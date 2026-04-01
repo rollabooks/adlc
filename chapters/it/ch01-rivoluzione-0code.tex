@@ -1,0 +1,199 @@
+% ============================================================
+% CAPITOLO 1 — La Rivoluzione 0-Code: Vederla in Azione
+% ============================================================
+\chapter{La Rivoluzione 0-Code: Vederla in Azione}
+
+\section*{Cosa Imparerai}
+
+Alla fine di questo capitolo saprai:
+\begin{itemize}
+  \item Come si presenta una sessione di lavoro in 0-code (dal vivo)
+  \item Perché il contesto è tutto e come cambia i risultati
+  \item Cosa costruirai con questo libro (anteprima dei 9 progetti)
+\end{itemize}
+
+\begin{notebox}
+Se non hai ancora letto l'Introduzione, fallo ora. Spiega il framework ADLC, il confronto con l'SDLC tradizionale, e le tre competenze fondamentali (Context Engineering, Risk Design, Confidence Tagging) su cui si basa tutto il libro.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Una Sessione di Lavoro in 0-Code: Dal Vivo}
+
+La teoria la conosci dall'Introduzione. Ora vediamo come funziona \textbf{concretamente} --- che aspetto ha una sessione di lavoro in 0-code, cosa appare sullo schermo, cosa fai tu e cosa fa l'IA.
+
+\subsection{Il setup: 30 secondi}
+
+Apri VS Code. Apri una cartella vuota. Apri la chat di Copilot in Agent Mode. Scrivi:
+
+\begin{lstlisting}
+Crea un'applicazione Python che converte temperature tra Celsius,
+Fahrenheit e Kelvin. L'utente sceglie la conversione da un menu
+interattivo nel terminale. Aggiungi un file di test con pytest.
+\end{lstlisting}
+
+\subsection{Cosa succede nei 60 secondi successivi}
+
+Copilot in Agent Mode:
+\begin{enumerate}
+  \item \textbf{Crea} il file \texttt{converter.py} con le funzioni di conversione
+  \item \textbf{Crea} il file \texttt{test\_converter.py} con i test unitari
+  \item \textbf{Esegue} \texttt{pytest} nel terminale integrato
+  \item \textbf{Legge} l'output: 6 test passati su 6
+  \item \textbf{Ti notifica}: ``Ho creato i file e i test passano tutti. Vuoi che aggiunga qualcosa?''
+\end{enumerate}
+
+Tu hai scritto 3 righe di istruzioni. L'IA ha generato $\sim$80 righe di codice funzionante e testato.
+
+Ma ecco il punto: il codice è \textbf{generico}. Funziona, ma non segue una struttura specifica, non ha gestione degli errori sofisticata, non ha documentazione interna.
+
+\subsection{Lo stesso task, con contesto}
+
+Ora immagina di scrivere prima un file \texttt{\_CONTEXT.md}:
+
+\begin{lstlisting}[language=yaml]
+# Progetto: Temperature Converter
+
+## Scopo
+CLI tool per conversione temperature con focus su precisione scientifica.
+
+## Vincoli
+- Kelvin non puo' essere negativo (0 K = zero assoluto)
+- Arrotondamento sempre a 2 decimali
+- Messaggi di errore in italiano
+- Naming: snake_case per tutto
+
+## Struttura
+converter/
+|-- main.py          <- Entry point con menu
+|-- conversions.py   <- Funzioni pure di conversione
+|-- validators.py    <- Validazione input
++-- tests/
+    |-- test_conversions.py
+    +-- test_validators.py
+\end{lstlisting}
+
+E poi scrivi a Copilot:
+
+\begin{lstlisting}
+Leggi il _CONTEXT.md e implementa l'applicazione completa
+seguendo tutte le specifiche.
+\end{lstlisting}
+
+Il risultato è \textbf{radicalmente diverso}: codice separato in moduli, validazione dello zero assoluto, test specifici per i casi limite, messaggi in italiano, struttura pulita.
+
+\textbf{Stesse 3 righe di richiesta. Risultati incomparabili.} La variabile che cambia è il contesto.
+
+% ---------------------------------------------------------
+\section{Il Contesto è Tutto}
+
+Questo è il principio più importante dell'intero libro, e merita di essere cristallizzato con un esempio concreto della differenza.
+
+\textbf{Richiesta vaga:}
+\begin{lstlisting}
+Crea un'API per gestire gli utenti
+\end{lstlisting}
+\textbf{Risultato}: codice generico, probabilmente senza validazione, senza autenticazione, con naming inconsistente.
+
+\textbf{Richiesta con contesto:}
+\begin{lstlisting}
+Crea un'API REST con Express.js per la gestione utenti.
+Struttura: src/routes/, src/controllers/, src/models/.
+Database: PostgreSQL con Prisma ORM.
+Endpoint: GET /users, GET /users/:id, POST /users,
+  PUT /users/:id, DELETE /users/:id.
+Validazione input con Zod.
+Risposte JSON standard: { success: boolean, data: T,
+  error?: string }.
+Gestione errori centralizzata con middleware.
+\end{lstlisting}
+\textbf{Risultato}: codice strutturato, validato, con pattern consistenti e pronto per la produzione.
+
+La differenza non è nell'IA. È nel contesto. Nel Capitolo~3 imparerai a scrivere file \texttt{\_CONTEXT.md} professionali; nel Capitolo~4 inizierai a costruire il tuo primo progetto reale.
+
+\begin{warnbox}
+\textbf{Una nota sulle aspettative.} Questo libro non richiede di saper programmare, ma richiede \textbf{curiosità e disponibilità ad apprendere concetti nuovi}. A partire dal Capitolo~6 incontrerai termini come API, middleware, database, autenticazione, token JWT. L'IA scriverà tutto il codice, ma il tuo ruolo di \textit{architetto di contesto} richiede di comprendere \textit{cosa} stai chiedendo di costruire --- non \textit{come} scriverlo. Nell'Introduzione trovi un ``Crash Course'' con i concetti fondamentali, e ogni capitolo avanzato include un ``Box Teoria'' con le spiegazioni necessarie. Se un termine ti è oscuro, consulta il Glossario (Appendice~A).
+\end{warnbox}
+
+% ---------------------------------------------------------
+\section{Cosa Costruirai con Questo Libro}
+
+Questo libro è strutturato come una \textbf{progressione di progetti reali}, ognuno più complesso del precedente.
+
+\subsection*{Progetto 1 --- Hello World (Capitolo 4)}
+Il tuo primo programma generato interamente dall'IA. Imparerai a formulare richieste, leggere l'output e iterare.
+
+\subsection*{Progetto 2 --- CLI Tool (Capitolo 5)}
+Un'applicazione da riga di comando completa: parsing CSV/JSON, argomenti, test automatici. Il tuo primo \texttt{\_CONTEXT.md} strutturato.
+
+\subsection*{Progetto 3 --- REST API (Capitolo 6)}
+Il tuo primo server web con Express.js: endpoint CRUD, validazione, documentazione Swagger.
+
+\subsection*{Progetti 4--7 --- Applicazione Web Full-Stack con OAuth 2.0 (Capitoli 7--10)}
+Il cuore del libro. Costruirai:
+\begin{itemize}
+  \item \textbf{Progetto 4} (Cap.~7): Backend Node.js/Express con PostgreSQL e~Prisma
+  \item \textbf{Progetto 5} (Cap.~8): Autenticazione OAuth~2.0 (Google/GitHub) con~JWT
+  \item \textbf{Progetto 6} (Cap.~9): Frontend React con rotte protette e primo SKILL.md
+  \item \textbf{Progetto 7} (Cap.~10): Integrazione end-to-end e dashboard CRUD completa
+\end{itemize}
+
+\subsection*{Progetti 8--9 --- App Mobile Flutter (Capitoli 11--12)}
+\begin{itemize}
+  \item \textbf{Progetto 8} (Cap.~11): Setup Flutter, prima app mobile e~SKILL.md Flutter
+  \item \textbf{Progetto 9} (Cap.~12): Login OAuth da mobile, CRUD sincronizzato, deep link
+\end{itemize}
+
+\subsection*{Progetto finale --- Deploy Completo (Capitoli 13--15)}
+Tutto in produzione: backend su cloud, frontend su Vercel, database PostgreSQL gestito, app mobile sugli store, CI/CD automatizzato.
+
+% ---------------------------------------------------------
+\section{Requisiti per Seguire Questo Libro}
+
+\subsection*{Cosa devi sapere}
+\begin{itemize}
+  \item Usare un computer (Windows, macOS o Linux)
+  \item Concetti base di come funziona un'applicazione (anche solo come utente)
+  \item L'inglese tecnico di base (i nomi dei comandi e delle tecnologie sono in inglese)
+\end{itemize}
+
+\subsection*{Cosa NON devi sapere}
+\begin{itemize}
+  \item Non devi saper programmare in Python, JavaScript, Dart o qualsiasi linguaggio
+  \item Non devi aver mai usato React, Node.js, Flutter o PostgreSQL
+  \item Non devi aver mai usato un terminale o la riga di comando
+  \item Non devi aver mai usato Git (ma lo imparerai strada facendo)
+\end{itemize}
+
+\subsection*{Cosa ti serve}
+\begin{itemize}
+  \item Un computer con Windows 10/11, macOS 10.15+ o Linux
+  \item Una connessione internet stabile
+  \item Un account GitHub (gratuito)
+  \item Un abbonamento a GitHub Copilot OPPURE accesso a Claude Code
+  \item VS Code installato (gratuito)
+\end{itemize}
+
+\begin{costbox}
+GitHub Copilot\index{GitHub Copilot} Individual costa 10\$/mese. Claude Code\index{Claude Code} funziona a consumo tramite API Anthropic~\cite{anthropic:claude-code}. Il costo per completare tutti i progetti del libro è paragonabile a quello di un corso online ($\sim$20--50\,\euro). Nel Capitolo~2 vedremo le opzioni gratuite disponibili e come minimizzare la spesa.
+\end{costbox}
+
+% ---------------------------------------------------------
+\section{La Promessa di Questo Libro}
+
+Alla fine di questa lettura avrai:
+
+\begin{enumerate}
+  \item \textbf{Costruito} un'applicazione web completa con backend, frontend e autenticazione OAuth~2.0
+  \item \textbf{Costruito} un'app mobile Flutter connessa al tuo backend
+  \item \textbf{Deployato} tutto in produzione --- accessibile da chiunque nel mondo
+  \item \textbf{Senza aver scritto manualmente} una singola riga di codice
+\end{enumerate}
+
+E soprattutto avrai acquisito un \textbf{metodo} --- il Context Engineering e l'ADLC --- che ti permetterà di costruire qualsiasi altra applicazione con lo stesso approccio.
+
+Non è magia. È ingegneria del contesto. E inizia nel prossimo capitolo, con l'installazione del tuo ambiente di sviluppo.
+
+\bigskip
+\begin{quote}
+\itshape ``Nell'era dello sviluppo 0-code, le parole umane perdono il loro ruolo di veicolo comunicativo informale e assumono il peso e le conseguenze di direttive in un linguaggio di programmazione procedurale ad alto livello.''
+\end{quote}

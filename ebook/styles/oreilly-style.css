@@ -1,0 +1,181 @@
+/* ============================================================
+   O'Reilly Media Style — EPUB
+   Elegante, professionale, serif body, teal accents.
+   ============================================================ */
+
+body {
+  font-family: "Georgia", "Cambria", "Times New Roman", serif;
+  line-height: 1.55;
+  margin: 1em 1.2em;
+  color: #1a1a1a;
+}
+
+/* --- Headings --- */
+h1 {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-top: 2em;
+  margin-bottom: 0.3em;
+  padding-bottom: 0.2em;
+  border-bottom: 2px solid #006b6b;
+  page-break-before: always;
+}
+
+h1::before {
+  content: attr(data-chapter);
+  display: block;
+  font-size: 0.55em;
+  color: #999;
+  font-weight: normal;
+  margin-bottom: 0.2em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.35em;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-top: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+  color: #555;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+}
+
+/* --- Code --- */
+pre {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0.8em 1em;
+  font-size: 0.8em;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  page-break-inside: auto;
+}
+
+code {
+  font-family: "Consolas", "Menlo", "Courier New", monospace;
+  font-size: 0.88em;
+}
+
+p code, li code {
+  background-color: #f0f0f0;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+  color: #006b6b;
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.4em 0.7em;
+  text-align: left;
+}
+
+th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+  color: #006b6b;
+  border-bottom: 2px solid #006b6b;
+}
+
+/* --- Blockquotes / Admonitions --- */
+blockquote {
+  margin: 1.2em 0;
+  padding: 0.6em 1em;
+  border-left: 3px solid #006b6b;
+  background-color: #f9fafa;
+  font-size: 0.95em;
+  color: #333;
+}
+
+blockquote strong:first-child {
+  display: block;
+  color: #006b6b;
+  margin-bottom: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+}
+
+/* Tip */
+blockquote.tip {
+  border-left-color: #528b2e;
+  background-color: #f6faf3;
+}
+blockquote.tip strong:first-child { color: #528b2e; }
+
+/* Warning */
+blockquote.warning {
+  border-left-color: #cc6600;
+  background-color: #fdf7f0;
+}
+blockquote.warning strong:first-child { color: #cc6600; }
+
+/* Caution */
+blockquote.caution {
+  border-left-color: #993333;
+  background-color: #fbf3f3;
+}
+blockquote.caution strong:first-child { color: #993333; }
+
+/* --- Links --- */
+a {
+  color: #004b6b;
+  text-decoration: none;
+}
+
+/* --- Lists --- */
+ul, ol {
+  margin: 0.5em 0;
+  padding-left: 1.8em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* --- Figures --- */
+figure {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+figcaption {
+  font-size: 0.85em;
+  color: #555;
+  font-style: italic;
+  margin-top: 0.3em;
+}
+
+/* --- Horizontal Rules --- */
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 2em 0;
+}

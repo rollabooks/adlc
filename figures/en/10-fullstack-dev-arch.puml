@@ -1,0 +1,21 @@
+@startuml 10-fullstack-dev-arch
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam RectangleBackgroundColor #F5F5F5
+skinparam RectangleBorderColor #999999
+skinparam DatabaseBackgroundColor #DCEDC8
+skinparam ArrowColor #333333
+
+rectangle "Browser" as browser #E3F2FD
+rectangle "React Frontend\n:5173" as frontend #BBDEFB
+rectangle "Vite Proxy\n/api" as proxy #FFE0B2
+rectangle "Express Backend\n:3000" as backend #FFF3E0
+database "PostgreSQL\n:5432" as pg
+
+browser -right-> frontend
+frontend -right-> proxy
+proxy -right-> backend
+backend -right-> pg
+
+@enduml

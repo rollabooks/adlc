@@ -1,0 +1,38 @@
+@startuml 06-notes-fullstack-arch
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 10
+skinparam RectangleBackgroundColor #F5F5F5
+skinparam RectangleBorderColor #999999
+skinparam DatabaseBackgroundColor #DCEDC8
+
+rectangle "Notes Full-Stack" as main {
+  rectangle "Web Frontend" as fe #BBDEFB {
+    rectangle "React + Vite" as fe1
+    rectangle "Tailwind CSS" as fe2
+    rectangle "OAuth UI" as fe3
+    rectangle "Dashboard" as fe4
+  }
+
+  rectangle "Backend API" as be #FFE0B2 {
+    rectangle "Express + JWT" as be1
+    rectangle "Prisma + PG" as be2
+    rectangle "OAuth 2.0" as be3
+    rectangle "REST CRUD" as be4
+  }
+
+  rectangle "Mobile App" as mob #C8E6C9 {
+    rectangle "Flutter + Dart" as mob1
+    rectangle "Riverpod + Dio" as mob2
+    rectangle "OAuth WebView" as mob3
+    rectangle "Secure Storage" as mob4
+  }
+}
+
+database "PostgreSQL 16" as pg
+
+fe -down-> pg
+be -down-> pg
+mob -down-> pg
+
+@enduml

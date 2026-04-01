@@ -1,0 +1,106 @@
+% ============================================================
+% nostarch-boxes.tex — Box admonition stile No Starch Press
+% ============================================================
+% Stile: vivace, icone grandi, sfondo colorato, bordi evidenti.
+% No Starch usa: Note, Warning, Gotcha!, Try It Yourself.
+% ============================================================
+
+\providecolor{tip-green}{HTML}{2E994E}
+\providecolor{warn-orange}{HTML}{E67A1A}
+\providecolor{note-blue}{HTML}{3366CC}
+\providecolor{danger-red}{HTML}{CC3333}
+\providecolor{gotcha-purple}{HTML}{7B2D8E}
+\providecolor{nostarch-accent}{HTML}{D4451A}
+\providecolor{nostarch-gray}{HTML}{4D4D4D}
+
+\usepackage{fontawesome5}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Note
+\newtcolorbox{notebox}[1][]{
+  colback=note-blue!6, colframe=note-blue,
+  fonttitle=\sffamily\bfseries,
+  title={\faInfoCircle\space \MakeUppercase{\LabelNote}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=note-blue,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Tip
+\newtcolorbox{tipbox}[1][]{
+  colback=tip-green!6, colframe=tip-green,
+  fonttitle=\sffamily\bfseries,
+  title={\faLightbulb\space \MakeUppercase{\LabelTip}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=tip-green,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Warning
+\newtcolorbox{warnbox}[1][]{
+  colback=warn-orange!6, colframe=warn-orange,
+  fonttitle=\sffamily\bfseries,
+  title={\faExclamationTriangle\space \MakeUppercase{\LabelWarning}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=warn-orange,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Danger / Gotcha!
+\newtcolorbox{dangerbox}[1][]{
+  colback=gotcha-purple!5, colframe=gotcha-purple,
+  fonttitle=\sffamily\bfseries,
+  title={\faBug\space \MakeUppercase{\LabelGotcha}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=gotcha-purple,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Checkpoint / Try It Yourself
+\newtcolorbox{checkpointbox}[1][]{
+  colback=nostarch-accent!5, colframe=nostarch-accent,
+  fonttitle=\sffamily\bfseries,
+  title={\faRocket\space \MakeUppercase{\LabelTryItYourself}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=nostarch-accent,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Version
+\newtcolorbox{versionbox}[1][]{
+  colback=purple!4, colframe=purple!50!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faCogs\space \MakeUppercase{\LabelVersion}},
+  boxrule=1pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=purple!50!black,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Cost
+\newtcolorbox{costbox}[1][]{
+  colback=Goldenrod!5, colframe=Goldenrod!80!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faCoins\space \MakeUppercase{\LabelCost}},
+  boxrule=1pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=Goldenrod!80!black,
+  toptitle=4pt, bottomtitle=4pt, #1
+}
+
+% Exercise
+\newtcolorbox{praticabox}[1][]{
+  colback=nostarch-gray!5, colframe=nostarch-gray,
+  fonttitle=\sffamily\bfseries,
+  title={\faPencilAlt\space \MakeUppercase{\LabelExercise}},
+  boxrule=1.5pt, arc=3pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=white, colbacktitle=nostarch-gray,
+  toptitle=4pt, bottomtitle=4pt, #1
+}

@@ -1,0 +1,104 @@
+% ============================================================
+% oreilly-boxes.tex — Box admonition stile O'Reilly
+% ============================================================
+% Stile: icona a sinistra, bordo sottile, sfondo leggero.
+% O'Reilly usa Tip, Note, Warning, Caution, Important.
+% ============================================================
+
+\providecolor{tip-green}{HTML}{528B2E}
+\providecolor{warn-orange}{HTML}{CC6600}
+\providecolor{note-blue}{HTML}{336699}
+\providecolor{caution-red}{HTML}{993333}
+\providecolor{oreilly-gray}{HTML}{555555}
+
+\usepackage{fontawesome5}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Tip — scorpion icon (O'Reilly classic)
+\newtcolorbox{tipbox}[1][]{
+  colback=tip-green!3,
+  colframe=tip-green!50,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faLightbulb\space \LabelTip},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=tip-green!80!black, #1
+}
+
+% Note
+\newtcolorbox{notebox}[1][]{
+  colback=note-blue!3,
+  colframe=note-blue!50,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faStickyNote\space \LabelNote},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=note-blue!80!black, #1
+}
+
+% Warning
+\newtcolorbox{warnbox}[1][]{
+  colback=warn-orange!4,
+  colframe=warn-orange!50,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faExclamationTriangle\space \LabelWarning},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=warn-orange!80!black, #1
+}
+
+% Caution
+\newtcolorbox{dangerbox}[1][]{
+  colback=caution-red!3,
+  colframe=caution-red!50,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faTimesCircle\space \LabelCaution},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=caution-red!80!black, #1
+}
+
+% Important
+\newtcolorbox{checkpointbox}[1][]{
+  colback=tip-green!3,
+  colframe=tip-green!40,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCheckCircle\space \LabelImportant},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=tip-green!80!black, #1
+}
+
+% Version Note
+\newtcolorbox{versionbox}[1][]{
+  colback=purple!2,
+  colframe=purple!40,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCogs\space \LabelVersionNote},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=purple!70!black, #1
+}
+
+% Cost
+\newtcolorbox{costbox}[1][]{
+  colback=Goldenrod!3,
+  colframe=Goldenrod!50,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCoins\space \LabelCost},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=Goldenrod!80!black, #1
+}
+
+% Practice
+\newtcolorbox{praticabox}[1][]{
+  colback=oreilly-gray!3,
+  colframe=oreilly-gray!30,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faWrench\space \LabelExercise},
+  boxrule=0.5pt, arc=2pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=oreilly-gray, #1
+}

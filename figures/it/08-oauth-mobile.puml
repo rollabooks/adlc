@@ -1,0 +1,23 @@
+@startuml 08-oauth-mobile
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam SequenceMessageAlignment center
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #999999
+skinparam SequenceArrowColor #333333
+
+participant "App Flutter" as app
+participant "WebView\ninterna" as wv
+participant "Google/GitHub\nOAuth" as oauth
+participant "Backend\ncallback" as backend
+
+app -> wv : Apri login
+wv -> oauth : Redirect OAuth
+oauth --> backend : Codice autorizzazione
+backend -> backend : Genera JWT
+backend --> wv : Redirect a\nnotesapp://auth/callback\n?token=JWT&refresh=REFRESH
+wv --> app : Intercetta deep link
+app -> app : Salva token in\nsecure storage
+
+@enduml

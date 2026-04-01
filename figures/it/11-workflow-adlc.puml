@@ -1,0 +1,52 @@
+@startuml 11-workflow-adlc
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName "Sans-Serif"
+skinparam defaultFontSize 12
+
+skinparam activity {
+  BackgroundColor #F4F4F4
+  BorderColor #616161
+  FontColor #212121
+  ArrowColor #616161
+  DiamondBackgroundColor #F4F4F4
+  DiamondBorderColor #616161
+}
+
+skinparam activityDiagram {
+  BackgroundColor white
+}
+
+|Workflow ADLC|
+
+start
+:""Idea grezza"";
+
+#E3F2FD:**1. SPECIFICHE (PRD)**
+"Cosa deve fare il sistema?"
+Requisiti funzionali e non funzionali;
+
+#E8F5E9:**2. USE CASE**
+"Come lo useranno gli utenti?"
+Scenari con attore, azione, risultato;
+
+#FFF3E0:**3. DESIGN**
+"Quale architettura e quali tecnologie?"
+L'IA propone opzioni, l'umano decide;
+
+#F3E8FF:**4. EPIC**
+"Quali blocchi di lavoro servono?"
+Raggruppamenti logici (auth, CRUD, deploy…);
+
+#FEF9C3:**5. TASK**
+"Quali passi atomici per ogni epic?"
+Unità implementabili con Acceptance Criteria;
+
+#FFEBEE:**6. IMPLEMENTA**
+"Esegui il task e verifica"
+Codice + test + checkpoint;
+
+stop
+
+@enduml

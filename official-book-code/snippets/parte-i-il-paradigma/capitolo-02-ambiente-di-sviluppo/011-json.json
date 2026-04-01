@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.minimap.enabled": false,
+  "files.autoSave": "onFocusChange",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "github.copilot.chat.agent.enabled": true
+}

@@ -1,0 +1,183 @@
+% ============================================================
+% manning-style.tex — Stile Manning Publications per libri tecnici
+% ============================================================
+% Caratteristiche: sans-serif headers, barra laterale codice,
+% no-indent paragraphs, numero capitolo grande e grigio.
+% ============================================================
+
+% === LINGUA ===
+\usepackage[\BabelLang]{babel}
+\usepackage[autostyle]{csquotes}
+
+% === BIBLIOGRAFIA ===
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  urldate=long,
+  maxbibnames=3,
+  backref=true,
+  backrefstyle=none
+]{biblatex}
+
+% === FONT (stile Manning: Times text, Helvetica heads, Inconsolata code) ===
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setmainfont{texgyretermes}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setsansfont{texgyreheros}[
+  Extension=.otf,
+  Scale=0.92,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setmonofont{InconsolataN}[
+  Extension=.otf,
+  Scale=0.88,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold
+]
+
+% === LAYOUT PAGINA (7.375 × 9.25 poll. — formato Manning) ===
+\usepackage[
+  paperwidth=7.375in,
+  paperheight=9.25in,
+  top=1in, bottom=1in,
+  inner=1.1in, outer=0.85in,
+  headheight=14pt,
+  footskip=0.5in
+]{geometry}
+
+% === SPAZIATURA PARAGRAFI (Manning: no indent, space between) ===
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip plus 2pt minus 1pt}
+
+% === COLORI (palette Manning — rosso/grigio scuro) ===
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\definecolor{manning-red}{HTML}{B71C1C}
+\definecolor{manning-dark}{HTML}{212121}
+\definecolor{manning-gray}{HTML}{616161}
+\definecolor{manning-chap-bg}{HTML}{424242}
+\definecolor{code-bg}{HTML}{F4F4F4}
+\definecolor{code-bar}{HTML}{BDBDBD}
+\definecolor{tip-green}{HTML}{2E7D32}
+\definecolor{warn-orange}{HTML}{E65100}
+\definecolor{note-blue}{HTML}{1565C0}
+\definecolor{link-blue}{HTML}{0D47A1}
+
+% === GRAFICA E TABELLE ===
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+
+% === CODICE SORGENTE (Manning: sfondo grigio + barra laterale) ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily\color{manning-dark},
+  backgroundcolor=\color{code-bg},
+  frame=l,
+  framerule=2.5pt,
+  rulecolor=\color{code-bar},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=1em,
+  xrightmargin=0.5em,
+  aboveskip=0.8em,
+  belowskip=0.8em,
+  numbers=none,
+  numberstyle=\tiny\color{manning-gray},
+  numbersep=8pt,
+  keepspaces=true,
+  keywordstyle=\color{manning-red}\bfseries,
+  stringstyle=\color{tip-green},
+  commentstyle=\color{manning-gray}\itshape,
+  columns=fullflexible,
+  literate={€}{{\euro}}1 {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+}
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+% === INTESTAZIONI E PIÈ DI PAGINA ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\sffamily\color{manning-gray}\leftmark}
+\fancyhead[RO]{\small\sffamily\color{manning-gray}\rightmark}
+\fancyfoot[C]{\small\sffamily\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{manning-gray}\leaders\hrule height \headrulewidth\hfill}}
+
+% === TITOLI CAPITOLO (Manning: numero grande grigio) ===
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries\color{manning-dark}}
+  {\fontsize{60}{60}\selectfont\color{manning-gray!40}\thechapter}
+  {10pt}
+  {\huge}
+\titlespacing*{\chapter}{0pt}{0pt}{25pt}
+\titleformat{\section}
+  {\normalfont\Large\sffamily\bfseries\color{manning-dark}}
+  {\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalfont\large\sffamily\bfseries\color{manning-dark}}
+  {\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\sffamily\bfseries\color{manning-gray}}
+  {\thesubsubsection}{0.8em}{}
+
+% === TITOLI PARTI ===
+\titleformat{\part}[display]
+  {\centering\normalfont\sffamily\bfseries}
+  {\fontsize{50}{50}\selectfont\color{manning-gray!30}\partname\ \thepart}
+  {15pt}
+  {\Huge\color{manning-dark}}
+
+% === HYPERLINK ===
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=manning-dark,
+  citecolor=manning-red,
+  urlcolor=link-blue,
+  bookmarks=true,
+  bookmarksnumbered=true
+]{hyperref}
+
+% === PROTEZIONE OVERFLOW ===
+\tolerance=1000
+\emergencystretch=1.5em
+\setlength{\tabcolsep}{4pt}
+
+% === SPAZIATURA LISTE ===
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.5em, topsep=0.3em, itemsep=0.15em}
+
+% === BOX ADMONITION ===
+\input{styles/manning-boxes}
+
+% === EURO ===
+\newcommand{\euro}{€}
+
+% === INDICE ANALITICO ===
+\usepackage{makeidx}
+\makeindex

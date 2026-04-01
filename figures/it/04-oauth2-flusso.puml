@@ -1,0 +1,26 @@
+@startuml 04-oauth2-flusso
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam SequenceMessageAlignment center
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #999999
+skinparam SequenceArrowColor #333333
+skinparam SequenceLifeLineBorderColor #CCCCCC
+
+actor Utente as user
+participant "Tua App\n(Frontend)" as app
+participant "Google" as google
+participant "Tuo Backend" as backend
+participant "Google API" as gapi
+
+user -> app : 1. Clicca "Login con Google"
+app -> user : 2. Redirect a Google
+user -> google : 3. Login su Google
+google --> user : 4. Restituisce un CODICE
+user -> backend : 5. Il codice va al Backend
+backend -> gapi : 6. Scambia codice\nper token
+gapi --> backend : Profilo utente
+backend --> user : 7. Crea JWT e\nlo restituisce
+
+@enduml

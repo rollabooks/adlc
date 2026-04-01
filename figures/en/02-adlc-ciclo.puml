@@ -1,0 +1,33 @@
+@startuml 02-adlc-ciclo
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam ArrowColor #333333
+
+|Context|
+start
+#DDEEFF:Context;
+note right: Human
+
+|Prompt|
+#DDEEFF:Prompt;
+note right: Human
+
+|Generation|
+#FFE0B2:AI Generation;
+note right: Agent
+
+|Review|
+#DDEEFF:Review;
+note right: Human
+
+|Iteration|
+#E8F5E9:Iteration;
+note right: Human + AI
+
+|Deployment|
+#DDEEFF:Deployment;
+note right: Human
+stop
+
+@enduml

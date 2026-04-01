@@ -1,0 +1,30 @@
+@startuml 05-http-request-flow
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam RectangleBackgroundColor #F5F5F5
+skinparam RectangleBorderColor #999999
+skinparam ArrowColor #333333
+
+rectangle "Request HTTP" as req #DDEEFF
+rectangle "Express Router" as router
+rectangle "Middleware" as mw
+rectangle "Controller" as ctrl
+rectangle "Service" as svc
+rectangle "Storage" as store
+rectangle "Response JSON" as resp #DDEEFF
+
+req -down-> router
+router -down-> mw
+mw -down-> ctrl
+ctrl -down-> svc
+svc -down-> store
+store -down-> resp
+
+note right of router : src/routes/notes.js
+note right of mw : src/middleware/validateRequest.js
+note right of ctrl : src/controllers/notesController.js
+note right of svc : src/services/notesService.js
+note right of store : in-memory array,\npoi PostgreSQL
+
+@enduml

@@ -1,0 +1,1 @@
+flutter build ipa --dart-define=ENV=production

@@ -1,0 +1,322 @@
+% ============================================================
+% APPENDIX E — A Real-World ADLC Framework
+% ============================================================
+\chapter{A Real-World ADLC Framework: Analysis of a Professional Contract for AI Agents}\index{ADLC!framework}\index{SKILL.md}
+\label{app:adlc-framework}
+
+\section*{Foreword}
+
+Throughout the book you have learned how to write \texttt{\_CONTEXT.md} files, define constraints, and structure your interaction with the AI agent. This appendix shows how the same principles are applied in a \textbf{production-grade} framework made of multiple modules and specialized skills.
+
+The framework analyzed here is included in the repository under \texttt{example\_contracts/}. It is not a thought experiment: it represents a practical, structured contract for real software projects.
+
+% ---------------------------------------------------------
+\section{Framework Architecture}
+
+The framework is organized across \textbf{three hierarchical levels}, just like the Progressive Disclosure pattern introduced in Chapter~3.
+
+\begin{lstlisting}[language={},title={Framework structure}]
+Repository/
+├── .github/
+│   ├── copilot-instructions.md          ← Universal contract
+│   └── copilot_modules/                 ← Specialized modules
+│       ├── 00_MODE_EN.md
+│       ├── 00_CONTEXT_TEMPLATE_EN.md
+│       ├── 01_CORE_RULES_EN.md
+│       ├── 02_DISCOVERY_ANALYSIS_EN.md
+│       ├── 03_DESIGN_EN.md
+│       ├── 04_IMPLEMENTATION_EN.md
+│       ├── 05_VERIFICATION_RELEASE_EN.md
+│       ├── 06_OPS_EN.md
+│       ├── 07_SPECIAL_LANES_EN.md
+│       ├── 08_PROMPT_LIBRARY_EN.md
+│       ├── 09_CODEBASE_ANALYSIS_EN.md
+│       ├── 10_DOCUMENTATION_EN.md
+│       ├── 11_BUGFIX_PLAYBOOK_EN.md
+│       ├── 12_OPERATING_GUIDE_EN.md
+│       ├── 13_ARCH_BACKEND_EXAMPLE_EN.md
+│       ├── SECURITY_CONSTRAINTS_LIBRARY_EN.md
+│       └── PERFORMANCE_CONSTRAINTS_LIBRARY_EN.md
+│
+├── .copilot/
+│   └── skills/
+│       ├── SKILL_ANALYSIS_EN.md
+│       ├── SKILL_DESIGN_EN.md
+│       ├── SKILL_REACT_EN.md
+│       ├── SKILL_FLUTTER_EN.md
+│       ├── SKILL_API_DESIGN_EN.md
+│       ├── SKILL_DATABASE_EN.md
+│       ├── SKILL_SECURITY_EN.md
+│       └── SKILL_OPS_EN.md
+│
+├── ProjectA/
+│   ├── .copilot/
+│   │   ├── instructions.md
+│   │   └── domain.md
+│   ├── _CONTEXT.md
+│   └── PROGRESS.md
+│
+└── ProjectB/
+    ├── .copilot/
+    ├── _CONTEXT.md
+    └── PROGRESS.md
+\end{lstlisting}
+
+\subsection{The separation principle}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{Scope} & \textbf{Location} & \textbf{Managed by} & \textbf{Purpose} \\
+\midrule
+Universal framework & \texttt{.github/} & Architecture team & Immutable rules shared across projects \\
+Project rules & \texttt{.copilot/} & Project team & Stack- and domain-specific overrides \\
+Session state & \texttt{\_CONTEXT.md} & Human + agent & Current phase, active task, constraints, commands \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+This architecture solves a practical problem: how to keep consistency across many projects without copying the same instructions into every repository.
+
+% ---------------------------------------------------------
+\section{The Universal Contract: \texttt{copilot-instructions.md}}
+
+The main file acts as a \textbf{router}. It defines the essential protocols and delegates details to specialized modules. Four elements are especially important.
+
+\subsection{Bootstrap Protocol}
+At the start of each new session, the agent:
+\begin{enumerate}
+  \item discovers the codebase structure,
+  \item locates the nearest \texttt{\_CONTEXT.md},
+  \item loads project instructions and skills,
+  \item produces a structured context block with phase, stack, constraints, and commands.
+\end{enumerate}
+
+\subsection{Operating Modes}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{Mode} & \textbf{Active checks} & \textbf{Speed} & \textbf{Typical use} \\
+\midrule
+STANDARD & SEC/PERF/test/doc checks & Normal & Day-to-day development \\
+FAST & Minimal critical checks & 2$\times$ & Prototypes and spikes \\
+AUDIT & Full checks plus compliance & Slow & Pre-production review \\
+RAPID & Only basic sanity checks & 5$\times$ & Emergency fixes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Risk Classification and Mandatory STOP}
+
+The framework formalizes the same logic you saw in the book:
+\begin{lstlisting}[language={}]
+LOW RISK + SMALL SCOPE:
+→ Execute directly and report when done
+
+MEDIUM RISK or MEDIUM SCOPE:
+→ Propose the change and request confirmation
+
+HIGH RISK or LARGE SCOPE:
+→ Present a detailed plan; explicit approval required
+\end{lstlisting}
+
+Mandatory STOP situations include database schema changes, API contract changes, deletion of data or code, authentication changes, production deploys, and secrets management.
+
+\subsection{Confidence Tagging}
+Every substantial technical answer ends with a confidence tag and an evidence basis:
+\begin{lstlisting}[language={}]
+---
+AI CONFIDENCE: FACT
+Basis: Function signature verified in src/auth/handler.ts#L42
+\end{lstlisting}
+
+\begin{notebox}
+This is the professional extension of the Confidence Tagging idea: not just \emph{FACT} or \emph{ASSUMPTION}, but also the exact evidence used to justify the claim.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{SDLC Modules: One Agent for Each Phase}
+
+A key innovation of the framework is modularization \textbf{by development phase}. Instead of loading every rule in every session, the system activates only the relevant modules.
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{X l X}
+\toprule
+\textbf{Input pattern} & \textbf{Detected phase} & \textbf{Module loaded} \\
+\midrule
+``I need...'' / ``new feature'' & 0--1: Discovery & \texttt{02\_DISCOVERY\_ANALYSIS\_EN.md} \\
+``architecture'' / ``ADR'' / ``tech stack'' & 2: Design & \texttt{03\_DESIGN\_EN.md} \\
+``implement'' / ``code'' / ``write'' & 3: Implementation & \texttt{04\_IMPLEMENTATION\_EN.md} \\
+``test'' / ``QA'' / ``is it ready?'' & 4--5: Verification & \texttt{05\_VERIFICATION\_RELEASE\_EN.md} \\
+``production error'' / ``incident'' & 6: Ops & \texttt{06\_OPS\_EN.md} \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+\subsection{The Design module}
+It contains stack evaluation templates, ADR structures, API contract patterns, and EPIC-to-task decomposition.
+
+\subsection{The Implementation module}
+It enforces the \textbf{Pseudocode Rule}: for tasks with complex logic or more than roughly 50 lines of algorithmic code, outline the logic first, then implement.
+
+\subsection{The Ops module}
+It covers incident triage, root cause analysis, post-mortems, and operational runbooks.
+
+% ---------------------------------------------------------
+\section{Interaction Workflow: The Human-Agent Protocol}
+
+The full working cycle has five phases:
+\begin{enumerate}
+  \item \textbf{Initial setup}: the human prepares the project structure and base context
+  \item \textbf{Session start}: the agent runs the bootstrap protocol
+  \item \textbf{Task assignment}: by task file, by epic, or freeform
+  \item \textbf{Work cycle}: implementation with checkpoints every 3--5 meaningful actions
+  \item \textbf{Session end}: update of \texttt{\_CONTEXT.md} and \texttt{PROGRESS.md}
+\end{enumerate}
+
+\subsection{Control commands}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Effect} \\
+\midrule
+\texttt{@stop} & Immediate halt \\
+\texttt{@explain} & Explain the reasoning behind the last action \\
+\texttt{@undo} & Revert the last change \\
+\texttt{@alternatives} & Propose alternative solutions \\
+\texttt{@confidence} & Declare FACT / INFERRED / ASSUMPTION \\
+\texttt{@context-update} & Update \texttt{\_CONTEXT.md} and \texttt{PROGRESS.md} \\
+\texttt{@checkpoint} & Save progress and propose the next step \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Specialized Components}
+
+\subsection{Parallel full-stack workflow}
+For features that require synchronized frontend and backend changes, the framework defines explicit sync points:
+\begin{lstlisting}[language={}]
+SYNC POINT 1: Contract Agreement
+→ OpenAPI spec finalized, shared DTOs agreed
+
+SYNC POINT 2: Integration Ready
+→ Backend operational, frontend ready for real integration
+
+SYNC POINT 3: E2E Ready
+→ Both layers integrated and testable end-to-end
+\end{lstlisting}
+
+\subsection{Constraint libraries}
+Two dedicated libraries collect reusable patterns:
+\begin{itemize}
+  \item \texttt{SECURITY\_CONSTRAINTS\_LIBRARY\_EN.md}
+  \item \texttt{PERFORMANCE\_CONSTRAINTS\_LIBRARY\_EN.md}
+\end{itemize}
+
+\subsection{SKILL files: competencies for every phase}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{SKILL} & \textbf{Phase} & \textbf{Competency} \\
+\midrule
+\texttt{SKILL\_ANALYSIS\_EN.md} & 0--1 & Requirements, user stories, threat model \\
+\texttt{SKILL\_DESIGN\_EN.md} & 2 & Stack evaluation, ADR, task design \\
+\texttt{SKILL\_REACT\_EN.md} & 3--4 & React frontend implementation \\
+\texttt{SKILL\_FLUTTER\_EN.md} & 3--4 & Flutter mobile implementation \\
+\texttt{SKILL\_API\_DESIGN\_EN.md} & 3--4 & REST API design and contracts \\
+\texttt{SKILL\_DATABASE\_EN.md} & 3--4 & PostgreSQL, Prisma, migrations \\
+\texttt{SKILL\_SECURITY\_EN.md} & 3--4 & OAuth~2.0, JWT, OWASP practices \\
+\texttt{SKILL\_OPS\_EN.md} & 6 & Incident handling and runbooks \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+This is Progressive Disclosure applied to \emph{skills}: only the relevant expertise is loaded when it is needed.
+
+% ---------------------------------------------------------
+\section{From the Book to the Framework: A Mapping}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l c X}
+\toprule
+\textbf{Book concept} & \textbf{Ch.} & \textbf{Framework implementation} \\
+\midrule
+\texttt{\_CONTEXT.md} & 3 & Standardized context card template \\
+SEC/PERF constraints & 3, 14 & Reusable constraint libraries \\
+Confidence Tagging & 3, 14 & Tag plus mandatory evidence basis \\
+Risk Classification & 14 & Risk matrix with Mandatory STOP \\
+Pseudocode Rule & 10 & Mandatory for complex tasks \\
+Context Engineering & 3 & Three-level Progressive Disclosure \\
+Multi-agent pattern & 16 & Modules loaded per phase \\
+Checkpointing & 10, 16 & Protocol every 3--5 actions \\
+Testing and security & 14 & Checklists and release gates \\
+Deploy discipline & 15 & Rollback plan and release governance \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Lessons from the Real World}
+
+\subsection{Framework immutability matters}
+The universal rules belong in \texttt{.github/}. Project teams customize \texttt{.copilot/}, not the core framework.
+
+\subsection{Context cost must be managed}
+Each module declares its approximate size and context cost, helping teams avoid saturation.
+
+\subsection{Priority hierarchy must be explicit}
+\begin{enumerate}
+  \item \texttt{\_CONTEXT.md} --- highest priority
+  \item \texttt{.copilot/instructions.md}
+  \item \texttt{.copilot/skills/*.md}
+  \item \texttt{.copilot/domain.md}
+  \item \texttt{.github/copilot\_modules/} --- lowest priority
+\end{enumerate}
+
+\subsection{Control commands act like an operating system}
+Commands such as \texttt{@stop}, \texttt{@explain}, and \texttt{@checkpoint} are not decoration; they are the human control surface for the agent.
+
+% ---------------------------------------------------------
+\section{Beyond the Textual Contract: Infrastructure Governance}
+
+Textual constraints are powerful, but they still rely on the model respecting them. Enterprise systems increasingly add \textbf{runtime enforcement} through sandboxing and policy-based controls.
+
+A prominent example is NVIDIA's \textbf{NemoClaw}, which combines textual guidance with kernel-level policy enforcement. In practice this means:
+\begin{itemize}
+  \item network access can be limited to approved endpoints,
+  \item file system access can be restricted to authorized directories,
+  \item sensitive data can be routed through local models rather than public cloud systems.
+\end{itemize}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+& \textbf{Textual Contract (ADLC)} & \textbf{Infrastructure Governance (NemoClaw)} \\
+\midrule
+Mechanism & Natural-language rules & YAML policies at runtime \\
+Enforcement & The agent \emph{should} comply & The agent \emph{cannot} violate \\
+Cost & Near zero & Dedicated infrastructure \\
+Ideal for & Small teams and individual projects & Enterprise and regulated environments \\
+Limitation & Vulnerable to prompt injection & Higher complexity and cost \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{notebox}
+For the kind of projects covered in this book, the textual ADLC contract is usually more than sufficient. Infrastructure-level governance becomes necessary only when you deal with regulated data, highly sensitive environments, or large fleets of autonomous agents.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section*{Conclusion}
+
+This framework demonstrates that ADLC is not an academic curiosity. It is a practical operating model for real teams, real repositories, and real delivery constraints. The path from a simple \texttt{\_CONTEXT.md} to a multi-module professional framework is not a leap --- it is a progressive staircase built from the same core ideas you have already learned.

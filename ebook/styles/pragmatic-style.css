@@ -1,0 +1,169 @@
+/* ============================================================
+   Pragmatic Bookshelf Style — EPUB
+   Warm tones, orange accents, line-numbered code feel.
+   ============================================================ */
+
+body {
+  font-family: "Bookman Old Style", "Palatino", "Georgia", serif;
+  line-height: 1.6;
+  margin: 1em 1.2em;
+  color: #2c3e50;
+}
+
+/* --- Headings (Pragmatic: bold sans, orange accents) --- */
+h1 {
+  font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+  padding-left: 0.5em;
+  border-left: 5px solid #d35400;
+  page-break-before: always;
+}
+
+h2 {
+  font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+  font-size: 1.35em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+h2::before {
+  content: "▸ ";
+  color: #d35400;
+}
+
+h3 {
+  font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #6d4c41;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  color: #7f8c8d;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+}
+
+/* --- Code (Pragmatic: warm yellow background, numbered feel) --- */
+pre {
+  background-color: #fffbe6;
+  border: 1px solid #e0d8b0;
+  border-radius: 3px;
+  padding: 0.8em 1em;
+  font-size: 0.78em;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  page-break-inside: auto;
+}
+
+code {
+  font-family: "Inconsolata", "Consolas", "Courier New", monospace;
+  font-size: 0.88em;
+}
+
+p code, li code {
+  background-color: #fffbe6;
+  padding: 0.1em 0.35em;
+  border: 1px solid #e0d8b0;
+  border-radius: 3px;
+  color: #d35400;
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em 0.7em;
+  text-align: left;
+}
+
+th {
+  background-color: #d35400;
+  color: white;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+}
+
+/* --- Admonition Blocks (rounded, colored header) --- */
+blockquote {
+  margin: 1.2em 0;
+  padding: 0;
+  border: 1px solid #2980b9;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 0.95em;
+}
+
+blockquote strong:first-child {
+  display: block;
+  background-color: #2980b9;
+  color: white;
+  padding: 0.3em 0.7em;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+}
+
+blockquote p {
+  padding: 0.5em 0.8em;
+  margin: 0;
+}
+
+blockquote.tip { border-color: #27ae60; background-color: #eafaf1; }
+blockquote.tip strong:first-child { background-color: #27ae60; }
+blockquote.warning { border-color: #e67e22; background-color: #fef5e7; }
+blockquote.warning strong:first-child { background-color: #e67e22; }
+blockquote.danger { border-color: #c0392b; background-color: #fdedec; }
+blockquote.danger strong:first-child { background-color: #c0392b; }
+
+/* --- Links --- */
+a {
+  color: #1a5276;
+  text-decoration: underline;
+  text-decoration-color: #d35400;
+}
+
+/* --- Lists --- */
+ul, ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+li {
+  margin-bottom: 0.25em;
+}
+
+/* --- Figures --- */
+figure {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+figcaption {
+  font-size: 0.85em;
+  color: #6d4c41;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 2px dashed #e0d8b0;
+  margin: 2em 0;
+}

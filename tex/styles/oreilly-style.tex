@@ -1,0 +1,186 @@
+% ============================================================
+% oreilly-style.tex — Stile O'Reilly Media per libri tecnici
+% ============================================================
+% Caratteristiche: font serif elegante, capitoli con animale
+% illustrativo, layout pulito e professionale, colori sobri.
+% ============================================================
+
+% === LINGUA ===
+\usepackage[\BabelLang]{babel}
+\usepackage[autostyle]{csquotes}
+
+% === BIBLIOGRAFIA ===
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  urldate=long,
+  maxbibnames=3,
+  backref=true,
+  backrefstyle=none
+]{biblatex}
+
+% === FONT (LuaLaTeX — stile O'Reilly: Garamond + Helvetica) ===
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setmainfont{texgyretermes}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setsansfont{texgyreheros}[
+  Extension=.otf,
+  Scale=0.95,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setmonofont{InconsolataN}[
+  Extension=.otf,
+  Scale=0.85,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold
+]
+
+% === LAYOUT PAGINA (7 × 9.1875 poll. — formato O'Reilly) ===
+\usepackage[
+  paperwidth=7in,
+  paperheight=9.1875in,
+  top=0.875in, bottom=0.75in,
+  inner=1in, outer=0.75in,
+  headheight=14pt,
+  footskip=0.4in
+]{geometry}
+
+% === SPAZIATURA PARAGRAFI (stile O'Reilly: indent, no extra space) ===
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% === COLORI (palette O'Reilly — teal/grigio) ===
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\definecolor{oreilly-teal}{HTML}{006B6B}
+\definecolor{oreilly-dark}{HTML}{1A1A1A}
+\definecolor{oreilly-gray}{HTML}{555555}
+\definecolor{oreilly-lightgray}{HTML}{999999}
+\definecolor{code-bg}{HTML}{F7F7F7}
+\definecolor{code-border}{HTML}{CCCCCC}
+\definecolor{tip-green}{HTML}{528B2E}
+\definecolor{warn-orange}{HTML}{CC6600}
+\definecolor{note-blue}{HTML}{336699}
+\definecolor{link-blue}{HTML}{004B6B}
+\definecolor{caution-red}{HTML}{993333}
+
+% === GRAFICA E TABELLE ===
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+
+% === CODICE SORGENTE (stile O'Reilly: box leggero, bordo sottile) ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize\ttfamily\color{oreilly-dark},
+  backgroundcolor=\color{code-bg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{code-border},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=0.8em,
+  xrightmargin=0.8em,
+  aboveskip=1em,
+  belowskip=1em,
+  numbers=none,
+  numberstyle=\tiny\color{oreilly-lightgray},
+  numbersep=8pt,
+  keepspaces=true,
+  keywordstyle=\color{oreilly-teal}\bfseries,
+  stringstyle=\color{tip-green},
+  commentstyle=\color{oreilly-lightgray}\itshape,
+  columns=fullflexible,
+  literate={€}{{\euro}}1 {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+}
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+% === INTESTAZIONI E PIÈ DI PAGINA (stile O'Reilly: minimale) ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\itshape\color{oreilly-gray}\leftmark}
+\fancyhead[RO]{\small\itshape\color{oreilly-gray}\rightmark}
+\fancyfoot[LE,RO]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{oreilly-lightgray}\leaders\hrule height \headrulewidth\hfill}}
+
+% === TITOLI CAPITOLO (stile O'Reilly: elegante, linea sotto) ===
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\Large\sffamily\color{oreilly-lightgray}Chapter\ \thechapter}
+  {8pt}
+  {\huge\color{oreilly-dark}}
+  [\vspace{4pt}{\color{oreilly-teal}\titlerule[1.5pt]}]
+\titlespacing*{\chapter}{0pt}{0pt}{30pt}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{oreilly-dark}}
+  {\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{oreilly-dark}}
+  {\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape\color{oreilly-gray}}
+  {\thesubsubsection}{0.8em}{}
+
+% === TITOLI PARTI ===
+\titleformat{\part}[display]
+  {\centering\normalfont\bfseries}
+  {\LARGE\color{oreilly-lightgray}\partname\ \thepart}
+  {12pt}
+  {\Huge\color{oreilly-dark}}
+  [\vspace{6pt}{\color{oreilly-teal}\titlerule[2pt]}]
+
+% === HYPERLINK ===
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=oreilly-dark,
+  citecolor=oreilly-teal,
+  urlcolor=link-blue,
+  bookmarks=true,
+  bookmarksnumbered=true
+]{hyperref}
+
+% === PROTEZIONE OVERFLOW ===
+\tolerance=1000
+\emergencystretch=1.5em
+\setlength{\tabcolsep}{4pt}
+
+% === SPAZIATURA LISTE ===
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=2em, topsep=0.4em, itemsep=0.2em}
+
+% === BOX ADMONITION ===
+\input{styles/oreilly-boxes}
+
+% === EURO ===
+\newcommand{\euro}{€}
+
+% === INDICE ANALITICO ===
+\usepackage{makeidx}
+\makeindex

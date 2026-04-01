@@ -1,0 +1,185 @@
+/* ============================================================
+   No Starch Press Style — EPUB
+   Bold, colorful, fun but professional. Dark code option.
+   ============================================================ */
+
+body {
+  font-family: "Century Schoolbook", "Georgia", serif;
+  line-height: 1.6;
+  margin: 1em 1.2em;
+  color: #1c1c1c;
+}
+
+/* --- Headings (No Starch: bold sans, red accent line) --- */
+h1 {
+  font-family: "Futura", "Trebuchet MS", "Arial", sans-serif;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #1c1c1c;
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+  padding-bottom: 0.3em;
+  border-bottom: 3px solid #d4451a;
+  page-break-before: always;
+}
+
+h2 {
+  font-family: "Futura", "Trebuchet MS", "Arial", sans-serif;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #1c1c1c;
+  margin-top: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+h2::before {
+  content: "// ";
+  color: #d4451a;
+  font-weight: normal;
+}
+
+h3 {
+  font-family: "Futura", "Trebuchet MS", "Arial", sans-serif;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #4d4d4d;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+  color: #8c8c8c;
+  margin-top: 1em;
+}
+
+/* --- Code (No Starch: dark terminal look) --- */
+pre {
+  background-color: #2b2b2b;
+  color: #e8e8e8;
+  border-left: 3px solid #d4451a;
+  border-radius: 3px;
+  padding: 0.8em 1em;
+  font-size: 0.78em;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  page-break-inside: auto;
+}
+
+code {
+  font-family: "Inconsolata", "Fira Code", "Consolas", monospace;
+  font-size: 0.88em;
+}
+
+p code, li code {
+  background-color: #f0f0f0;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border-left: 2px solid #d4451a;
+  color: #1c1c1c;
+}
+
+/* Light code variant */
+pre.light {
+  background-color: #f0f0f0;
+  color: #1c1c1c;
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5em 0.7em;
+  text-align: left;
+}
+
+th {
+  background-color: #d4451a;
+  color: white;
+  font-family: "Futura", "Trebuchet MS", sans-serif;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* --- Admonition Blocks (colorful header bars) --- */
+blockquote {
+  margin: 1.2em 0;
+  padding: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1.5px solid #3366cc;
+  font-size: 0.95em;
+}
+
+blockquote strong:first-child {
+  display: block;
+  background-color: #3366cc;
+  color: white;
+  padding: 0.4em 0.8em;
+  font-family: "Futura", "Trebuchet MS", sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+blockquote p {
+  padding: 0.5em 0.8em;
+  margin: 0;
+}
+
+blockquote.tip { border-color: #2e994e; }
+blockquote.tip strong:first-child { background-color: #2e994e; }
+blockquote.warning { border-color: #e67a1a; }
+blockquote.warning strong:first-child { background-color: #e67a1a; }
+blockquote.danger, blockquote.gotcha { border-color: #7b2d8e; }
+blockquote.danger strong:first-child,
+blockquote.gotcha strong:first-child { background-color: #7b2d8e; }
+
+/* --- Links --- */
+a {
+  color: #1a5daa;
+  text-decoration: none;
+  border-bottom: 1px dotted #1a5daa;
+}
+
+/* --- Lists --- */
+ul, ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* --- Figures --- */
+figure {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+figcaption {
+  font-size: 0.85em;
+  color: #4d4d4d;
+  font-style: italic;
+  margin-top: 0.3em;
+}
+
+hr {
+  border: none;
+  border-top: 3px solid #d4451a;
+  margin: 2em auto;
+  width: 40%;
+}

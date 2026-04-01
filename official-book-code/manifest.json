@@ -1,0 +1,877 @@
+[
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 9,
+    "end_line": 41,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/001-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 47,
+    "end_line": 101,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/002-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 107,
+    "end_line": 136,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/003-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 142,
+    "end_line": 173,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/004-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 179,
+    "end_line": 204,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/005-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 210,
+    "end_line": 235,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/006-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 241,
+    "end_line": 266,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/007-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 272,
+    "end_line": 307,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/008-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 313,
+    "end_line": 330,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/009-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-b-template.md",
+    "start_line": 375,
+    "end_line": 401,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-b-template/011-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-e-framework-adlc-reale.md",
+    "start_line": 134,
+    "end_line": 138,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-e-framework-adlc-reale/003-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-e-framework-adlc-reale.md",
+    "start_line": 236,
+    "end_line": 242,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-e-framework-adlc-reale/005-markdown.md"
+  },
+  {
+    "source_file": "appendici/appendice-f-progetto-autonomo.md",
+    "start_line": 38,
+    "end_line": 113,
+    "language": "markdown",
+    "output_file": "snippets/appendici/appendice-f-progetto-autonomo/001-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-01-la-rivoluzione-0-code.md",
+    "start_line": 45,
+    "end_line": 65,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-01-la-rivoluzione-0-code/002-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo.md",
+    "start_line": 29,
+    "end_line": 31,
+    "language": "bash",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo/001-bash.sh"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo.md",
+    "start_line": 34,
+    "end_line": 36,
+    "language": "bash",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo/002-bash.sh"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo.md",
+    "start_line": 115,
+    "end_line": 125,
+    "language": "bash",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo/003-bash.sh"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo.md",
+    "start_line": 304,
+    "end_line": 313,
+    "language": "json",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-02-ambiente-di-sviluppo/011-json.json"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 106,
+    "end_line": 112,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/001-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 118,
+    "end_line": 132,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/002-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 138,
+    "end_line": 147,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/003-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 153,
+    "end_line": 161,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/004-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 167,
+    "end_line": 185,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/005-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 199,
+    "end_line": 249,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/006-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 365,
+    "end_line": 377,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/012-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 395,
+    "end_line": 413,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/014-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 440,
+    "end_line": 454,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/016-markdown.md"
+  },
+  {
+    "source_file": "parte-i-il-paradigma/capitolo-03-metodo-adlc.md",
+    "start_line": 472,
+    "end_line": 494,
+    "language": "markdown",
+    "output_file": "snippets/parte-i-il-paradigma/capitolo-03-metodo-adlc/018-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-04-hello-world.md",
+    "start_line": 24,
+    "end_line": 57,
+    "language": "markdown",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-04-hello-world/001-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-04-hello-world.md",
+    "start_line": 98,
+    "end_line": 132,
+    "language": "python",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-04-hello-world/003-python.py"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-04-hello-world.md",
+    "start_line": 158,
+    "end_line": 160,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-04-hello-world/004-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-04-hello-world.md",
+    "start_line": 172,
+    "end_line": 175,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-04-hello-world/006-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-04-hello-world.md",
+    "start_line": 244,
+    "end_line": 248,
+    "language": "markdown",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-04-hello-world/010-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-05-applicazione-cli.md",
+    "start_line": 26,
+    "end_line": 121,
+    "language": "markdown",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-05-applicazione-cli/001-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-05-applicazione-cli.md",
+    "start_line": 207,
+    "end_line": 209,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-05-applicazione-cli/004-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-05-applicazione-cli.md",
+    "start_line": 221,
+    "end_line": 246,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-05-applicazione-cli/006-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-05-applicazione-cli.md",
+    "start_line": 305,
+    "end_line": 312,
+    "language": "markdown",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-05-applicazione-cli/010-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 39,
+    "end_line": 41,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/001-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 44,
+    "end_line": 47,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/002-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 50,
+    "end_line": 53,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/003-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 67,
+    "end_line": 177,
+    "language": "markdown",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/004-markdown.md"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 211,
+    "end_line": 215,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/006-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 245,
+    "end_line": 247,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/007-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 258,
+    "end_line": 260,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/009-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 261,
+    "end_line": 263,
+    "language": "json",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/010-json.json"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 266,
+    "end_line": 270,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/011-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 271,
+    "end_line": 273,
+    "language": "json",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/012-json.json"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 276,
+    "end_line": 278,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/013-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 281,
+    "end_line": 285,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/014-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 286,
+    "end_line": 288,
+    "language": "json",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/015-json.json"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 298,
+    "end_line": 300,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/016-bash.sh"
+  },
+  {
+    "source_file": "parte-ii-primi-progetti/capitolo-06-rest-api.md",
+    "start_line": 345,
+    "end_line": 349,
+    "language": "bash",
+    "output_file": "snippets/parte-ii-primi-progetti/capitolo-06-rest-api/017-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 30,
+    "end_line": 32,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/001-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 45,
+    "end_line": 48,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/002-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 60,
+    "end_line": 110,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/003-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 130,
+    "end_line": 142,
+    "language": "json",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/004-json.json"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 182,
+    "end_line": 189,
+    "language": "javascript",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/006-javascript.js"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 192,
+    "end_line": 201,
+    "language": "javascript",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/007-javascript.js"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 211,
+    "end_line": 223,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/008-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 229,
+    "end_line": 231,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/009-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 237,
+    "end_line": 239,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/010-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-07-database-postgresql.md",
+    "start_line": 279,
+    "end_line": 285,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-07-database-postgresql/012-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 62,
+    "end_line": 79,
+    "language": "env",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/001-env.txt"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 91,
+    "end_line": 178,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/002-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 227,
+    "end_line": 230,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/004-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 233,
+    "end_line": 235,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/005-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 236,
+    "end_line": 238,
+    "language": "json",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/006-json.json"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2.md",
+    "start_line": 281,
+    "end_line": 284,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-08-autenticazione-oauth2/008-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 32,
+    "end_line": 37,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/001-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 48,
+    "end_line": 51,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/003-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 61,
+    "end_line": 137,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/004-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 147,
+    "end_line": 202,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/005-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 240,
+    "end_line": 259,
+    "language": "javascript",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/007-javascript.js"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 272,
+    "end_line": 275,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/008-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 278,
+    "end_line": 281,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/009-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-09-frontend-react.md",
+    "start_line": 354,
+    "end_line": 358,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-09-frontend-react/013-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 41,
+    "end_line": 47,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/002-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 57,
+    "end_line": 146,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/003-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 183,
+    "end_line": 207,
+    "language": "javascript",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/005-javascript.js"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 250,
+    "end_line": 278,
+    "language": "markdown",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/007-markdown.md"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 372,
+    "end_line": 390,
+    "language": "json",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/013-json.json"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 392,
+    "end_line": 395,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/014-bash.sh"
+  },
+  {
+    "source_file": "parte-iii-web-fullstack/capitolo-10-integrazione-fullstack.md",
+    "start_line": 424,
+    "end_line": 428,
+    "language": "bash",
+    "output_file": "snippets/parte-iii-web-fullstack/capitolo-10-integrazione-fullstack/015-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 30,
+    "end_line": 35,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/001-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 39,
+    "end_line": 41,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/002-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 45,
+    "end_line": 47,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/003-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 51,
+    "end_line": 53,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/004-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 76,
+    "end_line": 80,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/005-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 96,
+    "end_line": 98,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/007-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 102,
+    "end_line": 111,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/008-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 121,
+    "end_line": 203,
+    "language": "markdown",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/009-markdown.md"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 211,
+    "end_line": 246,
+    "language": "markdown",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/010-markdown.md"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 250,
+    "end_line": 264,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/011-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 268,
+    "end_line": 298,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/012-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 302,
+    "end_line": 315,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/013-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 319,
+    "end_line": 334,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/014-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 374,
+    "end_line": 376,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/016-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 384,
+    "end_line": 388,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/017-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-11-setup-flutter.md",
+    "start_line": 415,
+    "end_line": 448,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-11-setup-flutter/018-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-12-flutter-backend.md",
+    "start_line": 30,
+    "end_line": 48,
+    "language": "markdown",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-12-flutter-backend/001-markdown.md"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-12-flutter-backend.md",
+    "start_line": 85,
+    "end_line": 92,
+    "language": "xml",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-12-flutter-backend/004-xml.xml"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-12-flutter-backend.md",
+    "start_line": 98,
+    "end_line": 108,
+    "language": "xml",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-12-flutter-backend/005-xml.xml"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-12-flutter-backend.md",
+    "start_line": 201,
+    "end_line": 242,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-12-flutter-backend/011-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-12-flutter-backend.md",
+    "start_line": 295,
+    "end_line": 299,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-12-flutter-backend/013-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 23,
+    "end_line": 41,
+    "language": "markdown",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/001-markdown.md"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 109,
+    "end_line": 127,
+    "language": "dart",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/006-dart.dart"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 137,
+    "end_line": 141,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/007-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 158,
+    "end_line": 164,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/009-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 193,
+    "end_line": 195,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/011-bash.sh"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 307,
+    "end_line": 347,
+    "language": "yaml",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/015-yaml.yaml"
+  },
+  {
+    "source_file": "parte-iv-flutter-mobile/capitolo-13-release.md",
+    "start_line": 355,
+    "end_line": 359,
+    "language": "bash",
+    "output_file": "snippets/parte-iv-flutter-mobile/capitolo-13-release/016-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 70,
+    "end_line": 73,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/002-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 120,
+    "end_line": 123,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/005-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 148,
+    "end_line": 151,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/007-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 340,
+    "end_line": 343,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/013-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 346,
+    "end_line": 348,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/014-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza.md",
+    "start_line": 381,
+    "end_line": 385,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-14-testing-sicurezza/015-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-15-deploy-produzione.md",
+    "start_line": 52,
+    "end_line": 63,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-15-deploy-produzione/001-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-15-deploy-produzione.md",
+    "start_line": 111,
+    "end_line": 113,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-15-deploy-produzione/003-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-15-deploy-produzione.md",
+    "start_line": 119,
+    "end_line": 122,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-15-deploy-produzione/004-bash.sh"
+  },
+  {
+    "source_file": "parte-v-qualita-e-produzione/capitolo-15-deploy-produzione.md",
+    "start_line": 245,
+    "end_line": 250,
+    "language": "bash",
+    "output_file": "snippets/parte-v-qualita-e-produzione/capitolo-15-deploy-produzione/008-bash.sh"
+  },
+  {
+    "source_file": "parte-vi-avanzato/capitolo-16-pattern-avanzati.md",
+    "start_line": 25,
+    "end_line": 37,
+    "language": "markdown",
+    "output_file": "snippets/parte-vi-avanzato/capitolo-16-pattern-avanzati/001-markdown.md"
+  },
+  {
+    "source_file": "parte-vi-avanzato/capitolo-16-pattern-avanzati.md",
+    "start_line": 75,
+    "end_line": 86,
+    "language": "markdown",
+    "output_file": "snippets/parte-vi-avanzato/capitolo-16-pattern-avanzati/003-markdown.md"
+  },
+  {
+    "source_file": "parte-vi-avanzato/capitolo-16-pattern-avanzati.md",
+    "start_line": 92,
+    "end_line": 114,
+    "language": "json",
+    "output_file": "snippets/parte-vi-avanzato/capitolo-16-pattern-avanzati/004-json.json"
+  },
+  {
+    "source_file": "parte-vi-avanzato/capitolo-16-pattern-avanzati.md",
+    "start_line": 210,
+    "end_line": 225,
+    "language": "markdown",
+    "output_file": "snippets/parte-vi-avanzato/capitolo-16-pattern-avanzati/008-markdown.md"
+  }
+]

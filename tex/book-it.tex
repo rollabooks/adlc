@@ -1,0 +1,91 @@
+% ============================================================
+% Progetto Editoriale — Edizione Italiana
+% Compilare con: lualatex --shell-escape book-it.tex
+% ============================================================
+\documentclass[10pt,twoside,openright]{book}
+
+% === CONFIGURAZIONE ===
+\input{config}          % impostazioni condivise (autore, anno, stile)
+\input{config-it}       % metadati edizione italiana (titolo, sottotitolo, edizione)
+
+% === LINGUA ===
+\input{lang/it}
+
+% === STILE ===
+\input{styles/\BookStyle-style}
+
+% === RISORSE ===
+\addbibresource{references.bib}
+\graphicspath{{../figures/}{../figures/it/}{../chapters/it/figures/}}
+
+% === INIZIO DOCUMENTO ===
+\begin{document}
+
+% ============================================================
+% FRONT MATTER
+% ============================================================
+\frontmatter
+\input{../chapters/it/frontmatter}
+\tableofcontents
+\input{../chapters/it/ch00-introduzione}
+
+% ============================================================
+% MAIN MATTER
+% ============================================================
+\mainmatter
+
+% --- Parte I: Il Paradigma ---
+\part{Il Paradigma}
+\input{../chapters/it/ch01-rivoluzione-0code}
+\input{../chapters/it/ch02-ambiente-sviluppo}
+\input{../chapters/it/ch03-metodo-adlc}
+
+% --- Parte II: Primi Progetti ---
+\part{Primi Progetti}
+\input{../chapters/it/ch04-hello-world}
+\input{../chapters/it/ch05-applicazione-cli}
+\input{../chapters/it/ch06-rest-api}
+
+% --- Parte III: Web Full-Stack ---
+\part{Web Full-Stack}
+\input{../chapters/it/ch07-database-postgresql}
+\input{../chapters/it/ch08-autenticazione-oauth2}
+\input{../chapters/it/ch09-frontend-react}
+\input{../chapters/it/ch10-integrazione-fullstack}
+
+% --- Parte IV: Flutter Mobile ---
+\part{Flutter Mobile}
+\input{../chapters/it/ch11-setup-flutter}
+\input{../chapters/it/ch12-flutter-backend}
+\input{../chapters/it/ch13-release}
+
+% --- Parte V: Qualità e Produzione ---
+\part{Qualità e Produzione}
+\input{../chapters/it/ch14-testing-sicurezza}
+\input{../chapters/it/ch15-deploy-produzione}
+
+% --- Parte VI: Avanzato ---
+\part{Avanzato}
+\input{../chapters/it/ch16-pattern-avanzati}
+
+% ============================================================
+% APPENDICI
+% ============================================================
+\appendix
+\part{\LabelAppendices}
+\input{../chapters/it/app-a-glossario}
+\input{../chapters/it/app-b-template}
+\input{../chapters/it/app-c-comandi}
+\input{../chapters/it/app-d-bibliografia}
+\input{../chapters/it/app-e-framework-adlc}
+\input{../chapters/it/app-f-progetto-autonomo}
+
+% ============================================================
+% BACK MATTER
+% ============================================================
+\backmatter
+\nocite{*}
+\printbibliography[title={\LabelBibliography}]
+\printindex
+
+\end{document}

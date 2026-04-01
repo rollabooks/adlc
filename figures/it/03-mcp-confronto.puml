@@ -1,0 +1,25 @@
+@startuml 03-mcp-confronto
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam ComponentBackgroundColor #F5F5F5
+skinparam ComponentBorderColor #999999
+skinparam DatabaseBackgroundColor #DCEDC8
+
+left to right direction
+
+rectangle "Senza MCP" as without {
+  component "Copilot" as c1
+  component "  X  " as x1 #FFCDD2
+  c1 -right-> x1 : immagina
+}
+
+rectangle "Con MCP" as with_mcp {
+  component "Copilot" as c2
+  database "PostgreSQL" as pg
+  component " OK " as ok #C8E6C9
+  c2 -right-> ok : query reale
+  c2 -down-> pg : MCP
+}
+
+@enduml

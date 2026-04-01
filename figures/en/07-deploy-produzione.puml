@@ -1,0 +1,31 @@
+@startuml 07-deploy-produzione
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam CloudBackgroundColor #E3F2FD
+skinparam CloudBorderColor #90CAF9
+skinparam RectangleBackgroundColor #F5F5F5
+skinparam DatabaseBackgroundColor #DCEDC8
+
+cloud "Vercel" as vercel #E3F2FD {
+  rectangle "React SPA\nGlobal CDN" as vapp
+}
+
+cloud "Railway" as railway #FFF3E0 {
+  rectangle "Express.js\nAuto-scale" as rapp
+}
+
+cloud "Neon" as neon #E8F5E9 {
+  database "PostgreSQL\nServerless" as ndb
+}
+
+vercel -right-> railway
+railway -right-> neon
+
+actor "Browser\n(React)" as browser
+actor "Mobile App\n(Flutter)" as mobile
+
+browser -up-> vercel
+mobile -up-> railway
+
+@enduml

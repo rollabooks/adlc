@@ -1,0 +1,272 @@
+% ============================================================
+% INTRODUZIONE — Dal SDLC all'ADLC
+% ============================================================
+\chapter*{Introduzione - Dal SDLC all'ADLC: La Trasformazione dell'Ingegneria del Software}
+\addcontentsline{toc}{chapter}{Introduzione}
+\markboth{Introduzione}{Introduzione}
+
+\section*{Perché Questo Libro}
+
+Nel 2024 è successo qualcosa che ha cambiato le regole del gioco. I modelli di intelligenza artificiale hanno smesso di essere strumenti di autocompletamento e sono diventati \textbf{collaboratori autonomi}, capaci di ragionare, pianificare, scrivere codice, eseguire test e autocorreggersi. Questo evento --- che gli analisti hanno definito ``Inflessione Agentica'' --- ha reso possibile per la prima volta nella storia dell'informatica costruire software completo senza scrivere manualmente codice sorgente.
+
+Non è fantascienza. Non è una promessa. È il presente.
+
+Ma questa rivoluzione ha un problema: nessuno ha spiegato \textbf{come si fa} nella pratica. Le fonti accademiche descrivono la teoria in modo brillante. I blog aziendali vendono visioni futuristiche. I tutorial su YouTube mostrano demo impressionanti che durano 5 minuti. Quello che manca è un percorso completo e strutturato che parta da zero e arrivi a un'applicazione reale in produzione, spiegando ogni passo con la chiarezza di un manuale operativo.
+
+Questo libro colma quel vuoto.
+
+Costruirai 9 progetti reali --- da un Hello World a un'applicazione full-stack con database, autenticazione, frontend React, app mobile Flutter e deploy in produzione. Tutto senza scrivere manualmente una riga di codice. Il codice esiste, funziona e puoi leggerlo, ma è l'intelligenza artificiale a generarlo. Il tuo ruolo è diverso, ed è più importante di quanto pensi.
+
+% ---------------------------------------------------------
+\section*{Il Paradigma Tradizionale: Lo SDLC}
+
+Per comprendere la rivoluzione in corso, è necessario capire da cosa si sta evolvendo.
+
+Da decenni, lo sviluppo software segue il \textbf{Software Development Life Cycle (SDLC)} --- un modello di processo che, nelle sue varie incarnazioni (Waterfall, Agile, DevOps), si fonda su un presupposto fondamentale: \textbf{il software è deterministico}. Lo sviluppatore scrive istruzioni precise in un linguaggio formale. A parità di input, la macchina restituisce sempre lo stesso output. Il codice sorgente è l'unico depositario della logica di business.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{01-sdlc-tradizionale}
+\caption{SDLC Tradizionale}
+\end{figure}
+
+In questo paradigma, l'essere umano è un \textbf{operaio della sintassi}. Traduce requisiti in istruzioni formali, riga per riga. La qualità del software dipende dalla capacità del programmatore di scrivere codice corretto, efficiente e manutenibile. I test verificano percorsi noti con risultati binari: passa o fallisce. Il successo si misura in linee di codice funzionanti, copertura dei test, cicli di calcolo ottimizzati.
+
+Il modello ha funzionato per cinquant'anni. Ma ha un costo altissimo: la barriera d'ingresso. Per costruire software, devi prima imparare a programmare --- anni di studio della sintassi, dei framework, dei pattern, delle quirk di ogni linguaggio. E anche dopo anni di esperienza, il collo di bottiglia resta la velocità con cui le dita del programmatore trasformano i concetti in codice.
+
+% ---------------------------------------------------------
+\section*{Il Nuovo Paradigma: L'ADLC}
+
+L'\textbf{Agent Development Life Cycle (ADLC)}\index{ADLC}\index{Agent Development Life Cycle|see{ADLC}} non è una versione aggiornata dell'SDLC\index{SDLC}. È un cambio di paradigma~\cite{epam:adlc}. La differenza non è quantitativa (scrivere codice più velocemente), ma qualitativa (il ruolo dell'essere umano cambia natura).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{02-adlc-ciclo}
+\caption{ADLC --- Agent Development Life Cycle}
+\end{figure}
+
+Nell'ADLC, l'intelligenza artificiale non è un assistente che completa le frasi. È un \textbf{agente autonomo}\index{agente autonomo} che utilizza un LLM\index{LLM} come motore di ragionamento~\cite{anthropic:agents} per eseguire flussi complessi: scrive codice, lo testa, rileva errori, propone correzioni, interagisce con strumenti esterni e, quando incontra ostacoli insormontabili, trasferisce il controllo all'umano.
+
+L'essere umano non scrive più codice. Diventa un \textbf{architetto di contesto} --- un direttore d'orchestra la cui responsabilità è fornire all'agente:
+
+\begin{itemize}
+  \item \textbf{Il progetto} (contesto): cosa costruire, con quali tecnologie, in quale struttura
+  \item \textbf{Le regole} (vincoli): cosa non fare mai, quali standard rispettare, dove fermarsi
+  \item \textbf{Gli strumenti} (capabilities): quali sistemi esterni l'agente può usare
+\end{itemize}
+
+\subsection*{Le 5 Dimensioni del Cambiamento}
+
+La tabella seguente illustra le differenze fondamentali tra i due approcci lungo cinque dimensioni critiche:
+
+\begin{small}
+\begin{longtable}{p{2.5cm} p{5cm} p{5.5cm}}
+\toprule
+\textbf{Dimensione} & \textbf{SDLC Tradizionale} & \textbf{ADLC} \\
+\midrule
+\endhead
+\textbf{Ruolo del sistema} & Esegue esclusivamente task predefiniti lungo percorsi logici rigidi & Agisce come collaboratore autonomo capace di interpretare, prioritizzare e ripianificare i task \\
+\midrule
+\textbf{Comportamento} & Deterministico e prevedibile. La logica risiede in codice e configurazioni rigide & Adattivo e probabilistico. La logica emerge dall'interazione tra contesto, prompt, modelli e strumenti \\
+\midrule
+\textbf{Focus operativo} & Efficienza computazionale, ottimizzazione algoritmica e correttezza funzionale & Agenzia, ragionamento astratto, resilienza agli errori e adattabilità a scenari imprevisti \\
+\midrule
+\textbf{Driver di iterazione} & Cambiamenti formali nei requisiti di business comunicati dagli stakeholder & Cambiamenti nelle performance, mutazioni ambientali o feedback umano in tempo reale \\
+\midrule
+\textbf{Paradigma di testing} & Test predefiniti validano percorsi noti (pass/fail). Qualità = manutenibilità del codice & Valutazione continua di reasoning, allucinazioni e sicurezza. Qualità = affidabilità del comportamento \\
+\bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------
+\section*{Le 7 Fasi dell'ADLC}
+
+L'ADLC struttura il processo di sviluppo in 7 fasi che mappano --- e trasformano --- le fasi classiche dell'SDLC:
+
+\begin{small}
+\begin{longtable}{c p{3cm} p{2.5cm} p{5.5cm}}
+\toprule
+\textbf{\#} & \textbf{Fase ADLC} & \textbf{Equiv.\ SDLC} & \textbf{Cosa cambia} \\
+\midrule
+\endhead
+\textbf{0} & Preparazione e Ipotesi & Pianificazione & Non scrivi requisiti formali. Formuli ipotesi testabili \\
+\midrule
+\textbf{1} & Inquadramento & Analisi & Mappi i confini di autonomia dell'agente \\
+\midrule
+\textbf{2} & Definizione e Architettura & Design & Scrivi il \texttt{\_CONTEXT.md} --- il contratto in linguaggio naturale \\
+\midrule
+\textbf{3} & Simulazione & Prototipazione & Testi con un caso minimo (Proof of Value) \\
+\midrule
+\textbf{4} & Implementazione & Coding & Orchesti l'agente: formuli richieste, revisioni l'output, iteri \\
+\midrule
+\textbf{5} & Rilascio & Testing + Deploy & Valuti la sicurezza del comportamento e deployi \\
+\midrule
+\textbf{6} & Apprendimento Continuo & Manutenzione & Aggiorni il contesto con le lezioni apprese \\
+\bottomrule
+\end{longtable}
+\end{small}
+
+% ---------------------------------------------------------
+\section*{Le Tre Competenze Fondamentali}
+
+Se lo SDLC richiedeva la padronanza dei linguaggi di programmazione, l'ADLC richiede tre competenze diverse:
+
+\subsection*{1. Context Engineering (Ingegneria del Contesto)}\index{Context Engineering}
+
+I modelli linguistici sono architetture \textbf{stateless} --- soffrono di amnesia totale tra una sessione e l'altra. Se non ricevono contesto strutturato, tendono a \textit{derivare} verso comportamenti generici o a \textit{confabulare} informazioni inesistenti~\cite{anthropic:context-engineering}.
+
+La Context Engineering è l'arte di progettare le informazioni fornite all'agente affinché possa operare con precisione. Non è ``scrivere prompt migliori''. È costruire un \textbf{sistema informativo} --- file di contesto, vincoli, template, regole --- che permetta all'agente di lavorare autonomamente per periodi prolungati senza perdere la rotta.
+
+\textbf{La stragrande maggioranza dei fallimenti operativi degli agenti IA non è più imputabile a deficienze cognitive dei modelli, ma a fallimenti del contesto.} La qualità del software che produci in 0-code dipende interamente dalla qualità dei tuoi documenti di contesto.
+
+\subsection*{2. Risk Design (Progettazione del Rischio)}\index{Risk Design}
+
+Un agente che opera in autonomia può prendere decisioni sbagliate. La differenza tra un sistema sicuro e uno pericoloso sta nella classificazione del rischio:
+
+\begin{itemize}
+  \item \textbf{LOW RISK}: Azioni diagnostiche e di ricerca $\rightarrow$ l'agente procede autonomamente
+  \item \textbf{MEDIUM RISK}: Azioni che creano nuovi artefatti $\rightarrow$ l'agente chiede conferma prima di procedere
+  \item \textbf{HIGH RISK}: Azioni distruttive o irreversibili $\rightarrow$ \textbf{Mandatory STOP} --- l'agente si ferma categoricamente
+\end{itemize}
+
+Progettare il rischio significa decidere in anticipo dove l'agente può muoversi liberamente, dove deve chiedere permesso, e dove deve fermarsi senza eccezioni.
+
+\subsection*{3. Confidence Tagging (Etichettatura della Fiducia)}
+
+Gli LLM non esprimono incertezza spontaneamente. Possono affermare un fatto verificato e un'allucinazione pericolosa con la stessa identica sicurezza. Per questo l'ADLC impone un protocollo di trasparenza:
+
+\begin{center}
+\begin{tabular}{l l p{6cm}}
+\toprule
+\textbf{Tag} & \textbf{Significato} & \textbf{Azione} \\
+\midrule
+\textbf{FACT} & Informazione verificabile & Nessuna revisione necessaria \\
+\textbf{INFERRED} & Deduzione logica da fatti consolidati & Revisione umana consigliata \\
+\textbf{ASSUMPTION} & Ipotesi non verificata & \textbf{STOP} --- l'umano deve validare \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Questo protocollo trasforma l'output dell'agente da ``scatola nera'' a sistema trasparente dove ogni affermazione ha un grado di affidabilità dichiarato.
+
+% ---------------------------------------------------------
+\section*{0-Code $\neq$ No-Code}
+
+Un chiarimento essenziale. Lo sviluppo \textbf{0-code} non ha nulla a che vedere con le piattaforme no-code tradizionali (Bubble, Wix, Zapier):
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+ & \textbf{No-Code Tradizionale} & \textbf{0-Code con IA} \\
+\midrule
+\textbf{Codice} & Non esiste, solo blocchi visuali & L'IA lo genera (React, Node, Flutter\ldots) \\
+\textbf{Personalizzazione} & Limitata ai template della piattaforma & Illimitata --- qualsiasi stack \\
+\textbf{Proprietà} & Bloccato nella piattaforma & Tuo, nel tuo repository Git \\
+\textbf{Scalabilità} & Dipende dalla piattaforma & Dipende dalla tua architettura \\
+\textbf{Come lavori} & Trascini blocchi & Descrivi in linguaggio naturale \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nello sviluppo 0-code, il codice sorgente esiste, funziona ed è standard. Puoi leggerlo, modificarlo, versionarlo su Git e deployarlo ovunque. L'unica differenza è chi lo scrive: non tu con le mani sulla tastiera, ma l'agente IA sulla base dei tuoi documenti di contesto.
+
+% ---------------------------------------------------------
+\section*{Cosa Ti Serve per Iniziare}
+
+Questo libro è progettato per due profili:
+
+\begin{itemize}
+  \item \textbf{Chi ha basi di programmazione} (anche minime o arrugginite) e vuole imparare a costruire applicazioni complete orchestrando l'IA --- diventando un ``Architetto del Contesto''
+  \item \textbf{Sviluppatori junior/mid} che vogliono decuplicare la produttività adottando il paradigma 0-code nei propri progetti
+\end{itemize}
+
+L'IA scrive il codice, ma \textbf{tu devi saperlo leggere} per verificare che funzioni e sia sicuro. Nei capitoli avanzati incontrerai token JWT, middleware Express, migrazioni Prisma, state management con Riverpod. Non devi saper scrivere queste cose da zero --- devi saper riconoscere se l'IA le ha implementate correttamente. Il Crash Course qui sotto e le spiegazioni contestuali nei singoli capitoli ti aiuteranno, ma chi parte da zero assoluto dovrà investire più tempo nella comprensione del codice generato.
+
+Serve:
+
+\begin{itemize}
+  \item \textbf{Un computer} (Windows, macOS o Linux)
+  \item \textbf{VS Code} (gratuito) con l'estensione GitHub Copilot
+  \item \textbf{Curiosità} e disponibilità a sperimentare
+  \item \textbf{Familiarità minima} con il concetto di file, cartelle e terminale
+\end{itemize}
+
+Se hai esperienza di programmazione, questo libro non ti annoierà. Ti mostrerà un modo completamente diverso di lavorare --- e potresti scoprire che il tuo nuovo ruolo di architetto di contesto è più stimolante di quello di scrittore di codice.
+
+% ---------------------------------------------------------
+\section*{Crash Course --- I Concetti Fondamentali in 5 Minuti}
+
+Nei capitoli successivi costruirai applicazioni con database, API, autenticazione e app mobile. L'IA scriverà il codice, ma per verificare che funzioni correttamente hai bisogno di comprendere alcuni concetti di base. Ecco un minimo vocabolario operativo.
+
+\begin{notebox}
+\textbf{Cos'è un'API?} --- Un'\textbf{API} (Application Programming Interface) è un insieme di ``porte d'ingresso'' che un programma mette a disposizione per ricevere richieste e restituire risposte. Quando il tuo browser carica una pagina web, sta chiamando un'API. Quando un'app mobile mostra una lista di prodotti, sta chiamando un'API. Pensa a un ristorante: tu (il cliente) non vai in cucina --- parli con il cameriere (l'API), che porta il tuo ordine in cucina (il server) e ti riporta il piatto (la risposta).
+\end{notebox}
+
+\begin{notebox}
+\textbf{Cos'è un database relazionale?} --- Un \textbf{database} è un archivio organizzato di dati. Un database \textit{relazionale} (come PostgreSQL) organizza i dati in \textbf{tabelle} --- simili a fogli Excel. Ogni tabella ha colonne (campi) e righe (record). Le tabelle possono essere collegate tra loro: ad esempio, la tabella ``utenti'' è collegata alla tabella ``note'' tramite un campo \texttt{user\_id}. Quando chiedi ``mostrami le note dell'utente~3'', il database cerca tutte le righe nella tabella note dove \texttt{user\_id = 3}.
+\end{notebox}
+
+\begin{notebox}
+\textbf{Cos'è l'architettura client-server?} --- In quasi tutte le applicazioni moderne, ci sono due parti: il \textbf{client} (ciò che l'utente vede --- il browser web, l'app mobile) e il \textbf{server} (il programma che gira su un computer remoto e gestisce dati, logica e sicurezza). Il client invia richieste, il server risponde. Il \textbf{frontend} (React, Flutter) è il client; il \textbf{backend} (Express.js, Node.js) è il server. Comunicano tramite richieste \textbf{HTTP} --- lo stesso protocollo che il browser usa quando visiti un sito web.
+\end{notebox}
+
+\begin{notebox}
+\textbf{Cos'è l'autenticazione?} --- L'\textbf{autenticazione} è il processo con cui un'applicazione verifica \textit{chi sei}. Quando fai login con Google, Google conferma la tua identità alla tua app. L'app ti rilascia un ``biglietto'' digitale (un \textbf{token JWT}) che alleghi a ogni richiesta successiva, così il server sa che sei tu senza chiederti la password ogni volta.
+\end{notebox}
+
+Non devi memorizzare tutto ora. Questi concetti riappariranno con spiegazioni contestuali nei capitoli dove servono. Se un termine ti risulta oscuro durante la lettura, consulta il \textbf{Glossario} (Appendice~A).
+
+% ---------------------------------------------------------
+\section*{Come Leggere Questo Libro}
+
+Il libro è organizzato in una progressione lineare. Ogni capitolo costruisce sul precedente:
+
+\textbf{Parte~I (Capitoli~1--3)} installa il paradigma: cos'è il 0-code, come configurare l'ambiente, come funziona l'ADLC nella pratica.
+
+\textbf{Parte~II (Capitoli~4--6)} ti mette le mani in pasta con i primi progetti: Hello World, un'applicazione CLI completa, la tua prima REST API.
+
+\textbf{Parte~III (Capitoli~7--10)} costruisce un'applicazione web full-stack: database PostgreSQL, autenticazione OAuth~2.0, frontend React, integrazione completa.
+
+\textbf{Parte~IV (Capitoli~11--13)} porta il progetto su mobile con Flutter: setup, integrazione con il backend, pubblicazione sugli store.
+
+\textbf{Parte~V (Capitoli~14--15)} affronta la qualità e la produzione: testing automatizzato, sicurezza, deploy su piattaforme cloud reali.
+
+\textbf{Parte~VI (Capitolo~16)} guarda al futuro: pattern multi-agente, microservizi, codice legacy, i limiti onesti del paradigma.
+
+In \textbf{Appendice~E} trovi l'analisi di un framework ADLC reale e professionale --- un set completo di ``contratti'' per agenti IA usato in produzione --- che mostra come i principi teorici del libro si traducono in pratica operativa matura.
+
+In \textbf{Appendice~F} ti aspetta la prova del nove: un progetto autonomo (BookShelf) dove applicherai l'intero framework ADLC senza rotelle di addestramento. \`E la sfida finale che consolida tutto ci\`o che hai appreso.
+
+Ogni capitolo segue la stessa struttura: \textbf{``Cosa imparerai'' $\rightarrow$ Spiegazione $\rightarrow$ Pratica guidata $\rightarrow$ Riepilogo''}. Puoi seguire il libro dall'inizio alla fine come un corso, oppure saltare ai capitoli che ti interessano se hai già le basi.
+
+% ---------------------------------------------------------
+\section*{Legenda dei Box}
+
+In tutto il libro troverai box colorati che segnalano informazioni di natura diversa. Ecco come leggerli:
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{c l X}
+\toprule
+\textbf{Icona} & \textbf{Box} & \textbf{Significato} \\
+\midrule
+\textcolor{note-blue}{\faInfoCircle} & \textcolor{note-blue}{\textsc{Nota}} & Approfondimento teorico, concetto chiave o informazione contestuale. \\
+\textcolor{tip-green}{\faLightbulb} & \textcolor{tip-green}{\textsc{Suggerimento}} & Best practice, scorciatoia o consiglio operativo. \\
+\textcolor{warn-orange}{\faExclamationTriangle} & \textcolor{warn-orange}{\textsc{Attenzione}} & Errore comune o comportamento inaspettato da evitare. \\
+\textcolor{red!70!black}{\faSkullCrossbones} & \textcolor{red!70!black}{\textsc{Pericolo}} & Rischio critico: sicurezza, perdita dati, lock-in irreversibile. \\
+\textcolor{purple!60!black}{\faCogs} & \textcolor{purple!60!black}{\textsc{Nota di versione}} & Compatibilità tra versioni di tool, librerie o framework. \\
+\textcolor{Goldenrod}{\faCoins} & \textcolor{Goldenrod}{\textsc{Quanto costa?}} & Implicazioni economiche: piani gratuiti, limiti, costi reali. \\
+\textcolor{tip-green}{\faCheckCircle} & \textcolor{tip-green}{\textsc{Checkpoint}} & Punto di verifica: fermati e controlla che tutto funzioni. \\
+\textcolor{manning-gray}{\faWrench} & \textcolor{manning-gray}{\textsc{Pratica}} & Esercizio guidato passo-passo --- mani sulla tastiera. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section*{Una Nota sulla Responsabilità}
+
+L'IA è un collaboratore straordinariamente capace, ma non è infallibile. Il codice che genera può contenere errori, vulnerabilità di sicurezza o assunzioni sbagliate. Il tuo ruolo di architetto di contesto include una responsabilità fondamentale: \textbf{la revisione critica di ogni output}.
+
+Questo libro ti insegnerà non solo a generare software, ma a valutarlo. A riconoscere quando l'IA sta procedendo con sicurezza e quando sta confabulando. A progettare vincoli che prevengano errori prima che si verifichino. A costruire quel rapporto di fiducia verificabile --- non cieca --- che è il cuore del paradigma ADLC.
+
+Buona costruzione.

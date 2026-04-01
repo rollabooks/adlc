@@ -1,0 +1,309 @@
+% ============================================================
+% CHAPTER 11 — Project 8: Flutter Setup and First Mobile App
+% ============================================================
+\chapter{Project 8: Flutter Setup and First Mobile App}\index{Flutter}\index{Dart}\index{Riverpod}\index{Dio}
+
+\section*{What You'll Build}
+A working Flutter mobile application that:
+\begin{itemize}
+  \item Runs on Android and iOS from a single codebase
+  \item Has a login screen and a notes list (static UI)
+  \item Uses the 0-code pattern with \texttt{\_CONTEXT.md} for Flutter/Dart
+\end{itemize}
+
+\textbf{Estimated time}: 60--90 minutes\\
+\textbf{Prerequisite}: Working Notes API backend (Chapters~6--10)
+
+\begin{notebox}
+\textbf{Tooling Box --- Stack chosen for this example.}
+\begin{itemize}
+  \item \textbf{Framework:} Flutter~3.x (Dart~3.x)
+  \item \textbf{State Management:} Riverpod~2.x
+  \item \textbf{Routing:} GoRouter~14.x
+  \item \textbf{HTTP Client:} Dio
+\end{itemize}
+\textbf{Equivalent alternatives:} React Native, Kotlin Multiplatform, .NET MAUI. The \textbf{pattern} (declarative UI, state management, navigation, API calls to the backend) is common to all cross-platform mobile frameworks. If you choose React Native, the ADLC method and \texttt{\_CONTEXT.md} work in exactly the same way.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Installing Flutter}
+
+\begin{versionbox}
+The instructions in this chapter are verified with Flutter~3.x, Dart~3.x, Riverpod~2.x, and GoRouter~14.x. The Flutter ecosystem evolves rapidly: packages change APIs between minor versions. If the AI flags a deprecated method or suggests a newer version of a package, trust the correction --- the architectural pattern stays the same. Always run \texttt{flutter pub get} after changes to \texttt{pubspec.yaml}.
+\end{versionbox}
+
+\begin{praticabox}[title={Hands-on --- Installation}]
+\textbf{Windows:}
+\begin{lstlisting}[language=bash]
+winget install -e --id Google.Flutter
+\end{lstlisting}
+
+\textbf{macOS:}
+\begin{lstlisting}[language=bash]
+brew install --cask flutter
+\end{lstlisting}
+
+\textbf{Linux:}
+\begin{lstlisting}[language=bash]
+sudo snap install flutter --classic
+\end{lstlisting}
+
+\textbf{Verification:}
+\begin{lstlisting}[language=bash]
+flutter doctor
+\end{lstlisting}
+You should have: Flutter SDK \checkmark, Android toolchain \checkmark, Connected device \checkmark.
+\end{praticabox}
+
+\begin{tipbox}
+For Android development without the full Android Studio, you can use only the Android SDK command-line tools. But for your first projects, Android Studio with the built-in emulator is the simplest choice.
+\end{tipbox}
+
+Install the \textbf{Flutter} (Dart-Code) extension for VS~Code --- it enables IntelliSense, running, debugging, hot reload, and the widget inspector.
+
+% ---------------------------------------------------------
+\section{Creating the Project}
+
+\begin{praticabox}[title={Hands-on --- Project scaffold}]
+\begin{lstlisting}[language=bash]
+cd notes-fullstack
+flutter create notes_mobile
+cd notes_mobile
+\end{lstlisting}
+Generated structure:
+\begin{lstlisting}[language={}]
+notes_mobile/
++-- lib/
+|   +-- main.dart          <- Entry point
++-- android/               <- Android configuration
++-- ios/                   <- iOS configuration
++-- test/                  <- Tests
++-- pubspec.yaml           <- Dependencies
++-- analysis_options.yaml  <- Lint rules
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Hands-on --- Verify it works}]
+\begin{lstlisting}[language=bash]
+flutter run
+# Or for quick testing:
+flutter run -d chrome
+\end{lstlisting}
+\end{praticabox}
+
+\begin{tipbox}
+\texttt{flutter run -d chrome} is the fastest way to iterate. You do not need an emulator for most UI work.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{The Context for Flutter}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} for Notes Mobile}]
+# Project: Notes Mobile (Flutter)
+
+## Purpose
+Flutter mobile app connected to the Notes API backend.
+
+## Technologies
+- Flutter 3.x, Dart
+- State Management: Riverpod 2
+- HTTP: Dio
+- Routing: GoRouter
+- Local storage: flutter_secure_storage
+- UI: Material Design 3
+
+## Architecture
+lib/
+  main.dart
+  app.dart
+  config/
+    api_config.dart      <- Backend URL, timeouts
+    theme.dart           <- Material Design 3 theme
+  models/
+    user.dart / note.dart / api_response.dart
+  services/
+    api_service.dart     <- Configured Dio client
+    auth_service.dart    <- Login, logout, refresh
+    notes_service.dart   <- Notes CRUD
+  providers/
+    auth_provider.dart   <- Authentication state
+    notes_provider.dart  <- Notes state
+  screens/
+    login_screen.dart
+    dashboard_screen.dart
+    note_detail_screen.dart
+    note_form_screen.dart
+  widgets/
+    note_card.dart / empty_state.dart / error_banner.dart
+
+## Dart/Flutter Conventions
+- Files: snake_case.dart
+- Classes: PascalCase
+- Variables/functions: camelCase
+- Widgets: each widget in a separate file
+- State: Riverpod (NOT setState for shared state)
+- Models: immutable classes with factory fromJson/toJson
+- Max 3 widget nesting levels -> extract
+
+## Constraints
+- DO NOT use SharedPreferences for JWT tokens
+- DO NOT use setState for state shared across screens
+- DO NOT hardcode URLs. Use api_config.dart
+- Every screen: loading, error, empty, data
+- Material Design 3 with useMaterial3: true
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{\texttt{SKILL.md} for Flutter}
+
+\begin{lstlisting}[language={},title={\texttt{SKILL.md} --- Flutter Mobile Developer}]
+# Flutter Mobile Developer Skill
+
+## Widget Structure
+class NoteCard extends ConsumerWidget {
+  final Note note;
+  final VoidCallback? onTap;
+  const NoteCard({super.key, required this.note, this.onTap});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Card(
+      child: ListTile(
+        title: Text(note.title),
+        subtitle: Text(note.content, maxLines: 2),
+        onTap: onTap,
+      ),
+    );
+  }
+}
+
+## Riverpod Pattern
+final authProvider =
+  StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+    return AuthNotifier(ref.read(authServiceProvider));
+  });
+
+## Material 3 Design
+- ColorScheme.fromSeed(seedColor: Colors.indigo)
+- Theme.of(context).colorScheme for colors
+- Card with elevation: 0 and border for a modern style
+- FilledButton primary, OutlinedButton secondary
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Generating the Base Structure}
+
+\begin{praticabox}[title={Hands-on --- Generate the app with Copilot}]
+\begin{lstlisting}[language={}]
+Read _CONTEXT.md and SKILL.md. Generate the base structure.
+
+Order:
+ 1. Dependencies in pubspec.yaml: dio, riverpod,
+    flutter_riverpod, go_router, flutter_secure_storage
+ 2. lib/config/api_config.dart
+ 3. lib/config/theme.dart (Material Design 3, seed: indigo)
+ 4. lib/models/ (Note, User, ApiResponse) immutable
+ 5. lib/services/api_service.dart (Dio + interceptor)
+ 6. lib/providers/auth_provider.dart
+ 7. lib/app.dart with MaterialApp.router
+ 8. lib/screens/login_screen.dart (static UI)
+ 9. lib/screens/dashboard_screen.dart (static UI, mock data)
+10. GoRouter with redirect for route protection
+11. lib/main.dart
+\end{lstlisting}
+After the AI updates \texttt{pubspec.yaml}:
+\begin{lstlisting}[language=bash]
+flutter pub get
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Verification and Iteration}
+
+\begin{praticabox}[title={Hands-on --- Start the app}]
+\begin{lstlisting}[language=bash]
+flutter run -d chrome
+\end{lstlisting}
+\end{praticabox}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Feature} & \textbf{Test} \\
+\midrule
+App starts & No compilation errors \\
+Login screen & Google/GitHub buttons visible \\
+Theme & Indigo Material~3 colors \\
+Router & Login $\leftrightarrow$ dashboard navigation \\
+Redirect & Direct access to /dashboard $\rightarrow$ /login \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Hot Reload}: with the app running, edit the text of a button and save. The app updates \textbf{instantly} --- the fastest feedback loop in mobile development.
+
+\begin{checkpointbox}
+The app starts, shows the login screen with the Material~3 theme, and navigation works.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Dart in 10 Minutes}
+
+You do not need to know Dart to work in 0-code. But recognizing the patterns helps you review:
+
+\begin{lstlisting}[language=Java,title={Key Dart concepts}]
+// Variables: strong typing, null safety
+String name = 'Notes App';
+int? count;                       // Nullable
+final items = <Note>[];           // Typed list
+
+// Asynchronous functions
+Future<List<Note>> fetchNotes() async {
+  final response = await dio.get('/api/notes');
+  return (response.data['data'] as List)
+      .map((json) => Note.fromJson(json))
+      .toList();
+}
+
+// Classes
+class Note {
+  final String id;
+  final String title;
+  const Note({required this.id, required this.title});
+}
+
+// Widget = function that returns UI
+class MyButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+  const MyButton({super.key,
+    required this.label, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      onPressed: onPressed, child: Text(label));
+  }
+}
+\end{lstlisting}
+
+\begin{tipbox}
+Dart looks a lot like Java/TypeScript. If you do not know them, do not worry: the AI writes the code, and you verify that it does what you asked.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section*{Summary}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Aspect} & \textbf{Detail} \\
+\midrule
+Framework & Flutter~3.x with Dart \\
+State & Riverpod~2 \\
+Routing & GoRouter with redirect \\
+Design & Material Design~3 \\
+Structure & Monorepo notes-fullstack/notes\_mobile/ \\
+\bottomrule
+\end{tabularx}
+\end{center}

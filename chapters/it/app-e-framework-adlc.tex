@@ -1,0 +1,374 @@
+% ============================================================
+% APPENDICE E — Un Framework ADLC Reale
+% ============================================================
+\chapter{Un Framework ADLC Reale: Analisi di un Contratto Professionale}\index{ADLC!framework completo}
+
+\section*{Premessa}
+
+Nel corso del libro hai imparato a scrivere file \texttt{\_CONTEXT.md}, a definire vincoli, a strutturare la comunicazione con l'agente IA. Hai costruito 9~progetti applicando queste tecniche in modo progressivo --- dal Hello World al deploy in produzione.
+
+Ora è il momento di vedere come questi stessi principi vengono applicati in un ambiente \textbf{professionale e di produzione}. Questa appendice analizza un framework reale composto da 17~moduli di contratto e 8~file SKILL specializzate, organizzato in una struttura modulare che governa il comportamento di un agente IA lungo l'intero ciclo di sviluppo software. Il framework è incluso nella cartella \texttt{example\_contracts/} del repository di questo libro.
+
+Non è un esercizio accademico. È un set di istruzioni operative usato in progetti reali, con team reali, su codebase reali. E ogni suo componente è un'applicazione diretta dei concetti ADLC che hai imparato.
+
+% ---------------------------------------------------------
+\section{Architettura del Framework}
+
+Il framework si struttura su \textbf{tre livelli gerarchici}, esattamente come il pattern di Progressive Disclosure descritto nel Capitolo~3:
+
+\begin{lstlisting}[language={},title={Struttura del framework}]
+Repository/
++-- .github/
+|   +-- copilot-instructions.md        <- Contratto universale
+|   +-- copilot_modules/               <- Moduli specializzati
+|       +-- 00_MODE_EN.md              <- Modalita operative
+|       +-- 00_CONTEXT_TEMPLATE_EN.md  <- Template context card (+ variante minimale)
+|       +-- 01_CORE_RULES_EN.md        <- Regole base
+|       +-- 02_DISCOVERY_ANALYSIS_EN.md <- Fase 0-1
+|       +-- 03_DESIGN_EN.md            <- Fase 2
+|       +-- 04_IMPLEMENTATION_EN.md    <- Fase 3
+|       +-- 05_VERIFICATION_RELEASE_EN.md <- Fase 4-5
+|       +-- 06_OPS_EN.md              <- Fase 6
+|       +-- 07_SPECIAL_LANES_EN.md     <- Workflow paralleli
+|       +-- 08_PROMPT_LIBRARY_EN.md    <- Prompt riutilizzabili
+|       +-- 09_CODEBASE_ANALYSIS_EN.md <- Analisi codebase
+|       +-- 10_DOCUMENTATION_EN.md     <- Generazione e automazione docs
+|       +-- 11_BUGFIX_PLAYBOOK_EN.md   <- Approccio al debug
+|       +-- 12_OPERATING_GUIDE_EN.md   <- Guida operativa
+|       +-- 13_ARCH_BACKEND_EXAMPLE_EN.md <- Contratto backend (esempio)
+|       +-- SECURITY_CONSTRAINTS_LIBRARY_EN.md
+|       +-- PERFORMANCE_CONSTRAINTS_LIBRARY_EN.md
+|       +-- skills/                    <- SKILL per ogni fase ADLC
+|           +-- SKILL_ANALYSIS_EN.md   <- Fase 0-1: requisiti, user story
+|           +-- SKILL_DESIGN_EN.md     <- Fase 2: stack, ADR, EPIC/task
+|           +-- SKILL_REACT_EN.md      <- Fase 3: frontend React
+|           +-- SKILL_FLUTTER_EN.md    <- Fase 3: mobile Flutter
+|           +-- SKILL_API_DESIGN_EN.md <- Fase 3: REST API design
+|           +-- SKILL_DATABASE_EN.md   <- Fase 3: Prisma/PostgreSQL
+|           +-- SKILL_SECURITY_EN.md   <- Fase 3: OAuth2, JWT, CORS
+|           +-- SKILL_OPS_EN.md        <- Fase 6: incidenti, monitoring
+|
++-- ProgettoA/
+|   +-- .copilot/
+|   |   +-- instructions.md            <- Regole progetto
+|   |   +-- skills/                    <- SKILL selezionati per il progetto
+|   |   +-- domain.md                  <- Conoscenza dominio
+|   +-- _CONTEXT.md                    <- Stato corrente
+|   +-- PROGRESS.md                    <- Storico sessioni
+|
++-- ProgettoB/
+    +-- .copilot/
+    |   +-- instructions.md
+    |   +-- skills/
+    +-- _CONTEXT.md
+    +-- PROGRESS.md
+\end{lstlisting}
+
+\subsection{Il principio di separazione}
+
+Il framework distingue nettamente tre ambiti:
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{Ambito} & \textbf{Posizione} & \textbf{Chi gestisce} & \textbf{Scopo} \\
+\midrule
+Framework universale & \texttt{.github/} & Team architettura & Regole immutabili per qualsiasi progetto \\
+Regole di progetto & \texttt{.copilot/} & Team di progetto & Override specifici per stack/dominio/team \\
+Stato di sessione & \texttt{\_CONTEXT.md} & Umano + Agente & Fase corrente, task attivo, vincoli \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+Questa architettura risolve un problema reale: come mantenere la coerenza delle regole su decine di progetti senza duplicare le istruzioni.
+
+% ---------------------------------------------------------
+\section{Il Contratto Universale: \texttt{copilot-instructions.md}}
+
+Il file principale --- circa 350~righe --- \`e il punto d'ingresso che l'agente carica \textbf{ad ogni sessione}. Funziona come un \textbf{router}: definisce i protocolli essenziali (Bootstrap, Risk Classification, Confidence Tagging) e rimanda ai moduli specializzati per i dettagli. Contiene quattro sezioni critiche.
+
+\subsection{Bootstrap Protocol}
+
+All'apertura di ogni nuova chat, l'agente esegue automaticamente:
+
+\begin{enumerate}
+  \item \textbf{Codebase Discovery}: Analizza il repository per comprendere struttura, stack, pattern, comandi di build/test/deploy
+  \item \textbf{Context Intake}: Cerca il \texttt{\_CONTEXT.md} più vicino al file attivo, carica le istruzioni da \texttt{.copilot/}, conferma i parametri
+  \item \textbf{Context Block Generation}: Produce un riepilogo strutturato con fase, stack, vincoli SEC/PERF, comandi
+\end{enumerate}
+
+Confronta con il Capitolo~3: è esattamente il \texttt{\_CONTEXT.md} che hai imparato a scrivere, ma automatizzato.
+
+\subsection{Modalità Operative}
+
+Il framework definisce 4~modalità che calibrano il comportamento dell'agente:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{Modalità} & \textbf{Controlli} & \textbf{Velocità} & \textbf{Uso tipico} \\
+\midrule
+STANDARD & Tutti (SEC/PERF/test/doc) & Normale & Sviluppo quotidiano \\
+FAST & Solo SEC-XX & 2$\times$ & Prototipi e spike \\
+AUDIT & Tutti + compliance & Lenta & Pre-produzione \\
+RAPID & Minimali (naming + errori) & 5$\times$ & Fix d'emergenza \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Classificazione del Rischio e Mandatory STOP}
+
+Il contratto implementa la classificazione a tre livelli del Capitolo~14:
+
+\begin{lstlisting}[language={}]
+LOW RISK + SMALL (spiegare, nominare, formattare):
+  -> Esegui direttamente, notifica a fine
+
+MEDIUM RISK o SCOPE MEDIO (implementare, testare, refactoring):
+  -> "Propongo di [X]. Procedo?"
+
+HIGH RISK o SCOPE AMPIO (architettura, schema, eliminazione):
+  -> Piano dettagliato con step. Conferma obbligatoria.
+\end{lstlisting}
+
+Situazioni di \textbf{STOP obbligatorio}: modifiche a schema database o contratto API, cancellazione di dati o codice, modifiche alla logica di autenticazione, cambiamenti architetturali, deploy in produzione, gestione segreti, azioni che impattano la compliance.
+
+\subsection{Confidence Tagging con base probatoria}
+
+Ogni output tecnico superiore a 5~righe deve terminare con un tag di affidabilità:
+
+\begin{lstlisting}[language={}]
+---
+AI CONFIDENCE: FACT
+Basis: Function signature verified in src/auth/handler.ts#L42
+\end{lstlisting}
+
+\begin{notebox}
+Nota la differenza rispetto al Confidence Tagging del Capitolo~14: qui il tag include la \textbf{base probatoria} --- il file e la riga esatta da cui l'informazione è stata verificata. Questo è il livello professionale del protocollo.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{I Moduli SDLC: Un Agente per Ogni Fase}
+
+La vera innovazione del framework è la modularizzazione delle competenze dell'agente \textbf{per fase di sviluppo}. Invece di caricare tutte le regole in ogni sessione, il sistema attiva solo i moduli necessari.
+
+\subsection{Attivazione Automatica per Fase}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{X l X}
+\toprule
+\textbf{Pattern nell'input} & \textbf{Fase} & \textbf{Modulo caricato} \\
+\midrule
+``Ho bisogno di\ldots'' / ``nuova feature'' & 0-1: Discovery & \texttt{02\_DISCOVERY\_ANALYSIS} \\
+``architettura'' / ``tech stack'' / ``ADR'' & 2: Design & \texttt{03\_DESIGN} \\
+``implementa'' / ``codifica'' / ``scrivi'' & 3: Implementation & \texttt{04\_IMPLEMENTATION} \\
+``è pronto?'' / ``test'' / ``QA'' & 4-5: Verification & \texttt{05\_VERIFICATION\_RELEASE} \\
+``errore in produzione'' / ``incident'' & 6: Ops & \texttt{06\_OPS} \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+Questo è il \textbf{Progressive Disclosure} del Capitolo~3, applicato non a una singola Skill ma all'intero ciclo di vita.
+
+\subsection{Modulo Design}
+
+Contiene template di valutazione stack (tabella con 6~criteri pesati), Architecture Decision Record (ADR), template contratto API e struttura EPIC $\rightarrow$ Task con story point.
+
+\subsection{Modulo Implementation}
+
+Implementa la \textbf{Regola dello Pseudocodice} del Capitolo~10: per task con logica $>$ 50~righe, scrivi prima lo pseudocodice, attendi approvazione, poi implementa.
+
+\subsection{Modulo Ops}
+
+Copre triage incidenti, Root Cause Analysis (RCA), protocollo post-mortem e runbook per scenari ricorrenti.
+
+% ---------------------------------------------------------
+\section{Workflow di Interazione: Il Protocollo Uomo-Agente}
+
+Il protocollo completo si articola in 5~fasi:
+
+\begin{enumerate}
+  \item \textbf{Setup Iniziale} (una tantum): l'umano prepara \texttt{.github/}, \texttt{.copilot/} (con \texttt{skills/}), \texttt{\_CONTEXT.md}
+  \item \textbf{Inizio Sessione} (ogni chat): Bootstrap Protocol automatico, caricamento SKILL per la fase corrente, conferma fase e stack
+  \item \textbf{Assegnazione Task}: per task file, per epic o modo libero
+  \item \textbf{Ciclo di Lavoro}: implementazione con checkpoint ogni 3--5 azioni
+  \item \textbf{Fine Sessione}: aggiornamento \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}
+\end{enumerate}
+
+\subsection{Comandi di Controllo}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Effetto} \\
+\midrule
+\texttt{@stop} & Arresto immediato \\
+\texttt{@explain} & L'agente spiega il ragionamento dell'ultima azione \\
+\texttt{@undo} & Annulla l'ultima modifica \\
+\texttt{@alternatives} & Propone soluzioni alternative \\
+\texttt{@confidence} & Dichiara FACT / INFERRED / ASSUMPTION \\
+\texttt{@context-update} & Aggiorna \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md} con lo stato corrente \\
+\texttt{@checkpoint} & Salva progresso e propone il prossimo passo \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Componenti Specializzati}
+
+\subsection{Workflow Fullstack Parallelo}
+
+Per feature che richiedono modifiche simultanee a frontend e backend, il framework definisce \textbf{sync point} espliciti:
+
+\begin{lstlisting}[language={}]
+SYNC POINT 1: Contract Agreement
+  -> OpenAPI spec finalizzata, DTO condivisi, mock server
+
+SYNC POINT 2: Integration Ready
+  -> Backend funzionante, frontend pronto, rimozione mock
+
+SYNC POINT 3: E2E Ready
+  -> Entrambi i layer integrati, feature testabile end-to-end
+\end{lstlisting}
+
+\subsection{Librerie di Vincoli}
+
+Due file dedicati raccolgono pattern riutilizzabili:
+\begin{itemize}
+  \item \texttt{SECURITY\_CONSTRAINTS\_LIBRARY}: catalogo vincoli SEC-XX (autenticazione, autorizzazione, input validation, encryption, CORS\ldots)
+  \item \texttt{PERFORMANCE\_CONSTRAINTS\_LIBRARY}: catalogo vincoli PERF-XX con target specifici (response time, throughput, memory, caching\ldots)
+\end{itemize}
+
+\subsection{SKILL Files: Competenze per Ogni Fase}\index{SKILL.md!framework completo}
+
+Nel libro hai creato SKILL per React (Cap.~9) e Flutter (Cap.~11). Il framework estende il concetto a \textbf{tutte le fasi ADLC}:
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{SKILL} & \textbf{Fase} & \textbf{Dominio} \\
+\midrule
+\texttt{analysis.md} & 0-1 Discovery & Requisiti, user story, threat model \\
+\texttt{design.md} & 2 Design & Valutazione stack, ADR, EPIC/task \\
+\texttt{react.md} & 3 Impl. & Componenti, hook, stato, test \\
+\texttt{flutter.md} & 3 Impl. & Riverpod, navigazione, deep link \\
+\texttt{api-design.md} & 3 Impl. & Convenzioni REST, formato risposta \\
+\texttt{database.md} & 3 Impl. & Prisma, migrazioni, query pattern \\
+\texttt{security.md} & 3 Impl. & OAuth2, JWT, CORS, OWASP \\
+\texttt{ops.md} & 6 Ops & Incidenti, SLA, runbook, monitoring \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+L'agente carica \textbf{un solo SKILL alla volta}, in base alla fase e al tipo di task. Quando il lavoro cambia dominio (da backend a frontend, dalla progettazione all'implementazione), l'agente scarica lo SKILL corrente e carica quello pertinente. Questo è il Progressive Disclosure applicato alle competenze.
+
+\subsection{Bugfix Playbook}
+
+Protocollo strutturato: riproduzione del bug $\rightarrow$ isolamento della causa $\rightarrow$ fix minimale $\rightarrow$ test di regressione $\rightarrow$ post-mortem.
+
+% ---------------------------------------------------------
+\section{Dal Libro al Framework: Mappatura}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l c X}
+\toprule
+\textbf{Concetto del libro} & \textbf{Cap.} & \textbf{Implementazione nel framework} \\
+\midrule
+\texttt{\_CONTEXT.md} & 3 & Context Card con template standardizzato \\
+Vincoli SEC/PERF & 3, 14 & Librerie riutilizzabili \\
+Confidence Tagging & 3, 14 & Tag con base probatoria obbligatoria \\
+Risk Classification & 14 & Matrice con Mandatory STOP \\
+Regola Pseudocodice & 10 & Obbligatoria per $>$50 righe \\
+Context Engineering & 3 & Progressive Disclosure a 3~livelli \\
+Pattern Multi-Agente & 16 & Moduli SDLC caricati per fase \\
+Checkpoint & 10, 16 & Protocollo ogni 3--5 azioni \\
+Testing e Sicurezza & 14 & Security checklist per PR + SAST/DAST \\
+Deploy & 15 & Rollback plan obbligatorio \\
+Codice Legacy & 16 & Protocollo con ADR retroattivi \\
+Agent Skills (SKILL.md) & 9, 11 & 8~file SKILL che coprono tutte le fasi ADLC \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Lezioni dal Mondo Reale}
+
+\subsection{L'immutabilità del framework è non-negoziabile}
+
+Il file principale contiene: \textit{``THIS FILE MUST NEVER BE MODIFIED''} e una \textbf{Agent Protection Clause} che vieta all'agente di modificare \texttt{.github/copilot\_modules/}. Le personalizzazioni vivono in \texttt{.copilot/}.
+
+\subsection{Il costo del contesto è gestito con precisione}
+
+Ogni modulo dichiara il proprio costo (\texttt{Size: $\sim$320 lines | Context cost: Medium}), permettendo scelte consapevoli su quanti moduli caricare simultaneamente.
+
+\subsection{La gerarchia di priorità è esplicita}
+
+\begin{enumerate}
+  \item \texttt{\_CONTEXT.md} --- stato sessione (priorità \textsc{massima})
+  \item \texttt{.copilot/instructions.md} --- regole progetto
+  \item \texttt{.copilot/skills/*.md} --- competenze di dominio (caricate on-demand)
+  \item \texttt{.copilot/domain.md} --- conoscenza di dominio
+  \item \texttt{.github/copilot\_modules/} --- regole framework (priorità minima)
+\end{enumerate}
+
+In caso di conflitto, il livello più specifico prevale.
+
+\subsection{I comandi di controllo sono un sistema operativo per l'IA}
+
+I comandi \texttt{@stop}, \texttt{@explain}, \texttt{@undo}, \texttt{@checkpoint} non sono suggerimenti --- sono un'interfaccia di controllo che permette all'umano di governare l'agente in tempo reale.
+
+% ---------------------------------------------------------
+\section{Oltre il Contratto Testuale: La Governance Infrastrutturale}\index{governance}\index{sandbox}
+
+Il framework analizzato in questa appendice si basa su \textbf{vincoli testuali}: regole scritte in linguaggio naturale che l'agente dovrebbe rispettare. Questo approccio funziona nella maggioranza dei casi, ma ha un limite intrinseco: si affida all'autodisciplina del modello linguistico. Un prompt avversario o un'allucinazione possono violare qualsiasi vincolo testuale.
+
+Nel 2026, l'industria enterprise ha risposto con soluzioni che applicano i vincoli \textbf{a livello di runtime}. Il caso più significativo è \textbf{NemoClaw}\index{NemoClaw} di NVIDIA~\cite{nvidia:nemoclaw,nvidia:sandbox}, uno stack infrastrutturale che implementa il sandboxing a livello di processo tramite il componente \textbf{OpenShell}.
+
+\subsection{Come funziona}
+
+A differenza di un \texttt{\_CONTEXT.md} che dice ``NON usare librerie esterne'', NemoClaw utilizza policy scritte in YAML applicate a livello di kernel. L'agente è isolato in una sandbox con:
+
+\begin{itemize}
+  \item Permessi di rete limitati a specifici endpoint
+  \item Accesso al file system ristretto a directory autorizzate
+  \item Blocco fisico di qualsiasi operazione non prevista, indipendentemente dal prompt
+\end{itemize}
+
+Un \textit{Privacy Router} instrada le query con dati sensibili verso modelli locali (come la famiglia NVIDIA Nemotron), inviando al cloud solo i compiti di ragionamento astratto.
+
+\subsection{I due approcci si completano}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+& \textbf{Contratto Testuale (ADLC)} & \textbf{Governance Infrastrutturale (NemoClaw)} \\
+\midrule
+Meccanismo & Regole in linguaggio naturale & Policy YAML a livello di kernel \\
+Enforcement & L'agente \textit{dovrebbe} rispettare & L'agente \textit{non può} violare \\
+Costo & Zero (file di testo) & Infrastruttura dedicata \\
+Ideale per & Team piccoli, progetti individuali & Enterprise, dati regolamentati \\
+Limite & Vulnerabile a prompt injection & Richiede infrastruttura NVIDIA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{notebox}
+Per i progetti di questo libro e per la maggioranza delle startup, il contratto testuale ADLC è più che sufficiente. La governance infrastrutturale diventa necessaria quando si trattano dati regolamentati (GDPR, HIPAA), si opera in settori critici (finanza, sanità), o si gestiscono team con decine di agenti autonomi.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section*{Conclusione}
+
+Il framework analizzato dimostra che il paradigma ADLC non è un concetto accademico --- è un metodo di lavoro operativo, testato in produzione, con strumenti concreti e protocolli misurabili.
+
+Partendo dal semplice \texttt{\_CONTEXT.md} del Capitolo~3, hai visto come lo stesso principio scala fino a un'architettura modulare di 17~moduli e~8~SKILL specializzate. La distanza tra il tuo primo Hello World e questo framework non \`e un abisso --- \`e una scala progressiva, e ogni gradino \`e un concetto che hai gi\`a appreso.
+
+Il prossimo passo è tuo: prendi i template, adattali al tuo progetto, e inizia a costruire i tuoi contratti per agenti IA.

@@ -1,0 +1,36 @@
+@startuml 01-sdlc-tradizionale
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam ArrowColor #333333
+skinparam ActivityBackgroundColor #E8E8E8
+skinparam ActivityBorderColor #999999
+skinparam ActivityFontSize 11
+
+|Requisiti|
+start
+:Requisiti;
+note right: Umano
+
+|Design|
+:Design;
+note right: Umano
+
+|Codifica|
+:Codifica;
+note right: Umano
+
+|Test|
+:Test;
+note right: Umano
+
+|Deploy|
+:Deploy;
+note right: Umano
+
+|Manutenzione|
+:Manutenzione;
+note right: Umano
+stop
+
+@enduml

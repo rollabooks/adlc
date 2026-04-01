@@ -1,0 +1,1 @@
+docker run --name notes-db -e POSTGRES_USER=notes -e POSTGRES_PASSWORD=notes123 -e POSTGRES_DB=notesdb -p 5432:5432 -d postgres:16

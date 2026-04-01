@@ -1,0 +1,152 @@
+/* ============================================================
+   Manning Publications Style — EPUB
+   Sans-serif headings, red accents, clean layout.
+   ============================================================ */
+
+body {
+  font-family: "Georgia", "Cambria", serif;
+  line-height: 1.6;
+  margin: 1em;
+  color: #212121;
+}
+
+/* --- Headings (sans-serif Manning style) --- */
+h1 {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #212121;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  page-break-before: always;
+}
+
+h2 {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #212121;
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+h3 {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #212121;
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+}
+
+h4 {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: #616161;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+}
+
+/* --- Code (Manning: gray background, left bar) --- */
+pre {
+  background-color: #f4f4f4;
+  border-left: 3px solid #bdbdbd;
+  padding: 0.8em 1em;
+  font-size: 0.8em;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  page-break-inside: auto;
+}
+
+code {
+  font-family: "Inconsolata", "Consolas", "Courier New", monospace;
+  font-size: 0.88em;
+}
+
+p code, li code {
+  background-color: #f4f4f4;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+  color: #b71c1c;
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5em 0.7em;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+}
+
+/* --- Admonition Blocks (left-bordered) --- */
+blockquote {
+  border-left: 3px solid #1565c0;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background-color: #f8f9fa;
+  font-size: 0.95em;
+}
+
+blockquote strong:first-child {
+  display: block;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3em;
+}
+
+blockquote.tip { border-left-color: #2e7d32; background-color: #f1f8e9; }
+blockquote.tip strong:first-child { color: #2e7d32; }
+blockquote.warning { border-left-color: #e65100; background-color: #fff3e0; }
+blockquote.warning strong:first-child { color: #e65100; }
+blockquote.danger { border-left-color: #b71c1c; background-color: #fce4ec; }
+blockquote.danger strong:first-child { color: #b71c1c; }
+
+/* --- Links --- */
+a {
+  color: #0d47a1;
+  text-decoration: none;
+}
+
+/* --- Lists --- */
+ul, ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+li {
+  margin-bottom: 0.2em;
+}
+
+/* --- Figures --- */
+figure {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+figcaption {
+  font-size: 0.85em;
+  color: #616161;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #bdbdbd;
+  margin: 2em 0;
+}

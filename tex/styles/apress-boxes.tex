@@ -1,0 +1,113 @@
+% ============================================================
+% apress-boxes.tex — Box admonition stile Apress/Springer
+% ============================================================
+% Stile: formale, bordo nero/grigio, titoli maiuscoli,
+% look accademico. Apress usa Note, Tip, Caution.
+% ============================================================
+
+\providecolor{tip-green}{HTML}{2E7D32}
+\providecolor{warn-orange}{HTML}{EF6C00}
+\providecolor{note-blue}{HTML}{1976D2}
+\providecolor{caution-red}{HTML}{C62828}
+\providecolor{apress-dark}{HTML}{1A1A1A}
+\providecolor{apress-gray}{HTML}{4A4A4A}
+
+\usepackage{fontawesome5}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Note
+\newtcolorbox{notebox}[1][]{
+  colback=white, colframe=apress-dark,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faInfoCircle\space\MakeUppercase{\LabelNote}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=apress-dark,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Tip
+\newtcolorbox{tipbox}[1][]{
+  colback=tip-green!3, colframe=tip-green!60!black,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faLightbulb\space\MakeUppercase{\LabelTip}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=tip-green!60!black,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Warning (Caution in Apress)
+\newtcolorbox{warnbox}[1][]{
+  colback=warn-orange!3, colframe=warn-orange,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faExclamationTriangle\space\MakeUppercase{\LabelCaution}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=warn-orange,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Danger
+\newtcolorbox{dangerbox}[1][]{
+  colback=caution-red!3, colframe=caution-red,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faTimesCircle\space\MakeUppercase{\LabelWarning}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=caution-red,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Checkpoint
+\newtcolorbox{checkpointbox}[1][]{
+  colback=white, colframe=apress-gray,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCheckSquare\space\MakeUppercase{\LabelCheckpoint}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=apress-gray,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Version
+\newtcolorbox{versionbox}[1][]{
+  colback=white, colframe=apress-gray,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCogs\space\MakeUppercase{\LabelVersionNote}},
+  boxrule=0.5pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=apress-gray,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Cost
+\newtcolorbox{costbox}[1][]{
+  colback=white, colframe=apress-gray,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faCoins\space\MakeUppercase{\LabelCost}},
+  boxrule=0.5pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=apress-gray,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}
+
+% Exercise
+\newtcolorbox{praticabox}[1][]{
+  colback=white, colframe=apress-dark,
+  fonttitle=\sffamily\bfseries\small,
+  title={\faPencilAlt\space\MakeUppercase{\LabelExercise}},
+  boxrule=1pt, arc=0pt, breakable,
+  left=8pt, right=8pt,
+  coltitle=apress-dark,
+  toptitle=4pt, bottomtitle=4pt,
+  separator sign none, #1
+}

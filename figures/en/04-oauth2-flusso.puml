@@ -1,0 +1,26 @@
+@startuml 04-oauth2-flusso
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam SequenceMessageAlignment center
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #999999
+skinparam SequenceArrowColor #333333
+skinparam SequenceLifeLineBorderColor #CCCCCC
+
+actor User as user
+participant "Your App\n(Frontend)" as app
+participant "Google" as google
+participant "Your Backend" as backend
+participant "Google API" as gapi
+
+user -> app : 1. Clicks "Sign in with Google"
+app -> user : 2. Redirect to Google
+user -> google : 3. Sign in to Google
+google --> user : 4. Returns a CODE
+user -> backend : 5. Code is sent to backend
+backend -> gapi : 6. Exchange code\nfor token
+gapi --> backend : User profile
+backend --> user : 7. Creates JWT and\nreturns it
+
+@enduml

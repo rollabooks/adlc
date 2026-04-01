@@ -1,0 +1,335 @@
+% ============================================================
+% CHAPTER 6 — Project 3: REST API Server with Node.js
+% ============================================================
+\chapter{Project 3: REST API Server with Node.js}
+
+\section*{What You Will Build}
+A complete \textbf{REST API server} with Node.js and Express that:
+\begin{itemize}
+  \item Exposes CRUD endpoints for managing ``notes''
+  \item Validates all input with Zod\index{Zod}
+  \item Handles errors with centralized middleware
+  \item Generates automatic Swagger documentation
+  \item Includes integration tests
+\end{itemize}
+
+This server will become the \textbf{foundation of the full-stack project} that will grow in Chapters~7--10.
+
+\textbf{Estimated time}: 45--60 minutes
+
+\begin{notebox}
+\textbf{Theory Box --- What is a REST API?} A REST API is an interface that allows different programs to communicate with one another through standard HTTP requests. It works like a waiter in a restaurant: the client (browser, mobile app) sends an \textit{order} (request), specifying \textit{what it wants} (URL) and \textit{which operation} (HTTP method: GET to read, POST to create, PUT to update, DELETE to remove). The server processes the request and responds with data in JSON format --- a textual format that is readable both by humans and by computers. Example: \texttt{GET /api/notes} asks for the list of notes; the server responds with \texttt{[\{"id": 1, "title": "First note"\}]}.
+\end{notebox}
+
+\begin{notebox}
+\textbf{Tooling Box --- Stack chosen for this example.}
+\begin{itemize}
+  \item \textbf{Runtime:} Node.js~20~LTS
+  \item \textbf{Framework:} Express.js~4.x
+  \item \textbf{Validation:} Zod~3.x
+  \item \textbf{Testing:} Jest~29.x
+\end{itemize}
+\textbf{Equivalent alternatives:} Python/FastAPI, Go/Gin, Java/Spring Boot, C\#/ASP.NET. The \textbf{architectural pattern} (CRUD endpoints, input validation, middleware, tests) is identical regardless of the language. If you prefer another stack, apply the same 0-code method: \texttt{\_CONTEXT.md} will guide the AI to generate the implementation in the framework you chose.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Prerequisites}
+
+\begin{versionbox}
+The instructions in this chapter are verified with Node.js~20~LTS, Express.js~4.x, Zod~3.x, and Jest~29.x. JavaScript frameworks evolve constantly: if the AI warns you that a library is deprecated or suggests a newer version (e.g.\ Express~5, Vitest instead of Jest), trust the correction and proceed. The architectural concepts remain identical.
+\end{versionbox}
+
+\begin{praticabox}[title={Hands-on --- Installing Node.js}]
+\textbf{Windows:} Download the LTS version (20.x+) from \url{https://nodejs.org}.
+
+\textbf{macOS:}
+\begin{lstlisting}[language=bash]
+brew install node
+\end{lstlisting}
+
+\textbf{Linux:}
+\begin{lstlisting}[language=bash]
+curl -fsSL https://deb.nodesource.com/setup_20.x \
+  | sudo -E bash -
+sudo apt-get install nodejs
+\end{lstlisting}
+
+\textbf{Verify:}
+\begin{lstlisting}[language=bash]
+node --version    # v20.x.x
+npm --version     # 10.x.x
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{The Project Context (ADLC Phases 0--2)}\index{REST API}\index{Express.js}\index{Node.js}
+
+\begin{notebox}
+\textbf{Didactic note}: In a real project, before writing \texttt{\_CONTEXT.md} you would apply Phase~3 of the professional workflow (Section~3.8): the AI proposes the technology options, you choose, and document everything in \texttt{docs/DESIGN.md} as an ADR. In this guided project, the choices have already been made for you --- so you can focus on learning the ADLC method without the decision-making overhead. In the autonomous project in Appendix~F you will apply the complete workflow, including Design.
+\end{notebox}
+
+\begin{praticabox}[title={Hands-on --- Setup and \texttt{\_CONTEXT.md}}]
+Create the folder \texttt{notes-api}, open it in VS~Code, and create the file \texttt{\_CONTEXT.md}:
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} for Notes API}]
+# Progetto: Notes API
+
+## Scopo
+REST API per la gestione di note personali. Backend che verra'
+usato come fondamento per un'app full-stack (React + Flutter).
+
+## Tecnologie
+- Runtime: Node.js 20 LTS
+- Framework: Express.js 4.x
+- Linguaggio: JavaScript ES2022+ con ESModules
+- Validazione: Zod
+- Documentazione: swagger-jsdoc + swagger-ui-express
+- Testing: Jest con supertest
+- Linting: ESLint
+
+## Struttura del Progetto
+notes-api/
++-- _CONTEXT.md
++-- package.json
++-- .env.example
++-- .gitignore
++-- src/
+|   +-- index.js
+|   +-- app.js
+|   +-- routes/
+|   |   +-- notes.js
+|   +-- controllers/
+|   |   +-- notesController.js
+|   +-- services/
+|   |   +-- notesService.js
+|   +-- middleware/
+|   |   +-- errorHandler.js
+|   |   +-- validateRequest.js
+|   +-- schemas/
+|   |   +-- noteSchema.js
+|   +-- utils/
+|       +-- apiResponse.js
++-- tests/
+    +-- setup.js
+    +-- notes.test.js
+
+## Modello Dati (Nota) -- storage in-memory
+- id: string UUID v4
+- title: string (1-200 caratteri)
+- content: string (1-10000 caratteri)
+- tags: string[] (opzionale, default [])
+- createdAt: string ISO 8601
+- updatedAt: string ISO 8601
+
+## Endpoint API
+GET    /api/notes       Lista tutte le note      200
+GET    /api/notes/:id   Dettaglio nota            200/404
+POST   /api/notes       Crea nota                 201
+PUT    /api/notes/:id   Aggiorna nota             200/404
+DELETE /api/notes/:id   Elimina nota              204/404
+GET    /api/health      Health check              200
+GET    /api/docs        Swagger UI                200
+
+## Formato Risposte
+Successo: { "success": true, "data": T }
+Con lista: { "success": true, "data": T[], "count": N }
+Errore:   { "success": false, "error": { "message": "", "code": "" } }
+
+## Convenzioni
+- ESModules: usa SEMPRE import/export, MAI require
+- Async: usa SEMPRE async/await, MAI callback o .then()
+- camelCase per variabili/funzioni, PascalCase per classi
+- kebab-case per nomi file
+- Status code appropriati (201 POST, 204 DELETE)
+
+## Vincoli
+- NON usare require(). Progetto ESModules.
+- NON mettere logica di business nei controller. Usa i service.
+- NON ritornare stack trace negli errori.
+- NON hardcodare la porta. Usa process.env.PORT default 3000.
+- CORS abilitato per lo sviluppo.
+- Ogni endpoint deve avere commento JSDoc Swagger.
+- package.json DEVE avere "type": "module"
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Project Generation}
+
+\begin{praticabox}[title={Hands-on --- Initialization and generation}]
+In Copilot Agent Mode:
+\begin{lstlisting}[language={}]
+Leggi il _CONTEXT.md e implementa l'intero progetto Notes API.
+
+Inizia con:
+1. Inizializza npm con package.json (type: module)
+2. Installa le dipendenze necessarie
+3. Implementa i file nell'ordine:
+   schemas -> utils -> services -> middleware ->
+   controllers -> routes -> app -> index
+4. Aggiungi la configurazione Swagger
+5. Crea i test di integrazione
+6. Crea .env.example e .gitignore
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Structural Verification}
+
+\subsection*{Review checklist}
+
+\textbf{\texttt{package.json}:}
+\begin{itemize}
+  \item Contains \texttt{"type": "module"}
+  \item Scripts \texttt{dev}, \texttt{start}, \texttt{test}, \texttt{lint} are present
+  \item Correct dependencies
+\end{itemize}
+
+\textbf{\texttt{src/app.js}:}
+\begin{itemize}
+  \item Uses \texttt{import}, not \texttt{require}
+  \item CORS is enabled
+  \item Error handler as the last middleware
+  \item Routes \texttt{/api/notes} and \texttt{/api/docs} are mounted
+\end{itemize}
+
+\textbf{\texttt{src/schemas/noteSchema.js}:}
+\begin{itemize}
+  \item Zod schema with validation for title (1--200), content (1--10000)
+  \item Optional \texttt{tags} field
+\end{itemize}
+
+\textbf{\texttt{src/utils/apiResponse.js}:}
+\begin{itemize}
+  \item Response format matches the context
+  \item Functions \texttt{successResponse()} and \texttt{errorResponse()}
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{Testing and First Run}
+
+\begin{praticabox}[title={Hands-on --- Starting the server}]
+\begin{lstlisting}[language=bash]
+npm run dev
+\end{lstlisting}
+Expected output:
+\begin{lstlisting}[language={}]
+Server running on port 3000
+Swagger docs available at http://localhost:3000/api/docs
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Hands-on --- Manual tests}]
+\textbf{Health check:}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/health
+\end{lstlisting}
+\begin{lstlisting}[language=json]
+{ "success": true, "data": { "status": "ok" } }
+\end{lstlisting}
+
+\textbf{Create a note:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/notes \
+  -H "Content-Type: application/json" \
+  -d '{"title":"La mia prima nota",
+       "content":"Generata in 0-code!",
+       "tags":["test"]}'
+\end{lstlisting}
+
+\textbf{Validation (expected error):}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/notes \
+  -H "Content-Type: application/json" \
+  -d '{"title":""}'
+\end{lstlisting}
+\begin{lstlisting}[language=json]
+{ "success": false,
+  "error": { "message": "Validation failed",
+             "code": "VALIDATION_ERROR" } }
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Hands-on --- Swagger UI}]
+Open in the browser: \url{http://localhost:3000/api/docs}
+
+You should see the interactive Swagger documentation with all the endpoints.
+\end{praticabox}
+
+\begin{praticabox}[title={Hands-on --- Automated tests}]
+\begin{lstlisting}[language=bash]
+npm test
+\end{lstlisting}
+\end{praticabox}
+
+\begin{checkpointbox}
+Server started, health check responds, CRUD works, validation blocks invalid input, Swagger UI is accessible, and the automated tests pass.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Understanding the Architecture}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{05-http-request-flow}
+\caption{Flow of an HTTP request}
+\end{figure}
+
+Each layer has a precise responsibility:
+\begin{itemize}
+  \item \textbf{Router}: defines URLs and HTTP methods
+  \item \textbf{Middleware}: validation, authentication (Ch.~8)
+  \item \textbf{Controller}: handles the HTTP request/response
+  \item \textbf{Service}: business logic (it knows nothing about HTTP)
+  \item \textbf{Storage}: persists the data
+\end{itemize}
+
+\begin{notebox}
+This separation into layers is a classic architectural pattern. When in Chapter~7 we add PostgreSQL, we will need to modify \textsc{only} the storage layer. Everything else remains unchanged.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Preparation for the Next Chapters}
+
+This API is the foundation of the full-stack project:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{c X}
+\toprule
+\textbf{Chapter} & \textbf{What we add} \\
+\midrule
+Ch.~7 & PostgreSQL + Prisma (we replace the in-memory storage) \\
+Ch.~8 & OAuth~2.0 authentication + JWT \\
+Ch.~9 & React frontend with authentication \\
+Ch.~10 & Complete Full-Stack integration \\
+Ch.~11--12 & Flutter app connected to this API \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{praticabox}[title={Hands-on --- Initialize Git}]
+\begin{lstlisting}[language=bash]
+git init
+git add .
+git commit -m "feat: Notes API REST completa"
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section*{Project Summary}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Aspect} & \textbf{Detail} \\
+\midrule
+Stack & Node.js~20 + Express + Zod + Swagger \\
+Endpoints & 6 REST endpoints + documentation \\
+Validation & Zod schema on all inputs \\
+Tests & Integration tests with Jest + supertest \\
+Architecture & Router $\rightarrow$ Controller $\rightarrow$ Service $\rightarrow$ Storage \\
+Total time & $\sim$45--60 minutes \\
+Code written by hand & Only \texttt{\_CONTEXT.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}

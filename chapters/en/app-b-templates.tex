@@ -1,0 +1,387 @@
+% ============================================================
+% APPENDIX B — Ready-to-Use Templates
+% ============================================================
+\chapter{Ready-to-Use Templates}
+\label{app:templates}
+
+All the templates from this book, ready to copy, adapt, and reuse in your own projects.
+
+% ---------------------------------------------------------
+\section{Base \texttt{\_CONTEXT.md} Template}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- Base template}]
+# Project: [Project Name]
+
+## Purpose
+[Description in 2-3 sentences of what the application does]
+
+## Technologies
+- Language: [e.g. Python 3.12, Node.js 20, Dart]
+- Framework: [e.g. Express.js, React, Flutter]
+- Database: [e.g. PostgreSQL 16 with Prisma]
+- Other: [key dependencies]
+
+## Architecture
+[ASCII diagram or description of the structure]
+
+src/
+  [directory structure with a comment for each folder]
+
+## Conventions
+- [Naming conventions]
+- [Architectural patterns]
+- [API response format if applicable]
+
+## Constraints
+- [DO NOT do X because Y]
+- [ALWAYS do Z]
+- [Technical or security limitations]
+
+## Commands
+- Start: [command]
+- Test: [command]
+- Build: [command]
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{REST API \texttt{\_CONTEXT.md} Template}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- REST API template}]
+# Project: [Name] API
+
+## Purpose
+[Description of the API service]
+
+## Technologies
+- Runtime: Node.js 20
+- Framework: Express.js
+- Validation: Zod
+- Database: PostgreSQL 16 with Prisma ORM
+- Auth: JWT + OAuth 2.0
+- Docs: Swagger/OpenAPI
+
+## Architecture
+src/
+  index.js          ← Entry point, server startup
+  app.js            ← Express app, middleware, routes
+  routes/           ← Endpoint definitions
+  controllers/      ← Request/response handling
+  services/         ← Business logic
+  middleware/       ← Auth, validation, error handling
+  prisma/           ← Schema and migrations
+
+## Endpoints
+| Method | Path | Auth | Description |
+|:--|:--|:--|:--|
+| GET | /api/resource | Yes | List resources |
+| POST | /api/resource | Yes | Create resource |
+| GET | /api/resource/:id | Yes | Detail |
+| PUT | /api/resource/:id | Yes | Update |
+| DELETE | /api/resource/:id | Yes | Delete |
+
+## Response Format
+Success: { "success": true, "data": { ... } }
+Error:   { "success": false, "error": { "message": "..." } }
+
+## Constraints
+- Zod validation BEFORE the controller
+- Every query filters by userId
+- Production errors must be generic only
+- Rate limiting on auth endpoints
+
+## Commands
+- Dev: npm run dev
+- Test: npx vitest run
+- Migrate: npx prisma migrate dev
+- Studio: npx prisma studio
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{React \texttt{SKILL.md} Template}
+
+\begin{lstlisting}[language={},title={SKILL.md --- React developer}]
+---
+name: react-developer
+description: Skill for React frontend development with Tailwind CSS.
+---
+
+# React Developer Skill
+
+## Stack
+- React 18+ with Vite
+- Tailwind CSS 4
+- React Router 6
+- Axios for HTTP
+
+## Structure
+src/
+  components/ui/     ← Reusable components
+  components/layout/ ← Header, Footer, Container
+  pages/             ← Pages (one per route)
+  hooks/             ← Custom hooks
+  context/           ← Context API for global state
+  services/          ← API calls (Axios)
+
+## Conventions
+- Components: PascalCase, functional only, one file per component
+- Hooks: camelCase with "use" prefix
+- DO NOT fetch inside components, use custom hooks
+- DO NOT use localStorage for JWT tokens
+- Every page: loading state + error state + empty state
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Flutter \texttt{SKILL.md} Template}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Flutter developer}]
+---
+name: flutter-developer
+description: Skill for Flutter mobile app development.
+---
+
+# Flutter Developer Skill
+
+## Stack
+- Flutter 3.x / Dart
+- Riverpod 2 for state management
+- GoRouter for navigation
+- Dio for HTTP
+- flutter_secure_storage for tokens
+
+## Structure
+lib/
+  config/      ← Configuration (API URL, theme)
+  models/      ← Immutable classes with fromJson/toJson
+  services/    ← HTTP client, auth, business logic
+  providers/   ← Riverpod StateNotifier
+  screens/     ← Screens (one per route)
+  widgets/     ← Reusable widgets
+
+## Conventions
+- Files: snake_case.dart, Classes: PascalCase
+- Widgets: ConsumerWidget to access providers
+- Models: immutable classes with factory constructor
+- DO NOT use setState for shared state
+- DO NOT use SharedPreferences for tokens
+- Material Design 3 with useMaterial3: true
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Analysis \texttt{SKILL.md} Template}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Discovery \& Analysis Specialist}]
+---
+name: discovery-analysis-specialist
+description: Skill for ADLC phases 0-1 — discovery and requirements analysis.
+---
+
+# Discovery & Analysis Specialist
+
+## Responsibilities
+- Elicitation of functional and non-functional requirements
+- User stories with acceptance criteria
+- Threat model and risk analysis
+- Non-Functional Requirements (NFR) checklist
+
+## Deliverables
+- PRD (Product Requirements Document)
+- User Stories with acceptance criteria
+- Risk Register
+- NFR Matrix
+
+## Conventions
+- Every requirement: unique ID (FR-01, NFR-01)
+- User story: format "As a [role], I want [action], so that [benefit]"
+- Acceptance Criteria: Given/When/Then format
+- DO NOT proceed to implementation without an approved PRD
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Design \texttt{SKILL.md} Template}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Architecture \& Design Specialist}]
+---
+name: architecture-design-specialist
+description: Skill for ADLC phase 2 — architecture and design.
+---
+
+# Architecture & Design Specialist
+
+## Responsibilities
+- Technology stack evaluation (weighted matrix)
+- Architecture Decision Records (ADR)
+- Decomposition into EPIC → Task
+- API contracts and interfaces
+
+## Deliverables
+- ADR for each architectural decision
+- EPIC with atomic tasks and story points
+- Architectural diagrams (C4, sequence)
+- OpenAPI/Swagger contract
+
+## Conventions
+- ADR: Context → Options → Decision → Consequences
+- Task: ID, title, acceptance criteria, SEC/PERF constraints
+- DO NOT start implementation without approved design
+- Every decision must be justified
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Operations \texttt{SKILL.md} Template}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Operations \& Monitoring Specialist}]
+---
+name: operations-monitoring-specialist
+description: Skill for ADLC phase 6 — operations and monitoring.
+---
+
+# Operations & Monitoring Specialist
+
+## Responsibilities
+- Incident triage and management
+- SLA and metrics monitoring
+- Structured post-mortems
+- Operational runbooks
+
+## Deliverables
+- Incident Report with RCA
+- Post-mortem with timeline and corrective actions
+- Runbooks for recurring scenarios
+- Metrics dashboard (uptime, latency, errors)
+
+## Conventions
+- Incidents classified by severity (S1-S4)
+- Post-mortems must be blameless and system-focused
+- DO NOT apply hotfixes without regression testing
+- Every runbook must include rollback steps
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Full-Stack \texttt{\_CONTEXT.md} Template}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- Full-stack template}]
+# Project: [Name] Full-Stack
+
+## Overview
+[Description in 3-4 sentences]
+
+## Architecture
+[Browser] → [Frontend :5173] → [Proxy /api] → [Backend :3000] → [PostgreSQL]
+
+## Components
+### Backend (./backend/)
+- Context: ./backend/_CONTEXT.md
+- Port: 3000
+
+### Frontend (./frontend/)
+- Context: ./frontend/_CONTEXT.md
+- Skill: ./frontend/SKILL.md
+- Port: 5173
+
+### Mobile (./mobile/) — optional
+- Context: ./mobile/_CONTEXT.md
+- Skill: ./mobile/SKILL.md
+
+## API Contract
+[Endpoint table shared across all components]
+
+## Environment Variables
+### Backend: DATABASE_URL, JWT_SECRET, ...
+### Frontend: VITE_API_URL
+
+## Commands
+- All: npm run dev (with concurrently)
+- Backend: cd backend && npm run dev
+- Frontend: cd frontend && npm run dev
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{\texttt{PROGRESS.md} Template}
+
+\begin{lstlisting}[language={},title={PROGRESS.md --- Session memory template}]
+# [Project Name] — Progress
+
+## Current Status
+- [x] Completed task 1
+- [x] Completed task 2
+- [ ] In-progress task
+- [ ] Future task
+
+## Architectural Decisions
+- [Decision]: [Rationale]
+
+## Resolved Issues
+- [Problem]: [Adopted solution]
+
+## Notes for the Next Session
+- [What to remember to continue the work]
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Full-Stack \texttt{.gitignore} Template}
+
+\begin{lstlisting}[language={}]
+# Environment
+.env
+.env.local
+.env.production
+
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.jks
+*.keystore
+key.properties
+
+# Flutter
+.dart_tool/
+.packages
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Pre-Deploy Checklist}
+
+\begin{lstlisting}[language={}]
+## Security
+- [ ] JWT_SECRET >= 256 bit, stored in environment variable
+- [ ] Token expires (access: 1h, refresh: 7d)
+- [ ] Logout invalidates refresh token
+- [ ] Input validated with Zod
+- [ ] Errors do not expose stack traces
+- [ ] Helmet.js enabled
+- [ ] Rate limiting on auth
+- [ ] CORS restricted to allowed domains only
+- [ ] npm audit clean
+- [ ] .env in .gitignore
+
+## Functionality
+- [ ] OAuth login works
+- [ ] Full CRUD works
+- [ ] Route protection works
+- [ ] End-to-end error handling
+- [ ] Mobile connected to backend
+- [ ] Health check endpoint
+
+## Infrastructure
+- [ ] Database migrated in production
+- [ ] Environment variables set
+- [ ] HTTPS enabled
+- [ ] Monitoring enabled
+\end{lstlisting}

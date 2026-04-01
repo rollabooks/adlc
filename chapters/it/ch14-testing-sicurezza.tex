@@ -1,0 +1,485 @@
+% ============================================================
+% CAPITOLO 14 — Testing e Sicurezza
+% ============================================================
+\chapter{Testing e Sicurezza}\index{testing}\index{sicurezza}
+
+\section*{Cosa Costruirai}
+Un sistema di testing e verifica di sicurezza per l'intero stack:
+\begin{itemize}
+  \item Test unitari generati dall'IA per backend e frontend
+  \item Test di integrazione per gli endpoint API
+  \item Analisi di sicurezza OWASP Top~10 automatizzata
+  \item Confidence Tagging per decidere cosa revisionare manualmente
+  \item Pipeline di qualità riproducibile
+\end{itemize}
+
+\textbf{Tempo stimato}: 60--90 minuti\\
+\textbf{Prerequisito}: Applicazione full-stack completa (Capitoli~6--13)
+
+\begin{dangerbox}[title={La Sicurezza Non è Opzionale}]
+Il codice generato dall'IA può contenere vulnerabilità di sicurezza --- non per malevolenza, ma perché l'IA ottimizza per la funzionalità, non per la sicurezza, a meno che non glielo chiedi esplicitamente. Questo capitolo ti fornisce gli strumenti per individuare i problemi più comuni (OWASP Top~10), ma \textbf{non sostituisce una revisione professionale di sicurezza}.
+
+\textbf{Prima di un deployment commerciale} --- un'applicazione che gestisce dati di clienti reali, transazioni finanziarie, dati sanitari o qualsiasi informazione sensibile --- fai revisionare il codice da un professionista di sicurezza informatica. Il costo di un audit è una frazione del danno reputazionale e legale di un data breach.
+
+Le tecniche che impari qui sono il tuo \textbf{primo livello di difesa}, non l'ultimo.
+\end{dangerbox}
+
+% ---------------------------------------------------------
+\section{Test del Backend}
+
+\subsection{Il principio: Test come Documentazione}
+
+I test generati dall'IA hanno un doppio valore: verificano il funzionamento \textbf{e} documentano il comportamento atteso. Se domani cambi qualcosa e un test fallisce, il messaggio di errore ti dice esattamente cosa si è rotto.
+
+\begin{praticabox}[title={Pratica --- Genera i test del backend}]
+\begin{lstlisting}[language={}]
+Genera test completi per il backend Notes API con vitest.
+
+Setup:
+1. Installa vitest e supertest come devDependencies
+2. Crea vitest.config.js con database PostgreSQL di test
+3. Esegui migrazioni prima dei test, pulisci i dati tra i test
+
+Test richiesti:
+
+test/unit/
+  - note-service.test.js: CRUD del servizio note
+    (crea, leggi, aggiorna, elimina, nota non trovata, accesso negato)
+  - auth-service.test.js: token (generazione JWT, verifica,
+    refresh, token scaduto)
+  - validation.test.js: middleware Zod (titolo vuoto,
+    contenuto troppo lungo, campi extra ignorati)
+
+test/integration/
+  - notes-api.test.js: endpoint con supertest
+    (GET /api/notes senza auth -> 401,
+     POST con dati validi -> 201,
+     GET /:id di altro utente -> 403,
+     DELETE /:id -> 200 + nota rimossa)
+  - auth-api.test.js: flusso auth
+    (GET /api/auth/me senza token -> 401,
+     con token valido -> 200 + profilo,
+     POST /api/auth/refresh con refresh valido -> nuovo access)
+
+Ogni test deve avere un nome descrittivo che spiega lo scenario.
+\end{lstlisting}
+\end{praticabox}
+
+\begin{lstlisting}[language=bash,title={Esegui i test}]
+cd backend
+npx vitest run
+\end{lstlisting}
+
+Output atteso:
+\begin{lstlisting}[language={}]
+ v note-service.test.js (6 tests)
+ v auth-service.test.js (4 tests)
+ v validation.test.js (3 tests)
+ v notes-api.test.js (4 tests)
+ v auth-api.test.js (3 tests)
+
+ Test Files  5 passed
+ Tests       20 passed
+\end{lstlisting}
+
+\begin{tipbox}
+Se un test fallisce, copia l'errore e incollalo a Copilot: ``Questo test fallisce con questo errore. Qual è il problema?'' L'IA di solito identifica il bug al primo tentativo.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{Test del Frontend}
+
+\begin{praticabox}[title={Pratica --- Genera i test React}]
+\begin{lstlisting}[language={}]
+Genera test per il frontend React con vitest e @testing-library/react.
+
+1. Installa: vitest, @testing-library/react,
+   @testing-library/jest-dom, jsdom, msw (Mock Service Worker)
+2. Configura MSW per simulare il backend
+
+Test richiesti:
+test/components/
+  - NoteCard.test.jsx: renderizza titolo e contenuto
+  - NoteForm.test.jsx: validazione campi, submit callback
+  - ProtectedRoute.test.jsx: redirige se non autenticato
+
+test/hooks/
+  - useNotes.test.jsx: carica note, gestisce errori, aggiorna
+
+test/pages/
+  - LoginPage.test.jsx: mostra bottoni OAuth
+  - DashboardPage.test.jsx: loading, lista note, empty state
+\end{lstlisting}
+\end{praticabox}
+
+\begin{lstlisting}[language=bash]
+cd frontend
+npx vitest run
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Test dell'App Flutter}
+
+\begin{praticabox}[title={Pratica --- Genera i test Flutter}]
+\begin{lstlisting}[language={}]
+Genera test per l'app Flutter:
+
+test/
+  unit/
+    - token_service_test.dart: salvataggio, lettura, cancellazione
+    - note_model_test.dart: fromJson, toJson, campi obbligatori
+
+  widget/
+    - login_screen_test.dart: bottoni OAuth, loading state
+    - note_card_test.dart: renderizza titolo, tap callback
+    - dashboard_screen_test.dart: loading -> lista note, empty state
+
+Usa mockito per simulare i servizi.
+Usa ProviderScope.overrides per iniettare provider mock.
+\end{lstlisting}
+\end{praticabox}
+
+\begin{lstlisting}[language=bash]
+cd notes_mobile
+flutter test
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Confidence Tagging}\index{Confidence Tagging}
+
+Non tutto il codice generato dall'IA richiede la stessa attenzione in revisione. Il \textbf{Confidence Tagging} classifica il codice per livello di rischio.
+
+\subsection{La matrice di rischio}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Livello} & \textbf{Cosa include} & \textbf{Azione} \\
+\midrule
+\textcolor{green!60!black}{\textbf{LOW}} & UI, styling, componenti stateless, modelli dati & Revisione rapida: il codice funziona? \\
+\textcolor{orange}{\textbf{MEDIUM}} & Logica business, validazione, routing, state management & Revisione attenta: la logica è corretta? \\
+\textcolor{red}{\textbf{HIGH}} & Auth, autorizzazione, crypto, query DB, input utente & Revisione rigorosa: è sicuro? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{praticabox}[title={Pratica --- Analisi di rischio del progetto}]
+\begin{lstlisting}[language={}]
+Analizza l'intero progetto e classifica ogni file:
+
+- LOW RISK: non gestiscono dati sensibili ne logica critica
+- MEDIUM RISK: logica business o validazione
+- HIGH RISK: autenticazione, autorizzazione, dati utente, query DB
+
+Per ogni file HIGH RISK, elenca le vulnerabilita da verificare:
+
+HIGH: backend/src/middleware/auth.js
+   - JWT: verificare che il secret non sia hardcoded
+   - Token: gestisca token malformati
+   - User lookup: non vulnerabile a injection
+
+MEDIUM: backend/src/services/note-service.js
+   - Verificare che filtri sempre per userId
+
+LOW: frontend/src/components/ui/Button.jsx
+   - Nessuna verifica necessaria
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Code Review del Codice Generato dall'IA}\index{code review}
+
+Il Confidence Tagging ti dice \textbf{cosa} revisionare. Questa sezione ti insegna \textbf{come} farlo --- anche se non sei uno sviluppatore esperto.
+
+\subsection{Perché l'IA sbaglia in modi diversi dall'umano}
+
+Un programmatore umano fa errori di distrazione: typo, parentesi dimenticate, variabili con nomi sbagliati. L'IA non fa quasi mai questi errori. I bug dell'IA sono più insidiosi:
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Tipo di bug} & \textbf{Esempio} & \textbf{Perché succede} \\
+\midrule
+Happy path only & Funziona con input validi, crasha con input vuoti & L'IA ottimizza per ``funziona'', non per ``resiste'' \\
+API inesistenti & Usa un metodo che non esiste nella versione installata & Ha mescolato documentazione di versioni diverse \\
+Logica plausibile ma errata & Un filtro che sembra corretto ma esclude casi limite & Il pattern sembrava giusto nel training data \\
+Sicurezza dimenticata & Endpoint senza controllo di autorizzazione & Non glielo hai chiesto esplicitamente \\
+Dipendenze fantasma & Importa un pacchetto non nel package.json & L'ha visto in un progetto simile \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+\subsection{Metodologia di review per livello}
+
+\textbf{\textcolor{green!60!black}{LOW RISK} --- Verifica funzionale (2 minuti/file)}
+
+Componenti UI, styling, modelli dati. La domanda è una sola: \textit{funziona?}
+
+\begin{enumerate}
+  \item L'IA ha creato il file? Aprilo e verifica che non sia vuoto
+  \item Avvia l'app e guarda se il componente si visualizza
+  \item Se sì, passa oltre
+\end{enumerate}
+
+\textbf{\textcolor{orange}{MEDIUM RISK} --- Verifica logica (5--10 minuti/file)}
+
+Logica business, validazione, routing. La domanda: \textit{fa quello che dovrebbe?}
+
+\begin{enumerate}
+  \item Leggi la funzione principale e chiediti: ``Cosa succede se l'input è vuoto? Nullo? Enorme?''
+  \item Cerca le parole chiave pericolose: \texttt{any}, \texttt{as any} (TypeScript), \texttt{!} (force unwrap), \texttt{catch} vuoti
+  \item Verifica che le validazioni Zod/Joi corrispondano ai requisiti del \texttt{\_CONTEXT.md}
+  \item Se la logica ti sembra corretta ma non sei sicuro, chiedi all'IA: \textit{``Spiega passo per passo cosa fa questa funzione e quali edge case potrebbe non gestire''}
+\end{enumerate}
+
+\textbf{\textcolor{red}{HIGH RISK} --- Verifica rigorosa (15--30 minuti/file)}
+
+Autenticazione, autorizzazione, crypto, query DB. La domanda: \textit{è sicuro?}
+
+\begin{enumerate}
+  \item \textbf{Autorizzazione}: ogni endpoint che accede a dati utente filtra per \texttt{userId}? Può un utente accedere ai dati di un altro?
+  \item \textbf{JWT}: il secret è in una variabile d'ambiente? Il token ha una scadenza?
+  \item \textbf{Input utente}: tutto l'input passa attraverso validazione prima di raggiungere il database?
+  \item \textbf{Errori}: i messaggi di errore in produzione \textsc{non} espongono stack trace o dettagli interni?
+  \item Usa la Security Checklist come guida sistematica
+\end{enumerate}
+
+\begin{praticabox}[title={Pratica --- Review assistita dall'IA}]
+\begin{lstlisting}[language={}]
+Analizza i file HIGH RISK del progetto notes-fullstack.
+
+Per ogni file:
+1. Elenca tutti i possibili edge case non gestiti
+2. Identifica ogni punto dove l'input utente raggiunge il database
+   senza passare per validazione
+3. Verifica che non ci siano segreti hardcoded
+4. Controlla che ogni endpoint protetto verifichi l'autorizzazione
+
+Formato output per ogni file:
+VERIFICATO: [cosa va bene]
+ATTENZIONE: [cosa potrebbe essere un problema]
+BUG: [cosa e sicuramente sbagliato, con fix]
+\end{lstlisting}
+\end{praticabox}
+
+\begin{tipbox}
+\textbf{La regola d'oro della review}: Non devi capire \textit{come} funziona ogni riga di codice. Devi capire \textit{cosa} fa la funzione e chiederti: ``Cosa potrebbe andare storto?''. L'IA è il tuo microscopio --- tu devi sapere dove puntarlo.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{Analisi OWASP Top 10}\index{OWASP!Top 10}
+
+Le 10 vulnerabilità più comuni nelle applicazioni web~\cite{owasp:top10}. Verifichiamole nel nostro progetto.
+
+\begin{praticabox}[title={Pratica --- Audit OWASP}]
+\begin{lstlisting}[language={}]
+Esegui un'analisi di sicurezza basata su OWASP Top 10 (2021).
+
+A01: Broken Access Control
+- Un utente puo accedere alle note di un altro?
+- Gli endpoint admin sono protetti?
+- Le route protette verificano SEMPRE il JWT?
+
+A02: Cryptographic Failures
+- Il JWT secret e sufficientemente lungo?
+- Le password sono hashate con bcrypt?
+- Il database usa SSL in produzione?
+
+A03: Injection
+- Le query Prisma sono parametrizzate?
+- L'input e validato con Zod prima del database?
+
+A04: Insecure Design
+- Il refresh token ha una scadenza?
+- C'e rate limiting sul login?
+
+A05: Security Misconfiguration
+- Errori in produzione espongono dettagli interni?
+- Helmet.js configurato?
+- CORS configurato per la produzione?
+
+A06: Vulnerable Components
+- npm audit non riporta vulnerabilita critiche?
+
+A07: Authentication Failures
+- I token JWT scadono?
+- Il logout invalida il refresh token nel database?
+
+A08: Software and Data Integrity
+- package-lock.json committato?
+
+A09: Security Logging
+- I tentativi di login falliti vengono loggati?
+- I log NON contengono dati sensibili?
+
+A10: SSRF
+- Il backend fa richieste a URL forniti dall'utente?
+
+Per ogni vulnerabilita trovata, fornisci il fix con il codice.
+\end{lstlisting}
+\end{praticabox}
+
+\subsection{Fix comuni}
+
+\textbf{Rate Limiting:}\index{rate limiting}
+\begin{lstlisting}[language={}]
+Aggiungi rate limiting al backend:
+1. Installa express-rate-limit
+2. Limita /api/auth/* a 10 richieste/minuto per IP
+3. Limita /api/notes a 100 richieste/minuto per utente
+\end{lstlisting}
+
+\textbf{Helmet.js:}\index{Helmet.js}
+\begin{lstlisting}[language={}]
+Aggiungi Helmet.js per gli header di sicurezza:
+1. Installa helmet
+2. Aggiungi helmet() come primo middleware
+3. Configura CSP per la produzione
+\end{lstlisting}
+
+\textbf{Audit dipendenze:}
+\begin{lstlisting}[language=bash]
+cd backend && npm audit
+cd frontend && npm audit
+npm audit fix  # se vengono riportate vulnerabilita
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Security Checklist Finale}
+
+\begin{praticabox}[title={Pratica --- Verifica completa}]
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{c l X}
+\toprule
+\textbf{\#} & \textbf{Controllo} & \textbf{Stato} \\
+\midrule
+1 & JWT secret $\geq$ 256 bit, in variabile d'ambiente & $\square$ \\
+2 & Access token scade in 1 ora & $\square$ \\
+3 & Refresh token scade in 7 giorni & $\square$ \\
+4 & Logout cancella il refresh token dal database & $\square$ \\
+5 & Note filtrate per userId in \textsc{tutte} le query & $\square$ \\
+6 & Input validato con Zod prima del database & $\square$ \\
+7 & Errori in produzione \textsc{non} espongono stack trace & $\square$ \\
+8 & Helmet.js attivo con header di sicurezza & $\square$ \\
+9 & Rate limiting su endpoint auth & $\square$ \\
+10 & CORS configurato solo per domini consentiti & $\square$ \\
+11 & npm audit senza vulnerabilità critiche & $\square$ \\
+12 & Token mobile in flutter\_secure\_storage & $\square$ \\
+13 & Frontend non salva token in localStorage & $\square$ \\
+14 & Database usa SSL in produzione & $\square$ \\
+15 & \texttt{.env} e \texttt{keystore.jks} nel \texttt{.gitignore} & $\square$ \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+\end{praticabox}
+
+\begin{checkpointbox}
+Se tutti i 15 controlli sono spuntati e i test passano, l'applicazione è pronta per il deploy in produzione.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Sicurezza Agentica: Oltre l'OWASP Web}
+
+L'analisi OWASP Top~10 protegge l'\textbf{applicazione} che costruisci. Ma chi protegge l'\textbf{infrastruttura di sviluppo}? Quando concedi a un agente IA l'accesso a database, file system e API tramite MCP, introduci vettori di minaccia nuovi che l'OWASP tradizionale non copre.
+
+Nel 2025 l'OWASP ha pubblicato la \textbf{OWASP Top~10 for MCP}\index{OWASP!MCP Top 10}~\cite{owasp:mcp-top10,owasp:ai-agent}, una classificazione specifica per le vulnerabilità del protocollo. Tre di queste meritano attenzione immediata:
+
+\subsection{Tool Poisoning (MCP03)}\index{Tool Poisoning}\index{MCP!Tool Poisoning}
+
+Quando configuri un server MCP, l'agente si fida delle \textbf{descrizioni} dei tool esposti dal server per decidere quale azione eseguire. Un server compromesso può inserire descrizioni malevole che inducono l'agente a eseguire operazioni distruttive.
+
+\begin{dangerbox}
+Un server MCP PostgreSQL manomesso potrebbe descrivere il tool \texttt{cleanup\_old\_data} come ``rimuove i record di test'', quando in realtà esegue \texttt{DROP TABLE users CASCADE}. L'agente, fidandosi della descrizione, lo invocherebbe senza esitazione.
+\end{dangerbox}
+
+\textbf{Mitigazione:} installa \textit{solo} server MCP da repository verificati (\texttt{@modelcontextprotocol/} ufficiali o con migliaia di stelle GitHub). Verifica il codice sorgente del server prima dell'adozione.
+
+\subsection{Shadow MCP Servers (MCP09)}\index{Shadow MCP Server}
+
+Come accadeva con lo ``Shadow IT'', gli sviluppatori possono installare server MCP non verificati per accelerare l'integrazione con nuove API. Questi server bypassano i controlli di sicurezza del team e creano punti di ingresso occulti.
+
+\textbf{Mitigazione:} mantieni un registro condiviso dei server MCP approvati (nel \texttt{\_CONTEXT.md} di progetto o nelle policy del team).
+
+\subsection{Context Injection e Over-Sharing (MCP10)}\index{Context Injection}\index{MCP!Context Injection}
+
+Quando la finestra di contesto è condivisa tra sessioni diverse, informazioni sensibili --- token API, segreti, dati utente --- possono fuoriuscire da un task all'altro.
+
+\textbf{Mitigazione:} usa sempre file \texttt{.env} per i segreti, \textbf{mai} inline nelle configurazioni MCP. Verifica che il \texttt{.gitignore} includa tutti i file sensibili. In ambienti di team, considera la mutual~TLS per autenticare le connessioni MCP.
+
+\begin{praticabox}[title={Pratica --- Audit di sicurezza agentica}]
+\begin{lstlisting}[language={}]
+Analizza la sicurezza della nostra infrastruttura agentica:
+
+1. TOOL VERIFICATION:
+   - Elenca tutti i server MCP configurati (.vscode/mcp.json)
+   - Per ognuno: verifica la fonte, controlla le stelle GitHub
+     e la data dell'ultimo commit
+   - Segnala server non ufficiali o non manutenuti
+
+2. SECRET MANAGEMENT:
+   - Verifica che NESSUN segreto sia hardcoded in mcp.json
+   - Tutti i segreti devono essere in variabili d'ambiente
+   - Il file .env è nel .gitignore?
+
+3. CONTEXT HYGIENE:
+   - Il _CONTEXT.md contiene credenziali?
+   - I log di sessione contengono dati sensibili?
+   - Le configurazioni MCP espongono URL o token interni?
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Testing di Sistemi Non Deterministici}
+
+I test unitari e di integrazione che hai scritto in questo capitolo validano \textbf{codice deterministico}: dato un input, l'output è sempre lo stesso. Ma nel 2026 molte applicazioni integrano agenti IA che producono risposte \textbf{probabilistiche} --- chatbot, motori di raccomandazione, pipeline di ragionamento autonomo.
+
+In questi scenari, le asserzioni binarie pass/fail crollano: l'output ``corretto'' ha molte forme possibili.
+
+\subsection{Strategie per il testing probabilistico}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Tecnica} & \textbf{Quando usarla} \\
+\midrule
+Valutazione semantica & L'output deve \textit{significare} la stessa cosa, non essere identico lettera per lettera \\
+Golden dataset & Confronta le risposte con un set di riferimento curato da esperti umani \\
+Evaluator Agent & Un secondo agente valuta la qualità dell'output del primo \\
+Osservabilità (tracing) & Traccia l'\textit{albero decisionale} dell'agente per capire \textit{perché} ha dato quella risposta \\
+Fuzzing probabilistico & Inietta variazioni nell'input per verificare la robustezza dell'output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+Piattaforme come \textbf{Maxim~AI}~\cite{maxim:eval-2026} permettono di valutare sistemi multi-agente misurando l'accuratezza del ragionamento su interazioni multi-turno. Strumenti open-source come \textbf{Arize Phoenix}~\cite{arize:phoenix} (basato su OpenTelemetry) tracciano l'intero albero di esecuzione delle decisioni di un agente.
+\end{tipbox}
+
+\begin{notebox}
+Per le applicazioni di questo libro (CRUD, REST~API, autenticazione) i test tradizionali sono perfettamente adeguati. Il testing probabilistico diventa necessario solo quando integri modelli IA \textit{all'interno} della tua applicazione --- ad esempio un chatbot o un motore di ricerca semantica.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section*{Riepilogo}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Aspetto} & \textbf{Dettaglio} \\
+\midrule
+Test Backend & vitest + supertest, unit + integration \\
+Test Frontend & vitest + testing-library + MSW \\
+Test Mobile & flutter test + mockito \\
+Rischio & Confidence Tagging a 3 livelli \\
+Code Review & Metodologia di review per livello di rischio \\
+Sicurezza Web & OWASP Top~10 audit con fix \\
+Sicurezza Agentica & OWASP MCP Top~10: Tool Poisoning, Shadow MCP, Context Injection \\
+Testing Probabilistico & Strategie per output non deterministici \\
+Checklist & 15 controlli di sicurezza verificabili \\
+\bottomrule
+\end{tabularx}
+\end{center}

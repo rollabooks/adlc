@@ -1,0 +1,16 @@
+DATABASE_URL="postgresql://notes:notes123@localhost:5432/notesdb"
+
+# OAuth Google
+GOOGLE_CLIENT_ID=il-tuo-client-id
+GOOGLE_CLIENT_SECRET=il-tuo-client-secret
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/callback
+
+# OAuth GitHub
+GITHUB_CLIENT_ID=il-tuo-client-id
+GITHUB_CLIENT_SECRET=il-tuo-client-secret
+GITHUB_CALLBACK_URL=http://localhost:3000/api/auth/github/callback
+
+# JWT
+JWT_SECRET=una-stringa-lunga-e-casuale-almeno-32-caratteri
+JWT_EXPIRES_IN=1h
+JWT_REFRESH_EXPIRES_IN=7d

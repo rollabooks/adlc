@@ -1,0 +1,36 @@
+# === File generati LaTeX ===
+*.aux
+*.log
+*.toc
+*.out
+*.idx
+*.ilg
+*.ind
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.pdf
+
+# === Diagrammi generati ===
+figures/*.png
+
+# === EPUB generato ===
+ebook/*.epub
+ebook/cover.jpg
+
+# === Tools scaricati ===
+tools/plantuml.jar
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Editor ===
+.vscode/
+*.swp
+*~

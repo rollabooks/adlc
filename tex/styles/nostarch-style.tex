@@ -1,0 +1,198 @@
+% ============================================================
+% nostarch-style.tex — Stile No Starch Press per libri tecnici
+% ============================================================
+% Caratteristiche: layout divertente ma professionale,
+% font sans-serif principale, colori vivaci, box evidenti,
+% codice con sfondo scuro opzionale.
+% ============================================================
+
+% === LINGUA ===
+\usepackage[\BabelLang]{babel}
+\usepackage[autostyle]{csquotes}
+
+% === BIBLIOGRAFIA ===
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  urldate=long,
+  maxbibnames=3,
+  backref=true,
+  backrefstyle=none
+]{biblatex}
+
+% === FONT (No Starch: New Century Schoolbook body, Futura heads) ===
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setmainfont{texgyreschola}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setsansfont{texgyreadventor}[
+  Extension=.otf,
+  Scale=0.90,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setmonofont{InconsolataN}[
+  Extension=.otf,
+  Scale=0.85,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold
+]
+
+% === LAYOUT PAGINA (7 × 9.25 poll. — formato No Starch) ===
+\usepackage[
+  paperwidth=7in,
+  paperheight=9.25in,
+  top=0.875in, bottom=0.875in,
+  inner=1in, outer=0.875in,
+  headheight=14pt,
+  footskip=0.45in
+]{geometry}
+
+% === SPAZIATURA PARAGRAFI (No Starch: indent) ===
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% === COLORI (palette No Starch — nero/grigio con accenti vivaci) ===
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\definecolor{nostarch-black}{HTML}{1C1C1C}
+\definecolor{nostarch-gray}{HTML}{4D4D4D}
+\definecolor{nostarch-lightgray}{HTML}{8C8C8C}
+\definecolor{nostarch-accent}{HTML}{D4451A}
+\definecolor{code-bg}{HTML}{2B2B2B}
+\definecolor{code-fg}{HTML}{E8E8E8}
+\definecolor{code-light-bg}{HTML}{F0F0F0}
+\definecolor{tip-green}{HTML}{2E994E}
+\definecolor{warn-orange}{HTML}{E67A1A}
+\definecolor{note-blue}{HTML}{3366CC}
+\definecolor{link-blue}{HTML}{1A5DAA}
+\definecolor{danger-red}{HTML}{CC3333}
+\definecolor{gotcha-purple}{HTML}{7B2D8E}
+
+% === GRAFICA E TABELLE ===
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+
+% === CODICE SORGENTE (No Starch: sfondo chiaro, bordo colorato) ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize\ttfamily\color{nostarch-black},
+  backgroundcolor=\color{code-light-bg},
+  frame=l,
+  framerule=2pt,
+  rulecolor=\color{nostarch-accent},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=1.2em,
+  xrightmargin=0.5em,
+  aboveskip=0.8em,
+  belowskip=0.8em,
+  numbers=left,
+  numberstyle=\tiny\color{nostarch-lightgray},
+  numbersep=8pt,
+  keepspaces=true,
+  keywordstyle=\color{nostarch-accent}\bfseries,
+  stringstyle=\color{tip-green},
+  commentstyle=\color{nostarch-lightgray}\itshape,
+  columns=fullflexible,
+  literate={€}{{\euro}}1 {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+}
+% Dark code variant
+\lstdefinestyle{dark}{
+  basicstyle=\footnotesize\ttfamily\color{code-fg},
+  backgroundcolor=\color{code-bg},
+  rulecolor=\color{nostarch-accent},
+  keywordstyle=\color{yellow!80!white}\bfseries,
+  stringstyle=\color{green!70!white},
+  commentstyle=\color{gray!60!white}\itshape,
+}
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+% === INTESTAZIONI PIÈ DI PAGINA ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\sffamily\color{nostarch-gray}\leftmark}
+\fancyhead[RO]{\small\sffamily\color{nostarch-gray}\rightmark}
+\fancyfoot[LE,RO]{\small\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{nostarch-accent}\leaders\hrule height \headrulewidth\hfill}}
+
+% === TITOLI CAPITOLO (No Starch: grande, grassetto, accento rosso) ===
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries}
+  {\fontsize{80}{80}\selectfont\color{nostarch-accent!20}\thechapter}
+  {-15pt}
+  {\Huge\color{nostarch-black}}
+  [\vspace{5pt}{\color{nostarch-accent}\titlerule[2.5pt]}]
+\titlespacing*{\chapter}{0pt}{-30pt}{25pt}
+\titleformat{\section}
+  {\normalfont\Large\sffamily\bfseries\color{nostarch-black}}
+  {\color{nostarch-accent}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\normalfont\large\sffamily\bfseries\color{nostarch-gray}}
+  {\color{nostarch-accent}\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\sffamily\bfseries\itshape\color{nostarch-gray}}
+  {\thesubsubsection}{0.7em}{}
+
+% === TITOLI PARTI ===
+\titleformat{\part}[display]
+  {\centering\normalfont\sffamily\bfseries}
+  {\fontsize{60}{60}\selectfont\color{nostarch-accent!15}\partname\ \thepart}
+  {10pt}
+  {\Huge\color{nostarch-black}}
+  [\vspace{4pt}{\color{nostarch-accent}\titlerule[3pt]}]
+
+% === HYPERLINK ===
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=nostarch-black,
+  citecolor=nostarch-accent,
+  urlcolor=link-blue,
+  bookmarks=true,
+  bookmarksnumbered=true
+]{hyperref}
+
+% === PROTEZIONE OVERFLOW ===
+\tolerance=1000
+\emergencystretch=1.5em
+\setlength{\tabcolsep}{4pt}
+
+% === SPAZIATURA LISTE ===
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.8em, topsep=0.4em, itemsep=0.2em}
+
+% === BOX ADMONITION ===
+\input{styles/nostarch-boxes}
+
+% === EURO ===
+\newcommand{\euro}{€}
+
+% === INDICE ANALITICO ===
+\usepackage{makeidx}
+\makeindex

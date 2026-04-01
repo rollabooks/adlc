@@ -1,0 +1,164 @@
+% ============================================================
+% APPENDIX C — Commands and Shortcuts
+% ============================================================
+\chapter{Commands and Shortcuts}
+\label{app:commands}
+
+% ---------------------------------------------------------
+\section{VS Code}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Shortcut} & \textbf{Action} \\
+\midrule
+\texttt{Ctrl+Shift+P} (Win/Linux) / \texttt{Cmd+Shift+P} (Mac) & Command Palette \\
+\texttt{Ctrl+Shift+I} (Win/Linux) / \texttt{Cmd+Shift+I} (Mac) & Open Copilot Chat (Agent Mode) \\
+\texttt{Ctrl+I} (Win/Linux) / \texttt{Cmd+I} (Mac) & Copilot Inline Chat \\
+\texttt{Tab} & Accept Copilot suggestion \\
+\texttt{Esc} & Dismiss Copilot suggestion \\
+\texttt{Ctrl+`} & Open/close the integrated terminal \\
+\texttt{Ctrl+Shift+E} & Explorer (files) \\
+\texttt{Ctrl+Shift+G} & Source Control (Git) \\
+\texttt{Ctrl+P} & Quick Open (find file) \\
+\texttt{Ctrl+Shift+F} & Search across all files \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Node.js and npm}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{npm init -y} & Create \texttt{package.json} \\
+\texttt{npm install <package>} & Install a dependency \\
+\texttt{npm install -D <package>} & Install a dev dependency \\
+\texttt{npm run dev} & Start in development mode \\
+\texttt{npm run build} & Production build \\
+\texttt{npm audit} & Check for vulnerabilities \\
+\texttt{npm audit fix} & Apply automatic vulnerability fixes \\
+\texttt{npx <command>} & Run a package without global installation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Prisma}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{npx prisma init} & Initialize Prisma in the project \\
+\texttt{npx prisma migrate dev --name <name>} & Create and apply a migration (development) \\
+\texttt{npx prisma migrate deploy} & Apply pending migrations in production \\
+\texttt{npx prisma generate} & Regenerate the Prisma client \\
+\texttt{npx prisma studio} & Open the database browser \\
+\texttt{npx prisma db push} & Sync schema without a migration \\
+\texttt{npx prisma db seed} & Run the database seed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Git}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{git init} & Initialize a repository \\
+\texttt{git add .} & Stage all modified files \\
+\texttt{git commit -m "message"} & Create a commit \\
+\texttt{git status} & Show working tree status \\
+\texttt{git log --oneline} & Compact commit history \\
+\texttt{git branch <name>} & Create a branch \\
+\texttt{git checkout <name>} & Switch branch \\
+\texttt{git merge <name>} & Merge branch \\
+\texttt{git push origin main} & Push to the remote \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Flutter}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{flutter create <name>} & Create a new Flutter project \\
+\texttt{flutter run} & Launch the app on an emulator or device \\
+\texttt{flutter run -d chrome} & Launch the app in the browser \\
+\texttt{flutter pub get} & Install dependencies \\
+\texttt{flutter pub add <package>} & Add a package \\
+\texttt{flutter test} & Run the tests \\
+\texttt{flutter analyze} & Static analysis \\
+\texttt{flutter build apk --release} & Build the Android APK \\
+\texttt{flutter build appbundle} & Build the Android App Bundle \\
+\texttt{flutter build ipa} & Build the iOS package \\
+\texttt{flutter doctor} & Verify the development environment \\
+\texttt{flutter devices} & List available devices \\
+\texttt{flutter screenshot} & Capture a screenshot from the emulator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Docker (PostgreSQL)}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{docker run --name pg -e POSTGRES\_PASSWORD=password -p 5432:5432 -d postgres:16} & Start PostgreSQL \\
+\texttt{docker start pg} & Restart the container \\
+\texttt{docker stop pg} & Stop the container \\
+\texttt{docker exec -it pg psql -U postgres} & Open the PostgreSQL console \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Claude Code}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Command} & \textbf{Description} \\
+\midrule
+\texttt{claude} & Start an interactive session \\
+\texttt{claude "request"} & Execute a single request \\
+\texttt{claude --model sonnet} & Specify the model \\
+\texttt{/clear} & Clear session context \\
+\texttt{/cost} & Show session cost \\
+\texttt{/help} & Show available commands \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Deploy Commands}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Platform} & \textbf{Command / Action} \\
+\midrule
+Railway & \texttt{git push origin main} (automatic deploy) \\
+Vercel & \texttt{git push origin main} (automatic deploy) \\
+Vercel CLI & \texttt{npx vercel --prod} (manual deploy) \\
+Railway CLI & \texttt{railway up} (manual deploy) \\
+\bottomrule
+\end{tabularx}
+\end{center}

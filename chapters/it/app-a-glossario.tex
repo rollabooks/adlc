@@ -1,0 +1,137 @@
+% ============================================================
+% APPENDICE A — Glossario
+% ============================================================
+\chapter{Glossario}\index{glossario}
+
+\begin{small}
+\begin{longtable}{l p{7.5cm} l}
+\toprule
+\textbf{Termine} & \textbf{Definizione} & \textbf{Primo uso} \\
+\midrule
+\endhead
+
+\textbf{0-code} & Paradigma di sviluppo in cui il programmatore descrive cosa costruire e l'IA genera il codice. A differenza del no-code tradizionale, produce codice sorgente reale e modificabile. & Cap.~1 \\
+\midrule
+
+\textbf{ADLC} & \textit{Agent Development Life Cycle} --- Ciclo di vita in 7~fasi per lo sviluppo con IA: Preparazione, Inquadramento, Definizione, Simulazione, Implementazione, Rilascio, Apprendimento. & Cap.~3 \\
+\midrule
+
+\textbf{Agent Mode} & Modalità di GitHub Copilot in VS~Code in cui l'IA può leggere file, eseguire comandi, creare file e navigare il progetto autonomamente. & Cap.~2 \\
+\midrule
+
+\textbf{Agent Skill} & Competenza specializzata racchiusa in un file SKILL.md con metadati YAML. Caricata dall'IA quando il tipo di lavoro lo richiede (Progressive Disclosure). & Cap.~9 \\
+\midrule
+
+\textbf{Allucinazione} & Generazione di informazioni false o inventate, presentate dal modello con apparente sicurezza. & Cap.~1 \\
+\midrule
+
+\textbf{Claude Code} & Strumento CLI di Anthropic per lo sviluppo 0-code direttamente dal terminale. Alternativa a Copilot Agent Mode. & Cap.~2 \\
+\midrule
+
+\textbf{PROGRESS.md} & File di memoria persistente tra sessioni. Diario del progetto che registra stato, decisioni, problemi risolti e prossimi passi. & Cap.~3, 10 \\
+\midrule
+
+\textbf{Confidence Tagging} & Classificazione del codice generato per livello di rischio (\textcolor{green!60!black}{LOW}, \textcolor{orange}{MEDIUM}, \textcolor{red}{HIGH}) per decidere l'intensità della revisione. & Cap.~14 \\
+\midrule
+
+\textbf{Context Engineering} & Disciplina di progettazione delle informazioni fornite all'IA. Evoluzione del Prompt Engineering per progetti complessi e di lunga durata. & Cap.~3 \\
+\midrule
+
+\textbf{\_CONTEXT.md} & Documento di contesto del progetto che descrive scopo, architettura, convenzioni e vincoli. L'IA lo legge per generare codice coerente. & Cap.~3 \\
+\midrule
+
+\textbf{CORS} & \textit{Cross-Origin Resource Sharing} --- Meccanismo di sicurezza del browser che blocca richieste tra domini diversi. & Cap.~10 \\
+\midrule
+
+\textbf{Deep Link} & URL con schema personalizzato (es.\ \texttt{notesapp://auth/callback}) che apre direttamente un'app mobile. & Cap.~12 \\
+\midrule
+
+\textbf{Dio} & Client HTTP per Dart/Flutter con supporto a interceptor, retry e cancellazione. Equivalente di Axios per Flutter. & Cap.~11 \\
+\midrule
+
+\textbf{Express.js} & Framework web minimale per Node.js. Usato per costruire la REST API del progetto. & Cap.~6 \\
+\midrule
+
+\textbf{Finestra di Contesto} & Quantità massima di informazioni (in token) che un LLM può elaborare in una singola richiesta. & Cap.~3 \\
+\midrule
+
+\textbf{Flutter} & Framework di Google per la creazione di app mobile native (Android e iOS) da un unico codice Dart. & Cap.~11 \\
+\midrule
+
+\textbf{GoRouter} & Libreria di routing dichiarativo per Flutter con supporto a redirect, deep link e navigazione protetta. & Cap.~11 \\
+\midrule
+
+\textbf{Helmet.js} & Middleware Express che imposta header HTTP di sicurezza (CSP, HSTS, X-Frame-Options, ecc.). & Cap.~14 \\
+\midrule
+
+\textbf{Hot Reload} & Funzionalità di Flutter che aggiorna l'interfaccia istantaneamente dopo una modifica al codice. & Cap.~11 \\
+\midrule
+
+\textbf{httpOnly Cookie} & Cookie non accessibile da JavaScript (protezione XSS). Usato per salvare il JWT nel frontend web. & Cap.~8 \\
+\midrule
+
+\textbf{JWT} & \textit{JSON Web Token} --- Token firmato che contiene l'identità dell'utente. Usato per autenticare le richieste API. & Cap.~8 \\
+\midrule
+
+\textbf{LLM} & \textit{Large Language Model} --- Modello linguistico di grandi dimensioni. Il ``motore'' dietro Copilot e Claude. & Cap.~1 \\
+\midrule
+
+\textbf{MCP} & \textit{Model Context Protocol} --- Standard per collegare l'IA a strumenti esterni (database, file system, API). & Cap.~7 \\
+\midrule
+
+\textbf{Monorepo} & Struttura di progetto in cui backend, frontend e mobile risiedono nella stessa repository con contesti separati. & Cap.~10 \\
+\midrule
+
+\textbf{MSW} & \textit{Mock Service Worker} --- Libreria per simulare risposte API nei test del frontend senza un backend reale. & Cap.~14 \\
+\midrule
+
+\textbf{OAuth 2.0} & Protocollo di autenticazione delegata. L'utente fa login con Google/GitHub, l'app riceve un token senza gestire password. & Cap.~8 \\
+\midrule
+
+\textbf{OWASP Top 10} & Lista delle 10 vulnerabilità di sicurezza più comuni nelle applicazioni web, pubblicata da OWASP. & Cap.~14 \\
+\midrule
+
+\textbf{Passport.js} & Middleware di autenticazione per Express.js con strategie per OAuth, JWT, locale, ecc. & Cap.~8 \\
+\midrule
+
+\textbf{Planner-Generator-Evaluator} & Pattern multi-agente in cui l'IA assume ruoli diversi: pianifica, genera codice, valuta. & Cap.~10 \\
+\midrule
+
+\textbf{Prisma} & ORM per Node.js/TypeScript. Traduce classi in tabelle SQL e fornisce un client tipizzato. & Cap.~7 \\
+\midrule
+
+\textbf{Progressive Disclosure} & Caricamento incrementale delle informazioni: l'IA riceve solo il contesto necessario per il task corrente. & Cap.~9 \\
+\midrule
+
+\textbf{Proof of Value} & Pattern di validazione: genera prima una parte piccola, verifica che sia corretta, poi procedi con il resto. & Cap.~5 \\
+\midrule
+
+\textbf{Proxy Vite} & Configurazione di Vite che inoltra le chiamate \texttt{/api} al backend durante lo sviluppo, evitando problemi CORS. & Cap.~9 \\
+\midrule
+
+\textbf{Rate Limiting} & Limitazione del numero di richieste per IP/utente in un intervallo di tempo. Protezione contro abusi. & Cap.~14 \\
+\midrule
+
+\textbf{Refresh Token} & Token a lunga durata (7~giorni) usato per ottenere nuovi access token senza ripetere il login. & Cap.~8 \\
+\midrule
+
+\textbf{Riverpod} & Libreria di state management per Flutter. Provider reattivi con dependency injection. & Cap.~11 \\
+\midrule
+
+\textbf{SKILL.md} & File che conferisce all'IA competenze specializzate per un dominio. Caricato on-demand. & Cap.~9 \\
+\midrule
+
+\textbf{Swagger} & Strumento per documentazione e test interattivo di API REST. Genera una UI navigabile. & Cap.~6 \\
+\midrule
+
+\textbf{Token} & Unità di elaborazione dei modelli linguistici. Un frammento di parola ($\sim$3--4 caratteri in inglese). & Cap.~3 \\
+\midrule
+
+\textbf{Vite} & Build tool moderno per progetti web. Veloce in sviluppo (HMR) e ottimizzato per la produzione. & Cap.~9 \\
+\midrule
+
+\textbf{Zod} & Libreria di validazione per TypeScript/JavaScript. Definisce schemi e valida input con messaggi chiari. & Cap.~6 \\
+
+\bottomrule
+\end{longtable}
+\end{small}

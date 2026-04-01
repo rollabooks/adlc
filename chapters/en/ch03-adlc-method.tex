@@ -1,0 +1,335 @@
+% ============================================================
+% CHAPTER 3 — The ADLC Method
+% ============================================================
+\chapter{The ADLC Method: How to Work in 0-Code}\index{ADLC}\index{Context Engineering}
+
+\section*{What You Will Learn}
+By the end of this chapter you will know:
+\begin{itemize}
+  \item The 7 phases of the Agent Development Life Cycle applied to application development
+  \item How to write an effective \texttt{\_CONTEXT.md}
+  \item Why Context Engineering is the key skill of the 0-code paradigm
+  \item How to structure a project to maximize the quality of AI output
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{The Life Cycle: The 7 Phases of the ADLC}
+
+The ADLC (Agent Development Life Cycle) is the structured method for developing with AI. It is not abstract theory --- it is the sequence of steps you will follow throughout the book.
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{c l X X}
+\toprule
+\textbf{Phase} & \textbf{Name} & \textbf{What you do} & \textbf{Deliverable} \\
+\midrule
+\textbf{0} & Preparation & Define the problem and assess whether 0-code is suitable & Solution hypothesis \\
+\textbf{1} & Framing & Establish boundaries, technologies, and constraints & Natural-language requirements \\
+\textbf{2} & Definition & Write \texttt{\_CONTEXT.md} and any \texttt{SKILL.md} files & Context documents \\
+\textbf{3} & Simulation & Validate the idea with a small case & Proof of value \\
+\textbf{4} & Implementation & The AI generates code while you supervise & Working code \\
+\textbf{5} & Release & Test, fix, and deploy & Production-ready application \\
+\textbf{6} & Learning & Update the context with lessons learned & Improved context \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+\begin{notebox}
+\textbf{Toward the professional framework.} In this chapter we work with a single \texttt{\_CONTEXT.md}. In Appendix~E you will see how the exact same principles scale to a professional framework with multiple modules, specialist skills, and infrastructure governance.
+\end{notebox}
+
+\subsection{How it applies in daily practice}
+
+For a simple project, phases~0--3 may take only a few minutes. For a complex full-stack application, each phase becomes a meaningful checkpoint.
+
+\textbf{Example --- a blog REST API}
+\begin{itemize}
+  \item \textbf{Phase 0}: ``I need a backend for a blog with posts, comments, and authentication.''
+  \item \textbf{Phase 1}: ``I will use Node.js, Express, PostgreSQL, Prisma, and JWT.''
+  \item \textbf{Phase 2}: Write the \texttt{\_CONTEXT.md} with architecture, structure, constraints, and commands.
+  \item \textbf{Phase 3}: Ask the AI to generate only the \texttt{/health} endpoint.
+  \item \textbf{Phase 4}: Expand to routes, services, middleware, and data model.
+  \item \textbf{Phase 5}: Test, fix, and deploy.
+  \item \textbf{Phase 6}: Update the context with what the AI got wrong.
+\end{itemize}
+
+\begin{quote}
+Phase~6 is essential: the \texttt{\_CONTEXT.md} is a \textbf{living document}.
+\end{quote}
+
+% ---------------------------------------------------------
+\subsection{When the AI goes off the rails}
+
+Sooner or later the AI will enter an error loop: it fixes one issue, creates another, then breaks something that was previously working.
+
+\begin{warnbox}
+\textbf{Five recovery techniques when the AI gets stuck:}
+\begin{enumerate}
+  \item \textbf{Stop and reset the conversation}
+  \item \textbf{Return to the last working version}
+  \item \textbf{Break the task into smaller parts}
+  \item \textbf{Add a more specific constraint to the context}
+  \item \textbf{Switch model or tool if needed}
+\end{enumerate}
+\end{warnbox}
+
+\begin{tipbox}
+If the AI has failed twice on the same problem with the same approach, do not insist. Change the strategy.
+\end{tipbox}
+
+\subsection{Phase 6 in practice: how a constraint saves the project}
+
+\begin{dangerbox}
+\textbf{Disaster 1: passwords stored in plain text.} The AI generates a registration endpoint that stores user passwords unencrypted. The fix is not just changing the code once --- it is adding a permanent rule to the context:\\[4pt]
+\texttt{SEC-01: Passwords MUST be hashed with bcrypt (cost 12). Never store passwords in plain text.}
+\end{dangerbox}
+
+\begin{dangerbox}
+\textbf{Disaster 2: the AI changes stack mid-project.} You are using ESModules and the AI suddenly generates CommonJS. The preventing rule is explicit:\\[4pt]
+\texttt{Language: JavaScript ES2022+ with ESModules. DO NOT use require() or module.exports.}
+\end{dangerbox}
+
+\begin{dangerbox}
+\textbf{Disaster 3: phantom dependencies.} The AI installs new libraries without approval. Prevent it with:\\[4pt]
+\texttt{Dependencies: ONLY those listed in the \_CONTEXT.md. Do not add new dependencies without explicit approval.}
+\end{dangerbox}
+
+% ---------------------------------------------------------
+\section{Context Engineering: The Art of Communicating with AI}
+
+Context Engineering is the foundational discipline of 0-code development. It is the difference between mediocre code and professional-quality output.
+
+\subsection{The amnesia problem}
+
+Large language models are \textbf{stateless}. When you start a new chat, they do not remember:
+\begin{itemize}
+  \item the architectural decisions from yesterday,
+  \item the naming conventions of your project,
+  \item the bugs you already fixed together,
+  \item the exact stack you selected.
+\end{itemize}
+
+If you do not provide that information, the model will invent its own assumptions.
+
+\subsection{The solution: the \texttt{\_CONTEXT.md} file}
+
+The \texttt{\_CONTEXT.md} file is the \textbf{contract} between you and the AI. It tells the agent what the project is, how it is structured, what conventions it must follow, and what it must never do.
+
+\begin{quote}
+Think of \texttt{\_CONTEXT.md} as the briefing document you would hand to a new developer on their first day.
+\end{quote}
+
+% ---------------------------------------------------------
+\section{Anatomy of a \texttt{\_CONTEXT.md}}
+
+A good context file usually contains five sections.
+
+\subsection{1. Identity and Purpose}
+\begin{lstlisting}[language={}]
+# Project: BlogAPI
+
+You are working on a REST API backend for a personal blog.
+Technologies: Node.js 20, Express.js, PostgreSQL 16, Prisma ORM.
+Environment: local development on Windows/macOS.
+\end{lstlisting}
+
+\subsection{2. Architecture and Structure}
+\begin{lstlisting}[language={}]
+## Project Structure
+
+src/
+  routes/          -> Endpoint definitions
+  controllers/     -> Request/response logic
+  services/        -> Business logic
+  middleware/      -> Auth and error handling
+  utils/           -> Helper functions
+prisma/
+  schema.prisma    -> Database schema
+tests/
+  unit/
+  integration/
+\end{lstlisting}
+
+\subsection{3. Conventions and Standards}
+\begin{lstlisting}[language={}]
+## Conventions
+- Naming: camelCase for variables and functions
+- API responses: { success: boolean, data: T, error?: string }
+- Validation: use Zod for input validation
+- Async: use async/await, never callbacks
+- Imports: use ESModules, never require()
+\end{lstlisting}
+
+\subsection{4. Constraints and Prohibitions}
+\begin{lstlisting}[language={}]
+## Constraints (MANDATORY)
+- NEVER use raw SQL queries. ALWAYS use Prisma.
+- NEVER store passwords in plain text.
+- NEVER expose stack traces in production errors.
+- NEVER install dependencies without a documented reason.
+\end{lstlisting}
+
+\subsection{5. Commands and Workflow}
+\begin{lstlisting}[language={}]
+## Commands
+- Start the server: npm run dev
+- Run tests: npm test
+- Migrate database: npx prisma migrate dev
+- Generate Prisma client: npx prisma generate
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Your First Complete \texttt{\_CONTEXT.md}}
+
+\begin{praticabox}[title={Hands-on --- Create your first context file}]
+Create a \texttt{\_CONTEXT.md} file in the root of a new project:
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} for TaskMaster CLI}]
+# Project: TaskMaster CLI
+
+## Purpose
+A command-line application for managing personal tasks.
+The user can add, list, complete, and delete tasks.
+Data is saved in a local JSON file.
+
+## Technologies
+- Language: Python 3.11+
+- Libraries: standard modules only (argparse, json, os, datetime)
+- No external dependencies allowed
+
+## Structure
+taskmaster/
+├── _CONTEXT.md
+├── main.py
+├── task_manager.py
+├── storage.py
+├── tests/
+│   ├── test_task_manager.py
+│   └── test_storage.py
+└── data/
+    └── tasks.json
+
+## Conventions
+- Naming: snake_case for everything
+- Docstrings on all public functions
+- Type hints on all function signatures
+- Clear CLI output for the user
+
+## Constraints
+- DO NOT use external libraries.
+- DO NOT use global variables.
+- DO NOT ignore errors.
+- tasks.json must be created automatically.
+\end{lstlisting}
+
+\begin{checkpointbox}
+This is enough context for the AI to generate a working, tested CLI application.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{The 7 Golden Rules of Context Engineering}
+
+\begin{enumerate}
+  \item \textbf{Be imperative, not descriptive}
+  \item \textbf{Prohibitions matter more than permissions}
+  \item \textbf{Show the structure, do not vaguely describe it}
+  \item \textbf{Specify the exact commands}
+  \item \textbf{Use one \texttt{\_CONTEXT.md} per project}
+  \item \textbf{Update it after every important error}
+  \item \textbf{Less is more, as long as it is precise}
+\end{enumerate}
+
+% ---------------------------------------------------------
+\section{MCP and Agent Skills: A Preview}
+
+\subsection{Model Context Protocol (MCP)}
+When the AI needs to interact with external systems --- databases, APIs, GitHub, or other tools --- it uses the \textbf{Model Context Protocol}. We will introduce it concretely in Chapter~7.
+
+\subsection{Agent Skills (\texttt{SKILL.md})}
+As projects become more complex, you can provide specialist expertise with \texttt{SKILL.md} files. Later chapters will use these for React, Flutter, API design, database work, and security.
+
+% ---------------------------------------------------------
+\section{Managing Long Projects: \texttt{PROGRESS.md}}
+
+For projects that span multiple sessions, you need a persistent memory file.
+
+\begin{lstlisting}[language={}]
+Update PROGRESS.md with:
+1. What was implemented in this session
+2. What architectural decisions were made
+3. What problems were encountered and how they were solved
+4. What remains to be done
+\end{lstlisting}
+
+\begin{notebox}
+With Claude Code you can also use a file such as \texttt{claude-progress.txt}. The principle is the same: persistent context between sessions.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{The Professional Workflow: From Idea to Implementation}
+
+Real projects require one more step: use the AI to decompose the idea into implementable work units before writing the code.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{11-workflow-adlc}
+\caption{Professional ADLC workflow: from idea to implementation in six phases}
+\label{fig:workflow-adlc-en}
+\end{figure}
+
+\subsection{Phase 1: From idea to specifications}
+Ask the AI to generate a PRD with functional requirements, non-functional requirements, technical constraints, and acceptance criteria.
+
+\subsection{Phase 2: From requirements to use cases}
+Derive concrete use cases from the PRD: actor, precondition, main flow, alternative flows, and postcondition.
+
+\subsection{Phase 3: Design and technology choices}
+The AI proposes options, but the human decides. Capture the result in \texttt{docs/DESIGN.md} using clear ADRs.
+
+\subsection{Phase 4: From use cases to epics}
+Group related work into epics such as setup, authentication, CRUD, frontend, mobile, testing, and deployment.
+
+\subsection{Phase 5: From epics to tasks}
+Break each epic into atomic tasks with clear acceptance criteria, involved files, SEC/PERF constraints, and an estimate.
+
+\subsection{Phase 6: Task-driven implementation}
+Once the tasks are defined, implementation becomes systematic and traceable.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{X X}
+\toprule
+\textbf{Without decomposition} & \textbf{With decomposition} \\
+\midrule
+``Build the BookShelf app'' & ``Implement T-003.1'' \\
+The AI invents the architecture & The architecture is documented first \\
+If it goes off track, start over & If it goes off track, resume from the task \\
+No traceability & Every decision is recorded \\
+Hard to estimate work & Story points per task \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{checkpointbox}
+The workflow Idea $\rightarrow$ Specifications $\rightarrow$ Use Cases $\rightarrow$ Design $\rightarrow$ Epics $\rightarrow$ Tasks $\rightarrow$ Implementation is what turns AI experimentation into software engineering.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section*{Summary}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Concept} & \textbf{What you learned} \\
+\midrule
+ADLC & The 7 phases of the 0-code life cycle \\
+\texttt{\_CONTEXT.md} & How to write the contract with the AI \\
+Context Engineering & The rules for high-quality prompts and constraints \\
+Project structure & The five essential parts of a well-written context \\
+MCP / Skills & A preview of advanced agent tooling \\
+\texttt{PROGRESS.md} & Persistent memory between sessions \\
+Professional workflow & How to decompose an idea into implementable tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}

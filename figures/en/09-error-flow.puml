@@ -1,0 +1,38 @@
+@startuml 09-error-flow
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontSize 11
+skinparam RectangleBackgroundColor #F5F5F5
+skinparam RectangleBorderColor #999999
+skinparam ArrowColor #333333
+
+rectangle "Backend" as backend #FFF3E0 {
+  rectangle "Database Error" as dberr #FFCDD2
+  rectangle "Prisma" as prisma
+  rectangle "Service" as svc
+  rectangle "Controller" as ctrl
+  rectangle "Express Error Handler" as handler
+}
+
+rectangle "Network" as net {
+  rectangle "JSON\n{success: false,\nerror: {...}}" as json #F5F5F5
+}
+
+rectangle "Frontend" as frontend #E3F2FD {
+  rectangle "Axios Interceptor" as axios
+  rectangle "useApi Hook" as hook
+  rectangle "React Component" as comp
+  rectangle "UI (toast/banner)" as ui #BBDEFB
+}
+
+dberr -right-> prisma
+prisma -right-> svc
+svc -right-> ctrl
+ctrl -down-> handler
+handler -down-> json
+json -down-> axios
+axios -right-> hook
+hook -right-> comp
+comp -right-> ui
+
+@enduml

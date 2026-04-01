@@ -1,0 +1,261 @@
+% ============================================================
+% CAPITOLO 4 — Progetto 1: Hello World in 0-Code
+% ============================================================
+\chapter{Progetto 1: Hello World in 0-Code}\index{Python}
+
+\section*{Cosa Costruirai}
+Un programma Python interattivo che:
+\begin{itemize}
+  \item Saluta l'utente per nome
+  \item Calcola l'età a partire dall'anno di nascita
+  \item Genera una ``fortuna del giorno'' casuale
+  \item Ha test automatici funzionanti
+\end{itemize}
+
+\textbf{Tempo stimato}: 15--20 minuti
+
+% ---------------------------------------------------------
+\section{Preparare il Progetto (ADLC Fase 0-2)}
+
+\begin{praticabox}[title={Pratica --- Setup iniziale}]
+\begin{enumerate}
+  \item Apri VS~Code
+  \item Crea una nuova cartella: \texttt{hello-0code}
+  \item Apri la cartella in VS~Code (\texttt{File $\rightarrow$ Open Folder})
+  \item Crea un file \texttt{\_CONTEXT.md} nella root con questo contenuto:
+\end{enumerate}
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} per Hello 0-Code}]
+# Progetto: Hello 0-Code
+
+## Scopo
+Un programma Python interattivo che saluta l'utente, calcola
+la sua eta' e genera una "fortuna del giorno" casuale.
+
+## Tecnologie
+- Python 3.11+
+- Solo librerie standard (random, datetime)
+- Test con pytest
+
+## Struttura
+hello-0code/
++-- _CONTEXT.md
++-- main.py          <- Entry point
++-- greeter.py       <- Logica di saluto e calcolo
++-- fortunes.py      <- Lista di fortune e generatore
++-- tests/
+    +-- test_greeter.py
+    +-- test_fortunes.py
+
+## Convenzioni
+- snake_case per tutto
+- Type hints su tutte le funzioni
+- Docstring per ogni funzione pubblica
+- Print formattato con f-strings
+
+## Vincoli
+- Solo librerie standard Python. Nessun pip install.
+- L'anno di nascita deve essere validato (1900-anno corrente)
+- Il nome non puo' essere vuoto
+- Gestisci input non validi con messaggi chiari
+\end{lstlisting}
+
+\begin{checkpointbox}
+Dovresti avere una cartella con un solo file: \texttt{\_CONTEXT.md}. Tutto il resto lo genererà l'IA.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{La Prima Richiesta (ADLC Fase 3-4)}
+
+\begin{praticabox}[title={Pratica --- Generare il codice}]
+\begin{enumerate}
+  \item Apri Copilot Chat in Agent Mode (\texttt{Ctrl+Shift+I}, seleziona ``Agent'')
+  \item Scrivi questa richiesta:
+\end{enumerate}
+\begin{lstlisting}[language={}]
+Leggi il file _CONTEXT.md e implementa l'intero progetto
+seguendo la struttura e i vincoli definiti.
+
+Il programma deve:
+1. Chiedere il nome dell'utente
+2. Chiedere l'anno di nascita
+3. Calcolare l'eta'
+4. Mostrare un saluto personalizzato con l'eta'
+5. Mostrare una fortuna del giorno casuale (10+ fortune)
+
+Crea anche i test unitari per greeter.py e fortunes.py.
+\end{lstlisting}
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item \textbf{Osserva l'IA al lavoro}: Copilot in Agent Mode creerà i file uno per uno e ti chiederà se accettare le modifiche.
+  \item \textbf{Accetta o correggi}: Se il codice è corretto, accetta. Se noti qualcosa di strano, chiedi una modifica.
+\end{enumerate}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Analisi dell'Output}
+
+Vediamo cosa l'IA dovrebbe aver generato. Non preoccuparti se il tuo output è leggermente diverso --- l'importante è che rispetti la struttura del \texttt{\_CONTEXT.md}.
+
+\subsection*{Output atteso: \texttt{greeter.py}}
+
+\begin{lstlisting}[language=Python,title={\texttt{greeter.py}}]
+from datetime import datetime
+
+
+def get_user_name() -> str:
+    """Chiede il nome all'utente e lo valida."""
+    while True:
+        name = input("Come ti chiami? ").strip()
+        if name:
+            return name
+        print("Il nome non puo' essere vuoto. Riprova.")
+
+
+def get_birth_year() -> int:
+    """Chiede l'anno di nascita e lo valida."""
+    current_year = datetime.now().year
+    while True:
+        try:
+            year = int(input("In che anno sei nato/a? "))
+            if 1900 <= year <= current_year:
+                return year
+            print(f"L'anno deve essere tra 1900 e {current_year}.")
+        except ValueError:
+            print("Inserisci un numero valido.")
+
+
+def calculate_age(birth_year: int) -> int:
+    """Calcola l'eta' a partire dall'anno di nascita."""
+    return datetime.now().year - birth_year
+
+
+def greet(name: str, age: int) -> str:
+    """Genera il messaggio di saluto personalizzato."""
+    return f"Ciao {name}! Hai {age} anni."
+\end{lstlisting}
+
+\subsection*{Cosa osservare}
+
+Controlla che l'IA abbia rispettato il \texttt{\_CONTEXT.md}:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{X c}
+\toprule
+\textbf{Vincolo del contesto} & \textbf{Rispettato?} \\
+\midrule
+snake\_case per funzioni & \checkmark \\
+Type hints & \checkmark \\
+Docstring & \checkmark \\
+Validazione anno (1900--corrente) & \checkmark \\
+Nome non vuoto & \checkmark \\
+Solo librerie standard & \checkmark \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+Questa verifica è il tuo lavoro principale come sviluppatore 0-code. Non devi scrivere il codice, ma devi saper \textbf{leggere e validare} che rispetti i requisiti.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{Eseguire e Testare (ADLC Fase 5)}
+
+\begin{praticabox}[title={Pratica --- Esecuzione del programma}]
+Apri il terminale integrato e esegui:
+\begin{lstlisting}[language=bash]
+python main.py
+\end{lstlisting}
+Interagisci con il programma:
+\begin{lstlisting}[language={}]
+Come ti chiami? Marco
+In che anno sei nato/a? 1990
+Ciao Marco! Hai 36 anni.
+La tua fortuna del giorno: "Il codice migliore e'
+quello che non devi scrivere."
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Pratica --- Esecuzione dei test}]
+\begin{lstlisting}[language=bash]
+pip install pytest
+python -m pytest tests/ -v
+\end{lstlisting}
+Output atteso:
+\begin{lstlisting}[language={}]
+tests/test_greeter.py::test_calculate_age PASSED
+tests/test_greeter.py::test_greet PASSED
+tests/test_greeter.py::test_greet_message_format PASSED
+tests/test_fortunes.py::test_get_fortune_returns_string PASSED
+tests/test_fortunes.py::test_fortune_not_empty PASSED
+========================= 5 passed =========================
+\end{lstlisting}
+\end{praticabox}
+
+\begin{checkpointbox}
+Se il programma funziona e i test passano, hai completato il tuo primo progetto in 0-code.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Iterare e Migliorare}
+
+Il vero potere del 0-code emerge nell'iterazione.
+
+\begin{praticabox}[title={Pratica --- Aggiungere una funzionalità}]
+Nella chat di Copilot, scrivi:
+\begin{lstlisting}[language={}]
+Aggiungi una funzionalita' "zodiac": dopo il saluto, mostra
+il segno zodiacale dell'utente basato sull'anno di nascita
+(zodiaco cinese). Aggiungi la logica in un nuovo file
+zodiac.py con i relativi test. Aggiorna main.py.
+\end{lstlisting}
+L'IA creerà \texttt{zodiac.py}, i test corrispondenti, e aggiornerà \texttt{main.py}.
+\end{praticabox}
+
+\begin{praticabox}[title={Pratica --- Correggere un bug}]
+Se il programma ha un comportamento inatteso, non modificare il codice a mano. Descrivi il problema a Copilot:
+\begin{lstlisting}[language={}]
+Quando inserisco l'anno 2024 come anno di nascita, il
+programma dice che ho 2 anni. Dovrebbe calcolare l'eta'
+usando anche mese e giorno, non solo l'anno. Correggi.
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Lezioni dal Primo Progetto (ADLC Fase 6)}
+
+\begin{enumerate}
+  \item \textbf{Il \texttt{\_CONTEXT.md} guida tutto}: struttura dei file, convenzioni, vincoli --- l'IA li ha seguiti perché li hai definiti nel contesto.
+  \item \textbf{La richiesta iniziale può essere generica}: i dettagli stanno nel contesto, la richiesta indica l'obiettivo.
+  \item \textbf{L'iterazione è gratuita}: aggiungere funzionalità o correggere bug è veloce come descrivere il problema.
+  \item \textbf{Tu revisioni, l'IA implementa}: il tuo lavoro è leggere il codice e verificare che rispetti i requisiti.
+\end{enumerate}
+
+\begin{praticabox}[title={Pratica --- Aggiorna il contesto}]
+Se l'IA ha commesso errori ricorrenti, aggiungili come vincoli:
+\begin{lstlisting}[language={}]
+## Lezioni Apprese
+- Calcolare l'eta' usando datetime.date completo
+- I test devono usare fixture, non valori hardcoded
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section*{Riepilogo del Progetto}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X c}
+\toprule
+\textbf{Fase ADLC} & \textbf{Cosa hai fatto} & \textbf{Tempo} \\
+\midrule
+Fase 0--2 & Creato \texttt{\_CONTEXT.md} & 5~min \\
+Fase 3--4 & Generato codice con Copilot & 5~min \\
+Fase 5 & Testato e verificato & 3~min \\
+Iterazione & Aggiunto zodiaco e fix bug & 5~min \\
+Fase 6 & Aggiornato contesto & 2~min \\
+\midrule
+\textbf{Totale} & \textbf{Applicazione completa con test} & \textbf{$\sim$20~min} \\
+\bottomrule
+\end{tabularx}
+\end{center}

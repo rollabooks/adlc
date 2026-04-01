@@ -1,0 +1,186 @@
+% ============================================================
+% apress-style.tex — Stile Apress / Springer per libri tecnici
+% ============================================================
+% Caratteristiche: layout accademico pulito, font classici,
+% capitoli con linea nera, stile formale e compatto.
+% ============================================================
+
+% === LINGUA ===
+\usepackage[\BabelLang]{babel}
+\usepackage[autostyle]{csquotes}
+
+% === BIBLIOGRAFIA ===
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  urldate=long,
+  maxbibnames=5,
+  backref=true,
+  backrefstyle=none
+]{biblatex}
+
+% === FONT (Apress: Computer Modern / Latin Modern classico) ===
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setmainfont{texgyretermes}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setsansfont{texgyreheros}[
+  Extension=.otf,
+  Scale=0.92,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setmonofont{InconsolataN}[
+  Extension=.otf,
+  Scale=0.85,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold
+]
+
+% === LAYOUT PAGINA (6.14 × 9.21 poll. — formato Apress standard) ===
+\usepackage[
+  paperwidth=6.14in,
+  paperheight=9.21in,
+  top=0.85in, bottom=0.85in,
+  inner=0.95in, outer=0.7in,
+  headheight=14pt,
+  footskip=0.4in
+]{geometry}
+
+% === SPAZIATURA PARAGRAFI (Apress: indent tradizionale) ===
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% === COLORI (palette Apress — giallo/nero) ===
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\definecolor{apress-yellow}{HTML}{FFD700}
+\definecolor{apress-dark}{HTML}{1A1A1A}
+\definecolor{apress-gray}{HTML}{4A4A4A}
+\definecolor{apress-lightgray}{HTML}{999999}
+\definecolor{code-bg}{HTML}{F5F5F5}
+\definecolor{code-border}{HTML}{CCCCCC}
+\definecolor{tip-green}{HTML}{2E7D32}
+\definecolor{warn-orange}{HTML}{EF6C00}
+\definecolor{note-blue}{HTML}{1976D2}
+\definecolor{link-blue}{HTML}{0D47A1}
+\definecolor{caution-red}{HTML}{C62828}
+
+% === GRAFICA E TABELLE ===
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+
+% === CODICE SORGENTE (Apress: grigio chiaro, numeri riga, formale) ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize\ttfamily\color{apress-dark},
+  backgroundcolor=\color{code-bg},
+  frame=tb,
+  framerule=0.4pt,
+  rulecolor=\color{code-border},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=2.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em,
+  numbers=left,
+  numberstyle=\scriptsize\color{apress-lightgray},
+  numbersep=10pt,
+  keepspaces=true,
+  keywordstyle=\color{apress-dark}\bfseries,
+  stringstyle=\color{tip-green},
+  commentstyle=\color{apress-lightgray}\itshape,
+  columns=fullflexible,
+  literate={€}{{\euro}}1 {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+}
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+% === INTESTAZIONI (Apress: formale con linea) ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\itshape\leftmark}
+\fancyhead[RO]{\small\itshape\rightmark}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
+% === TITOLI CAPITOLO (Apress: linea nera spessa, numero e titolo) ===
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}
+  {\filright\sffamily\fontsize{70}{70}\selectfont\color{apress-lightgray!50}\thechapter}
+  {-10pt}
+  {\filright\Huge\sffamily\color{apress-dark}}
+  [\vspace{2pt}{\titlerule[2pt]}]
+\titlespacing*{\chapter}{0pt}{-20pt}{30pt}
+\titleformat{\section}
+  {\normalfont\Large\sffamily\bfseries\color{apress-dark}}
+  {\thesection}{0.7em}{}
+  [\vspace{1pt}{\color{apress-lightgray}\titlerule[0.3pt]}]
+\titleformat{\subsection}
+  {\normalfont\large\sffamily\bfseries\color{apress-gray}}
+  {\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\sffamily\bfseries\color{apress-lightgray}}
+  {\thesubsubsection}{0.7em}{}
+
+% === TITOLI PARTI ===
+\titleformat{\part}[display]
+  {\centering\normalfont\sffamily\bfseries}
+  {\fontsize{48}{48}\selectfont\color{apress-lightgray!40}\partname\ \thepart}
+  {10pt}
+  {\Huge\color{apress-dark}}
+  [\vspace{4pt}{\titlerule[2pt]}]
+
+% === HYPERLINK ===
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=apress-dark,
+  citecolor=apress-gray,
+  urlcolor=link-blue,
+  bookmarks=true,
+  bookmarksnumbered=true
+]{hyperref}
+
+% === PROTEZIONE OVERFLOW ===
+\tolerance=1000
+\emergencystretch=1.5em
+\setlength{\tabcolsep}{4pt}
+
+% === SPAZIATURA LISTE ===
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=2em, topsep=0.4em, itemsep=0.2em}
+
+% === BOX ADMONITION ===
+\input{styles/apress-boxes}
+
+% === EURO ===
+\newcommand{\euro}{€}
+
+% === INDICE ANALITICO ===
+\usepackage{makeidx}
+\makeindex

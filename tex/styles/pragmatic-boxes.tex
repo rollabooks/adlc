@@ -1,0 +1,97 @@
+% ============================================================
+% pragmatic-boxes.tex — Box admonition stile Pragmatic Bookshelf
+% ============================================================
+% Stile: box con bordo colorato, angoli arrotondati, icone.
+% Pragmatic usa: Tip, Note, Important, Joe Asks, Did You Know?
+% ============================================================
+
+\providecolor{tip-green}{HTML}{27AE60}
+\providecolor{warn-orange}{HTML}{E67E22}
+\providecolor{note-blue}{HTML}{2980B9}
+\providecolor{danger-red}{HTML}{C0392B}
+\providecolor{prag-brown}{HTML}{6D4C41}
+\providecolor{prag-gray}{HTML}{7F8C8D}
+
+\usepackage{fontawesome5}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Tip
+\newtcolorbox{tipbox}[1][]{
+  colback=tip-green!5, colframe=tip-green,
+  fonttitle=\sffamily\bfseries,
+  title={\faLightbulb\space \LabelTip},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=tip-green, #1
+}
+
+% Note
+\newtcolorbox{notebox}[1][]{
+  colback=note-blue!5, colframe=note-blue,
+  fonttitle=\sffamily\bfseries,
+  title={\faCommentDots\space \LabelNote},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=note-blue, #1
+}
+
+% Warning / Important
+\newtcolorbox{warnbox}[1][]{
+  colback=warn-orange!5, colframe=warn-orange,
+  fonttitle=\sffamily\bfseries,
+  title={\faExclamationCircle\space \LabelImportant},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=warn-orange, #1
+}
+
+% Danger
+\newtcolorbox{dangerbox}[1][]{
+  colback=danger-red!5, colframe=danger-red,
+  fonttitle=\sffamily\bfseries,
+  title={\faTimesCircle\space \LabelDanger},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=danger-red, #1
+}
+
+% "Joe Asks" style — question/curiosity box
+\newtcolorbox{checkpointbox}[1][]{
+  colback=prag-brown!5, colframe=prag-brown,
+  fonttitle=\sffamily\bfseries,
+  title={\faQuestionCircle\space \LabelDidYouKnow},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=prag-brown, #1
+}
+
+% Version
+\newtcolorbox{versionbox}[1][]{
+  colback=purple!4, colframe=purple!60!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faCogs\space \LabelVersion},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=purple!60!black, #1
+}
+
+% Cost
+\newtcolorbox{costbox}[1][]{
+  colback=Goldenrod!5, colframe=Goldenrod!80!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faCoins\space \LabelCost},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=Goldenrod!80!black, #1
+}
+
+% Exercise
+\newtcolorbox{praticabox}[1][]{
+  colback=prag-gray!5, colframe=prag-gray,
+  fonttitle=\sffamily\bfseries,
+  title={\faPencilAlt\space \LabelExercise},
+  boxrule=1pt, arc=4pt, breakable,
+  left=6pt, right=6pt,
+  coltitle=white, colbacktitle=prag-gray, #1
+}

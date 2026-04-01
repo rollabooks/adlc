@@ -1,0 +1,191 @@
+% ============================================================
+% pragmatic-style.tex — Stile Pragmatic Bookshelf
+% ============================================================
+% Caratteristiche: font moderno, margini con annotazioni,
+% codice con numeri riga, colori caldi (arancio/marrone),
+% capitoli con banda colorata.
+% ============================================================
+
+% === LINGUA ===
+\usepackage[\BabelLang]{babel}
+\usepackage[autostyle]{csquotes}
+
+% === BIBLIOGRAFIA ===
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  urldate=long,
+  maxbibnames=3,
+  backref=true,
+  backrefstyle=none
+]{biblatex}
+
+% === FONT (Pragmatic: Bookman/Century, monospace stretto) ===
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setmainfont{texgyrebonum}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setsansfont{texgyreadventor}[
+  Extension=.otf,
+  Scale=0.90,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic
+]
+\setmonofont{InconsolataN}[
+  Extension=.otf,
+  Scale=0.85,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold
+]
+
+% === LAYOUT PAGINA (7.5 × 9 poll. — formato Pragmatic) ===
+\usepackage[
+  paperwidth=7.5in,
+  paperheight=9in,
+  top=0.85in, bottom=0.85in,
+  inner=0.95in, outer=1.1in,
+  marginparwidth=0.8in,
+  marginparsep=0.15in,
+  headheight=14pt,
+  footskip=0.45in
+]{geometry}
+
+% === SPAZIATURA PARAGRAFI ===
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% === COLORI (palette Pragmatic — arancio/terracotta) ===
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\definecolor{prag-orange}{HTML}{D35400}
+\definecolor{prag-dark}{HTML}{2C3E50}
+\definecolor{prag-brown}{HTML}{6D4C41}
+\definecolor{prag-gray}{HTML}{7F8C8D}
+\definecolor{prag-lightgray}{HTML}{BDC3C7}
+\definecolor{code-bg}{HTML}{FFFBE6}
+\definecolor{code-border}{HTML}{E0D8B0}
+\definecolor{tip-green}{HTML}{27AE60}
+\definecolor{warn-orange}{HTML}{E67E22}
+\definecolor{note-blue}{HTML}{2980B9}
+\definecolor{link-blue}{HTML}{1A5276}
+\definecolor{danger-red}{HTML}{C0392B}
+
+% === GRAFICA E TABELLE ===
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{colortbl}
+
+% === CODICE SORGENTE (Pragmatic: sfondo caldo, numeri riga) ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize\ttfamily\color{prag-dark},
+  backgroundcolor=\color{code-bg},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{code-border},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=2em,
+  xrightmargin=0.5em,
+  aboveskip=0.8em,
+  belowskip=0.8em,
+  numbers=left,
+  numberstyle=\tiny\color{prag-lightgray},
+  numbersep=8pt,
+  keepspaces=true,
+  keywordstyle=\color{prag-orange}\bfseries,
+  stringstyle=\color{tip-green},
+  commentstyle=\color{prag-gray}\itshape,
+  columns=fullflexible,
+  literate={€}{{\euro}}1 {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+}
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+% === INTESTAZIONI (Pragmatic: capitolo e sezione, minimale) ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\color{prag-gray}\leftmark}
+\fancyhead[RO]{\small\color{prag-gray}\rightmark}
+\fancyfoot[LE,RO]{\small\sffamily\color{prag-brown}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% === TITOLI CAPITOLO (Pragmatic: banda arancio + numero) ===
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries}
+  {\colorbox{prag-orange}{\parbox[c][1.2cm][c]{1.5cm}{\centering\fontsize{36}{36}\selectfont\color{white}\thechapter}}}
+  {14pt}
+  {\huge\color{prag-dark}}
+\titlespacing*{\chapter}{0pt}{-10pt}{25pt}
+\titleformat{\section}
+  {\normalfont\Large\sffamily\bfseries\color{prag-dark}}
+  {\color{prag-orange}\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\normalfont\large\sffamily\bfseries\color{prag-brown}}
+  {\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\sffamily\bfseries\color{prag-gray}}
+  {\thesubsubsection}{0.7em}{}
+
+% === TITOLI PARTI ===
+\titleformat{\part}[display]
+  {\centering\normalfont\sffamily\bfseries}
+  {\fontsize{48}{48}\selectfont\color{prag-orange!30}\partname\ \thepart}
+  {12pt}
+  {\Huge\color{prag-dark}}
+
+% === HYPERLINK ===
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=prag-dark,
+  citecolor=prag-orange,
+  urlcolor=link-blue,
+  bookmarks=true,
+  bookmarksnumbered=true
+]{hyperref}
+
+% === PROTEZIONE OVERFLOW ===
+\tolerance=1000
+\emergencystretch=1.5em
+\setlength{\tabcolsep}{4pt}
+
+% === SPAZIATURA LISTE ===
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.8em, topsep=0.3em, itemsep=0.15em}
+
+% === MARGINNOTES (Pragmatic signature feature) ===
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize\sffamily\color{prag-gray}}
+
+% === BOX ADMONITION ===
+\input{styles/pragmatic-boxes}
+
+% === EURO ===
+\newcommand{\euro}{€}
+
+% === INDICE ANALITICO ===
+\usepackage{makeidx}
+\makeindex

@@ -1,0 +1,52 @@
+@startuml 11-workflow-adlc
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName "Sans-Serif"
+skinparam defaultFontSize 12
+
+skinparam activity {
+  BackgroundColor #F4F4F4
+  BorderColor #616161
+  FontColor #212121
+  ArrowColor #616161
+  DiamondBackgroundColor #F4F4F4
+  DiamondBorderColor #616161
+}
+
+skinparam activityDiagram {
+  BackgroundColor white
+}
+
+|ADLC Workflow|
+
+start
+:""Raw idea"";
+
+#E3F2FD:**1. SPECIFICATIONS (PRD)**
+"What should the system do?"
+Functional and non-functional requirements;
+
+#E8F5E9:**2. USE CASES**
+"How will users use it?"
+Scenarios with actor, action, outcome;
+
+#FFF3E0:**3. DESIGN**
+"What architecture and technologies?"
+AI proposes options, the human decides;
+
+#F3E8FF:**4. EPICS**
+"What work blocks are needed?"
+Logical groupings (auth, CRUD, deploy...);
+
+#FEF9C3:**5. TASKS**
+"What atomic steps for each epic?"
+Implementable units with Acceptance Criteria;
+
+#FFEBEE:**6. IMPLEMENT**
+"Execute the task and verify"
+Code + tests + checkpoint;
+
+stop
+
+@enduml
