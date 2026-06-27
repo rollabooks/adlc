@@ -31,7 +31,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 **Uso:** dopo 3-5 azioni significative, o prima di una pausa.
 
 **Input opzionale:** nessuno, o contesto aggiuntivo:
-```
+```text
 @checkpoint — ho appena finito il refactor del middleware
 ```
 
@@ -50,7 +50,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** quando un singolo campo del context è cambiato e non vuoi fare un checkpoint completo.
 
-```
+```text
 @context-update — ho finito T-007, passo a T-008 GET /tasks/:id
 ```
 
@@ -72,7 +72,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** dopo aver implementato qualcosa, prima del PR, o su richiesta durante la progettazione.
 
-```
+```text
 @security-check — controlla l'endpoint POST /tasks
 @security-check — rivedi il piano per il sistema di webhook
 ```
@@ -102,7 +102,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** carica il modulo della fase N senza cambiare `_CONTEXT.md`.
 
-```
+```text
 @load-phase 4    ← carica 05_VERIFICATION_RELEASE.md
 @load-phase 2    ← carica 03_DESIGN.md
 ```
@@ -117,7 +117,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** quando vuoi fare un cambio di fase ufficiale.
 
-```
+```text
 @set-phase 4
 ```
 
@@ -137,7 +137,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** applica un template di prompt riusabile.
 
-```
+```text
 @prompt SPEC-001
 @prompt REVIEW-002
 ```
@@ -150,7 +150,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** quando vuoi opzioni strutturate invece di una decisione unilaterale dell'agente.
 
-```
+```text
 @alternatives — per la strategia di caching
 @alternatives — per il formato della risposta di errore
 ```
@@ -168,7 +168,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** quando il task sta diventando troppo grande per una sessione.
 
-```
+```text
 @simplify — il T-010 sta diventando troppo ampio
 @simplify — il piano per l'autenticazione è troppo complesso
 ```
@@ -184,7 +184,7 @@ Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il
 
 **Uso:** prima di un'operazione rischiosa, per avere un piano di revert pronto.
 
-```
+```text
 @rollback — cosa faccio se la migration fallisce in staging?
 @rollback — piano di revert per il deploy di oggi
 ```

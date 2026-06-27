@@ -48,7 +48,7 @@ Prima di andare avanti, è importante chiarire cosa ADLC non è.
 
 **Non è un'AI.** ADLC non genera codice, non esegue comandi, non decide nulla in autonomia. È un sistema di file che struttura il dialogo tra te e l'agente AI che già usi.
 
-**Non è un tool da installare.** Non c'è un pacchetto npm, una pip install, un binario. Il framework è un insieme di file Markdown e JSON che vivi nel tuo repository. Non c'è un server, non c'è una dashboard, non ci sono dipendenze esterne.
+**Non è un tool da installare.** Non c'è un pacchetto npm, una pip install, un binario. Il framework è un insieme di file Markdown e JSON che vivono nel tuo repository. Non c'è un server, non c'è una dashboard, non ci sono dipendenze esterne.
 
 **Non è specifico per un linguaggio o stack.** ADLC funziona identico su un progetto Node.js, Python, Go, Rust, Flutter. Il contenuto dei file cambia (i tuoi vincoli specifici, il tuo stack), ma il sistema è lo stesso.
 
@@ -102,7 +102,7 @@ Prima di entrare nel dettaglio nei capitoli successivi, ecco una mappa dei conce
 | **Modes** | `Mode:` in `_CONTEXT.md` | Quanta cerimonia vuoi (LITE / STANDARD / AUDIT) |
 | **Rischio** | Classificazione interna | LOW / MEDIUM / HIGH / CRITICAL |
 | **Model Level** | Campo nel task | Quale "potenza" AI serve (1-7) |
-| **Confidence Tags** | `FACT / INFERRED / ASSUMPTION` | Quanto è certo l'output dell'agente |
+| **Confidence tag** | `FACT / INFERRED / ASSUMPTION` | Quanto è certo l'output dell'agente |
 | **HALT Trigger** | `halt-triggers.yaml` | Path che richiedono conferma prima di modificare |
 | **Vincoli SEC** | `SEC-XX` in `_CONTEXT.md` | Requisiti di sicurezza riusabili |
 | **Vincoli PERF** | `PERF-XX` in `_CONTEXT.md` | Requisiti di performance riusabili |

@@ -34,7 +34,7 @@ Il più usato. Ogni 3-5 azioni significative, o quando vuoi fissare un punto fer
 
 > "@checkpoint"
 
-```
+```text
 Checkpoint — TaskFlow API | 2026-06-27 14:32
 
 Completato:
@@ -72,7 +72,7 @@ Quando sai che il context è cambiato ma non vuoi fare un checkpoint completo. U
 
 > "@context-update — ho finito T-007, passo a T-008 GET /tasks/:id"
 
-```
+```text
 Proposta aggiornamento _CONTEXT.md:
 
 | Active Task              | T-008 GET /tasks/:id                    |
@@ -90,7 +90,7 @@ Chiedi esplicitamente una revisione del piano o del codice prodotto contro i vin
 
 > "@security-check — controlla l'endpoint POST /tasks appena implementato"
 
-```
+```text
 @security-check — POST /tasks
 
 SEC-01 Input Validation: ✅
@@ -124,7 +124,7 @@ Quando hai un dubbio su quale approccio scegliere e vuoi opzioni strutturate inv
 
 > "@alternatives — per implementare la paginazione di GET /tasks"
 
-```
+```text
 Opzione A — Cursor-based (raccomandato)
 Pro: performance costante con tabelle grandi, no page drift con insert frequenti
 Contro: non supporta jump a pagina N, cursor opaco per il client
@@ -153,7 +153,7 @@ Quando ti accorgi che il task sta diventando troppo grande o complesso per una s
 
 > "@simplify — il task T-010 sta diventando troppo grande"
 
-```
+```text
 T-010 attuale: sistema di notifiche real-time (WebSocket, queue Redis, worker)
 
 Scope ridotto proposto:
@@ -179,7 +179,7 @@ In qualsiasi momento, per fermare immediatamente qualsiasi operazione in corso.
 
 > "@stop"
 
-```
+```text
 Lavoro fermato.
 
 Stato corrente:
