@@ -86,9 +86,9 @@ Lorenzo deve implementare `GET /tasks` con filtri e paginazione. Ha bisogno di l
 - `prisma/schema.prisma`: ~300 token
 
 Input totale: ~2000 token. L'agente produrrà il nuovo endpoint + service + test: ~2500 token.
-Totale: ~4500 token → **Livello 2**.
+Totale: ~4500 token → nella tabella §8.1, il range 4k-8k corrisponde a **Livello 2**.
 
-Ma aspetta — c'è il risk floor.
+Ma prima di fermarsi qui, si applica il risk floor.
 
 ### Passo 2 — Applica il risk floor
 

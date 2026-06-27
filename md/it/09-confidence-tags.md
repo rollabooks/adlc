@@ -10,6 +10,14 @@ I confidence tags sono il meccanismo con cui ADLC rende esplicita questa distinz
 
 ## 9.1 I tre tag
 
+I tag seguono sempre lo stesso formato, in coda all'affermazione che classificano:
+
+```
+AI CONFIDENCE: [FACT | INFERRED | ASSUMPTION]
+Basis: [motivazione — file letto, pattern riconosciuto, o ipotesi]
+[TODO: azione suggerita, obbligatorio per ASSUMPTION su output ad alto rischio]
+```
+
 ### FACT
 
 L'agente ha verificato l'informazione leggendo direttamente il codice, un file, un output di test, o altra fonte presente nel contesto della sessione.
@@ -139,19 +147,6 @@ I confidence tags diventano particolarmente preziosi quando l'agente lavora su c
 In quella situazione, quasi tutto è INFERRED o ASSUMPTION. Il valore non è nella certezza, ma nella trasparenza: l'agente ti sta dicendo esplicitamente "sto navigando a vista". È un segnale che devi leggere il codice con lui, non delegargli ciecamente la comprensione.
 
 ---
-
-## 9.6 Il formato dei tag
-
-Il formato standard è in coda all'output:
-
-```markdown
----
-AI CONFIDENCE: [FACT | INFERRED | ASSUMPTION]
-Basis: [motivazione — file letto, pattern riconosciuto, o ipotesi]
-[TODO: azione suggerita se ASSUMPTION]
-```
-
-Su output con più claim di certezza diversa (come nell'esempio di Lorenzo), il tag appare dopo ogni claim con il suo livello specifico.
 
 ---
 

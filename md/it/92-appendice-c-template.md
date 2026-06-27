@@ -132,6 +132,10 @@ Convenzioni:
 ## Vincoli Essenziali
 | SEC-01 | Input Validation | [approccio] |
 | SEC-02 | Auth             | [meccanismo] |
+
+## Note per l'Agente
+- Mode RAPID: lavora su branch dedicato, non toccare path di produzione
+- Obiettivo time-boxed: [descrivi cosa stai esplorando e entro quando]
 ```
 
 ---

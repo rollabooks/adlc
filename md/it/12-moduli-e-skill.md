@@ -8,9 +8,9 @@ Il framework ADLC è composto da file che non vengono caricati tutti insieme all
 
 ## 12.1 La distinzione tra moduli e skill
 
-**I moduli** (`/adlc/modules/NN_*.md`) definiscono le regole operative del framework per ciascuna fase del ciclo di sviluppo. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only — non li modifichi mai per personalizzare il tuo progetto.
+**I moduli** (`.adlc/modules/NN_*.md`) definiscono le regole operative del framework per ciascuna fase del ciclo di sviluppo. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only — non li modifichi mai per personalizzare il tuo progetto.
 
-**Le skill** (`/.adlc/modules/skills/SKILL_*.md`) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro: progettare un'API REST, gestire la sicurezza, scrivere test, costruire un'interfaccia UI, gestire le operazioni. Puoi caricare una skill senza necessariamente essere in una fase specifica.
+**Le skill** (`.adlc/modules/skills/SKILL_*.md`) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro: progettare un'API REST, gestire la sicurezza, scrivere test, costruire un'interfaccia UI, gestire le operazioni. Puoi caricare una skill senza necessariamente essere in una fase specifica.
 
 La differenza pratica: il modulo dice "sei in fase di implementazione, segui questo protocollo". La skill dice "stai progettando un'API REST, segui questi principi".
 

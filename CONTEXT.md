@@ -52,11 +52,11 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Nessuna — Fase 3 completata. Prossima: Fase 4 (Revisione Editoriale)
+- Nessuna — Fase 4 completata. Prossima: Fase 5 (Copy Editing)
 
 ## Attività Pianificate
 
-- Fase 4: Revisione editoriale (struttura, chiarezza, coerenza, qualità tecnica)
+- Fase 5: Copy editing (terminologia, fact-check, uniformità stilistica)
 - Fase 5: Copy editing
 - Fase 6: Correzione bozze
 - Fase 7: Formattazione LaTeX + compilazione PDF/EPUB

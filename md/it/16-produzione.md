@@ -307,6 +307,8 @@ In questi casi, la "disinstallazione" è semplice: rimuovi i file del framework 
 - **Personalizzazione** senza rompere l'aggiornabilità: tutto in `.adlc/project/`, niente in `.adlc/modules/`.
 - **Phase 6 (Ops)**: rollback obbligatorio su ogni modifica, aggiornamenti con test di non-regressione, incident response strutturata.
 
+> **Nota:** il bullet "Contribuire al framework" menzionato in alcune versioni precedenti di questo riepilogo è stato rimosso — il processo di contribuzione al framework è documentato nel `README.md` del repository ufficiale e non è parte di questo manuale d'uso.
+
 ---
 
 *Fine dei capitoli. Nelle appendici trovi glossario, comandi completi, template pronti all'uso e risorse.*

@@ -79,6 +79,8 @@ Questo libro è diviso in cinque parti.
 
 Per tutta la durata del libro useremo un progetto realistico: **TaskFlow API**, una REST API per la gestione di task e progetti, costruita con Node.js e Fastify. Il progetto è volutamente familiare — chiunque abbia già costruito una REST API riconoscerà i pattern — ma abbastanza ricco da far emergere i problemi reali che ADLC risolve.
 
+Il team è composto da tre sviluppatori: **Lorenzo**, tech lead con esperienza backend, che usa Claude Code in terminale; **Giulia**, sviluppatrice full-stack che lavora in VS Code con GitHub Copilot; e **Marco**, che si occupa di DevOps e code review, e usa Claude Code e Codex CLI. Li seguiremo in sessioni diverse nel corso del libro.
+
 Seguiremo TaskFlow API dall'analisi dei requisiti fino al deploy, passando per design, implementazione, test e release. A ogni capitolo vedremo come ADLC cambia il modo in cui l'agente AI lavora su quel progetto.
 
 Non importa se il tuo stack è diverso. ADLC è agnostico rispetto alla tecnologia. Ciò che impari su TaskFlow API si applica identico a un progetto Python, Go, Flutter o qualsiasi altra combinazione.

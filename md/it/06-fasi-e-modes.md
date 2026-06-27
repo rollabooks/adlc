@@ -181,6 +181,12 @@ Il Mode non è fisso per tutta la vita del progetto. È normale che cambi spesso
 
 Per cambiare mode, basta aggiornare il campo `Mode:` in `_CONTEXT.md`. Il cambio ha effetto dalla prossima sessione (o dal prossimo turno se sei già in sessione).
 
+**Esempio concreto:** Lorenzo, dopo due settimane in STANDARD, passa a LITE. Aggiorna `_CONTEXT.md`:
+```markdown
+| Mode | LITE |
+```
+Alla sessione successiva, l'agente non chiede la conferma di bootstrap — la presuppone invariata rispetto all'ultima sessione. Lorenzo lo nota: scrive "Implementa `DELETE /tasks/:id`" e l'agente propone subito il piano (MEDIUM) senza il passaggio di conferma contesto. Il flusso è più fluido, le regole di sicurezza sono le stesse.
+
 ---
 
 ## 6.5 Il comando `@load-phase`

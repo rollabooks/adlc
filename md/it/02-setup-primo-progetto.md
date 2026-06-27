@@ -31,6 +31,8 @@ progetto/
 
 Il modo più rapido è clonare la repo ufficiale del framework e copiare i file nella radice del tuo progetto:
 
+> **Nota:** l'URL del repository è indicativo — verifica quello aggiornato nella documentazione ufficiale del framework o nel file `README.md` della distribuzione che hai ricevuto.
+
 ```bash
 # Clona il framework (una volta sola, in una directory temporanea)
 git clone https://github.com/rollaradio/adlc-framework /tmp/adlc

@@ -2,6 +2,8 @@
 
 È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere ADLC in azione su un caso concreto.
 
+> *TaskFlow API ha attraversato le fasi 0-2 nelle settimane precedenti. I requisiti sono stati analizzati, l'architettura definita (schema DB, contratto API con 12 endpoint), le decisioni aperte chiuse. Lorenzo ha aggiornato `_CONTEXT.md` a `Phase: 3-Implementation` al termine del design. Da questo punto inizia il lavoro che seguiamo ora.*
+
 Il task di oggi: implementare l'endpoint `POST /tasks` — il cuore dell'API, quello che crea un nuovo task per un utente autenticato.
 
 ---

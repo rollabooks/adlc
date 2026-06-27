@@ -99,9 +99,9 @@ Documentazione ufficiale di Claude Code — l'agente AI usato come riferimento p
 `https://docs.github.com/en/copilot`
 Documentazione ufficiale di GitHub Copilot, inclusa la configurazione di `.github/copilot-instructions.md`.
 
-**OpenAI Codex CLI**
+**OpenAI CLI / Codex**
 `https://github.com/openai/openai-codex`
-Repository del Codex CLI — l'agente che legge `AGENTS.md` nella root del progetto.
+L'agente che legge `AGENTS.md` nella root del progetto.
 
 ---
 
@@ -113,6 +113,14 @@ Standard di controlli di sicurezza per sistemi informativi. Rilevante per chi la
 **Google SRE Book**
 `https://sre.google/sre-book/table-of-contents/`
 Disponibile gratuitamente online. Capitoli su SLO, SLI e error budget sono la base teorica di PERF-01 e PERF-02. Capitoli su incident response informano il modulo `06_OPS.md`.
+
+---
+
+**OpenAI Codex CLI**
+`https://github.com/openai/openai-codex`
+Repository del Codex CLI.
+
+> **Nota:** OpenAI Codex CLI è stato soggetto a variazioni di stato (deprecazione, rinomina) nel 2025-2026. Verifica lo stato attuale del prodotto prima di usarlo come riferimento — potrebbe essere stato sostituito da "OpenAI CLI" o da un'interfaccia equivalente. La documentazione ADLC in `AGENTS.md` rimane applicabile indipendentemente dal nome del prodotto.
 
 ---
 
