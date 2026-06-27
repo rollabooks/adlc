@@ -30,11 +30,11 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | 4 | 04-context-md.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 5 | 05-progress-md.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 6 | 06-fasi-e-modes.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
-| 7 | 07-classificazione-rischio.md | ⬜ da fare | — | — | — |
-| 8 | 08-model-levels.md | ⬜ da fare | — | — | — |
-| 9 | 09-confidence-tags.md | ⬜ da fare | — | — | — |
-| 10 | 10-halt-triggers.md | ⬜ da fare | — | — | — |
-| 11 | 11-vincoli-sec-perf.md | ⬜ da fare | — | — | — |
+| 7 | 07-classificazione-rischio.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 8 | 08-model-levels.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 9 | 09-confidence-tags.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 10 | 10-halt-triggers.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 11 | 11-vincoli-sec-perf.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 12 | 12-moduli-e-skill.md | ⬜ da fare | — | — | — |
 | 13 | 13-comandi-conversazionali.md | ⬜ da fare | — | — | — |
 | 14 | 14-multi-agente.md | ⬜ da fare | — | — | — |
@@ -52,7 +52,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Fase 3 — Scrittura: Capitoli 7-11 (Parte III — Il Sistema di Sicurezza)
+- Fase 3 — Scrittura: Capitoli 12-15 (Parte IV — Workflow Avanzato)
 
 ## Attività Pianificate
 
