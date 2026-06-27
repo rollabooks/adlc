@@ -1,0 +1,32 @@
+% ============================================================
+% config.tex — Configurazione CONDIVISA del progetto editoriale
+% ============================================================
+% Impostazioni comuni a tutte le lingue.
+% I metadati specifici per lingua (titolo, sottotitolo, edizione)
+% sono in config-<lang>.tex (es. config-it.tex, config-en.tex).
+% ============================================================
+
+% --- Autore e anno (condivisi tra tutte le lingue) ---
+\newcommand{\BookAuthor}{Riccardo Rolla}
+\newcommand{\BookYear}{2026}
+\newcommand{\BookCopyright}{\BookAuthor}
+\newcommand{\BookRepo}{https://github.com/user/repo}
+
+% --- Stile grafico ---
+% Opzioni: "manning" | "oreilly" | "pragmatic" | "apress" | "nostarch"
+% Ogni stile ha un file LaTeX in tex/styles/ e un CSS in ebook/styles/.
+\newcommand{\BookStyle}{manning}
+
+% --- Formato pagina ---
+% (gestito automaticamente dallo stile scelto)
+\newcommand{\BookFormat}{manning}
+
+% --- Struttura per lingua ---
+% Ogni lingua ha:
+%   - tex/config-<lang>.tex    → titolo, sottotitolo, edizione, mese
+%   - tex/book-<lang>.tex      → file LaTeX principale
+%   - tex/lang/<lang>.tex      → etichette UI, babel
+%   - chapters/<lang>/         → capitoli LaTeX per PDF
+%   - md/<lang>/               → capitoli Markdown per EPUB
+%   - ebook/metadata-<lang>.yaml → metadati EPUB
+% Per aggiungere una nuova lingua: .\init-project.ps1 -AddLang <codice>

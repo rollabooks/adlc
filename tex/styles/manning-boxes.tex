@@ -1,0 +1,86 @@
+% ============================================================
+% manning-boxes.tex — Box admonition stile Manning
+% ============================================================
+% Stile: barra laterale colorata, sfondo minimo, icone FontAwesome.
+% ============================================================
+
+\providecolor{tip-green}{HTML}{2E7D32}
+\providecolor{warn-orange}{HTML}{E65100}
+\providecolor{note-blue}{HTML}{1565C0}
+\providecolor{manning-gray}{HTML}{616161}
+
+\usepackage{fontawesome5}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{tipbox}[1][]{
+  colback=tip-green!4, colframe=tip-green,
+  fonttitle=\sffamily\bfseries,
+  title={\faLightbulb\space\textsc{\LabelTip}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=tip-green,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{warnbox}[1][]{
+  colback=warn-orange!4, colframe=warn-orange,
+  fonttitle=\sffamily\bfseries,
+  title={\faExclamationTriangle\space\textsc{\LabelWarning}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=warn-orange,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{notebox}[1][]{
+  colback=note-blue!4, colframe=note-blue,
+  fonttitle=\sffamily\bfseries,
+  title={\faInfoCircle\space\textsc{\LabelNote}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=note-blue,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{dangerbox}[1][]{
+  colback=red!3, colframe=red!70!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faSkullCrossbones\space\textsc{\LabelDanger}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=red!70!black,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{versionbox}[1][]{
+  colback=purple!3, colframe=purple!60!black,
+  fonttitle=\sffamily\bfseries,
+  title={\faCogs\space\textsc{\LabelVersionNote}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=purple!60!black,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{costbox}[1][]{
+  colback=Goldenrod!5, colframe=Goldenrod,
+  fonttitle=\sffamily\bfseries,
+  title={\faCoins\space\textsc{\LabelCost}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=Goldenrod,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{checkpointbox}[1][]{
+  colback=tip-green!4, colframe=tip-green,
+  fonttitle=\sffamily\bfseries,
+  title={\faCheckCircle\space\textsc{\LabelCheckpoint}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=tip-green,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
+
+\newtcolorbox{praticabox}[1][]{
+  colback=manning-gray!3, colframe=manning-gray,
+  fonttitle=\sffamily\bfseries,
+  title={\faWrench\space\textsc{\LabelExercise}},
+  boxrule=0pt, leftrule=3pt, arc=0pt, breakable,
+  coltitle=white, colbacktitle=manning-gray,
+  toptitle=3pt, bottomtitle=3pt, #1
+}
