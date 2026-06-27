@@ -1,0 +1,133 @@
+% ============================================================
+% Capitolo 6 — Fasi e Modes
+% ============================================================
+
+\chapter{Fasi e Modes}
+\label{ch:fasi-e-modes}
+
+Uno degli errori più comuni nell'uso degli agenti AI è trattarli come strumenti uniformi: la stessa configurazione per qualsiasi task, in qualsiasi momento del progetto.
+
+Le \textbf{Fasi} dicono all'agente in che punto del ciclo di sviluppo si trova. I \textbf{Modes} controllano quanta cerimonia applicare per quella sessione. Insieme, rendono l'agente contestuale invece che generico.
+
+\section{Le sette fasi del ciclo AI-Driven}
+\label{sec:06-sette-fasi}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cll}
+    \toprule
+    \textbf{Fase} & \textbf{Nome} & \textbf{Quando ci sei} \\
+    \midrule
+    0 & Discovery & Raccolta requisiti, comprensione del problema \\
+    1 & Analysis & Analisi requisiti, scelta dell'approccio macro \\
+    2 & Design & Architettura, API contract, schema DB \\
+    3 & Implementation & Codice, test \\
+    4 & Verification & QA, integration testing \\
+    5 & Release & Deploy, documentazione finale \\
+    6 & Ops & Monitoraggio, incident response, manutenzione \\
+    \bottomrule
+  \end{tabular}
+  \caption{Le sette fasi del ciclo ADLC}
+  \label{tab:06-fasi}
+\end{table}
+
+Il campo \texttt{Phase} in \texttt{\_CONTEXT.md} indica la fase corrente e determina quale modulo il framework carica:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cll}
+    \toprule
+    \textbf{Fase} & \textbf{Modulo} & \textbf{Skill suggerite} \\
+    \midrule
+    0--1 & \texttt{02\_DISCOVERY\_ANALYSIS.md} & \texttt{SKILL\_ANALYSIS.md} \\
+    2 & \texttt{03\_DESIGN.md} & \texttt{SKILL\_DESIGN.md}, \texttt{SKILL\_API\_DESIGN.md} \\
+    3 & \texttt{04\_IMPLEMENTATION.md} & \texttt{SKILL\_API\_DESIGN.md}, \texttt{SKILL\_SECURITY.md} \\
+    4--5 & \texttt{05\_VERIFICATION\_RELEASE.md} & \texttt{SKILL\_TESTING.md} \\
+    6 & \texttt{06\_OPS.md} & \texttt{SKILL\_OPS.md} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Moduli e skill per fase}
+  \label{tab:06-moduli-fasi}
+\end{table}
+
+\section{I cinque Modes}
+\label{sec:06-cinque-modes}
+
+\subsection*{LITE --- lavoro quotidiano}
+
+Per lavoro routine su un progetto stabile. Riduce l'overhead senza rinunciare alla sicurezza.
+
+\begin{itemize}
+  \item Conferma di sessione: saltata se \texttt{\_CONTEXT.md} non è cambiato
+  \item Confidence tag: solo per output $>$10 righe o classificati HIGH
+  \item Checkpoint: suggerito ogni 5+ azioni (non obbligatorio per LOW/MEDIUM)
+  \item HALT trigger: sempre rispettati
+\end{itemize}
+
+\subsection*{STANDARD --- default}
+
+Applica il protocollo completo. Per nuovi progetti, nuovi team, zone del codice mai toccate.
+
+\subsection*{AUDIT --- tracciabilità completa}
+
+Per lavoro con compliance, sicurezza, revisioni formali. Confidence tag su ogni output, checklist di completamento per ogni task.
+
+\subsection*{RAPID --- spike/emergenze}
+
+Lavoro time-boxed (1--2 ore), nessuna documentazione obbligatoria. Usa sempre un branch separato; evita i path di produzione. SEC critici sempre rispettati.
+
+\subsection*{FAST --- task semplici}
+
+Output diretto senza loop di conferma, a meno che il rischio non sia HIGH.
+
+\section{Scenario tipico su TaskFlow API}
+\label{sec:06-scenario}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Periodo} & \textbf{Mode} & \textbf{Motivazione} \\
+    \midrule
+    Fase 0--2 & STANDARD & Decisioni architetturali ad alto impatto \\
+    Prima settimana Fase 3 & STANDARD & Nuovo territorio, stabilire convenzioni \\
+    Settimane 2--N Fase 3 & LITE & Pattern rodati, team allineato \\
+    Audit pre-release & AUDIT & Tracciabilità completa richiesta \\
+    Hotfix urgente & RAPID & Velocità, branch dedicato \\
+    Refactor di naming & FAST & Task a basso rischio \\
+    \bottomrule
+  \end{tabular}
+  \caption{Evoluzione del Mode durante il progetto}
+  \label{tab:06-scenario}
+\end{table}
+
+Per cambiare mode aggiorna il campo \texttt{Mode:} in \texttt{\_CONTEXT.md}. Esempio concreto:
+
+Lorenzo, dopo due settimane in STANDARD, passa a LITE:
+
+\begin{lstlisting}[language=,caption={Aggiornamento del Mode nel context}]
+| Mode | LITE |
+\end{lstlisting}
+
+Alla sessione successiva, l'agente non chiede la conferma di bootstrap --- la presuppone invariata. Lorenzo scrive \textit{``Implementa \texttt{DELETE /tasks/:id}''} e l'agente propone subito il piano senza il passaggio di conferma contesto. Il flusso è più fluido, le regole di sicurezza sono le stesse.
+
+\section{Errori comuni con Fasi e Modes}
+\label{sec:06-errori}
+
+\textbf{Tenere STANDARD per tutta la vita del progetto.} Dopo le prime settimane, le conferme diventano rumore. Il team inizia a ignorarle. Abbassa a LITE quando il progetto è stabile.
+
+\textbf{Usare RAPID per lavoro che va in produzione.} RAPID è per esperimenti. Se il codice prodotto in RAPID finisce in main senza review, stai usando il mode sbagliato.
+
+\textbf{Non aggiornare la fase in \texttt{\_CONTEXT.md} quando si cambia fase.} L'agente carica i moduli sbagliati. Il cambio di fase nel PROGRESS.md deve essere accompagnato dall'aggiornamento del campo \texttt{Phase} nel context.
+
+\textbf{Pensare che i Modes disattivino gli HALT trigger.} Non è così. In nessun mode gli HALT trigger vengono disattivati.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item Le \textbf{sette fasi} (0--6) definiscono il punto del ciclo di sviluppo e quale modulo viene caricato.
+  \item I \textbf{cinque Modes} (LITE, STANDARD, AUDIT, RAPID, FAST) controllano quanta cerimonia applica l'agente.
+  \item Mode e Fase sono indipendenti: puoi essere in Fase 3 con Mode LITE.
+  \item Gli HALT trigger non vengono mai disattivati, indipendentemente dal Mode.
+  \item Cambia Mode liberamente durante il progetto: STANDARD per partire, LITE per il lavoro quotidiano rodato.
+\end{itemize}

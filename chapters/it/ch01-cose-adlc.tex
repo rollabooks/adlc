@@ -1,0 +1,137 @@
+% ============================================================
+% Capitolo 1 — ADLC: cos'è e perché esiste
+% ============================================================
+
+\chapter{ADLC: cos'è e perché esiste}
+\label{ch:cose-adlc}
+
+TaskFlow API nasce da una decisione semplice: il team di tre sviluppatori vuole usare agenti AI per accelerare lo sviluppo, ma senza rinunciare alla qualità e senza perdere il controllo su ciò che viene generato.
+
+Il primo giorno, Lorenzo --- il tech lead --- apre Claude Code e chiede di impostare il progetto. L'agente risponde subito con una struttura di directory, un \texttt{package.json} e i primi endpoint. Funziona. Il team è soddisfatto.
+
+Il terzo giorno, però, Lorenzo nota che il codice generato nel pomeriggio non rispetta la convenzione di gestione degli errori che avevano discusso la mattina. L'agente ha dimenticato.
+
+Il decimo giorno, il team ha tre conversazioni diverse con tre agenti diversi, ognuna con il proprio contesto implicito. Nessuno dei tre agenti sa cosa stanno facendo gli altri.
+
+È a questo punto che Lorenzo decide di adottare ADLC.
+
+\section{I quattro problemi che ADLC risolve}
+\label{sec:01-quattro-problemi}
+
+ADLC nasce per risolvere quattro problemi specifici, tutti connessi alla natura degli agenti AI attuali.
+
+\subsection*{Problema 1 --- L'AI dimentica}
+
+Gli agenti AI non hanno memoria persistente tra sessioni. Ogni conversazione inizia da zero. Se hai discusso la settimana scorsa che il tuo stack usa OIDC per l'autenticazione e che i token non devono mai apparire nei log, dovrai ridirlo la settimana prossima.
+
+\textbf{Soluzione ADLC:} \texttt{\_CONTEXT.md}, un file Markdown alla radice del progetto che contiene tutto il contesto rilevante. L'agente lo legge a ogni sessione. Se cambia qualcosa, lo aggiorni. Non devi ripetere nulla.
+
+\subsection*{Problema 2 --- L'AI ignora i vincoli}
+
+Anche quando spieghi i requisiti di sicurezza all'inizio di una conversazione, l'agente può ignorarli o dimenticarli nel corso del lavoro --- specialmente in sessioni lunghe o complesse. Un vincolo che non è strutturato in modo esplicito non viene rispettato sistematicamente.
+
+\textbf{Soluzione ADLC:} I vincoli \texttt{SEC-XX} (sicurezza) e \texttt{PERF-XX} (performance) sono definiti una volta in \texttt{\_CONTEXT.md} e riletti dall'agente prima di ogni operazione critica. Non sono una nota a margine: sono parte del protocollo obbligatorio.
+
+\subsection*{Problema 3 --- L'AI inventa}
+
+Gli agenti AI sono progettati per rispondere, non per dire ``non lo so''. Questo produce output che mischiano fatti verificabili, deduzioni logiche e ipotesi non verificate --- il tutto con la stessa sicurezza apparente.
+
+\textbf{Soluzione ADLC:} I confidence tag (\texttt{FACT} / \texttt{INFERRED} / \texttt{ASSUMPTION}) obbligano l'agente a classificare esplicitamente la certezza del proprio output su decisioni ad alto impatto. Un \texttt{ASSUMPTION} non è un errore --- è un segnale che devi verificare prima di procedere.
+
+\subsection*{Problema 4 --- L'AI fa troppo}
+
+Un agente senza limiti può modificare lo schema del database mentre aggiusta un bug di UI, o cambiare la configurazione di produzione mentre aggiorna un test. Le operazioni rischiose vengono eseguite senza avvisare.
+
+\textbf{Soluzione ADLC:} Gli HALT trigger definiscono i path e le operazioni che richiedono conferma esplicita prima di procedere. L'agente si ferma, spiega cosa sta per fare e aspetta il tuo via libera.
+
+\section{Cosa NON è ADLC}
+\label{sec:01-cosa-non-e}
+
+Prima di andare avanti, è importante chiarire cosa ADLC non è.
+
+\textbf{Non è un'AI.} ADLC non genera codice, non esegue comandi, non decide nulla in autonomia. È un sistema di file che struttura il dialogo tra te e l'agente AI che già usi.
+
+\textbf{Non è un tool da installare.} Non c'è un pacchetto npm, una pip install, un binario. Il framework è un insieme di file Markdown e JSON che vivono nel tuo repository. Non c'è un server, non c'è una dashboard, non ci sono dipendenze esterne.
+
+\textbf{Non è specifico per un linguaggio o stack.} ADLC funziona identico su un progetto Node.js, Python, Go, Rust, Flutter. Il contenuto dei file cambia (i tuoi vincoli specifici, il tuo stack), ma il sistema è lo stesso.
+
+\textbf{Non è un sostituto del processo di sviluppo.} ADLC si inserisce nel processo che già hai --- o aiuta a costruirlo, se non ce l'hai. Non è un framework Agile alternativo, non è una metodologia di project management.
+
+\section{Quando usarlo (e quando no)}
+\label{sec:01-quando-usarlo}
+
+ADLC è uno strumento per progetti reali. Ha senso adottarlo quando:
+
+\begin{itemize}
+  \item Stai lavorando su un progetto che dura più di qualche giorno.
+  \item Usi agenti AI regolarmente, non solo per domande occasionali.
+  \item Il progetto ha vincoli di sicurezza, performance o compliance che devono essere rispettati sistematicamente.
+  \item Vuoi usare più agenti diversi (Claude, Copilot, Codex) sullo stesso progetto senza duplicare le regole.
+  \item Lavori in team e vuoi che tutti gli agenti seguano le stesse convenzioni.
+\end{itemize}
+
+Non serve quando:
+
+\begin{itemize}
+  \item Stai facendo un esperimento di un'ora o un prototipo usa-e-getta.
+  \item Hai solo una domanda veloce da fare all'agente.
+  \item Il progetto è talmente semplice che non ha vincoli significativi.
+\end{itemize}
+
+\begin{tipbox}
+\textbf{Costo di adozione:} circa 15 minuti per lo scaffold iniziale, poi 1--2 minuti a sessione per mantenere \texttt{\_CONTEXT.md} aggiornato. Il tempo si recupera entro la prima settimana di lavoro continuativo.
+\end{tipbox}
+
+\section{I prerequisiti}
+\label{sec:01-prerequisiti}
+
+Per usare ADLC non servono competenze avanzate, ma tre basi sono necessarie.
+
+\textbf{Riga di comando.} Devi saper aprire un terminale (PowerShell o Bash) e lanciare comandi. I tool del framework (\texttt{init.ps1}, \texttt{validate.ps1}) sono script da eseguire, non interfacce grafiche.
+
+\textbf{Markdown base.} I file del framework sono Markdown: titoli, tabelle, liste. Devi saper aprire, leggere e modificare un \texttt{.md}. Non serve sapere tutto il Markdown --- bastano i costrutti di base.
+
+\textbf{Git base.} \texttt{clone}, \texttt{commit}, \texttt{push}, branching di base. Tecnicamente puoi usare ADLC senza Git su un progetto locale, ma è fortemente sconsigliato --- il versionamento del contesto è parte del valore.
+
+Utili ma non obbligatori: YAML (per gli HALT trigger), JSON (per il manifest), PowerShell scripting (per modificare i tool). Capirai questi file leggendoli; non è necessario scriverli da zero.
+
+\section{I concetti fondamentali in sintesi}
+\label{sec:01-concetti}
+
+Prima di entrare nel dettaglio nei capitoli successivi, ecco una mappa dei concetti principali del framework.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Concetto} & \textbf{File/Meccanismo} & \textbf{A cosa serve} \\
+    \midrule
+    Stato del progetto & \texttt{\_CONTEXT.md} & Fase, task, stack, vincoli \\
+    Storia del progetto & \texttt{PROGRESS.md} & Registro sessioni e decisioni \\
+    Fasi & \texttt{Phase:} in \texttt{\_CONTEXT.md} & Ciclo 0--6 \\
+    Modes & \texttt{Mode:} in \texttt{\_CONTEXT.md} & Livello di cerimonia \\
+    Rischio & Classificazione interna & LOW / MEDIUM / HIGH / CRITICAL \\
+    Model Level & Campo nel task & Potenza AI necessaria (1--7) \\
+    Confidence tag & \texttt{FACT / INFERRED / ASSUMPTION} & Certezza dell'output \\
+    HALT Trigger & \texttt{halt-triggers.yaml} & Path con conferma obbligatoria \\
+    Vincoli SEC & \texttt{SEC-XX} in \texttt{\_CONTEXT.md} & Sicurezza riusabile \\
+    Vincoli PERF & \texttt{PERF-XX} in \texttt{\_CONTEXT.md} & Performance riusabile \\
+    Moduli & \texttt{.adlc/modules/} & Regole per fase \\
+    Skill & \texttt{.adlc/modules/skills/} & Guide tematiche \\
+    \bottomrule
+  \end{tabular}
+  \caption{Concetti fondamentali del framework ADLC}
+  \label{tab:01-concetti}
+\end{table}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item ADLC risolve quattro problemi: la dimenticanza, l'ignoranza dei vincoli, l'invenzione e l'eccesso di autonomia degli agenti AI.
+  \item Non è un tool, non è un'AI, non è specifico per uno stack tecnologico.
+  \item Funziona tramite file Markdown e JSON che vivono nel repository e danno all'agente un contesto strutturato e persistente.
+  \item Ha senso su progetti reali con continuità tra sessioni; non serve per esperimenti brevi.
+  \item Costo di adozione: $\sim$15 minuti iniziali, poi 1--2 minuti per sessione.
+\end{itemize}
+
+Nel prossimo capitolo installiamo ADLC su TaskFlow API.

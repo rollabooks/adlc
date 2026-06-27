@@ -1,0 +1,84 @@
+% ============================================================
+% Capitolo 10 — HALT Triggers
+% ============================================================
+
+\chapter{HALT Triggers: il freno di emergenza}
+\label{ch:halt-triggers}
+
+Ci sono zone in ogni progetto che non dovresti mai modificare di impulso: schema del database, codice di autenticazione, credenziali, CI/CD. Gli HALT trigger sono il meccanismo con cui ADLC presidia queste zone.
+
+\section{Il file \texttt{halt-triggers.yaml}}
+\label{sec:10-file}
+
+Vive in \texttt{.adlc/halt-triggers.yaml} ed è già lì dopo \texttt{init}. I sei trigger predefiniti:
+
+\begin{lstlisting}[language=yaml,caption={Trigger predefiniti in halt-triggers.yaml}]
+triggers:
+  - id: schema
+    patterns: ["**/migrations/**", "**/prisma/schema.prisma",
+               "**/*.sql", "**/alembic/**"]
+    risk: HIGH
+
+  - id: auth
+    patterns: ["**/auth/**", "**/middleware/auth*",
+               "**/oauth/**"]
+    risk: HIGH+
+
+  - id: secrets
+    patterns: ["**/.env*", "**/secrets/**", "**/*.pem"]
+    risk: HIGH+
+
+  - id: infra
+    patterns: ["**/terraform/**", "**/k8s/**",
+               "**/Dockerfile*", "**/*.tf"]
+    risk: HIGH
+
+  - id: cicd
+    patterns: [".github/workflows/**", "**/.gitlab-ci.yml"]
+    risk: HIGH
+
+  - id: framework
+    patterns: [".adlc/modules/**", "AGENTS.md", "CLAUDE.md"]
+    risk: HIGH
+\end{lstlisting}
+
+\section{Override di progetto}
+\label{sec:10-override}
+
+Le zone sensibili specifiche del tuo progetto vanno in \texttt{.adlc/project/halt-triggers.yaml}:
+
+\begin{lstlisting}[language=yaml,caption={Override di progetto per TaskFlow API}]
+version: 1
+
+triggers:
+  - id: billing
+    patterns: ["**/billing/**", "**/payments/**"]
+    reason: Logica di pagamento - impatto finanziario
+    risk: HIGH+
+\end{lstlisting}
+
+Il file di progetto \textit{aggiunge} trigger a quelli predefiniti. Per disattivare un trigger predefinito temporaneamente:
+
+\begin{lstlisting}[language=yaml,caption={Disattivazione temporanea del trigger schema}]
+version: 1
+disable:
+  - schema  # disattivato durante la fase di design intensivo DB
+\end{lstlisting}
+
+\begin{warnbox}
+Un trigger disattivato è una zona senza rete di sicurezza. Documenta in \texttt{PROGRESS.md} perché l'hai disattivato e quando pianifichi di riattivarlo.
+\end{warnbox}
+
+\section{I trigger non si disattivano mai con i Modes}
+\label{sec:10-modes}
+
+Anche in Mode FAST --- il mode con meno cerimonia --- un path che corrisponde a un trigger viene bloccato e richiede conferma. Il rischio di un percorso auth o di uno schema DB non cambia in base a quanto velocemente vuoi lavorare quel giorno.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework ADLC.
+  \item Gli override di progetto in \texttt{.adlc/project/halt-triggers.yaml} estendono (o disattivano) i trigger predefiniti.
+  \item I trigger non si disattivano mai con i Modes --- sono il livello di sicurezza costante.
+  \item Un falso positivo (trigger attivato per path poi non modificato) è accettabile e preferibile al contrario.
+\end{itemize}

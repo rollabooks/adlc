@@ -1,0 +1,118 @@
+% ============================================================
+% Capitolo 13 — Comandi conversazionali
+% ============================================================
+
+\chapter{Comandi conversazionali}
+\label{ch:comandi-conversazionali}
+
+I comandi conversazionali sono istruzioni che dai all'agente nella chat, precedute dal prefisso \texttt{@}. Non sono comandi shell. Sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo ADLC.
+
+\section{La lista completa}
+\label{sec:13-lista}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Comando} & \textbf{Scopo} & \textbf{Modifica file?} \\
+    \midrule
+    \texttt{@checkpoint} & Fissa stato avanzamento & Propone (no auto) \\
+    \texttt{@context-update} & Aggiorna il context & Propone (no auto) \\
+    \texttt{@show-constraints} & Mostra vincoli SEC/PERF & No \\
+    \texttt{@security-check} & Verifica vs SEC attivi & No \\
+    \texttt{@perf-check} & Verifica vs PERF attivi & No \\
+    \texttt{@load-phase [N]} & Carica modulo fase N & No \\
+    \texttt{@set-phase [N]} & Propone cambio fase & Propone (no auto) \\
+    \texttt{@alternatives} & Genera 2--3 opzioni & No (ADR per CRITICAL) \\
+    \texttt{@simplify} & Riduce scope & Propone (no auto) \\
+    \texttt{@rollback} & Piano di rollback & Propone (no auto) \\
+    \texttt{@stop} & Ferma immediatamente & No \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comandi conversazionali ADLC}
+  \label{tab:13-comandi}
+\end{table}
+
+\section{I comandi più usati in dettaglio}
+\label{sec:13-dettaglio}
+
+\subsection*{\texttt{@checkpoint}}
+
+Il più usato. Ogni 3--5 azioni significative o prima di una pausa.
+
+\begin{lstlisting}[language=,caption={Output tipico di @checkpoint}]
+Checkpoint — TaskFlow API | 2026-06-27 14:32
+
+Completato:
+- POST /tasks: route, service, Zod, RFC 7807, 4 test
+- GET /tasks: filtri, paginazione cursor, 6 test
+
+Aggiornamento _CONTEXT.md consigliato:
+  Active Task → T-008 GET /tasks/:id
+  Active Task Token Est. → 3000/1000/4000
+Applico gli aggiornamenti?
+\end{lstlisting}
+
+\textbf{Importante:} \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md} non vengono mai modificati automaticamente. L'agente propone il testo; sei tu ad applicarlo.
+
+\subsection*{\texttt{@security-check}}
+
+Revisione del codice/piano contro i vincoli SEC attivi. Ogni claim include il confidence tag.
+
+\begin{lstlisting}[language=,caption={Output di @security-check su POST /tasks}]
+SEC-01 Input Validation: ✅
+  Zod schema con titolo obbligatorio, dueDate ISO 8601. [FACT]
+
+SEC-02 Authentication: ✅
+  JWT verificato dal middleware auth. [FACT]
+
+SEC-05 Data Protection: ⚠ DA VERIFICARE
+  Non ho verificato che il log non esponga il body completo.
+  [ASSUMPTION — TODO: verifica src/app.ts configurazione Pino]
+
+Azione richiesta: verifica SEC-05 prima del merge.
+\end{lstlisting}
+
+\subsection*{\texttt{@alternatives}}
+
+Genera opzioni strutturate con pro, contro e raccomandazione.
+
+\subsection*{\texttt{@simplify}}
+
+Quando il task diventa troppo grande per una sessione: produce uno split in sotto-task con motivazione.
+
+\section{Regole che i comandi non possono violare}
+\label{sec:13-regole}
+
+\begin{enumerate}
+  \item Nessun comando bypassa gli HALT trigger.
+  \item Nessun comando modifica file automaticamente.
+  \item \texttt{@security-check} cita solo i vincoli in \texttt{\_CONTEXT.md}.
+  \item \texttt{@rollback} non esegue azioni distruttive senza conferma.
+  \item I comandi non cambiano la classificazione del rischio.
+\end{enumerate}
+
+\section{Comandi personalizzati di progetto}
+\label{sec:13-personalizzati}
+
+In \texttt{.adlc/project/instructions.md}:
+
+\begin{lstlisting}[language=,caption={Comandi personalizzati per TaskFlow API}]
+## Project Commands
+
+@deploy-check
+  Esegui in sequenza:
+  1. @security-check sull'endpoint modificato
+  2. Verifica che tutti i test passino
+  3. Controlla backward-compatibility della migration
+  4. Proponi la voce di CHANGELOG.md
+\end{lstlisting}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item I comandi \texttt{@} sono segnali semantici --- non comandi shell.
+  \item I più usati: \texttt{@checkpoint}, \texttt{@context-update}, \texttt{@security-check}, \texttt{@alternatives}, \texttt{@simplify}, \texttt{@stop}.
+  \item Non bypassano il protocollo di sicurezza; non modificano file automaticamente.
+  \item Comandi personalizzati in \texttt{.adlc/project/instructions.md} trasformano workflow ricorrenti in shortcut.
+\end{itemize}

@@ -1,0 +1,112 @@
+% ============================================================
+% Capitolo 12 — Moduli e Skill
+% ============================================================
+
+\chapter{Moduli e Skill: caricare solo ciò che serve}
+\label{ch:moduli-e-skill}
+
+Il framework ADLC è composto da file che non vengono caricati tutti insieme all'inizio di ogni sessione. Vengono caricati selettivamente, in base alla fase e al tipo di task. Questo evita il ``context overload'' --- la situazione in cui l'agente ha così tante regole da non riuscire ad applicarne nessuna bene.
+
+\section{La distinzione tra moduli e skill}
+\label{sec:12-distinzione}
+
+\textbf{I moduli} (\texttt{.adlc/modules/NN\_*.md}) definiscono le regole operative del framework per ciascuna fase. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only.
+
+\textbf{Le skill} (\texttt{.adlc/modules/skills/SKILL\_*.md}) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro.
+
+\section{La mappa dei moduli}
+\label{sec:12-mappa-moduli}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{File} & \textbf{Fase} & \textbf{Quando si carica} \\
+    \midrule
+    \texttt{00\_MODE.md} & Sempre & Regole per ogni Mode \\
+    \texttt{01\_CORE\_RULES.md} & Sempre & Regole base, risk, halt, confidence tag \\
+    \texttt{02\_DISCOVERY\_ANALYSIS.md} & 0--1 & Discovery e analisi requisiti \\
+    \texttt{03\_DESIGN.md} & 2 & Architettura e design \\
+    \texttt{04\_IMPLEMENTATION.md} & 3 & Implementazione e test \\
+    \texttt{05\_VERIFICATION\_RELEASE.md} & 4--5 & QA e release \\
+    \texttt{06\_OPS.md} & 6 & Operazioni e monitoring \\
+    \texttt{07\_SPECIAL\_LANES.md} & Su richiesta & Hotfix, spike, parallel track \\
+    \texttt{08\_PROMPT\_LIBRARY.md} & Su richiesta & Template di prompt \\
+    \texttt{09\_CODEBASE\_ANALYSIS.md} & Su richiesta & Analisi codebase esistente \\
+    \texttt{10\_DOCUMENTATION.md} & Su richiesta & Generazione documentazione \\
+    \texttt{11\_BUGFIX\_PLAYBOOK.md} & Su richiesta & Debug strutturato \\
+    \texttt{SEC\_CONSTRAINTS.md} & Su richiesta & Libreria vincoli SEC \\
+    \texttt{PERF\_CONSTRAINTS.md} & Su richiesta & Libreria vincoli PERF \\
+    \bottomrule
+  \end{tabular}
+  \caption{Mappa dei moduli ADLC}
+  \label{tab:12-moduli}
+\end{table}
+
+\section{La mappa delle skill}
+\label{sec:12-mappa-skill}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{File} & \textbf{Tipo di lavoro} \\
+    \midrule
+    \texttt{SKILL\_ANALYSIS.md} & Analisi requisiti, scenari d'uso \\
+    \texttt{SKILL\_DESIGN.md} & Architettura, pattern, decisioni strutturali \\
+    \texttt{SKILL\_API\_DESIGN.md} & API REST: naming, status code, paginazione \\
+    \texttt{SKILL\_DATA\_ACCESS.md} & Schema DB, ORM, query, migration \\
+    \texttt{SKILL\_SECURITY.md} & Revisione sicurezza, SEC-XX in pratica \\
+    \texttt{SKILL\_TESTING.md} & Strategie di test, piramide, mocking \\
+    \texttt{SKILL\_UI.md} & Componenti frontend, accessibilità \\
+    \texttt{SKILL\_OPS.md} & CI/CD, monitoring, incident response \\
+    \bottomrule
+  \end{tabular}
+  \caption{Skill disponibili nel framework}
+  \label{tab:12-skill}
+\end{table}
+
+\section{Skill personalizzate di progetto}
+\label{sec:12-skill-progetto}
+
+Le skill del framework sono generiche. Il tuo progetto può avere esigenze specifiche in \texttt{.adlc/project/skills/}:
+
+\begin{lstlisting}[language=,caption={Skill di dominio per TaskFlow API}]
+# SKILL — TaskFlow Domain
+
+> Carica quando: lavori su task, progetti, assegnazioni.
+
+## Regole di Dominio
+- Un Task appartiene esattamente a un Project
+- Transizioni stato: draft → open → in_progress → done | cancelled
+- done e cancelled sono stati terminali
+- completed_at viene impostato automaticamente su status → done
+
+## Business Invariants
+- Un utente non può essere assegnato a un task a cui non ha accesso
+- Cancellazioni: soft delete (isDeleted = true, non physical delete)
+\end{lstlisting}
+
+\section{Il modulo \texttt{07\_SPECIAL\_LANES.md}}
+\label{sec:12-special-lanes}
+
+Copre tre casi fuori dal ciclo normale:
+
+\textbf{Hotfix lane:} bug critico in produzione. Branch da main, fix minimale, review obbligatoria, rollback plan documentato prima del deploy.
+
+\textbf{Spike lane:} esplorazione time-boxed (1--2 ore). Branch dedicato, obiettivo dichiarato, risultato in \texttt{PROGRESS.md} anche se lo spike fallisce.
+
+\textbf{Parallel track:} feature su più layer (API + frontend). Tre sync point obbligatori: accordo sul contratto API, integrazione, E2E.
+
+\begin{warnbox}
+Non modificare mai \texttt{.adlc/modules/}. Le personalizzazioni vanno in \texttt{.adlc/project/} --- questo garantisce che il framework possa essere aggiornato senza perdere le tue regole.
+\end{warnbox}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item I \textbf{moduli} sono le regole per ogni fase --- caricati automaticamente in base a \texttt{Phase}.
+  \item Le \textbf{skill} sono guide tematiche --- caricate su richiesta in base al tipo di task.
+  \item Skill personalizzate di progetto in \texttt{.adlc/project/skills/} hanno priorità sulle skill del framework.
+  \item I moduli del framework sono read-only: personalizza in \texttt{.adlc/project/}.
+\end{itemize}

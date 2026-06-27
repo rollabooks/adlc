@@ -1,0 +1,109 @@
+% ============================================================
+% Capitolo 8 — Model Levels
+% ============================================================
+
+\chapter{Model Levels: quale AI per quale task}
+\label{ch:model-levels}
+
+C'è un errore comune nell'uso degli agenti AI: usare sempre il modello più potente disponibile. Il primo motivo è il costo: i modelli più potenti costano di più in token. Il secondo è la latency: su task semplici e frequenti la differenza è percepibile e non giustificata.
+
+ADLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che mappa la complessità del task al modello appropriato.
+
+\section{La scala 1--7}
+\label{sec:08-scala}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{cll}
+    \toprule
+    \textbf{Level} & \textbf{Token range (totali)} & \textbf{A cosa serve} \\
+    \midrule
+    1 & $<$ 4k & Piccoli edit, docs, formattazione \\
+    2 & 4k--8k & Modifiche localizzate, test semplici \\
+    3 & 8k--16k & Implementazione standard, debugging \\
+    4 & 16k--32k & Feature multi-file, design moderato \\
+    5 & 32k--64k & Refactor complessi, sicurezza \\
+    6 & 64k--120k & Architettura, debugging profondo \\
+    7 & $>$ 120k & Mission-critical, alta ambiguità \\
+    \bottomrule
+  \end{tabular}
+  \caption{Scala dei Model Level ADLC}
+  \label{tab:08-scala}
+\end{table}
+
+Il mapping ai modelli concreti (Anthropic, OpenAI, Gemini) vive in \texttt{.adlc/manifest.json\#model\_levels} e si legge con:
+
+\begin{lstlisting}[language=,caption={Visualizzazione mapping modelli}]
+bash .adlc/tools/show-models.sh   # Linux/macOS/WSL
+.\.adlc\tools\show-models.ps1     # Windows PowerShell
+\end{lstlisting}
+
+\section{Come stimare il livello di un task}
+\label{sec:08-stima}
+
+\subsection*{Passo 1 --- Stima dei token}
+
+La stima è \texttt{input / output / totale}. Alcune euristiche pratiche:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Input} & \textbf{Token approssimativi} \\
+    \midrule
+    File da 100 righe & 500--800 \\
+    \texttt{\_CONTEXT.md} compilato & 500--1.000 \\
+    3 file da 200 righe & 3.000--5.000 \\
+    Modulo da 10 file & 10.000--20.000 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Euristiche per la stima dei token in input}
+  \label{tab:08-euristiche}
+\end{table}
+
+Esempio per TaskFlow API --- Lorenzo implementa \texttt{GET /tasks} con filtri:
+\begin{itemize}
+  \item Input: \texttt{\_CONTEXT.md} (700) + route esistente (600) + service (400) + schema (300) = $\sim$2.000
+  \item Output: nuovo endpoint + test $\sim$ 2.500
+  \item Totale: $\sim$4.500 token $\to$ range 4k--8k $\to$ \textbf{Livello 2} (dalla tabella~\ref{tab:08-scala})
+\end{itemize}
+
+\subsection*{Passo 2 --- Applica il risk floor}
+
+Il task è classificato MEDIUM. Il risk floor per MEDIUM è livello 3. Anche se la stima token suggerisce livello 2, il level sale a 3.
+
+\begin{lstlisting}[language=,caption={AI Sizing in \_CONTEXT.md}]
+| Active Task Token Est.   | 2000/2500/4500  |
+| Active Task Model Level  | 3 Sonnet Low    |
+\end{lstlisting}
+
+\section{I risk floor in dettaglio}
+\label{sec:08-risk-floor}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Condizione} & \textbf{Minimum Level} \\
+    \midrule
+    Task MEDIUM & 3 \\
+    Task HIGH & 5 \\
+    Auth, secrets, compliance, produzione & 6 \\
+    Architettura o cambiamenti cross-modulo & 6 \\
+    CRITICAL & 7 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Risk floor per condizione}
+  \label{tab:08-risk-floor}
+\end{table}
+
+Il risk floor è cumulativo: un task HIGH (floor 5) che tocca auth (floor 6) usa il massimo --- livello 6.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item I Model Level (1--7) mappano la complessità del task al modello AI appropriato.
+  \item La stima è \texttt{input/output/totale} in token; il mapping vendor concreto è in \texttt{manifest.json}.
+  \item Il risk floor forza un minimum level indipendentemente dalla stima token.
+  \item La stima migliora con la pratica; le prime settimane è normale sbagliare.
+\end{itemize}

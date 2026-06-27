@@ -1,0 +1,114 @@
+% ============================================================
+% Capitolo 15 — Monorepo, Company Extension e Codebase Legacy
+% ============================================================
+
+\chapter{Monorepo, Company Extension e Codebase Legacy}
+\label{ch:monorepo-legacy}
+
+I capitoli precedenti hanno seguito TaskFlow API come progetto singolo. Questo capitolo copre tre scenari avanzati che emergono con la complessità reale del lavoro di squadra.
+
+\section{Monorepo: un framework, più progetti}
+\label{sec:15-monorepo}
+
+In un monorepo, ogni sottoprogetto che ha bisogno di un contesto indipendente crea il proprio \texttt{\_CONTEXT.md}:
+
+\begin{lstlisting}[language=,caption={Struttura di un monorepo ADLC}]
+taskflow/
+├── apps/
+│   ├── api/           ← REST API
+│   │   └── _CONTEXT.md (Phase 3)
+│   ├── worker/        ← Job worker
+│   │   └── _CONTEXT.md (Phase 2)
+│   └── dashboard/     ← Frontend React
+│       └── _CONTEXT.md (Phase 3)
+├── AGENTS.md          ← Framework condiviso
+├── CLAUDE.md
+└── .adlc/             ← Framework condiviso
+\end{lstlisting}
+
+L'agente usa il \texttt{\_CONTEXT.md} più vicino al file su cui lavora.
+
+\textbf{Scaffold di un nuovo sottoprogetto:}
+
+\begin{lstlisting}[language=bash,caption={Inizializzazione sottoprogetto in monorepo}]
+bash .adlc/tools/init.sh --project-root apps/worker --framework-root .
+\end{lstlisting}
+
+\textbf{Aggiornamento indice:} dopo aggiunte o spostamenti di sottoprogetti, aggiorna \texttt{.adlc/projects.json}:
+
+\begin{lstlisting}[language=bash,caption={Aggiornamento indice progetti}]
+bash .adlc/tools/update-projects.sh
+\end{lstlisting}
+
+\section{Company extension: processi SDLC aziendali}
+\label{sec:15-company}
+
+La company extension porta processi SDLC, standard di sicurezza e gate di governance nel contesto dell'agente.
+
+\begin{lstlisting}[language=,caption={Struttura della company extension}]
+.adlc/company/
+├── README.md       ← indice
+├── PROCESS.md      ← SDLC aziendale
+├── GOVERNANCE.md   ← approvazioni, compliance
+├── STANDARDS.md    ← standard ingegneristici
+├── source/         ← PDF/DOCX originali
+└── processed/      ← versioni Markdown generate
+\end{lstlisting}
+
+Per convertire documenti aziendali in Markdown leggibile dall'agente:
+
+\begin{lstlisting}[language=bash,caption={Preprocessing documenti aziendali}]
+bash .adlc/tools/preprocess-company-docs.sh
+\end{lstlisting}
+
+\begin{notebox}
+Le regole della company extension hanno priorità sulle regole del framework. Se l'azienda richiede comportamenti diversi da quelli predefiniti in \texttt{.adlc/modules/}, vincono le regole aziendali.
+\end{notebox}
+
+\section{Codebase legacy: analisi e documentazione}
+\label{sec:15-legacy}
+
+ADLC copre questo flusso con due moduli in sequenza: prima si analizza (\texttt{09\_CODEBASE\_ANALYSIS.md}), poi si documenta (\texttt{10\_DOCUMENTATION.md}).
+
+\textbf{Step 0 --- Prepara il contesto}
+
+\begin{lstlisting}[language=,caption={\_CONTEXT.md per analisi legacy}]
+| Phase                   | 0-Discovery                               |
+| Mode                    | STANDARD                                  |
+| Active Task             | T-DOC-001 Analisi e doc modulo auth       |
+| Active Task Model Level | 5                                         |
+\end{lstlisting}
+
+\textbf{Step 1 --- Analisi con il modulo 09}
+
+\begin{lstlisting}[language=,caption={Prompt di analisi codebase}]
+Carica .adlc/modules/09_CODEBASE_ANALYSIS.md e analizza src/auth/.
+
+Produci in docs/_analysis/:
+1) MAP.md    — moduli, dipendenze, entry point
+2) RISKS.md  — rischi tecnici e debito
+3) HOTSPOTS.md — file più critici con motivazione
+4) RUN.md    — build/test/run
+
+Non inventare: se ti mancano informazioni, elenca ASSUMPTION + TODO.
+\end{lstlisting}
+
+\textbf{Step 2 --- Documentazione con il modulo 10}
+
+Quando \texttt{MAP.md} è approvato, genera la documentazione navigabile usando \texttt{docs/\_analysis/} come fonte.
+
+\textbf{Step 3 --- Verifica}
+
+Per ogni file generato: verifica che gli endpoint API esistano nel codice, che le entità corrispondano allo schema, che i diagrammi Mermaid renderizzino e che ogni TODO e ASSUMPTION sia giustificato.
+
+\begin{warnbox}
+Non saltare l'analisi (Step 1). Documentare senza \texttt{MAP.md} produce contenuti inventati. Non usare Mode LITE o RAPID --- la documentazione è output ad alto impatto a lungo termine.
+\end{warnbox}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item \textbf{Monorepo:} ogni sottoprogetto ha il proprio \texttt{\_CONTEXT.md}; l'agente usa quello più vicino al file su cui lavora.
+  \item \textbf{Company extension:} \texttt{.adlc/company/} porta i processi SDLC aziendali nel contesto; priorità sulle regole del framework.
+  \item \textbf{Codebase legacy:} il flusso è sempre analisi (09) $\to$ documentazione (10). Non invertire l'ordine.
+\end{itemize}

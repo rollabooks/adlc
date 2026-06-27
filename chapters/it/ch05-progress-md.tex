@@ -1,0 +1,134 @@
+% ============================================================
+% Capitolo 5 — PROGRESS.md e il cambio di fase
+% ============================================================
+
+\chapter{\texttt{PROGRESS.md} e il cambio di fase}
+\label{ch:progress-md}
+
+\texttt{\_CONTEXT.md} fotografa il presente: dove sei adesso, cosa stai facendo, quali vincoli rispettare. Ma non risponde a domande come ``perché abbiamo scelto Prisma invece di Drizzle?'' o ``cosa è successo nella sessione di giovedì scorso quando il deploy è andato storto?''
+
+Quelle risposte vivono in \texttt{PROGRESS.md}.
+
+\section{La differenza tra context e progress}
+\label{sec:05-differenza}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{\texttt{\_CONTEXT.md}} & \textbf{\texttt{PROGRESS.md}} \\
+    \midrule
+    Stato attuale & Storia del progetto \\
+    Si sovrascrive & Cresce solo in avanti \\
+    Letto sempre dall'agente & Letto su richiesta \\
+    Fotografa dove sei & Registra da dove sei venuto \\
+    Conciso per design & Può essere lungo \\
+    \bottomrule
+  \end{tabular}
+  \caption{Differenza tra \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}}
+  \label{tab:05-context-vs-progress}
+\end{table}
+
+Pensa a \texttt{\_CONTEXT.md} come al cruscotto di un'auto --- mostra la velocità attuale, il carburante, la temperatura. Pensa a \texttt{PROGRESS.md} come al libretto di manutenzione --- registra ogni intervento, ogni anomalia, ogni decisione presa nel tempo.
+
+\section{Struttura di \texttt{PROGRESS.md}}
+\label{sec:05-struttura}
+
+Il file cresce dall'alto verso il basso: le voci più recenti sono in cima.
+
+\begin{lstlisting}[language=,caption={Esempio di PROGRESS.md per TaskFlow API}]
+# PROGRESS — TaskFlow API
+
+---
+
+## 2026-07-03 — T-009 Auth middleware refactor
+
+- Estratto il middleware JWT in src/middleware/auth.ts
+- Identificato: Zod eseguiva dopo auth — corretto l'ordine
+
+DECISIONE: middleware condiviso invece di per-route.
+Motivazione: riduce duplicazione, comportamento coerente.
+
+---
+
+## 2026-06-27 — T-007 POST /tasks (70%)
+
+- POST /tasks: Zod, auth JWT, RFC 7807, 4 test passanti
+- Migration: add-task-userid-index (dev only)
+- HALT trigger su schema.prisma → confermato e proceduto
+\end{lstlisting}
+
+\section{Cosa scrivere in ogni voce}
+\label{sec:05-cosa-scrivere}
+
+Una voce utile contiene tre tipi di informazioni:
+
+\textbf{Fatto} --- cosa è stato prodotto o modificato concretamente.
+
+\textbf{Scoperta} --- qualcosa di non ovvio trovato durante il lavoro: bug latenti, comportamenti inaspettati delle librerie, assunzioni sbagliate.
+
+\textbf{Decisione} --- una scelta architetturale, di design o di processo, con la motivazione.
+
+Le scoperte e le decisioni sono le più preziose. Sono le cose che non si deducono dal codice --- sono il contesto dietro al codice.
+
+\section{Come \texttt{PROGRESS.md} accelera le sessioni future}
+\label{sec:05-accelerazione}
+
+Giulia --- non presente giovedì durante il refactor --- apre una sessione e chiede:
+
+\begin{quote}
+``Carica \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}, poi dimmi cosa è cambiato nell'autenticazione nelle ultime due settimane.''
+\end{quote}
+
+L'agente risponde in trenta secondi con un riepilogo completo del refactor, la decisione architetturale presa e il lavoro ancora da fare. Giulia ha il contesto senza aver bisogno di leggere la git history o chiedere a Lorenzo.
+
+\section{Il cambio di fase}
+\label{sec:05-cambio-fase}
+
+Una delle voci più importanti è il cambio di fase:
+
+\begin{lstlisting}[language=,caption={Voce di cambio fase in PROGRESS.md}]
+## 2026-07-15 — CAMBIO FASE: Design → Implementation
+
+Stack confermato: Node.js 22 / Fastify 5 / PostgreSQL 16
+Decisioni architetturali prese:
+- Paginazione: cursor-based (AD-01 chiusa)
+- Cache: nessuna al primo rilascio (AD-02 rimandata)
+
+API contract: 12 endpoint (vedi docs/api-contract.md)
+Schema DB v1 migrato in dev
+
+Primo task Phase 3: T-001 Setup struttura e dipendenze
+\end{lstlisting}
+
+Questa voce serve da spartiacque: tutto sopra è storia di design, tutto sotto è storia di implementazione.
+
+\section{Aggiornare \texttt{PROGRESS.md} senza sforzo}
+\label{sec:05-aggiornamento}
+
+Alla fine di ogni sessione usa \texttt{@checkpoint}:
+
+\begin{quote}
+\texttt{@checkpoint} --- proponi una voce per PROGRESS.md
+\end{quote}
+
+L'agente produce una voce pronta. Tu la revisioni, aggiungi il contesto che solo tu conosci, e la incolli nel file. Trenta secondi di lavoro.
+
+\section{\texttt{PROGRESS.md} in team}
+\label{sec:05-team}
+
+In un team di tre persone, \texttt{PROGRESS.md} diventa il canale di comunicazione asincrona sul progetto. Ogni sviluppatore scrive la propria voce alla fine della sessione.
+
+\begin{warnbox}
+\texttt{PROGRESS.md} non sostituisce la comunicazione di team. Non è una board kanban, non è un sistema di ticket. È un diario tecnico che integra il contesto degli agenti AI. Tenete separati i due strumenti.
+\end{warnbox}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item \texttt{PROGRESS.md} registra la storia del progetto: fatto, scoperte, decisioni con motivazione.
+  \item Si aggiorna a fine sessione con \texttt{@checkpoint}; tu revisioni e incolli.
+  \item Le \textbf{scoperte} e le \textbf{decisioni} (con motivazione) sono le voci più preziose.
+  \item Il cambio di fase è una voce speciale che documenta lo spartiacque tra una fase e l'altra.
+  \item In team, permette agli agenti di ricostruire il contesto delle sessioni di altri membri.
+\end{itemize}

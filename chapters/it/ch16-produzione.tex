@@ -1,0 +1,118 @@
+% ============================================================
+% Capitolo 16 — Troubleshooting, CI/CD e Manutenzione
+% ============================================================
+
+\chapter{Troubleshooting, CI/CD e Manutenzione del Framework}
+\label{ch:produzione}
+
+Arrivati in produzione, ADLC entra nella sua fase di vita più lunga: manutenzione. Il framework deve rimanere utile mentre il team cresce, gli agenti AI evolvono e il progetto accumula storia.
+
+\section{Troubleshooting --- problemi comuni}
+\label{sec:16-troubleshooting}
+
+\subsection*{``L'agente ignora i vincoli SEC''}
+
+\textbf{Cause:} il bootstrap non è avvenuto, \texttt{\_CONTEXT.md} ha i vincoli nel formato sbagliato, sessione molto lunga con context parzialmente perso.
+
+\textbf{Soluzione:} \texttt{@show-constraints}. Se la lista è vuota, chiedi: ``Rileggi \texttt{\_CONTEXT.md} e confermami i vincoli attivi.'' Usa \texttt{@checkpoint} ogni 3--5 azioni per ri-ancorare il contesto in sessioni lunghe.
+
+\subsection*{``L'agente chiede conferma anche per task LOW''}
+
+\textbf{Causa:} Mode STANDARD su progetto maturo dove i task sono routine.
+
+\textbf{Soluzione:} abbassa a LITE in \texttt{\_CONTEXT.md}.
+
+\subsection*{``L'agente ha modificato file che non doveva''}
+
+\textbf{Causa:} il path non è coperto dagli HALT trigger.
+
+\textbf{Soluzione:} aggiungi il path in \texttt{.adlc/project/halt-triggers.yaml}.
+
+\subsection*{``Il validator fallisce su un task''}
+
+\textbf{Causa:} \texttt{Model Level} o \texttt{Risk Floor Applied} contengono ancora un placeholder.
+
+\textbf{Soluzione:} sostituisci i placeholder con valori reali nel file di task.
+
+\subsection*{``Il debugging non converge''}
+
+\textbf{Soluzione:} carica \texttt{11\_BUGFIX\_PLAYBOOK.md}. Impone triage strutturato (10 min), root cause analysis, fix minimale, verifica.
+
+\subsection*{``Voglio bypassare un HALT trigger''}
+
+\textbf{Soluzione corretta:} non scavalcarlo. Disattivalo consapevolmente per la durata del lavoro intensivo in \texttt{.adlc/project/halt-triggers.yaml}, documenta in \texttt{PROGRESS.md} perché e quando pianifichi di riattivarlo.
+
+\section{Integrazione CI/CD}
+\label{sec:16-cicd}
+
+\begin{lstlisting}[language=yaml,caption={GitHub Actions per validazione ADLC}]
+name: ADLC Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  adlc-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate ADLC
+        run: bash .adlc/tools/validate.sh
+
+      # Con --strict i warning diventano failure
+      # - name: Validate ADLC strict
+      #   run: bash .adlc/tools/validate.sh --strict
+
+      - name: Sync Copilot check
+        run: bash .adlc/tools/sync-copilot.sh
+
+      - name: Smoke tests
+        run: bash .adlc/tests/test.sh
+\end{lstlisting}
+
+\section{Manutenzione del framework nel tempo}
+\label{sec:16-manutenzione}
+
+ADLC segue semantic versioning (\texttt{MAJOR.MINOR.PATCH}):
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Tipo} & \textbf{Esempio} & \textbf{Quando aggiornare} \\
+    \midrule
+    PATCH & 3.3.0 $\to$ 3.3.1 & Subito: solo fix e chiarimenti \\
+    MINOR & 3.3.x $\to$ 3.4.0 & Pianificato: nuovi template, tool \\
+    MAJOR & 3.x.x $\to$ 4.0.0 & Con attenzione: leggere \texttt{MIGRATION.md} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Policy di aggiornamento del framework}
+  \label{tab:16-versioning}
+\end{table}
+
+\textbf{Cosa aggiornare:} \texttt{.adlc/modules/}, \texttt{.adlc/schemas/}, \texttt{halt-triggers.yaml}, \texttt{manifest.json}, \texttt{VERSION}, e i file di startup degli agenti (\texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc.).
+
+\textbf{Non toccare mai durante l'aggiornamento:} \texttt{\_CONTEXT.md}, \texttt{PROGRESS.md}, \texttt{.adlc/project/}, \texttt{.adlc/company/} --- questi sono tuoi.
+
+\section{L'agente in Fase 6 --- Ops}
+\label{sec:16-ops}
+
+In \texttt{Phase: 6-Ops} il comportamento cambia:
+\begin{itemize}
+  \item Ogni modifica ha un piano di rollback obbligatorio.
+  \item Le dipendenze si aggiornano solo con test di non-regressione.
+  \item Il runbook è il primo posto dove guardare prima di inventare soluzioni.
+  \item L'incident response segue il workflow del modulo \texttt{06\_OPS.md}.
+\end{itemize}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item I problemi comuni hanno cause precise: usa \texttt{@show-constraints} per vincoli ignorati, abbassa il Mode per troppe conferme, aggiungi trigger per file toccati indebitamente.
+  \item \texttt{validate.sh} in GitHub Actions verifica la presenza e validità del framework ad ogni PR.
+  \item Aggiornamenti: copia solo \texttt{.adlc/modules/} e file di startup --- mai \texttt{\_CONTEXT.md} o \texttt{.adlc/project/}.
+  \item Phase 6 (Ops): rollback obbligatorio, non-regressione, incident response strutturata.
+\end{itemize}

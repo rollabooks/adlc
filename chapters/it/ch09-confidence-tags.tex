@@ -1,0 +1,111 @@
+% ============================================================
+% Capitolo 9 — Confidence Tags
+% ============================================================
+
+\chapter{Confidence Tag: FACT, INFERRED, ASSUMPTION}
+\label{ch:confidence-tags}
+
+Gli agenti AI hanno un problema strutturale: rispondono con la stessa sicurezza apparente sia quando sanno, sia quando deducono, sia quando inventano. I confidence tag sono il meccanismo con cui ADLC rende esplicita questa distinzione.
+
+\section{I tre tag}
+\label{sec:09-tre-tag}
+
+I tag seguono sempre lo stesso formato, in coda all'affermazione che classificano:
+
+\begin{lstlisting}[language=,caption={Formato dei confidence tag}]
+AI CONFIDENCE: [FACT | INFERRED | ASSUMPTION]
+Basis: [motivazione]
+[TODO: azione suggerita — obbligatorio per ASSUMPTION su HIGH-risk]
+\end{lstlisting}
+
+\subsection*{FACT}
+
+L'agente ha verificato l'informazione leggendo direttamente il codice, un file, o un output di test presente nel contesto.
+
+\begin{lstlisting}[language=,caption={Esempio FACT}]
+La funzione getUserById lancia UserNotFoundError su record mancante.
+
+AI CONFIDENCE: FACT
+Basis: letto src/services/userService.ts, riga 45-50
+\end{lstlisting}
+
+\subsection*{INFERRED}
+
+L'agente ha dedotto l'informazione da contesto indiretto: nome della funzione, struttura del codice, convenzioni del framework. La deduzione è logica ma non verificata direttamente.
+
+\begin{lstlisting}[language=,caption={Esempio INFERRED}]
+Il middleware usa @fastify/jwt basandosi sull'import in src/app.ts.
+
+AI CONFIDENCE: INFERRED
+Basis: import @fastify/jwt in src/app.ts; non ho letto la
+       configurazione completa del middleware
+\end{lstlisting}
+
+\subsection*{ASSUMPTION}
+
+L'agente ha fatto un'ipotesi non supportata da evidenza diretta nel contesto.
+
+\begin{lstlisting}[language=,caption={Esempio ASSUMPTION}]
+Ho assunto che tasks abbia un indice su user_id (PERF-01: P95 < 200ms).
+
+AI CONFIDENCE: ASSUMPTION
+Basis: non ho letto lo schema Prisma
+TODO: verifica index su prisma/schema.prisma prima di andare in prod
+\end{lstlisting}
+
+\section{Quando i tag sono obbligatori}
+\label{sec:09-quando-obbligatori}
+
+\textbf{Sempre obbligatori:}
+\begin{itemize}
+  \item Output classificati HIGH-risk o superiore
+  \item Claim su vincoli SEC-XX o PERF-XX
+  \item Codice che modifica path presenti negli HALT trigger
+  \item Affermazioni su comportamento del codice esistente senza averlo letto
+\end{itemize}
+
+\textbf{Consigliati ma non obbligatori in Mode LITE:}
+\begin{itemize}
+  \item Output MEDIUM superiori a 10 righe
+  \item Deduzioni su comportamento di librerie esterne
+\end{itemize}
+
+\section{Il tag come segnale di azione}
+\label{sec:09-segnale}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Tag} & \textbf{Azione} \\
+    \midrule
+    FACT & Usa l'informazione. Verifica solo se la fonte potrebbe essere obsoleta. \\
+    INFERRED & Verifica prima di agire su operazioni MEDIUM o superiori. \\
+    ASSUMPTION & \textbf{Stop.} Verifica prima di qualsiasi operazione. \\
+    \bottomrule
+  \end{tabular}
+  \caption{Azione da intraprendere per ogni confidence tag}
+  \label{tab:09-azioni}
+\end{table}
+
+\section{In pratica su TaskFlow API}
+\label{sec:09-pratica}
+
+Lorenzo chiede all'agente di rivedere la gestione errori di \texttt{POST /tasks}. L'agente risponde con tre claim di certezza diversa:
+
+\begin{itemize}
+  \item \textbf{FACT}: la validazione Zod è corretta --- verificato leggendo il file.
+  \item \textbf{INFERRED}: il middleware è probabilmente registrato nell'ordine giusto --- consigliato di verificare.
+  \item \textbf{ASSUMPTION}: il mapping degli errori Prisma potrebbe non esistere --- Lorenzo deve verificare prima di andare in staging.
+\end{itemize}
+
+Senza i confidence tag, Lorenzo avrebbe ricevuto lo stesso testo senza sapere cosa è stato verificato e cosa no.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item Tre tag: FACT (verificato), INFERRED (dedotto), ASSUMPTION (ipotesi).
+  \item FACT: usa. INFERRED: verifica prima di operazioni MEDIUM+. ASSUMPTION: stop, verifica subito.
+  \item Obbligatori su output HIGH-risk, claim SEC/PERF, codice in zone HALT.
+  \item In Mode LITE si riducono ai soli casi critici.
+\end{itemize}

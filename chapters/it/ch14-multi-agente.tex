@@ -1,0 +1,79 @@
+% ============================================================
+% Capitolo 14 — Multi-agente
+% ============================================================
+
+\chapter{Multi-agente: Claude, Copilot, Codex, Gemini}
+\label{ch:multi-agente}
+
+ADLC è progettato per funzionare con più agenti, simultaneamente o in sequenza, sullo stesso progetto, con lo stesso \texttt{\_CONTEXT.md} come fonte di verità condivisa.
+
+\section{Uno stesso progetto, più entry point}
+\label{sec:14-entry-point}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Agente} & \textbf{File di startup} & \textbf{Note} \\
+    \midrule
+    Claude Code & \texttt{CLAUDE.md} & Importa \texttt{AGENTS.md} \\
+    OpenAI Codex CLI & \texttt{AGENTS.md} & Entry point principale \\
+    Google Gemini & \texttt{GEMINI.md} & Delega ad \texttt{AGENTS.md} \\
+    OpenClaw & \texttt{OPENCLAW.md} & Delega ad \texttt{AGENTS.md} \\
+    GitHub Copilot & \texttt{.github/copilot-instructions.md} & Non può importare \\
+    \bottomrule
+  \end{tabular}
+  \caption{Entry point per ogni agente AI}
+  \label{tab:14-entry-points}
+\end{table}
+
+La struttura è a stella: \texttt{AGENTS.md} è il centro, gli altri file orbitano intorno. Il contenuto sostanziale del protocollo --- le regole di rischio, i confidence tag, gli HALT trigger --- vive in \texttt{AGENTS.md}.
+
+\begin{tipbox}
+\textbf{Regola d'oro:} modifica solo \texttt{AGENTS.md} per le regole comuni. Non modificare \texttt{CLAUDE.md}, \texttt{GEMINI.md}, \texttt{OPENCLAW.md} per aggiungere regole --- aggiornali solo per comportamenti specifici di quell'agente.
+\end{tipbox}
+
+\section{Un workflow multi-agente su TaskFlow API}
+\label{sec:14-workflow}
+
+\begin{itemize}
+  \item \textbf{Lorenzo} usa Claude Code per design e architettura
+  \item \textbf{Giulia} usa GitHub Copilot in VS Code per lo sviluppo quotidiano
+  \item \textbf{Marco} usa Claude Code per code review, Codex CLI per script
+\end{itemize}
+
+Il \texttt{\_CONTEXT.md} è condiviso in git. Ogni mattina, quando Lorenzo fa il bootstrap, Claude Code legge lo stesso file che Giulia ha aggiornato la sera prima. Il contesto è allineato senza sincronizzazione manuale.
+
+\section{Mantenere Copilot allineato}
+\label{sec:14-sync-copilot}
+
+Copilot non può importare file esterni, quindi il suo file di istruzioni deve essere mantenuto allineato con \texttt{AGENTS.md}:
+
+\begin{lstlisting}[language=bash,caption={Verifica allineamento Copilot}]
+bash .adlc/tools/sync-copilot.sh
+\end{lstlisting}
+
+\begin{lstlisting}[language=,caption={Output di sync-copilot}]
+✅ Risk classification: present in both
+✅ HALT trigger reference: present in both
+⚠  @alternatives command: present in AGENTS.md,
+   missing in copilot-instructions.md
+\end{lstlisting}
+
+Esegui \texttt{sync-copilot} dopo ogni modifica a \texttt{AGENTS.md} e prima di aggiungere un nuovo membro al team che usa Copilot.
+
+\section{I limiti del multi-agente}
+\label{sec:14-limiti}
+
+\textbf{Non è collaborazione in tempo reale.} Gli agenti non si parlano tra loro. La coerenza è garantita dal \texttt{\_CONTEXT.md} condiviso, non da un canale diretto. Conflitti git su edit concorrenti rimangono conflitti git.
+
+\textbf{La qualità del context condiviso determina la qualità del risultato.} Se \texttt{\_CONTEXT.md} è obsoleto, tutti gli agenti lavorano su informazioni sbagliate.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item \texttt{AGENTS.md} è il centro del sistema multi-agente; gli altri file sono wrapper.
+  \item Il \texttt{\_CONTEXT.md} condiviso in git garantisce la coerenza tra agenti diversi.
+  \item \texttt{sync-copilot} verifica l'allineamento di Copilot dopo ogni modifica alle regole comuni.
+  \item Il multi-agente funziona bene per lavoro asincrono; non risolve i conflitti di edit concorrenti.
+\end{itemize}

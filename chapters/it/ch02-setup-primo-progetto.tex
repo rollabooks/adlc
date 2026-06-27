@@ -1,0 +1,216 @@
+% ============================================================
+% Capitolo 2 — Setup del primo progetto in 15 minuti
+% ============================================================
+
+\chapter{Setup del primo progetto in 15 minuti}
+\label{ch:setup-primo-progetto}
+
+Lorenzo ha clonato il repository di TaskFlow API, aperto il terminale e ha davanti a sé una directory con il codice del progetto e nient'altro. Nessun \texttt{\_CONTEXT.md}, nessun framework AI. Questo è il punto di partenza.
+
+In questo capitolo seguiamo Lorenzo --- e tu con lui --- mentre aggiunge ADLC al progetto, compila il contesto per la prima volta e fa il primo turno con un agente AI. Quindici minuti, non di più.
+
+\section{Passo 1 --- Copiare il framework nel repository}
+\label{sec:02-passo1-copia}
+
+ADLC non ha un installer. Si copia. La struttura che ti serve è questa:
+
+\begin{lstlisting}[language=,caption={Struttura del framework nel repository}]
+progetto/
+├── AGENTS.md          ← OpenAI Codex CLI
+├── CLAUDE.md          ← Claude Code
+├── GEMINI.md          ← Google Gemini
+├── OPENCLAW.md        ← OpenClaw
+├── .github/
+│   └── copilot-instructions.md  ← GitHub Copilot
+└── .adlc/
+    ├── halt-triggers.yaml
+    ├── manifest.json
+    ├── modules/       ← regole del framework
+    ├── schemas/       ← schemi JSON
+    └── tools/         ← script di utilità
+\end{lstlisting}
+
+\begin{notebox}
+L'URL del repository è indicativo --- verifica quello aggiornato nella documentazione ufficiale del framework o nel file \texttt{README.md} della distribuzione che hai ricevuto.
+\end{notebox}
+
+Clona il framework in una directory temporanea e copia i file:
+
+\begin{lstlisting}[language=bash,caption={Installazione su Bash (Linux/macOS/WSL)}]
+git clone https://github.com/rollaradio/adlc-framework /tmp/adlc
+cp /tmp/adlc/AGENTS.md .
+cp /tmp/adlc/CLAUDE.md .
+cp -r /tmp/adlc/.github .
+cp -r /tmp/adlc/.adlc .
+\end{lstlisting}
+
+\begin{lstlisting}[language=,caption={Installazione su PowerShell (Windows)}]
+git clone https://github.com/rollaradio/adlc-framework $env:TEMP\adlc
+Copy-Item "$env:TEMP\adlc\AGENTS.md" .
+Copy-Item "$env:TEMP\adlc\CLAUDE.md" .
+Copy-Item "$env:TEMP\adlc\.github" . -Recurse
+Copy-Item "$env:TEMP\adlc\.adlc" . -Recurse
+\end{lstlisting}
+
+\begin{notebox}
+I file \texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc. sono read-only per l'uso normale --- non modificarli. Le tue personalizzazioni vanno in \texttt{.adlc/project/} (lo vediamo al §\ref{sec:02-project-dir}).
+\end{notebox}
+
+\section{Passo 2 --- Scaffold dello stato di progetto}
+\label{sec:02-passo2-scaffold}
+
+Esegui lo script di inizializzazione per creare i file di stato:
+
+\begin{lstlisting}[language=bash,caption={Inizializzazione su Bash}]
+bash .adlc/tools/init.sh
+\end{lstlisting}
+
+\begin{lstlisting}[language=,caption={Inizializzazione su PowerShell}]
+.\.adlc\tools\init.ps1
+\end{lstlisting}
+
+Lo script crea quattro cose:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{File/Cartella} & \textbf{A cosa serve} \\
+    \midrule
+    \texttt{\_CONTEXT.md} & Stato corrente (fase, task, vincoli) \\
+    \texttt{PROGRESS.md} & Diario di bordo delle sessioni \\
+    \texttt{.adlc/project/instructions.md} & Regole specifiche per il progetto \\
+    \texttt{.adlc/project/skills/} & Skill personalizzate \\
+    \bottomrule
+  \end{tabular}
+  \caption{File creati dallo script di inizializzazione}
+  \label{tab:02-init-files}
+\end{table}
+
+Per progetti piccoli o spike usa il context minimo:
+
+\begin{lstlisting}[language=bash,caption={Inizializzazione con context minimale}]
+bash .adlc/tools/init.sh --context minimal
+\end{lstlisting}
+
+\section{Passo 3 --- Compilare \texttt{\_CONTEXT.md}}
+\label{sec:02-passo3-context}
+
+Apri \texttt{\_CONTEXT.md} e compila i campi con i valori del tuo progetto. Ecco quello di Lorenzo per TaskFlow API:
+
+\begin{lstlisting}[language=,caption={\_CONTEXT.md di TaskFlow API --- setup iniziale}]
+| Param                   | Value                                    |
+|-------------------------|------------------------------------------|
+| Project                 | TaskFlow API                             |
+| Phase                   | 0-Discovery                              |
+| Mode                    | STANDARD                                 |
+| Active Task             | T-001 Setup e analisi requisiti          |
+| Active Task Token Est.  | 8000/2000/10000                          |
+| Active Task Model Level | 3 Sonnet Low                             |
+
+## Stack
+| Layer     | Technology              |
+|-----------|-------------------------|
+| Runtime   | Node.js 22              |
+| Framework | Fastify 5               |
+| Database  | PostgreSQL 16 + Prisma  |
+| Auth      | OIDC + JWT              |
+
+## Security Constraints
+| SEC-01 | Input Validation | Zod schema su ogni endpoint     |
+| SEC-02 | Authentication   | OIDC, JWT con refresh rotation  |
+| SEC-03 | Logging          | Nessun token o PII nei log      |
+
+## Performance Constraints
+| PERF-01 | Latency     | P95 < 200ms per endpoint |
+| PERF-02 | Payload size| Max 1MB per risposta     |
+\end{lstlisting}
+
+\begin{tipbox}
+Compila almeno \texttt{Project}, \texttt{Phase}, \texttt{Mode} e \texttt{Stack}. I vincoli SEC e PERF sono fondamentali --- anche solo due o tre, quelli più rilevanti. Il resto puoi aggiungerlo progressivamente.
+\end{tipbox}
+
+\section{Passo 4 --- Verificare con il validator}
+\label{sec:02-passo4-validate}
+
+\begin{lstlisting}[language=bash,caption={Validazione su Bash}]
+bash .adlc/tools/validate.sh
+\end{lstlisting}
+
+\begin{lstlisting}[language=,caption={Validazione su PowerShell}]
+.\.adlc\tools\validate.ps1
+\end{lstlisting}
+
+Output atteso:
+
+\begin{lstlisting}[language=,caption={Output del validator}]
+ADLC validation — v3.3.0
+
+✅ Framework files present
+✅ AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
+✅ halt-triggers.yaml valid
+✅ manifest.json valid
+⚠  _CONTEXT.md: Active Task Token Est. is placeholder (0/0/0)
+
+ADLC validation passed (2 warnings)
+\end{lstlisting}
+
+I warning sui placeholder sono normali per la prima sessione. Con \texttt{--strict} diventano failure (utile in CI).
+
+\section{Passo 5 --- Il primo turno con l'agente}
+\label{sec:02-passo5-bootstrap}
+
+Apri l'agente AI e chiedi la conferma del contesto:
+
+\begin{quote}
+``Carica \texttt{\_CONTEXT.md} e confermami il contesto: fase, task attivo, stack, vincoli SEC e PERF attivi.''
+\end{quote}
+
+L'agente risponde con qualcosa del tipo:
+
+\begin{lstlisting}[language=,caption={Risposta di bootstrap dell'agente}]
+Context: TaskFlow API | Phase: 0-Discovery | Task: T-001 |
+Stack: Node.js/Fastify/PostgreSQL |
+Constraints: SEC-01,SEC-02,SEC-03,PERF-01. Proceed?
+\end{lstlisting}
+
+Quando vedi questa conferma, sai che l'agente ha letto il contesto. Da questo momento puoi iniziare il dialogo reale senza ripetere nulla.
+
+\section{Struttura raccomandata per \texttt{.adlc/project/}}
+\label{sec:02-project-dir}
+
+\begin{lstlisting}[language=,caption={Struttura della cartella di personalizzazione}]
+.adlc/project/
+├── instructions.md   ← regole specifiche del progetto
+├── domain.md         ← business logic e regole di dominio
+├── conventions.md    ← convenzioni di codice
+└── skills/           ← skill personalizzate
+\end{lstlisting}
+
+Per TaskFlow API, Lorenzo aggiunge a \texttt{instructions.md}:
+
+\begin{lstlisting}[language=,caption={.adlc/project/instructions.md di TaskFlow API}]
+# TaskFlow API — Project Instructions
+
+## Conventions
+- All API errors must use RFC 7807 Problem Details format
+- Database queries use Prisma only — no raw SQL except in migrations
+- All endpoints must have a corresponding integration test
+
+## Git workflow
+- Branch naming: feat/T-NNN-description, fix/T-NNN-description
+- PR review required before merge to main
+- Squash merge only
+\end{lstlisting}
+
+\section*{\LabelSummary}
+
+\begin{enumerate}
+  \item Copia i file del framework nella radice del progetto
+  \item Esegui \texttt{init.ps1} / \texttt{init.sh} per lo scaffold iniziale
+  \item Compila \texttt{\_CONTEXT.md} con fase, stack e vincoli
+  \item Verifica con \texttt{validate.ps1} / \texttt{validate.sh}
+  \item Fai il primo bootstrap con l'agente e ricevi conferma del contesto
+\end{enumerate}
+
+TaskFlow API è pronta. L'agente sa dove sei, cosa stai costruendo e cosa non può ignorare. Nel prossimo capitolo vediamo come si svolge una sessione completa, dall'inizio al commit finale.

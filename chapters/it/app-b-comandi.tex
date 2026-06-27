@@ -1,0 +1,59 @@
+% ============================================================
+% Appendice B — Comandi conversazionali completi
+% ============================================================
+
+\chapter{Comandi Conversazionali Completi}
+\label{app:comandi}
+
+Riferimento completo di tutti i comandi conversazionali ADLC.
+
+\section*{Tabella di riferimento rapido}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Comando} & \textbf{Scopo} & \textbf{Bypass sicurezza?} \\
+    \midrule
+    \texttt{@checkpoint} & Fissa stato avanzamento & No \\
+    \texttt{@context-update} & Propone aggiornamento context & No \\
+    \texttt{@show-constraints} & Mostra vincoli SEC/PERF & No \\
+    \texttt{@security-check} & Verifica codice vs SEC & No \\
+    \texttt{@perf-check} & Verifica codice vs PERF & No \\
+    \texttt{@load-phase [N]} & Carica modulo fase N & No \\
+    \texttt{@set-phase [N]} & Propone cambio fase & No \\
+    \texttt{@prompt-list} & Lista prompt riusabili & No \\
+    \texttt{@prompt [ID]} & Applica template prompt & No \\
+    \texttt{@alternatives} & Genera 2--3 opzioni & No \\
+    \texttt{@simplify} & Riduce scope/complessità & No \\
+    \texttt{@rollback} & Piano di rollback & No \\
+    \texttt{@stop} & Ferma immediatamente & No \\
+    \bottomrule
+  \end{tabular}
+  \caption{Riferimento rapido comandi ADLC}
+  \label{tab:app-b-comandi}
+\end{table}
+
+\section*{Regole di tutti i comandi}
+
+\begin{enumerate}
+  \item Nessun comando bypassa gli HALT trigger. Neanche \texttt{@stop} li disattiva.
+  \item Nessun comando modifica file automaticamente --- propone sempre, tu applichi.
+  \item \texttt{@security-check} e \texttt{@perf-check} citano solo i vincoli in \texttt{\_CONTEXT.md}.
+  \item \texttt{@rollback} non esegue azioni distruttive senza conferma esplicita.
+  \item I comandi non cambiano la classificazione del rischio.
+\end{enumerate}
+
+\section*{Comandi personalizzati di progetto}
+
+In \texttt{.adlc/project/instructions.md}, definisci shortcut per workflow ricorrenti:
+
+\begin{lstlisting}[language=,caption={Formato comandi personalizzati}]
+## Project Commands
+
+@nome-comando
+  [Descrizione di cosa deve fare l'agente quando
+   riceve questo comando]
+\end{lstlisting}
+
+Vedi Capitolo~\ref{ch:comandi-conversazionali} per esempi e output attesi di ciascun comando.

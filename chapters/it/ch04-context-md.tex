@@ -1,0 +1,152 @@
+% ============================================================
+% Capitolo 4 — _CONTEXT.md: la fonte di verità
+% ============================================================
+
+\chapter{\texttt{\_CONTEXT.md}: la fonte di verità}
+\label{ch:context-md}
+
+In un progetto software tradizionale, il contesto vive nelle teste delle persone. Con gli agenti AI il problema è amplificato: ogni sessione è un ``ingresso di qualcuno di nuovo''. L'agente non ha memoria. Senza un documento strutturato, sei tu che ricostruisci il contesto a voce ogni volta.
+
+\texttt{\_CONTEXT.md} è la risposta a questo problema. È la fonte di verità del progetto: un singolo file Markdown che l'agente legge all'inizio di ogni sessione e che contiene tutto ciò che serve per lavorare correttamente.
+
+\section{Dove vive e come viene trovato}
+\label{sec:04-dove-vive}
+
+\texttt{\_CONTEXT.md} vive alla radice del tuo progetto. L'agente segue questo protocollo di ricerca:
+
+\begin{enumerate}
+  \item Cerca \texttt{\_CONTEXT.md} nella directory corrente.
+  \item Se non lo trova, risale nelle directory padre fino alla radice del repository.
+  \item Se ne trova più di uno (monorepo), usa quello più vicino al file su cui sta lavorando.
+  \item Se non trova nulla, chiede di crearne uno.
+\end{enumerate}
+
+\section{La struttura del file}
+\label{sec:04-struttura}
+
+Un \texttt{\_CONTEXT.md} completo ha quattro sezioni principali.
+
+\subsection*{Sezione 1 --- Context card (obbligatoria)}
+
+\begin{lstlisting}[language=,caption={Context card di TaskFlow API}]
+| Param                    | Value                                       |
+|--------------------------|---------------------------------------------|
+| Project                  | TaskFlow API                                |
+| Phase                    | 3-Implementation                            |
+| Mode                     | STANDARD                                    |
+| Active Task              | T-007.2 GET /tasks con filtri               |
+| Active Task Token Est.   | 5000/1500/6500                              |
+| Active Task Model Level  | 3 Sonnet Low                                |
+| Active Branch            | feat/T-007-tasks-endpoints                  |
+| Last Checkpoint          | 2026-06-27 10:47 — POST /tasks completato   |
+\end{lstlisting}
+
+\textbf{Phase} (0--6) determina quali moduli il framework carica. \textbf{Mode} controlla il livello di cerimonia (Capitolo~\ref{ch:fasi-e-modes}). \textbf{Active Task Token Est.} è la stima \texttt{input/output/totale} in token. \textbf{Active Task Model Level} (1--7) è il livello AI necessario.
+
+\subsection*{Sezione 2 --- Stack (obbligatoria)}
+
+\begin{lstlisting}[language=,caption={Stack tecnologico nel context}]
+## Stack
+| Layer      | Technology                  |
+|------------|-----------------------------|
+| Runtime    | Node.js 22                  |
+| Framework  | Fastify 5                   |
+| Database   | PostgreSQL 16 + Prisma ORM  |
+| Auth       | OIDC + JWT (jose library)   |
+| Testing    | Vitest + Supertest          |
+| Deploy     | Docker + Railway            |
+\end{lstlisting}
+
+L'agente usa questa tabella per fare scelte coerenti senza dover chiedere.
+
+\subsection*{Sezione 3 --- Vincoli di sicurezza (obbligatoria se applicabile)}
+
+\begin{lstlisting}[language=,caption={Vincoli SEC nel context}]
+## Security Constraints
+| ID     | Name              | Spec                                |
+|--------|-------------------|-------------------------------------|
+| SEC-01 | Input Validation  | Zod schema obbligatorio             |
+| SEC-02 | Authentication    | OIDC, JWT con rotazione             |
+| SEC-03 | Logging           | Nessun token o PII nei log          |
+\end{lstlisting}
+
+\subsection*{Sezione 4 --- Vincoli di performance (obbligatoria se applicabile)}
+
+\begin{lstlisting}[language=,caption={Vincoli PERF nel context}]
+## Performance Constraints
+| ID      | Name         | Target              |
+|---------|--------------|---------------------|
+| PERF-01 | Latency      | P95 < 200ms         |
+| PERF-02 | Payload Size | Max 1MB per risposta|
+\end{lstlisting}
+
+\section{Sezioni opzionali utili}
+\label{sec:04-sezioni-opzionali}
+
+\subsection*{Decisioni architetturali aperte}
+
+\begin{lstlisting}[language=,caption={Open Decisions nel context}]
+## Open Decisions
+| ID    | Decision                  | Options         | Deadline   |
+|-------|---------------------------|-----------------|------------|
+| AD-01 | Paginazione cursor/offset | cursor / offset | 2026-07-05 |
+\end{lstlisting}
+
+Se una decisione è qui, l'agente non la prende da solo --- ti chiede di decidere.
+
+\subsection*{Note per l'agente}
+
+\begin{lstlisting}[language=,caption={Note nel context}]
+## Agent Notes
+- Priorità: qualità > velocità
+- Test: integration test su DB reale, no mock di Prisma
+- Naming: snake_case DB, camelCase TS, kebab-case file
+\end{lstlisting}
+
+\section{Come aggiornare \texttt{\_CONTEXT.md}}
+\label{sec:04-aggiornamento}
+
+Aggiorna il file ogni volta che cambia:
+\begin{itemize}
+  \item La fase del progetto
+  \item Il task attivo
+  \item I vincoli SEC o PERF
+  \item Una decisione aperta viene presa
+\end{itemize}
+
+Il modo più pratico è il comando \texttt{@context-update} (Capitolo~\ref{ch:comandi-conversazionali}).
+
+\section{Template minimo vs template completo}
+\label{sec:04-template}
+
+Il framework offre due template in \texttt{.adlc/modules/templates/}:
+
+\begin{itemize}
+  \item \textbf{CONTEXT\_TEMPLATE.md} --- completo, con tutte le sezioni incluse decisioni aperte e note.
+  \item \textbf{CONTEXT\_MIN.md} --- minimo per spike e POC: solo context card, stack e vincoli essenziali.
+\end{itemize}
+
+\begin{tipbox}
+Inizia sempre dal minimo. Un \texttt{\_CONTEXT.md} parzialmente compilato è meglio di uno vuoto. Aggiungi sezioni quando ne senti la necessità.
+\end{tipbox}
+
+\section{Errori comuni}
+\label{sec:04-errori}
+
+\textbf{Lasciare i placeholder.} Il validator segnala warning se \texttt{Active Task Token Est.} contiene \texttt{0/0/0}. Non blocca il lavoro, ma indica contesto incompleto.
+
+\textbf{Non aggiornare il file.} Un \texttt{\_CONTEXT.md} non aggiornato è un contesto che mente. Dopo una settimana senza aggiornamenti, l'agente lavora su informazioni obsolete.
+
+\textbf{Mettere troppo nel context.} Le regole dettagliate del progetto vanno in \texttt{.adlc/project/instructions.md}. Il context contiene lo stato attuale, non il manuale del progetto.
+
+\textbf{Non committare il file.} \texttt{\_CONTEXT.md} va in git. È parte del progetto, non un file temporaneo.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item \texttt{\_CONTEXT.md} è il singolo file che dà all'agente il contesto strutturato per lavorare correttamente senza istruzioni ripetute.
+  \item Contiene: context card, stack, vincoli SEC e PERF, e sezioni opzionali.
+  \item Va aggiornato a ogni cambio di fase, task o vincolo.
+  \item Inizia dal template minimo; aggiungi sezioni man mano che il progetto cresce.
+  \item Committalo in git e non lasciarlo mai stale.
+\end{itemize}

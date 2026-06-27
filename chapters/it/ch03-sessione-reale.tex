@@ -1,0 +1,191 @@
+% ============================================================
+% Capitolo 3 — Una sessione di lavoro reale
+% ============================================================
+
+\chapter{Una sessione di lavoro reale}
+\label{ch:sessione-reale}
+
+È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere ADLC in azione su un caso concreto.
+
+\begin{notebox}
+TaskFlow API ha attraversato le fasi 0--2 nelle settimane precedenti. I requisiti sono stati analizzati, l'architettura definita (schema DB, contratto API con 12 endpoint), le decisioni aperte chiuse. Lorenzo ha aggiornato \texttt{\_CONTEXT.md} a \texttt{Phase: 3-Implementation} al termine del design. Da questo punto inizia il lavoro che seguiamo ora.
+\end{notebox}
+
+Il task di oggi: implementare l'endpoint \texttt{POST /tasks} --- il cuore dell'API, quello che crea un nuovo task per un utente autenticato.
+
+\section{Inizio sessione --- il bootstrap}
+\label{sec:03-bootstrap}
+
+Lorenzo non spiega nulla all'agente. Chiede solo:
+
+\begin{quote}
+``Carica \texttt{\_CONTEXT.md} e confermami il contesto.''
+\end{quote}
+
+L'agente risponde:
+
+\begin{lstlisting}[language=,caption={Conferma di bootstrap}]
+Context: TaskFlow API | Phase: 3-Implementation |
+Task: T-007 POST /tasks endpoint |
+Stack: Node.js 22/Fastify 5/PostgreSQL 16 |
+Constraints: SEC-01,SEC-02,SEC-03,PERF-01,PERF-02. Proceed?
+\end{lstlisting}
+
+In tre secondi, l'agente sa tutto. Lorenzo scrive: \textit{``Procedi.''}
+
+\begin{tipbox}
+\textbf{Pattern da seguire:} all'inizio di ogni sessione, chiedi sempre la conferma del contesto prima di qualsiasi istruzione. È il modo per verificare che l'agente abbia letto \texttt{\_CONTEXT.md} correttamente.
+\end{tipbox}
+
+\section{Task LOW --- una modifica senza freni}
+\label{sec:03-task-low}
+
+Lorenzo comincia con un task leggero: aggiungere JSDoc all'interfaccia \texttt{Task} già esistente. È una modifica LOW-risk: documentazione, nessun impatto sulla logica.
+
+\begin{quote}
+``Aggiungi JSDoc all'interfaccia \texttt{Task} in \texttt{src/types/task.ts}. Segui lo stile già usato in \texttt{src/types/user.ts}.''
+\end{quote}
+
+L'agente produce il JSDoc coerente con lo stile del progetto e notifica:
+
+\begin{lstlisting}[language=,caption={Notifica per task LOW}]
+[LOW] Added JSDoc to Task interface (4 fields documented).
+No risk items. Changes in: src/types/task.ts
+\end{lstlisting}
+
+Per i task LOW, l'agente esegue e notifica senza aspettare approvazione.
+
+\section{Task MEDIUM --- proposta e approvazione}
+\label{sec:03-task-medium}
+
+Lorenzo chiede di implementare l'endpoint principale:
+
+\begin{quote}
+``Implementa \texttt{POST /tasks}. L'endpoint riceve titolo, descrizione e scadenza, crea il task per l'utente autenticato, e risponde 201 con il task creato.''
+\end{quote}
+
+L'agente classifica come MEDIUM (nuova feature) e risponde con un piano prima di scrivere codice:
+
+\begin{lstlisting}[language=,caption={Piano proposto per task MEDIUM}]
+[MEDIUM] Piano per POST /tasks:
+
+1. Route handler in src/routes/tasks.ts
+   - Validazione: Zod schema (SEC-01)
+   - userId dal JWT, non dall'input (SEC-02)
+   - Nessun userId nei log (SEC-03)
+
+2. Service in src/services/taskService.ts
+   - createTask(userId, data) → Prisma
+   - Errori: 400 / 401 / 500 in formato RFC 7807
+
+3. Test in tests/routes/tasks.test.ts
+   - 201 dati validi, 400 titolo mancante,
+   - 401 no auth, 400 titolo troppo lungo
+
+Stima: ~80 righe codice + ~60 test. Model Level: 3.
+Procedo?
+\end{lstlisting}
+
+Lorenzo approva. L'agente implementa citando SEC-02 e SEC-03 nel codice generato --- i vincoli sono attivi, non devono essere ripetuti.
+
+\section{Task HIGH --- l'HALT in azione}
+\label{sec:03-task-high}
+
+Lorenzo nota che lo schema Prisma non ha un indice su \texttt{userId} nella tabella \texttt{tasks}. Chiede all'agente di aggiungerlo.
+
+L'agente si ferma:
+
+\begin{lstlisting}[language=,caption={HALT per modifica schema}]
+⚠ HALT — trigger: schema (HIGH)
+
+File: prisma/schema.prisma
+Pattern: **/prisma/schema.prisma
+
+Proposta: aggiunta @@index([userId]) in model Task.
+Richiede migration:
+  prisma migrate dev --name add-task-userid-index
+
+Rischio: MEDIUM — migration non-destructive.
+In produzione: lock temporaneo sulla tabella.
+
+Minimum model level: 5. Conferma esplicita richiesta.
+Procedo?
+\end{lstlisting}
+
+Lorenzo risponde: \textit{``Confermato. Procedi con schema e migration.''}
+
+L'agente aggiunge l'indice e genera il file di migration. Il processo di HALT ha reso espliciti i dettagli che meritavano attenzione.
+
+\section{Il checkpoint}
+\label{sec:03-checkpoint}
+
+Dopo circa un'ora di lavoro, Lorenzo manda un checkpoint:
+
+\begin{quote}
+\texttt{@checkpoint}
+\end{quote}
+
+L'agente risponde:
+
+\begin{lstlisting}[language=,caption={Output di @checkpoint}]
+Checkpoint — TaskFlow API | 2026-06-27 10:47
+
+Completato:
+- POST /tasks: route, service, Zod, RFC 7807, 4 test
+- Migration: add-task-userid-index
+
+In corso: niente di sospeso. Blocchi: nessuno.
+
+Aggiornamento _CONTEXT.md consigliato:
+  Active Task → T-007.2 GET /tasks
+  Active Task Token Est. → 5000/1500/6500
+
+Applico gli aggiornamenti?
+\end{lstlisting}
+
+Lorenzo dice sì. L'agente produce il blocco da incollare in \texttt{\_CONTEXT.md}.
+
+\section{Fine sessione}
+\label{sec:03-fine-sessione}
+
+Lorenzo chiude la sessione con un checkpoint esplicito:
+
+\begin{quote}
+\texttt{@checkpoint} --- chiudo la sessione.
+\end{quote}
+
+L'agente produce:
+\begin{itemize}
+  \item Il blocco aggiornato per \texttt{\_CONTEXT.md} (Active Task, Token Est.)
+  \item Una voce per \texttt{PROGRESS.md} con riepilogo del lavoro
+\end{itemize}
+
+Lorenzo copia i due blocchi, fa il commit, chiude il terminale. Domani l'agente saprà esattamente dove erano rimasti.
+
+\section{Il ciclo completo in sintesi}
+\label{sec:03-ciclo}
+
+\begin{lstlisting}[language=,caption={Schema del ciclo ADLC per sessione}]
+INIZIO SESSIONE
+  └─ Chiedi conferma contesto → agente legge _CONTEXT.md
+
+DURANTE LA SESSIONE
+  ├─ Task LOW     → esegue + notifica
+  ├─ Task MEDIUM  → propone piano → approvi → esegue
+  ├─ Task HIGH    → HALT → spiega rischi → confermi → esegue
+  └─ @checkpoint  → ogni 3-5 azioni significative
+
+FINE SESSIONE
+  └─ @checkpoint → aggiorna _CONTEXT.md + PROGRESS.md → commit
+\end{lstlisting}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item Il \textbf{bootstrap} assicura che l'agente abbia letto \texttt{\_CONTEXT.md} prima di qualsiasi lavoro.
+  \item I task \textbf{LOW} vengono eseguiti direttamente; i \textbf{MEDIUM} richiedono approvazione del piano; i \textbf{HIGH} richiedono conferma esplicita dopo un HALT.
+  \item Il \textbf{checkpoint} ogni 3--5 azioni fissa un punto fermo e mantiene i file di stato aggiornati.
+  \item La \textbf{fine sessione} è un checkpoint esplicito che produce gli aggiornamenti da committare.
+\end{itemize}
+
+Nei prossimi capitoli esploriamo in dettaglio i meccanismi che rendono possibile tutto questo, a partire dal cuore del sistema: \texttt{\_CONTEXT.md}.

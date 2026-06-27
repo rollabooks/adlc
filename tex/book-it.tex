@@ -1,0 +1,90 @@
+% ============================================================
+% ADLC: Orchestrare Agenti AI nello Sviluppo Software
+% Edizione Italiana
+% Compilare con: lualatex --shell-escape book-it.tex
+% ============================================================
+\documentclass[10pt,twoside,openright]{book}
+
+% === CONFIGURAZIONE ===
+\input{config}
+\input{config-it}
+
+% === LINGUA ===
+\input{lang/it}
+
+% === STILE ===
+\input{styles/manning-style}
+\input{styles/manning-boxes}
+
+% === INDICE ===
+\usepackage{makeidx}
+\makeindex
+
+% === INIZIO DOCUMENTO ===
+\begin{document}
+
+% ============================================================
+% FRONT MATTER
+% ============================================================
+\frontmatter
+\input{../chapters/it/frontmatter}
+\tableofcontents
+
+% ============================================================
+% INTRODUZIONE
+% ============================================================
+\input{../chapters/it/ch00-introduzione}
+
+% ============================================================
+% MAIN MATTER
+% ============================================================
+\mainmatter
+
+% --- Parte I: Il Framework ---
+\part{Il Framework}
+\input{../chapters/it/ch01-cose-adlc}
+\input{../chapters/it/ch02-setup-primo-progetto}
+\input{../chapters/it/ch03-sessione-reale}
+
+% --- Parte II: La Memoria del Progetto ---
+\part{La Memoria del Progetto}
+\input{../chapters/it/ch04-context-md}
+\input{../chapters/it/ch05-progress-md}
+\input{../chapters/it/ch06-fasi-e-modes}
+
+% --- Parte III: Il Sistema di Sicurezza ---
+\part{Il Sistema di Sicurezza}
+\input{../chapters/it/ch07-classificazione-rischio}
+\input{../chapters/it/ch08-model-levels}
+\input{../chapters/it/ch09-confidence-tags}
+\input{../chapters/it/ch10-halt-triggers}
+\input{../chapters/it/ch11-vincoli-sec-perf}
+
+% --- Parte IV: Workflow Avanzato ---
+\part{Workflow Avanzato}
+\input{../chapters/it/ch12-moduli-e-skill}
+\input{../chapters/it/ch13-comandi-conversazionali}
+\input{../chapters/it/ch14-multi-agente}
+\input{../chapters/it/ch15-monorepo-legacy}
+
+% --- Parte V: In Produzione ---
+\part{In Produzione}
+\input{../chapters/it/ch16-produzione}
+
+% ============================================================
+% APPENDICI
+% ============================================================
+\appendix
+\part{\LabelAppendices}
+\input{../chapters/it/app-a-glossario}
+\input{../chapters/it/app-b-comandi}
+\input{../chapters/it/app-c-template}
+\input{../chapters/it/app-d-risorse}
+
+% ============================================================
+% BACK MATTER
+% ============================================================
+\backmatter
+\printindex
+
+\end{document}

@@ -1,0 +1,126 @@
+% ============================================================
+% Capitolo 7 — Classificazione del rischio
+% ============================================================
+
+\chapter{Classificazione del rischio}
+\label{ch:classificazione-rischio}
+
+Ogni richiesta che fai a un agente AI porta con sé un rischio implicito. Rinominare una variabile è diverso da modificare lo schema del database. ADLC formalizza questa distinzione in cinque livelli di rischio.
+
+\section{I cinque livelli}
+\label{sec:07-cinque-livelli}
+
+\subsection*{LOW}
+
+Modifiche a basso impatto, facilmente reversibili, che non toccano logica di business o sistemi condivisi. Esempi: rinomina variabile, typo, JSDoc, formattazione.
+
+\textbf{Cosa fa l'agente:} esegue direttamente e notifica.
+
+\begin{lstlisting}[language=,caption={Notifica LOW}]
+[LOW] Fixed typo in error message in src/services/taskService.ts.
+No risk items.
+\end{lstlisting}
+
+\subsection*{MEDIUM}
+
+Nuove funzionalità, refactor locali, modifiche multi-file reversibili con \texttt{git revert}. Esempi: nuovo endpoint, estrazione funzione, nuovo set di test.
+
+\textbf{Cosa fa l'agente:} propone un piano dettagliato, aspetta la tua approvazione.
+
+\begin{lstlisting}[language=,caption={Proposta MEDIUM}]
+[MEDIUM] Piano per GET /tasks con filtri:
+1. Route handler con query params (status, assignee, cursor)
+2. Zod schema per validazione params (SEC-01)
+3. Query Prisma con where dinamico + paginazione cursor
+Procedo?
+\end{lstlisting}
+
+\subsection*{HIGH}
+
+Modifiche difficilmente reversibili o con effetti su sistemi condivisi. Esempi: schema DB, autenticazione, architettura, eliminazione dati, configurazioni deploy.
+
+\textbf{Cosa fa l'agente:} HALT, piano dettagliato con analisi rischi, attende conferma esplicita.
+
+\begin{lstlisting}[language=,caption={HALT HIGH}]
+⚠ HALT — HIGH risk detected
+
+Operazione: aggiunta colonna NOT NULL completed_at a tabella tasks
+
+Rischi:
+- Migration non-reversibile (richiede backfill)
+- Lock sulla tabella durante la migration su PostgreSQL
+
+Piano: (1) colonna nullable → (2) backfill → (3) NOT NULL
+Conferma esplicita richiesta. Procedi?
+\end{lstlisting}
+
+\subsection*{HIGH+}
+
+Operazioni su secrets, credenziali, compliance, dati PII. L'agente non propone nemmeno un piano finché non riceve una conferma di intento.
+
+\begin{lstlisting}[language=,caption={HALT HIGH+}]
+⛔ HALT — HIGH+ risk: auth/secrets path detected
+
+File: src/middleware/auth.ts
+Pattern: **/middleware/auth*
+
+Conferma che vuoi modificare il codice di autenticazione.
+\end{lstlisting}
+
+\subsection*{CRITICAL}
+
+Decisioni mission-critical ambigue con implicazioni architetturali irreversibili. L'agente presenta alternative e un ADR bozza. \textbf{Non esegue nulla.}
+
+\begin{lstlisting}[language=,caption={HALT CRITICAL}]
+⛔ HALT — CRITICAL: architectural decision required
+
+Questione: strategia paginazione GET /tasks (AD-01 aperta)
+- Cursor-based: performante, no jump a pagina N
+- Offset-based: jump supportato, degrada con tabelle grandi
+
+Raccomandazione: cursor-based (FACT — PERF-01: P95 < 200ms)
+ma la scelta dipende da requisiti UI non ancora definiti.
+Non procedo finché AD-01 è aperta.
+\end{lstlisting}
+
+\section{Come l'agente classifica le richieste}
+\label{sec:07-come-classifica}
+
+L'agente esamina tre fattori prima di agire:
+
+\begin{enumerate}
+  \item Il path del file corrisponde a un pattern negli HALT trigger?
+  \item L'operazione è additiva (basso rischio) o distruttiva/strutturale?
+  \item La modifica è locale (un file) o sistemica (autenticazione, schema DB)?
+\end{enumerate}
+
+\section{Il risk floor per i Model Level}
+\label{sec:07-risk-floor}
+
+La classificazione del rischio influenza anche il modello AI minimo richiesto:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Livello} & \textbf{Minimum Model Level} \\
+    \midrule
+    LOW & 1 \\
+    MEDIUM & 3 \\
+    HIGH & 5 \\
+    HIGH+ (auth, secrets, compliance, produzione) & 6 \\
+    CRITICAL & 7 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Risk floor per Model Level}
+  \label{tab:07-risk-floor}
+\end{table}
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item Cinque livelli: LOW (esegui), MEDIUM (piano $\to$ approva $\to$ esegui), HIGH (HALT $\to$ conferma), HIGH+ (HALT $\to$ conferma intento $\to$ conferma esecuzione), CRITICAL (HALT $\to$ alternative $\to$ nessuna esecuzione).
+  \item La classificazione considera path HALT, tipo di operazione e ambito dell'effetto.
+  \item Ogni livello ha un risk floor che forza un minimum model level.
+  \item La classificazione è sempre comunicata prima di agire --- puoi correggerla.
+\end{itemize}

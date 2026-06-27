@@ -52,11 +52,11 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Nessuna — Fase 6 completata. Prossima: Fase 7 (Formattazione LaTeX + PDF/EPUB)
+- Nessuna — Fase 7 (LaTeX) completata. Prossima: compilazione PDF
 
 ## Attività Pianificate
 
-- Fase 7: Formattazione LaTeX e compilazione PDF/EPUB
+- Compilazione: lualatex --shell-escape tex/book-it.tex
 - Fase 7b: Preparazione cover Amazon KDP
 - Fase 5: Copy editing
 - Fase 6: Correzione bozze

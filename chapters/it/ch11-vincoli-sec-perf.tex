@@ -1,0 +1,98 @@
+% ============================================================
+% Capitolo 11 — Vincoli SEC e PERF
+% ============================================================
+
+\chapter{Vincoli SEC e PERF}
+\label{ch:vincoli-sec-perf}
+
+Ogni progetto software ha requisiti di sicurezza e performance. Il problema è che questi requisiti vengono discussi una volta --- e poi evaporano dalla pratica quotidiana. I vincoli SEC e PERF di ADLC risolvono questo: sono una libreria di requisiti riusabili, definiti una volta nel framework, attivati in \texttt{\_CONTEXT.md}, riletti dall'agente prima di ogni operazione critica.
+
+\section{La libreria SEC (sicurezza)}
+\label{sec:11-libreria-sec}
+
+Nove vincoli predefiniti in \texttt{SEC\_CONSTRAINTS.md}:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{ID} & \textbf{Nome} & \textbf{Principio} \\
+    \midrule
+    SEC-01 & Input Validation & Allow-list, validazione lato server obbligatoria \\
+    SEC-02 & Authentication & Provider collaudato, token short-lived, no log secrets \\
+    SEC-03 & Authorization & Least privilege, validazione ownership \\
+    SEC-04 & Secrets \& Config & No hardcoded secrets, env vars, rotazione chiavi \\
+    SEC-05 & Data Protection & PII minimizzata, redaction log, TLS \\
+    SEC-06 & Dependency Hygiene & Pin versioni, SBOM, vulnerability scan \\
+    SEC-07 & Threat Modeling & Asset, attori, STRIDE, rischio residuo (Fase 0--2) \\
+    SEC-08 & Logging \& Monitoring & Log eventi sicurezza, strutturati JSON, no PII \\
+    SEC-09 & SSRF & Allow-list URL in uscita, blocco IP privati \\
+    \bottomrule
+  \end{tabular}
+  \caption{Libreria vincoli SEC}
+  \label{tab:11-sec}
+\end{table}
+
+\section{La libreria PERF (performance)}
+\label{sec:11-libreria-perf}
+
+Sette vincoli predefiniti in \texttt{PERF\_CONSTRAINTS.md}:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{ID} & \textbf{Nome} & \textbf{Principio} \\
+    \midrule
+    PERF-01 & Latency Targets & SLO per endpoint (P50/P95/P99) \\
+    PERF-02 & Throughput \& Concurrency & RPS target, async I/O, no blocking \\
+    PERF-03 & Database Efficiency & Indici, no N+1, bound result sizes \\
+    PERF-04 & Resource Utilization & Limiti CPU/memoria, profiling \\
+    PERF-05 & Caching \& CDN & Cache layer, TTL, invalidazione \\
+    PERF-06 & Startup \& Warm-up & Lazy loading, health check readiness \\
+    PERF-07 & Build \& Bundle Size & Code splitting, tree shaking (frontend) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Libreria vincoli PERF}
+  \label{tab:11-perf}
+\end{table}
+
+\section{Come attivare i vincoli in \texttt{\_CONTEXT.md}}
+\label{sec:11-attivazione}
+
+Non tutti i vincoli si applicano a ogni progetto. Attivi solo quelli rilevanti specificando la configurazione specifica del tuo contesto:
+
+\begin{lstlisting}[language=,caption={Vincoli attivati per TaskFlow API}]
+## Security Constraints
+| SEC-01 | Input Validation  | Zod schema obbligatorio                    |
+| SEC-02 | Authentication    | OIDC + JWT short-lived, refresh rotation   |
+| SEC-03 | Authorization     | task.userId === auth.userId                |
+| SEC-05 | Data Protection   | Pino redaction: password, token, email     |
+
+## Performance Constraints
+| PERF-01 | Latency     | P95 < 200ms — monitored via Grafana        |
+| PERF-03 | DB Efficiency | Max 3 query per request, take: 50         |
+\end{lstlisting}
+
+La colonna \texttt{Spec} è la parte più importante: non ``usa autenticazione'' --- scrivi la specifica concreta che l'agente deve rispettare.
+
+\section{Come l'agente usa i vincoli}
+\label{sec:11-uso}
+
+L'agente rilegge i vincoli attivi in due momenti:
+\begin{itemize}
+  \item Prima di generare codice in zone SEC-sensibili (autenticazione, input utente, logging, chiamate esterne)
+  \item Prima di piani HIGH o superiori (il piano deve citare esplicitamente i vincoli rilevanti)
+\end{itemize}
+
+Il comando \texttt{@show-constraints} mostra in qualsiasi momento i vincoli attivi nella sessione corrente.
+
+\section*{\LabelSummary}
+
+\begin{itemize}
+  \item SEC-01..09 coprono: input, autenticazione, autorizzazione, secrets, dati, dipendenze, threat modeling, logging, SSRF.
+  \item PERF-01..07 coprono: latency, throughput, database, risorse, cache, startup, bundle.
+  \item Si attivano in \texttt{\_CONTEXT.md} con la specifica concreta --- non il principio generico.
+  \item L'agente li rilegge prima di codice SEC-sensibile e li cita nei piani HIGH+.
+  \item Vincoli personalizzati si aggiungono con ID arbitrari (es. \texttt{SEC-10}, \texttt{PERF-08}).
+\end{itemize}

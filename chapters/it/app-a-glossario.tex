@@ -1,0 +1,74 @@
+% ============================================================
+% Appendice A — Glossario
+% ============================================================
+
+\chapter{\LabelGlossary}
+\label{app:glossario}
+
+Definizioni operative dei termini usati nel libro.
+
+\begin{description}
+
+\item[\textbf{ADLC}] AI-Driven Software Development Life Cycle. Il framework descritto in questo libro. Non è un'AI, non è un tool da installare --- è un insieme di file Markdown e JSON che strutturano il dialogo tra sviluppatore e agente AI.
+
+\item[\textbf{Agent Bootstrap}] La sequenza di operazioni che l'agente esegue all'inizio di ogni sessione: legge \texttt{\_CONTEXT.md}, carica il modulo di fase appropriato, legge le regole di progetto, conferma il contesto.
+
+\item[\textbf{AI Sizing}] La stima associata a ogni task ADLC: token di input, token di output, totale, model level, modello raccomandato e motivazione.
+
+\item[\textbf{ASSUMPTION}] Uno dei tre confidence tag. Indica che l'agente ha fatto un'ipotesi non supportata da evidenza diretta. Richiede verifica prima di qualsiasi operazione.
+
+\item[\textbf{Checkpoint}] Punto fermo fissato con \texttt{@checkpoint} ogni 3--5 azioni significative.
+
+\item[\textbf{Comando conversazionale}] Istruzione in formato \texttt{@keyword} interpretata dall'agente secondo il protocollo ADLC. Non è un comando shell.
+
+\item[\textbf{Company extension}] Cartella \texttt{.adlc/company/} con processi SDLC aziendali. Ha priorità sul framework.
+
+\item[\textbf{Confidence tag}] Classificazione della certezza dell'agente. Tre valori: \texttt{FACT} (verificato), \texttt{INFERRED} (dedotto), \texttt{ASSUMPTION} (ipotesi).
+
+\item[\textbf{\_CONTEXT.md}] Il file di stato persistente del progetto: fase, task attivo, stack, vincoli SEC e PERF.
+
+\item[\textbf{CRITICAL}] Livello di rischio per decisioni mission-critical ambigue. L'agente non esegue nulla. Model Level minimo: 7.
+
+\item[\textbf{Entry point}] Il file che un agente AI legge come prima istruzione: \texttt{CLAUDE.md} (Claude Code), \texttt{AGENTS.md} (Codex), \texttt{GEMINI.md}, \texttt{OPENCLAW.md}, \texttt{.github/copilot-instructions.md} (Copilot).
+
+\item[\textbf{FACT}] Uno dei tre confidence tag. L'agente ha verificato l'informazione leggendo direttamente il codice o un file.
+
+\item[\textbf{HALT}] L'azione con cui l'agente si ferma prima di modificare un path protetto dagli HALT trigger.
+
+\item[\textbf{HALT trigger}] Pattern di path che richiedono conferma esplicita prima di qualsiasi modifica.
+
+\item[\textbf{HIGH}] Livello di rischio per modifiche difficilmente reversibili. Model Level minimo: 5.
+
+\item[\textbf{HIGH+}] Sottolivello di HIGH per secrets, compliance, dati in produzione. Model Level minimo: 6.
+
+\item[\textbf{INFERRED}] Uno dei tre confidence tag. L'agente ha dedotto da contesto indiretto senza verifica diretta.
+
+\item[\textbf{LOW}] Il livello di rischio più basso: modifiche facilmente reversibili. L'agente esegue e notifica.
+
+\item[\textbf{MEDIUM}] Livello per nuove funzionalità e refactor reversibili. L'agente propone piano e aspetta approvazione. Model Level minimo: 3.
+
+\item[\textbf{Mode}] Livello di cerimonia: LITE, STANDARD, AUDIT, RAPID, FAST. Gli HALT trigger non vengono mai disattivati.
+
+\item[\textbf{Model Level}] Scala 1--7 che mappa la complessità del task al modello AI appropriato.
+
+\item[\textbf{Modulo}] File in \texttt{.adlc/modules/NN\_*.md}. Read-only. Caricato per fase o su richiesta.
+
+\item[\textbf{PERF-XX}] Vincolo di performance riusabile. Attivato in \texttt{\_CONTEXT.md}. Sette predefiniti (PERF-01..PERF-07).
+
+\item[\textbf{Phase}] Una delle sette fasi ADLC: 0-Discovery, 1-Analysis, 2-Design, 3-Implementation, 4-Verification, 5-Release, 6-Ops.
+
+\item[\textbf{PROGRESS.md}] Il diario di bordo del progetto. Registra fatto, scoperte e decisioni in ordine cronologico inverso.
+
+\item[\textbf{Risk floor}] Model Level minimo imposto dal livello di rischio, indipendentemente dalla stima token.
+
+\item[\textbf{SEC-XX}] Vincolo di sicurezza riusabile. Nove predefiniti (SEC-01..SEC-09).
+
+\item[\textbf{Skill}] File in \texttt{.adlc/modules/skills/SKILL\_*.md}. Guida tematica caricata su richiesta.
+
+\item[\textbf{Strict mode}] Modalità del validator (\texttt{validate.sh --strict}) in cui i warning diventano failure. Usato in CI.
+
+\item[\textbf{sync-copilot}] Tool che verifica l'allineamento tra \texttt{AGENTS.md} e \texttt{.github/copilot-instructions.md}.
+
+\item[\textbf{Validator}] Script (\texttt{validate.ps1} / \texttt{validate.sh}) che verifica presenza e validità del framework.
+
+\end{description}
