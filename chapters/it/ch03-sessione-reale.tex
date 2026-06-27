@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 3 — Una sessione di lavoro reale
 % ============================================================
 
@@ -96,7 +96,7 @@ Lorenzo nota che lo schema Prisma non ha un indice su \texttt{userId} nella tabe
 L'agente si ferma:
 
 \begin{lstlisting}[language=,caption={HALT per modifica schema}]
-⚠ HALT — trigger: schema (HIGH)
+[!] HALT — trigger: schema (HIGH)
 
 File: prisma/schema.prisma
 Pattern: **/prisma/schema.prisma
@@ -167,16 +167,16 @@ Lorenzo copia i due blocchi, fa il commit, chiude il terminale. Domani l'agente 
 
 \begin{lstlisting}[language=,caption={Schema del ciclo ADLC per sessione}]
 INIZIO SESSIONE
-  └─ Chiedi conferma contesto → agente legge _CONTEXT.md
+  +- Chiedi conferma contesto → agente legge _CONTEXT.md
 
 DURANTE LA SESSIONE
-  ├─ Task LOW     → esegue + notifica
-  ├─ Task MEDIUM  → propone piano → approvi → esegue
-  ├─ Task HIGH    → HALT → spiega rischi → confermi → esegue
-  └─ @checkpoint  → ogni 3-5 azioni significative
+  +- Task LOW     → esegue + notifica
+  +- Task MEDIUM  → propone piano → approvi → esegue
+  +- Task HIGH    → HALT → spiega rischi → confermi → esegue
+  +- @checkpoint  → ogni 3-5 azioni significative
 
 FINE SESSIONE
-  └─ @checkpoint → aggiorna _CONTEXT.md + PROGRESS.md → commit
+  +- @checkpoint → aggiorna _CONTEXT.md + PROGRESS.md → commit
 \end{lstlisting}
 
 \section*{\LabelSummary}

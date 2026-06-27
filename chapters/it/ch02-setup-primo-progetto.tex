@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 2 — Setup del primo progetto in 15 minuti
 % ============================================================
 
@@ -16,18 +16,18 @@ ADLC non ha un installer. Si copia. La struttura che ti serve è questa:
 
 \begin{lstlisting}[language=,caption={Struttura del framework nel repository}]
 progetto/
-├── AGENTS.md          ← OpenAI Codex CLI
-├── CLAUDE.md          ← Claude Code
-├── GEMINI.md          ← Google Gemini
-├── OPENCLAW.md        ← OpenClaw
-├── .github/
-│   └── copilot-instructions.md  ← GitHub Copilot
-└── .adlc/
-    ├── halt-triggers.yaml
-    ├── manifest.json
-    ├── modules/       ← regole del framework
-    ├── schemas/       ← schemi JSON
-    └── tools/         ← script di utilità
++-- AGENTS.md          ← OpenAI Codex CLI
++-- CLAUDE.md          ← Claude Code
++-- GEMINI.md          ← Google Gemini
++-- OPENCLAW.md        ← OpenClaw
++-- .github/
+|   +-- copilot-instructions.md  ← GitHub Copilot
++-- .adlc/
+    +-- halt-triggers.yaml
+    +-- manifest.json
+    +-- modules/       ← regole del framework
+    +-- schemas/       ← schemi JSON
+    +-- tools/         ← script di utilità
 \end{lstlisting}
 
 \begin{notebox}
@@ -146,11 +146,11 @@ Output atteso:
 \begin{lstlisting}[language=,caption={Output del validator}]
 ADLC validation — v3.3.0
 
-✅ Framework files present
-✅ AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
-✅ halt-triggers.yaml valid
-✅ manifest.json valid
-⚠  _CONTEXT.md: Active Task Token Est. is placeholder (0/0/0)
+[OK] Framework files present
+[OK] AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
+[OK] halt-triggers.yaml valid
+[OK] manifest.json valid
+[!]  _CONTEXT.md: Active Task Token Est. is placeholder (0/0/0)
 
 ADLC validation passed (2 warnings)
 \end{lstlisting}
@@ -181,10 +181,10 @@ Quando vedi questa conferma, sai che l'agente ha letto il contesto. Da questo mo
 
 \begin{lstlisting}[language=,caption={Struttura della cartella di personalizzazione}]
 .adlc/project/
-├── instructions.md   ← regole specifiche del progetto
-├── domain.md         ← business logic e regole di dominio
-├── conventions.md    ← convenzioni di codice
-└── skills/           ← skill personalizzate
++-- instructions.md   ← regole specifiche del progetto
++-- domain.md         ← business logic e regole di dominio
++-- conventions.md    ← convenzioni di codice
++-- skills/           ← skill personalizzate
 \end{lstlisting}
 
 Per TaskFlow API, Lorenzo aggiunge a \texttt{instructions.md}:

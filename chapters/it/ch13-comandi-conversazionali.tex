@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 13 — Comandi conversazionali
 % ============================================================
 
@@ -60,13 +60,13 @@ Applico gli aggiornamenti?
 Revisione del codice/piano contro i vincoli SEC attivi. Ogni claim include il confidence tag.
 
 \begin{lstlisting}[language=,caption={Output di @security-check su POST /tasks}]
-SEC-01 Input Validation: ✅
+SEC-01 Input Validation: [OK]
   Zod schema con titolo obbligatorio, dueDate ISO 8601. [FACT]
 
-SEC-02 Authentication: ✅
+SEC-02 Authentication: [OK]
   JWT verificato dal middleware auth. [FACT]
 
-SEC-05 Data Protection: ⚠ DA VERIFICARE
+SEC-05 Data Protection: [!] DA VERIFICARE
   Non ho verificato che il log non esponga il body completo.
   [ASSUMPTION — TODO: verifica src/app.ts configurazione Pino]
 

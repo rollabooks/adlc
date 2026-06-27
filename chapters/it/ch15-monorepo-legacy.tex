@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 15 — Monorepo, Company Extension e Codebase Legacy
 % ============================================================
 
@@ -14,16 +14,16 @@ In un monorepo, ogni sottoprogetto che ha bisogno di un contesto indipendente cr
 
 \begin{lstlisting}[language=,caption={Struttura di un monorepo ADLC}]
 taskflow/
-├── apps/
-│   ├── api/           ← REST API
-│   │   └── _CONTEXT.md (Phase 3)
-│   ├── worker/        ← Job worker
-│   │   └── _CONTEXT.md (Phase 2)
-│   └── dashboard/     ← Frontend React
-│       └── _CONTEXT.md (Phase 3)
-├── AGENTS.md          ← Framework condiviso
-├── CLAUDE.md
-└── .adlc/             ← Framework condiviso
++-- apps/
+|   +-- api/           ← REST API
+|   |   +-- _CONTEXT.md (Phase 3)
+|   +-- worker/        ← Job worker
+|   |   +-- _CONTEXT.md (Phase 2)
+|   +-- dashboard/     ← Frontend React
+|       +-- _CONTEXT.md (Phase 3)
++-- AGENTS.md          ← Framework condiviso
++-- CLAUDE.md
++-- .adlc/             ← Framework condiviso
 \end{lstlisting}
 
 L'agente usa il \texttt{\_CONTEXT.md} più vicino al file su cui lavora.
@@ -47,12 +47,12 @@ La company extension porta processi SDLC, standard di sicurezza e gate di govern
 
 \begin{lstlisting}[language=,caption={Struttura della company extension}]
 .adlc/company/
-├── README.md       ← indice
-├── PROCESS.md      ← SDLC aziendale
-├── GOVERNANCE.md   ← approvazioni, compliance
-├── STANDARDS.md    ← standard ingegneristici
-├── source/         ← PDF/DOCX originali
-└── processed/      ← versioni Markdown generate
++-- README.md       ← indice
++-- PROCESS.md      ← SDLC aziendale
++-- GOVERNANCE.md   ← approvazioni, compliance
++-- STANDARDS.md    ← standard ingegneristici
++-- source/         ← PDF/DOCX originali
++-- processed/      ← versioni Markdown generate
 \end{lstlisting}
 
 Per convertire documenti aziendali in Markdown leggibile dall'agente:

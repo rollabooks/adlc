@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 7 — Classificazione del rischio
 % ============================================================
 
@@ -42,7 +42,7 @@ Modifiche difficilmente reversibili o con effetti su sistemi condivisi. Esempi: 
 \textbf{Cosa fa l'agente:} HALT, piano dettagliato con analisi rischi, attende conferma esplicita.
 
 \begin{lstlisting}[language=,caption={HALT HIGH}]
-⚠ HALT — HIGH risk detected
+[!] HALT — HIGH risk detected
 
 Operazione: aggiunta colonna NOT NULL completed_at a tabella tasks
 
@@ -59,7 +59,7 @@ Conferma esplicita richiesta. Procedi?
 Operazioni su secrets, credenziali, compliance, dati PII. L'agente non propone nemmeno un piano finché non riceve una conferma di intento.
 
 \begin{lstlisting}[language=,caption={HALT HIGH+}]
-⛔ HALT — HIGH+ risk: auth/secrets path detected
+[X] HALT — HIGH+ risk: auth/secrets path detected
 
 File: src/middleware/auth.ts
 Pattern: **/middleware/auth*
@@ -72,7 +72,7 @@ Conferma che vuoi modificare il codice di autenticazione.
 Decisioni mission-critical ambigue con implicazioni architetturali irreversibili. L'agente presenta alternative e un ADR bozza. \textbf{Non esegue nulla.}
 
 \begin{lstlisting}[language=,caption={HALT CRITICAL}]
-⛔ HALT — CRITICAL: architectural decision required
+[X] HALT — CRITICAL: architectural decision required
 
 Questione: strategia paginazione GET /tasks (AD-01 aperta)
 - Cursor-based: performante, no jump a pagina N
