@@ -1,10 +1,10 @@
-# Capitolo 9 — Confidence Tags: FACT, INFERRED, ASSUMPTION
+﻿# Capitolo 9 — Confidence Tags: FACT, INFERRED, ASSUMPTION
 
 Gli agenti AI hanno un problema strutturale: rispondono con la stessa sicurezza apparente sia quando sanno, sia quando deducono, sia quando inventano. Il tono è uniforme. La certezza è sempre implicita.
 
 Questo crea una trappola sottile. Se un agente ti dice "la funzione `getUserById` restituisce `null` quando l'utente non esiste", potresti prenderlo per vero senza verificare. Se invece ti dice lo stesso con tono ugualmente sicuro aggiungendo in fondo "ma non ho letto il file, è una deduzione dal nome della funzione", cambieresti il tuo comportamento.
 
-I confidence tag sono il meccanismo con cui ADLC rende esplicita questa distinzione.
+I confidence tag sono il meccanismo con cui AI-DLC rende esplicita questa distinzione.
 
 ---
 

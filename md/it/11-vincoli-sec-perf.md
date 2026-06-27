@@ -1,10 +1,10 @@
-# Capitolo 11 — Vincoli SEC e PERF
+﻿# Capitolo 11 — Vincoli SEC e PERF
 
 Ogni progetto software ha requisiti di sicurezza e performance. Il problema è che questi requisiti vengono di solito discussi una volta — in una riunione di kickoff, in un documento di architettura, in una conversazione Slack — e poi evaporano dalla pratica quotidiana.
 
 Lo sviluppatore che implementa l'endpoint `POST /tasks` tre settimane dopo quella conversazione non ricorda necessariamente che "i token non devono apparire nei log". Il revisore del PR potrebbe non saperlo. L'agente AI sicuramente non lo sa, a meno che glielo dica.
 
-I vincoli SEC e PERF di ADLC risolvono questo. Sono una libreria di requisiti riusabili — definiti una volta nel framework, attivati in `_CONTEXT.md`, riletti dall'agente prima di ogni operazione critica.
+I vincoli SEC e PERF di AI-DLC risolvono questo. Sono una libreria di requisiti riusabili — definiti una volta nel framework, attivati in `_CONTEXT.md`, riletti dall'agente prima di ogni operazione critica.
 
 ---
 
@@ -136,7 +136,7 @@ La colonna `Spec` è la parte più importante: non scrivere "usa autenticazione"
 
 ## 11.4 Come l'agente usa i vincoli
 
-Il protocollo ADLC prevede che l'agente rilegga i vincoli attivi in due momenti:
+Il protocollo AI-DLC prevede che l'agente rilegga i vincoli attivi in due momenti:
 
 **Prima di generare codice in zone SEC-sensibili:** qualsiasi codice che tocca autenticazione, input utente, logging, chiamate esterne.
 

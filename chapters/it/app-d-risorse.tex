@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Appendice D — Risorse e letture consigliate
 % ============================================================
 
@@ -11,7 +11,23 @@ Riferimenti per approfondire i temi trattati nel libro.
 I link a documentazione ufficiale di agenti AI cambiano frequentemente. Verifica che gli URL siano ancora validi prima di seguirli.
 \end{notebox}
 
-\section*{Il Framework ADLC}
+\section*{Fondamenti: dove AI-DLC incontra la letteratura}
+
+AI-DLC, come spiegato nel Capitolo~\ref{ch:cose-adlc}, non è uno standard accademico consolidato nella sua forma specifica, ma una sintesi operativa di filoni già documentati. Questa sezione mappa ciascun pilastro del framework alla letteratura che lo sostiene.
+
+\begin{itemize}
+  \item \textbf{Fasi, checkpoint e controllo dell'azione} --- \textit{Assistance to Autonomy: A Systematic Literature Review of Agentic AI across the Software Development Life Cycle} (arXiv 2605.15245, 2026). Identifica la verificabilità degli output come fattore abilitante e il pattern Planner--Executor--Reviewer come dominante: corrisponde a fasi, checkpoint e HALT trigger di AI-DLC.
+  \item \textbf{Delegated execution under human supervision} --- \textit{Agentic AI in the Software Development Lifecycle} (arXiv 2604.26275, 2026). Sposta il focus dalla generazione di codice alla supervisione dell'esecuzione delegata.
+  \item \textbf{Planning before action} --- Wei et al., \textit{Chain-of-Thought Prompting} (arXiv 2201.11903) e Yao et al., \textit{ReAct} (arXiv 2210.03629). Fondano l'idea del piano prima dell'azione (task MEDIUM e HIGH).
+  \item \textbf{Contesto persistente nel repository} --- \texttt{AGENTS.md} (OpenAI Codex), memoria \texttt{CLAUDE.md} (Anthropic), \textit{persistent context across all phases} di AWS AI-DLC. Equivalente industriale di \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}.
+  \item \textbf{Context rot e disciplina del contesto} --- \textit{Context Rot in AI-Assisted Software Development} (arXiv 2606.09090) ed \textit{Evaluating AGENTS.md} (arXiv 2602.11988): evidenza che i file di contesto non sono ``magici''. Base del §\ref{sec:04-non-magia}.
+  \item \textbf{Confidence tag} --- Architecture Decision Record con livello di confidenza esplicito (Microsoft) e letteratura su metacognizione degli LLM: giustificano FACT/INFERRED/ASSUMPTION.
+  \item \textbf{Classificazione del rischio e governance} --- NIST \textit{AI RMF: Generative AI Profile} (NIST.AI.600-1) e OWASP \textit{Top 10 for LLM Applications} (prompt injection, excessive agency, overreliance).
+  \item \textbf{Vincoli e DevSecOps} --- NIST \textit{Secure Software Development Framework} (SSDF): i vincoli SEC/PERF ne sono la versione operativa per agenti.
+  \item \textbf{Lifecycle vendor per agenti (per confronto)} --- IBM \textit{Agent Development Lifecycle}, Microsoft Foundry, Salesforce Agentforce. Trattano il ciclo di vita degli agenti \textit{come prodotto}: complemento, non sostituto, dell'AI-DLC di questo libro.
+\end{itemize}
+
+\section*{Il Framework AI-DLC}
 
 \begin{itemize}
   \item \textbf{Repository ufficiale:} \url{https://github.com/rollaradio/adlc-framework} --- sorgente del framework, CHANGELOG, MIGRATION.md.
@@ -60,7 +76,7 @@ I link a documentazione ufficiale di agenti AI cambiano frequentemente. Verifica
 \section*{Standard di riferimento}
 
 \begin{itemize}
-  \item \textbf{NIST SP 800-53}: standard di controlli di sicurezza per sistemi informativi. I vincoli SEC di ADLC ne sono parzialmente ispirati.
+  \item \textbf{NIST SP 800-53}: standard di controlli di sicurezza per sistemi informativi. I vincoli SEC di AI-DLC ne sono parzialmente ispirati.
   \item \textbf{Google SRE Book:} \url{https://sre.google/sre-book/table-of-contents/}. Capitoli su SLO/SLI (base di PERF-01/02) e incident response (base di \texttt{06\_OPS.md}).
 \end{itemize}
 

@@ -1,12 +1,12 @@
 ---
-title: "ADLC — Orchestrare Agenti AI nello Sviluppo Software"
+title: "AI-DLC — Orchestrare Agenti AI nello Sviluppo Software"
 subtitle: "Guida pratica al ciclo di vita AI-Driven per sviluppatori"
 author: "Riccardo Rolla"
 language: it
 date: "2026"
 rights: "© 2026 Riccardo Rolla. Tutti i diritti riservati."
 description: >
-  Guida pratica al framework ADLC (AI-Driven Software Development Life Cycle)
+  Guida pratica al framework AI-DLC (AI-Driven Development Life Cycle)
   per strutturare il lavoro con agenti AI come Claude Code, GitHub Copilot,
   Codex e Gemini su progetti software reali.
 subject: "Sviluppo software, Intelligenza artificiale, Agenti AI"

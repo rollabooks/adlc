@@ -1,4 +1,4 @@
-# Capitolo 6 — Fasi e Modes
+﻿# Capitolo 6 — Fasi e Modes
 
 Uno degli errori più comuni nell'uso degli agenti AI è trattarli come strumenti uniformi: la stessa configurazione, lo stesso livello di cerimonia, lo stesso tipo di dialogo — per qualsiasi task, in qualsiasi momento del progetto.
 
@@ -12,7 +12,7 @@ Fasi e Modes lavorano insieme per rendere l'agente contestuale, non generico.
 
 ## 6.1 Le sette fasi del ciclo AI-Driven
 
-ADLC divide il ciclo di sviluppo in sette fasi numerate da 0 a 6. Non sono rigide — puoi saltare fasi, tornare indietro, sovrapporre — ma hanno un significato preciso che influenza il comportamento dell'agente.
+AI-DLC divide il ciclo di sviluppo in sette fasi numerate da 0 a 6. Non sono rigide — puoi saltare fasi, tornare indietro, sovrapporre — ma hanno un significato preciso che influenza il comportamento dell'agente.
 
 ### Fase 0 — Discovery
 
@@ -219,4 +219,4 @@ L'agente carica `05_VERIFICATION_RELEASE.md` e ti conferma le regole attive per 
 - I HALT trigger non vengono mai disattivati, indipendentemente dal Mode.
 - Cambia Mode liberamente durante il progetto: STANDARD per partire, LITE per il lavoro quotidiano rodato, AUDIT per revisioni formali, RAPID solo per spike su branch dedicati.
 
-Con questo chiudiamo la Parte II. Nelle prossime cinque sessioni costruiremo il sistema di sicurezza di ADLC: classificazione del rischio, model levels, confidence tag, HALT trigger e vincoli SEC/PERF.
+Con questo chiudiamo la Parte II. Nelle prossime cinque sessioni costruiremo il sistema di sicurezza di AI-DLC: classificazione del rischio, model levels, confidence tag, HALT trigger e vincoli SEC/PERF.

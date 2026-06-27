@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Appendice A — Glossario
 % ============================================================
 
@@ -9,17 +9,19 @@ Definizioni operative dei termini usati nel libro.
 
 \begin{description}
 
-\item[\textbf{ADLC}] AI-Driven Software Development Life Cycle. Il framework descritto in questo libro. Non è un'AI, non è un tool da installare --- è un insieme di file Markdown e JSON che strutturano il dialogo tra sviluppatore e agente AI.
+\item[\textbf{AI-DLC}] AI-Driven Development Life Cycle. Il framework descritto in questo libro. Riprende la nomenclatura introdotta da AWS e la specializza. Non è un'AI, non è un tool da installare --- è un insieme di file Markdown e JSON che strutturano il dialogo tra sviluppatore e agente AI.
+
+\item[\textbf{ADLC}] Sigla da non confondere con AI-DLC. In ambito enterprise indica \textit{Agent Development Lifecycle} (IBM, Microsoft, Salesforce), il ciclo di vita per costruire e governare sistemi agentici come prodotto; in tradizioni più datate, \textit{Application Development Life Cycle} (quasi sinonimo di SDLC). Questo libro tratta l'uso di agenti per sviluppare software, non la costruzione di agenti.
 
 \item[\textbf{Agent Bootstrap}] La sequenza di operazioni che l'agente esegue all'inizio di ogni sessione: legge \texttt{\_CONTEXT.md}, carica il modulo di fase appropriato, legge le regole di progetto, conferma il contesto.
 
-\item[\textbf{AI Sizing}] La stima associata a ogni task ADLC: token di input, token di output, totale, model level, modello raccomandato e motivazione.
+\item[\textbf{AI Sizing}] La stima associata a ogni task AI-DLC: token di input, token di output, totale, model level, modello raccomandato e motivazione.
 
 \item[\textbf{ASSUMPTION}] Uno dei tre confidence tag. Indica che l'agente ha fatto un'ipotesi non supportata da evidenza diretta. Richiede verifica prima di qualsiasi operazione.
 
 \item[\textbf{Checkpoint}] Punto fermo fissato con \texttt{@checkpoint} ogni 3--5 azioni significative.
 
-\item[\textbf{Comando conversazionale}] Istruzione in formato \texttt{@keyword} interpretata dall'agente secondo il protocollo ADLC. Non è un comando shell.
+\item[\textbf{Comando conversazionale}] Istruzione in formato \texttt{@keyword} interpretata dall'agente secondo il protocollo AI-DLC. Non è un comando shell.
 
 \item[\textbf{Company extension}] Cartella \texttt{.adlc/company/} con processi SDLC aziendali. Ha priorità sul framework.
 
@@ -55,7 +57,7 @@ Definizioni operative dei termini usati nel libro.
 
 \item[\textbf{PERF-XX}] Vincolo di performance riusabile. Attivato in \texttt{\_CONTEXT.md}. Sette predefiniti (PERF-01..PERF-07).
 
-\item[\textbf{Phase}] Una delle sette fasi ADLC: 0-Discovery, 1-Analysis, 2-Design, 3-Implementation, 4-Verification, 5-Release, 6-Ops.
+\item[\textbf{Phase}] Una delle sette fasi AI-DLC: 0-Discovery, 1-Analysis, 2-Design, 3-Implementation, 4-Verification, 5-Release, 6-Ops.
 
 \item[\textbf{PROGRESS.md}] Il diario di bordo del progetto. Registra fatto, scoperte e decisioni in ordine cronologico inverso.
 

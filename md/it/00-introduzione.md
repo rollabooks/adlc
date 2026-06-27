@@ -1,4 +1,4 @@
-# Introduzione — Il problema senza nome
+﻿# Introduzione — Il problema senza nome
 
 Hai già lavorato con un agente AI per qualche ora e hai visto come può essere straordinariamente utile. Gli chiedi di progettare un endpoint, lui risponde con codice pulito, test inclusi. Gli chiedi di rivedere un modulo, individua tre problemi che non avevi notato. Sembra quasi troppo bello.
 
@@ -46,9 +46,9 @@ La soluzione non è trovare un agente "migliore". La soluzione è costruire un s
 
 ---
 
-## Cos'è ADLC
+## Cos'è AI-DLC
 
-**ADLC** — *AI-Driven Software Development Life Cycle* — è quel sistema. Non è un'AI, non è un tool da installare, non è un framework specifico per un linguaggio. È un insieme di file Markdown e JSON che vivono nel tuo repository e che dicono all'agente:
+**AI-DLC** — *AI-Driven Development Life Cycle* — è quel sistema. Non è un'AI, non è un tool da installare, non è un framework specifico per un linguaggio. È un insieme di file Markdown e JSON che vivono nel tuo repository e che dicono all'agente:
 
 - dove sei nel progetto (fase, task attivo)
 - cosa deve rispettare (vincoli di sicurezza e performance)
@@ -63,7 +63,7 @@ Il risultato è un agente che lavora *in continuità*: ogni sessione parte dal p
 
 Questo libro è diviso in cinque parti.
 
-**Parte I — Il Framework** (Capitoli 1-3) ti porta da zero a una prima sessione di lavoro funzionante. Se vuoi testare ADLC subito, puoi leggere solo questa parte e tornare al resto quando ne hai bisogno.
+**Parte I — Il Framework** (Capitoli 1-3) ti porta da zero a una prima sessione di lavoro funzionante. Se vuoi testare AI-DLC subito, puoi leggere solo questa parte e tornare al resto quando ne hai bisogno.
 
 **Parte II — La Memoria del Progetto** (Capitoli 4-6) spiega in dettaglio `_CONTEXT.md` e `PROGRESS.md`, i due file che costruiscono la continuità tra sessioni.
 
@@ -77,13 +77,13 @@ Questo libro è diviso in cinque parti.
 
 ## Il progetto di esempio
 
-Per tutta la durata del libro useremo un progetto realistico: **TaskFlow API**, una REST API per la gestione di task e progetti, costruita con Node.js e Fastify. Il progetto è volutamente familiare — chiunque abbia già costruito una REST API riconoscerà i pattern — ma abbastanza ricco da far emergere i problemi reali che ADLC risolve.
+Per tutta la durata del libro useremo un progetto realistico: **TaskFlow API**, una REST API per la gestione di task e progetti, costruita con Node.js e Fastify. Il progetto è volutamente familiare — chiunque abbia già costruito una REST API riconoscerà i pattern — ma abbastanza ricco da far emergere i problemi reali che AI-DLC risolve.
 
 Il team è composto da tre sviluppatori: **Lorenzo**, tech lead con esperienza backend, che usa Claude Code in terminale; **Giulia**, sviluppatrice full-stack che lavora in VS Code con GitHub Copilot; e **Marco**, che si occupa di DevOps e code review, e usa Claude Code e Codex CLI. Li seguiremo in sessioni diverse nel corso del libro.
 
-Seguiremo TaskFlow API dall'analisi dei requisiti fino al deploy, passando per design, implementazione, test e release. A ogni capitolo vedremo come ADLC cambia il modo in cui l'agente AI lavora su quel progetto.
+Seguiremo TaskFlow API dall'analisi dei requisiti fino al deploy, passando per design, implementazione, test e release. A ogni capitolo vedremo come AI-DLC cambia il modo in cui l'agente AI lavora su quel progetto.
 
-Non importa se il tuo stack è diverso. ADLC è agnostico rispetto alla tecnologia. Ciò che impari su TaskFlow API si applica identico a un progetto Python, Go, Flutter o qualsiasi altra combinazione.
+Non importa se il tuo stack è diverso. AI-DLC è agnostico rispetto alla tecnologia. Ciò che impari su TaskFlow API si applica identico a un progetto Python, Go, Flutter o qualsiasi altra combinazione.
 
 ---
 

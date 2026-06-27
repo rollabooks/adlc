@@ -7,12 +7,12 @@
 
 Lorenzo ha clonato il repository di TaskFlow API, aperto il terminale e ha davanti a sé una directory con il codice del progetto e nient'altro. Nessun \texttt{\_CONTEXT.md}, nessun framework AI. Questo è il punto di partenza.
 
-In questo capitolo seguiamo Lorenzo --- e tu con lui --- mentre aggiunge ADLC al progetto, compila il contesto per la prima volta e fa il primo turno con un agente AI. Quindici minuti, non di più.
+In questo capitolo seguiamo Lorenzo --- e tu con lui --- mentre aggiunge AI-DLC al progetto, compila il contesto per la prima volta e fa il primo turno con un agente AI. Quindici minuti, non di più.
 
 \section{Passo 1 --- Copiare il framework nel repository}
 \label{sec:02-passo1-copia}
 
-ADLC non ha un installer. Si copia. La struttura che ti serve è questa:
+AI-DLC non ha un installer. Si copia. La struttura che ti serve è questa:
 
 \begin{lstlisting}[language=,caption={Struttura del framework nel repository}]
 progetto/
@@ -144,7 +144,7 @@ bash .adlc/tools/validate.sh
 Output atteso:
 
 \begin{lstlisting}[language=,caption={Output del validator}]
-ADLC validation — v3.3.0
+AI-DLC validation — v3.3.0
 
 [OK] Framework files present
 [OK] AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
@@ -152,7 +152,7 @@ ADLC validation — v3.3.0
 [OK] manifest.json valid
 [!]  _CONTEXT.md: Active Task Token Est. is placeholder (0/0/0)
 
-ADLC validation passed (2 warnings)
+AI-DLC validation passed (2 warnings)
 \end{lstlisting}
 
 I warning sui placeholder sono normali per la prima sessione. Con \texttt{--strict} diventano failure (utile in CI).

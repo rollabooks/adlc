@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 4 — _CONTEXT.md: la fonte di verità
 % ============================================================
 
@@ -140,6 +140,21 @@ Inizia sempre dal minimo. Un \texttt{\_CONTEXT.md} parzialmente compilato è meg
 \textbf{Mettere troppo nel context.} Le regole dettagliate del progetto vanno in \texttt{.adlc/project/instructions.md}. Il context contiene lo stato attuale, non il manuale del progetto.
 
 \textbf{Non committare il file.} \texttt{\_CONTEXT.md} va in git. È parte del progetto, non un file temporaneo.
+
+\section{Il contesto non è magia}
+\label{sec:04-non-magia}
+
+Vale la pena essere onesti su un punto che la ricerca recente ha messo in evidenza. Gli studi empirici sui file di contesto (\texttt{\_CONTEXT.md}, \texttt{AGENTS.md}, \texttt{CLAUDE.md}) danno risultati misti: un file mal progettato, troppo lungo o non aggiornato può aumentare il costo in token e perfino peggiorare l'aderenza dell'agente invece di migliorarla. Un \texttt{\_CONTEXT.md} non è un talismano --- è una scelta di design che vale solo se trattata con disciplina ingegneristica.
+
+Tre principi che la letteratura conferma:
+
+\begin{itemize}
+  \item \textbf{Minimalità.} Più contesto non è meglio. Includi solo ciò che cambia il comportamento dell'agente; rimuovi il resto. Le panoramiche generiche del progetto sono poco utili --- i vincoli concreti, i comandi esatti e le modalità di fallimento note sono ciò che fa la differenza.
+  \item \textbf{Aggiornamento.} Il fenomeno del \textit{context rot} --- l'invecchiamento del contesto rispetto al codice reale --- è documentato in letteratura: un \texttt{\_CONTEXT.md} che diverge dal repository diventa una fonte di errori, non di verità.
+  \item \textbf{Specificità.} Un vincolo vago (\texttt{usa buone pratiche di sicurezza}) non orienta l'agente. Un vincolo specifico (\texttt{SEC-03: redaction di password, token, email nei log con Pino}) sì.
+\end{itemize}
+
+Il valore di \texttt{\_CONTEXT.md} non è automatico: dipende interamente da quanto bene lo mantieni. La classificazione del rischio e i confidence tag (Parte III) e il ciclo di checkpoint (Capitolo~\ref{ch:sessione-reale}) esistono proprio per imporre questa disciplina.
 
 \section*{\LabelSummary}
 

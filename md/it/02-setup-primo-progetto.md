@@ -1,14 +1,14 @@
-# Capitolo 2 — Setup del primo progetto in 15 minuti
+﻿# Capitolo 2 — Setup del primo progetto in 15 minuti
 
 Lorenzo ha clonato il repository di TaskFlow API, aperto il terminale e ha davanti a sé una directory con il codice del progetto e nient'altro. Nessun `_CONTEXT.md`, nessun framework AI. Questo è il punto di partenza.
 
-In questo capitolo seguiamo Lorenzo — e tu con lui — mentre aggiunge ADLC al progetto, compila il contesto per la prima volta e fa il primo turno con un agente AI. Quindici minuti, non di più.
+In questo capitolo seguiamo Lorenzo — e tu con lui — mentre aggiunge AI-DLC al progetto, compila il contesto per la prima volta e fa il primo turno con un agente AI. Quindici minuti, non di più.
 
 ---
 
 ## 2.1 Passo 1 — Copiare il framework nel repository
 
-ADLC non ha un installer. Si copia. La struttura che ti serve è questa:
+AI-DLC non ha un installer. Si copia. La struttura che ti serve è questa:
 
 ```
 progetto/
@@ -19,7 +19,7 @@ progetto/
 ├── .github/
 │   └── copilot-instructions.md      ← GitHub Copilot
 └── .adlc/
-    ├── ADLC.md
+    ├── @@AI-DLCFILE@@
     ├── COMMANDS.md
     ├── halt-triggers.yaml
     ├── manifest.json
@@ -139,7 +139,7 @@ Apri `_CONTEXT.md`. Troverai un template con placeholder da riempire. Ecco cosa 
 
 Alcuni campi che ti potrebbero sembrare oscuri:
 
-**Phase** segue la numerazione ADLC: 0 è Discovery (analisi requisiti), 1 è Analysis, 2 è Design, 3 è Implementation, 4 è Verification, 5 è Release, 6 è Ops. Lorenzo è all'inizio, quindi `0-Discovery`.
+**Phase** segue la numerazione AI-DLC: 0 è Discovery (analisi requisiti), 1 è Analysis, 2 è Design, 3 è Implementation, 4 è Verification, 5 è Release, 6 è Ops. Lorenzo è all'inizio, quindi `0-Discovery`.
 
 **Mode** controlla quanta cerimonia applica l'agente. `STANDARD` è il default consigliato per iniziare. Lo puoi abbassare a `LITE` quando il progetto è rodato e i workflow sono stabili.
 
@@ -166,7 +166,7 @@ bash .adlc/tools/validate.sh
 L'output atteso è simile a questo:
 
 ```
-ADLC validation — v3.3.0
+AI-DLC validation — v3.3.0
 
 ✅ Framework files present
 ✅ AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
@@ -176,7 +176,7 @@ ADLC validation — v3.3.0
 ⚠  _CONTEXT.md: Active Task Token Est. is placeholder (0/0/0)
 ⚠  _CONTEXT.md: Active Task Model Level is placeholder
 
-ADLC validation passed (2 warnings)
+AI-DLC validation passed (2 warnings)
 ```
 
 I warning sui placeholder sono normali per la prima sessione — scompaiono appena stimi il task corrente. Gli errori `✗` invece indicano problemi da correggere prima di procedere.

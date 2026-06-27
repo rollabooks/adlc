@@ -1,4 +1,4 @@
-# Capitolo 4 — `_CONTEXT.md`: la fonte di verità
+﻿# Capitolo 4 — `_CONTEXT.md`: la fonte di verità
 
 In un progetto software tradizionale, il contesto vive nelle teste delle persone: lo stack tecnologico, i vincoli di sicurezza, le decisioni architetturali, le convenzioni del team. Funziona finché il team è piccolo e stabile. Appena entra qualcuno di nuovo — o appena torni su un progetto dopo tre settimane — il contesto deve essere ricostruito da zero.
 
@@ -52,7 +52,7 @@ La prima tabella è la parte più letta dall'agente: contiene lo stato corrente 
 | Last Checkpoint          | 2026-06-27 10:47 — POST /tasks completato       |
 ```
 
-**`Phase`** segue la numerazione ADLC da 0 a 6. Non è solo informativa: determina quali moduli il framework suggerisce di caricare. Un agente in Phase 2 (Design) pensa in termini di architettura e contratti API; lo stesso agente in Phase 3 (Implementation) si concentra su codice e test.
+**`Phase`** segue la numerazione AI-DLC da 0 a 6. Non è solo informativa: determina quali moduli il framework suggerisce di caricare. Un agente in Phase 2 (Design) pensa in termini di architettura e contratti API; lo stesso agente in Phase 3 (Implementation) si concentra su codice e test.
 
 **`Mode`** controlla il livello di cerimonia. È il parametro su cui tornerai più spesso nel corso del progetto — il Capitolo 6 lo spiega in dettaglio.
 
@@ -178,6 +178,20 @@ Per TaskFlow API, Lorenzo è partito dal template minimo e ha aggiunto le sezion
 **Mettere troppe cose nel context.** Il file deve essere conciso. Le regole dettagliate del progetto vanno in `.adlc/project/instructions.md`. Le convenzioni di codice vanno in `.adlc/project/conventions.md`. Il context contiene lo stato attuale, non il manuale del progetto.
 
 **Non committare `_CONTEXT.md`.** Il file deve essere in git. È parte del progetto, non un file temporaneo. Il suo storico di versioni è prezioso: puoi vedere come è evoluto il progetto nel tempo.
+
+---
+
+## 4.7 Il contesto non è magia
+
+Vale la pena essere onesti su un punto che la ricerca recente ha messo in evidenza. Gli studi empirici sui file di contesto (`_CONTEXT.md`, `AGENTS.md`, `CLAUDE.md`) danno risultati misti: un file mal progettato, troppo lungo o non aggiornato può aumentare il costo in token e perfino peggiorare l'aderenza dell'agente invece di migliorarla. Un `_CONTEXT.md` non è un talismano — è una scelta di design che vale solo se trattata con disciplina ingegneristica.
+
+Tre principi che la letteratura conferma:
+
+- **Minimalità.** Più contesto non è meglio. Includi solo ciò che cambia il comportamento dell'agente; rimuovi il resto. Le panoramiche generiche del progetto sono poco utili — i vincoli concreti, i comandi esatti e le modalità di fallimento note sono ciò che fa la differenza.
+- **Aggiornamento.** Il fenomeno del *context rot* — l'invecchiamento del contesto rispetto al codice reale — è documentato in letteratura: un `_CONTEXT.md` che diverge dal repository diventa una fonte di errori, non di verità. È lo stesso problema della documentazione che non viene mantenuta, applicato agli artefatti per agenti.
+- **Specificità.** Un vincolo vago (`usa buone pratiche di sicurezza`) non orienta l'agente. Un vincolo specifico (`SEC-03: redaction di password, token, email nei log con Pino`) sì.
+
+Il valore di `_CONTEXT.md` non è automatico: dipende interamente da quanto bene lo mantieni. I capitoli sulla classificazione del rischio e sui confidence tag (Parte III) e il ciclo di checkpoint (Capitolo 3) esistono proprio per imporre questa disciplina.
 
 ---
 

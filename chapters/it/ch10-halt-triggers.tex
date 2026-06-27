@@ -1,11 +1,11 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 10 — HALT Triggers
 % ============================================================
 
 \chapter{HALT Triggers: il freno di emergenza}
 \label{ch:halt-triggers}
 
-Ci sono zone in ogni progetto che non dovresti mai modificare di impulso: schema del database, codice di autenticazione, credenziali, CI/CD. Gli HALT trigger sono il meccanismo con cui ADLC presidia queste zone.
+Ci sono zone in ogni progetto che non dovresti mai modificare di impulso: schema del database, codice di autenticazione, credenziali, CI/CD. Gli HALT trigger sono il meccanismo con cui AI-DLC presidia queste zone.
 
 \section{Il file \texttt{halt-triggers.yaml}}
 \label{sec:10-file}
@@ -77,7 +77,7 @@ Anche in Mode FAST --- il mode con meno cerimonia --- un path che corrisponde a 
 \section*{\LabelSummary}
 
 \begin{itemize}
-  \item I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework ADLC.
+  \item I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework AI-DLC.
   \item Gli override di progetto in \texttt{.adlc/project/halt-triggers.yaml} estendono (o disattivano) i trigger predefiniti.
   \item I trigger non si disattivano mai con i Modes --- sono il livello di sicurezza costante.
   \item Un falso positivo (trigger attivato per path poi non modificato) è accettabile e preferibile al contrario.

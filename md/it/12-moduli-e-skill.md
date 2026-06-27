@@ -1,8 +1,8 @@
-# Capitolo 12 — Moduli e Skill: caricare solo ciò che serve
+﻿# Capitolo 12 — Moduli e Skill: caricare solo ciò che serve
 
 Nei capitoli precedenti abbiamo usato termini come "il modulo di implementazione" o "la skill di API design" senza spiegarli in dettaglio. È il momento di farlo.
 
-Il framework ADLC è composto da file che non vengono caricati tutti insieme all'inizio di ogni sessione. Vengono caricati selettivamente, in base alla fase in cui sei e al tipo di task che stai svolgendo. Questo è il meccanismo che evita il "context overload" — la situazione in cui l'agente ha così tante regole in testa da non riuscire ad applicarne nessuna bene.
+Il framework AI-DLC è composto da file che non vengono caricati tutti insieme all'inizio di ogni sessione. Vengono caricati selettivamente, in base alla fase in cui sei e al tipo di task che stai svolgendo. Questo è il meccanismo che evita il "context overload" — la situazione in cui l'agente ha così tante regole in testa da non riuscire ad applicarne nessuna bene.
 
 ---
 

@@ -1,8 +1,8 @@
-# Capitolo 7 — Classificazione del rischio
+﻿# Capitolo 7 — Classificazione del rischio
 
 Ogni richiesta che fai a un agente AI porta con sé un rischio implicito. Rinominare una variabile è diverso da modificare lo schema del database. Aggiungere un campo a un DTO è diverso da cambiare il sistema di autenticazione. Eppure, senza un sistema di classificazione, l'agente tratta tutto allo stesso modo — o peggio, decide in autonomia cosa merita attenzione e cosa no.
 
-ADLC formalizza questa distinzione in cinque livelli di rischio. Non è una burocrazia aggiuntiva: è il meccanismo che decide quanta cerimonia applicare prima di agire.
+AI-DLC formalizza questa distinzione in cinque livelli di rischio. Non è una burocrazia aggiuntiva: è il meccanismo che decide quanta cerimonia applicare prima di agire.
 
 ---
 
@@ -192,7 +192,7 @@ In Mode LITE, le classificazioni LOW/MEDIUM vengono eseguite senza aspettare la 
 
 ## Riepilogo
 
-- ADLC classifica ogni richiesta in cinque livelli: LOW (esegui), MEDIUM (piano → approva → esegui), HIGH (HALT → piano → conferma esplicita), HIGH+ (HALT → conferma intenzione → piano → conferma esecuzione), CRITICAL (HALT → alternative → ADR → nessuna esecuzione).
+- AI-DLC classifica ogni richiesta in cinque livelli: LOW (esegui), MEDIUM (piano → approva → esegui), HIGH (HALT → piano → conferma esplicita), HIGH+ (HALT → conferma intenzione → piano → conferma esecuzione), CRITICAL (HALT → alternative → ADR → nessuna esecuzione).
 - La classificazione considera il path del file (HALT trigger), il tipo di operazione e l'ambito dell'effetto.
 - Ogni livello ha un risk floor che forza un minimum model level indipendentemente dalla stima token.
 - La classificazione è sempre comunicata prima di agire — puoi correggerla se non ti convince.

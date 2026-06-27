@@ -1,6 +1,6 @@
-# Capitolo 16 — Troubleshooting, CI/CD e Manutenzione del Framework
+﻿# Capitolo 16 — Troubleshooting, CI/CD e Manutenzione del Framework
 
-Arrivati in produzione, ADLC entra nella sua fase di vita più lunga: non più setup iniziale o sviluppo attivo, ma manutenzione. Il framework deve rimanere utile mentre il team cresce, gli agenti AI evolvono e il progetto accumula storia.
+Arrivati in produzione, AI-DLC entra nella sua fase di vita più lunga: non più setup iniziale o sviluppo attivo, ma manutenzione. Il framework deve rimanere utile mentre il team cresce, gli agenti AI evolvono e il progetto accumula storia.
 
 Questo capitolo copre tre argomenti: i problemi comuni e come risolverli, l'integrazione con CI/CD per rendere le verifiche automatiche, e come tenere il framework aggiornato nel tempo senza rompere ciò che funziona.
 
@@ -153,11 +153,11 @@ Il playbook impone un approccio strutturato: triage (10 minuti), root cause anal
 
 ## 16.2 Integrazione CI/CD
 
-Il validator ADLC può girare in CI come qualsiasi altro script di verifica. L'esempio ufficiale usa GitHub Actions:
+Il validator AI-DLC può girare in CI come qualsiasi altro script di verifica. L'esempio ufficiale usa GitHub Actions:
 
 ```yaml
-# .github/workflows/adlc-validate.yml
-name: ADLC Validate
+# .github/workflows/AI-DLC-validate.yml
+name: AI-DLC Validate
 
 on:
   pull_request:
@@ -166,13 +166,13 @@ on:
       - main
 
 jobs:
-  adlc-validate:
+  AI-DLC-validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate ADLC
+      - name: Validate AI-DLC
         run: bash .adlc/tools/validate.sh
 
       - name: Smoke tests
@@ -189,7 +189,7 @@ jobs:
 **Modalità strict per team esigenti:**
 
 ```yaml
-- name: Validate ADLC (strict)
+- name: Validate AI-DLC (strict)
   run: bash .adlc/tools/validate.sh --strict
 ```
 
@@ -210,7 +210,7 @@ Se il team usa Copilot, aggiungi la verifica dell'allineamento:
 
 ### Quando aggiornare il framework
 
-ADLC segue semantic versioning (`MAJOR.MINOR.PATCH`):
+AI-DLC segue semantic versioning (`MAJOR.MINOR.PATCH`):
 
 | Tipo di release | Quando aggiornare |
 |---|---|
@@ -225,7 +225,7 @@ cat .adlc/VERSION
 
 ### Come aggiornare
 
-Un aggiornamento ADLC è una copia di file, non un `npm update`. Il flusso raccomandato:
+Un aggiornamento AI-DLC è una copia di file, non un `npm update`. Il flusso raccomandato:
 
 ```bash
 # 1. Scarica la nuova versione in una directory temporanea
@@ -289,7 +289,7 @@ In `_CONTEXT.md`. Da quel momento, l'agente carica `06_OPS.md` e applica il prot
 
 ## 16.5 Quando il framework non serve più
 
-ADLC è uno strumento, non un dogma. Ci sono situazioni in cui ha senso ridurlo o rimuoverlo:
+AI-DLC è uno strumento, non un dogma. Ci sono situazioni in cui ha senso ridurlo o rimuoverlo:
 
 - Il progetto è in maintenance mode con cambiamenti rarissimi e nessun agente AI attivo.
 - Il team ha adottato un framework agente più stringente che include già gestione del contesto, classificazione del rischio e confidence tag.

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  27 JUN 2026 13:58
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  27 JUN 2026 14:46
  system commands enabled.
 **book-it.tex
 (./book-it.tex
@@ -1805,7 +1805,7 @@ LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 52.
+(Font)              scaled to size 8.27998pt on input line 53.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -1906,7 +1906,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [4]
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/b/sc' will be
-(Font)              scaled to size 9.19998pt on input line 82.
+(Font)              scaled to size 9.19998pt on input line 63.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -1924,12 +1924,28 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [6]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[7]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[8
+
+]
 Capitolo 2.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 17.
-[7
-
-]
+[9]
 (C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/tex/latex/listings/lst
 lang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
@@ -1945,26 +1961,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[8]
+[10]
 LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
 (Font)              scaled to size 12.67206pt on input line 96.
 
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[9]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[10]) (../chapters/it/ch03-sessione-reale.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1980,9 +1980,25 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[12]
+[12]) (../chapters/it/ch03-sessione-reale.tex
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[13]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[14]
 Capitolo 3.
-[13
+[15
 
 ]
 
@@ -1992,23 +2008,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[14]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[15]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[16])
+[16]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2024,38 +2024,31 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[18
+[18])
 
-] [19] [20] (../chapters/it/ch04-context-md.tex
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[19]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[20
+
+] [21] [22] (../chapters/it/ch04-context-md.tex
 Capitolo 4.
 LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
 (Font)              scaled to size 18.2513pt on input line 5.
-[21
+[23
 
 ]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[22]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[23]
-Overfull \hbox (8.04907pt too wide) in paragraph at lines 140--141
-[]\TU/texgyretermes(0)/b/n/10 Met-te-re trop-po nel con-text. \TU/texgyretermes
-(0)/m/n/10 Le re-go-le det-ta-glia-te del pro-get-to van-no in \TU/InconsolataN
-(0)/m/n/10 .adlc/project/instructions.md\TU/texgyretermes(0)/m/n/10 .
- []
-
-) (../chapters/it/ch05-progress-md.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2064,38 +2057,48 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [24]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[25]
+Overfull \hbox (8.04907pt too wide) in paragraph at lines 140--141
+[]\TU/texgyretermes(0)/b/n/10 Met-te-re trop-po nel con-text. \TU/texgyretermes
+(0)/m/n/10 Le re-go-le det-ta-glia-te del pro-get-to van-no in \TU/InconsolataN
+(0)/m/n/10 .adlc/project/instructions.md\TU/texgyretermes(0)/m/n/10 .
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[26]) (../chapters/it/ch05-progress-md.tex
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[27]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[28
+
+]
 Capitolo 5.
-[25
-
-]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[26]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[27]) (../chapters/it/ch06-fasi-e-modes.tex
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[28]
-Capitolo 6.
-[29
-
-]
+[29]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2104,6 +2107,34 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [30]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[31]) (../chapters/it/ch06-fasi-e-modes.tex
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[32]
+Capitolo 6.
+[33
+
+]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[34]
 
 LaTeX Font Warning: Font shape `TU/InconsolataN(0)/m/it' undefined
 (Font)              using `TU/InconsolataN(0)/m/n' instead on input line 112.
@@ -2115,7 +2146,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[31])
+[35])
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2123,45 +2154,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[32] [33
+[36] [37
 
-] [34] (../chapters/it/ch07-classificazione-rischio.tex
+] [38] (../chapters/it/ch07-classificazione-rischio.tex
 Capitolo 7.
-[35
-
-]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[36]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[37]) (../chapters/it/ch08-model-levels.tex
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[38]
-Capitolo 8.
-
-Overfull \hbox (1.66023pt too wide) in paragraph at lines 34--35
-[]\TU/texgyretermes(0)/m/n/10 Il map-ping ai mo-del-li con-cre-ti (An-th-ro-pic,
- Ope-nAI, Ge-mi-ni) vi-ve in \TU/InconsolataN(0)/m/n/10 .adlc/manifest.json#mode
-l_levels
- []
-
 [39
 
 ]
@@ -2172,7 +2168,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[40]) (../chapters/it/ch09-confidence-tags.tex
+[40]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2180,7 +2176,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[41]
+[41]) (../chapters/it/ch08-model-levels.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2188,11 +2184,18 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[42
+[42]
+Capitolo 8.
+
+Overfull \hbox (1.66023pt too wide) in paragraph at lines 34--35
+[]\TU/texgyretermes(0)/m/n/10 Il map-ping ai mo-del-li con-cre-ti (An-th-ro-pic,
+ Ope-nAI, Ge-mi-ni) vi-ve in \TU/InconsolataN(0)/m/n/10 .adlc/manifest.json#mode
+l_levels
+ []
+
+[43
 
 ]
-Capitolo 9.
-[43]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2200,7 +2203,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[44]) (../chapters/it/ch10-halt-triggers.tex
+[44]) (../chapters/it/ch09-confidence-tags.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2219,11 +2222,8 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [46
 
 ]
-Capitolo 10.
+Capitolo 9.
 [47]
-LaTeX Font Info:    Font shape `TU/InconsolataN(0)/m/it' will be
-(Font)              scaled to size 7.92004pt on input line 65.
-
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2231,7 +2231,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[48]) (../chapters/it/ch11-vincoli-sec-perf.tex
+[48]) (../chapters/it/ch10-halt-triggers.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2250,8 +2250,11 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [50
 
 ]
-Capitolo 11.
+Capitolo 10.
 [51]
+LaTeX Font Info:    Font shape `TU/InconsolataN(0)/m/it' will be
+(Font)              scaled to size 7.92004pt on input line 65.
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2259,7 +2262,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[52])
+[52]) (../chapters/it/ch11-vincoli-sec-perf.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2277,7 +2280,35 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [54
 
-] [55] [56] (../chapters/it/ch12-moduli-e-skill.tex
+]
+Capitolo 11.
+[55]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[56])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[57]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[58
+
+] [59] [60] (../chapters/it/ch12-moduli-e-skill.tex
 Capitolo 12.
 
 Underfull \hbox (badness 1442) in paragraph at lines 72--73
@@ -2285,7 +2316,7 @@ Underfull \hbox (badness 1442) in paragraph at lines 72--73
 pro-get-to può ave-re esi-gen-ze spe-ci-fi-che in
  []
 
-[57
+[61
 
 ]
 
@@ -2295,37 +2326,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[58]) (../chapters/it/ch13-comandi-conversazionali.tex
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[59]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[60
-
-]
-Capitolo 13.
-LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
-(Font)              scaled to size 10.56006pt on input line 39.
-[61]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[62]) (../chapters/it/ch14-multi-agente.tex
+[62]) (../chapters/it/ch13-comandi-conversazionali.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2344,7 +2345,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [64
 
 ]
-Capitolo 14.
+Capitolo 13.
+LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
+(Font)              scaled to size 10.56006pt on input line 39.
 [65]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -2353,7 +2356,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[66]) (../chapters/it/ch15-monorepo-legacy.tex
+[66]) (../chapters/it/ch14-multi-agente.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2372,14 +2375,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [68
 
 ]
-Capitolo 15.
-
-Overfull \hbox (0.77327pt too wide) in paragraph at lines 37--38
-[]\TU/texgyretermes(0)/b/n/10 Ag-gior-na-men-to in-di-ce: \TU/texgyretermes(0)/
-m/n/10 do-po ag-giun-te o spo-sta-men-ti di sot-to-pro-get-ti, ag-gior-na \TU/I
-nconsolataN(0)/m/n/10 .adlc/projects.json\TU/texgyretermes(0)/m/n/10 : 
- []
-
+Capitolo 14.
 [69]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -2388,7 +2384,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[70])
+[70]) (../chapters/it/ch15-monorepo-legacy.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2406,9 +2402,50 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [72
 
-] [73] [74] (../chapters/it/ch16-produzione.tex
+]
+Capitolo 15.
+
+Overfull \hbox (0.77327pt too wide) in paragraph at lines 37--38
+[]\TU/texgyretermes(0)/b/n/10 Ag-gior-na-men-to in-di-ce: \TU/texgyretermes(0)/
+m/n/10 do-po ag-giun-te o spo-sta-men-ti di sot-to-pro-get-ti, ag-gior-na \TU/I
+nconsolataN(0)/m/n/10 .adlc/projects.json\TU/texgyretermes(0)/m/n/10 : 
+ []
+
+[73]
+Overfull \hbox (2.00589pt too wide) in paragraph at lines 71--72
+\TU/texgyretermes(0)/m/n/10 AI-DLC co-pre que-sto flus-so con due mo-du-li in se
+-quen-za: pri-ma si ana-liz-za (\TU/InconsolataN(0)/m/n/10 09_CODEBASE_ANALYSIS.
+md\TU/texgyretermes(0)/m/n/10 ),
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[74])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[75]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[76
+
+] [77] [78] (../chapters/it/ch16-produzione.tex
 Capitolo 16.
-[75
+[79
 
 ]
 
@@ -2418,7 +2455,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[76]
+[80]
 Underfull \hbox (badness 10000) in paragraph at lines 98--99
 []\TU/texgyretermes(0)/b/n/10 Non toc-ca-re mai du-ran-te l’ag-gior-na-men-to:
  \TU/InconsolataN(0)/m/n/10 _CONTEXT.md\TU/texgyretermes(0)/m/n/10 , \TU/Incons
@@ -2434,7 +2471,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[77]
+[81]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2442,11 +2479,11 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[78
+[82
 
-] [79] [80] (../chapters/it/app-a-glossario.tex
+] [83] [84] (../chapters/it/app-a-glossario.tex
 Appendice A.
-[81
+[85
 
 ]) (../chapters/it/app-b-comandi.tex
 
@@ -2456,9 +2493,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[82]
+[86]
 Appendice B.
-[83
+[87
 
 ]) (../chapters/it/app-c-template.tex
 
@@ -2468,9 +2505,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[84]
+[88]
 Appendice C.
-[85
+[89
 
 ]
 
@@ -2480,35 +2517,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[86]) (../chapters/it/app-d-risorse.tex
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[87]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[88
-
-]
-Appendice D.
-[89]
-
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
-
-[90])
+[90]) (../chapters/it/app-d-risorse.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2527,6 +2536,32 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [92
 
 ]
+Appendice D.
+[93]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[94]
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[95])
+
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[96]
 No file book-it.ind.
 (./book-it.aux)
  ***********
@@ -2538,21 +2573,21 @@ L3 programming layer <2025-12-24>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `book-it.out' has not changed.
-(rerunfilecheck)             Checksum: 8F585C2979DD2EA615BD834D2DB28729;22724.
+(rerunfilecheck)             Checksum: E9EF0179F4B003F68045FC0417162FBE;22963.
 Package logreq Info: Writing requests to 'book-it.run.xml'.
 
 \openout1 = book-it.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 44512 strings out of 476081
- 596959,1977958 words of node,token memory allocated
- 679 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 18 attribute, 74 glue_spec
-, 11 attribute_list, 2 write, 3 pdf_action nodes
-   avail lists: 1:2,2:9866,3:484,4:12657,5:11846,6:89,7:14873,8:73,9:28637,10:63
+ 44521 strings out of 476081
+ 596957,1977958 words of node,token memory allocated
+ 688 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 74 glue_spec
+, 12 attribute_list, 3 write, 3 pdf_action nodes
+   avail lists: 1:4,2:9863,3:458,4:12657,5:11848,6:93,7:14873,8:73,9:28637,10:63
 ,11:1456
- 65100 multiletter control sequences out of 65536+600000
+ 65104 multiletter control sequences out of 65536+600000
  86 fonts using 9724727 bytes
  108i,13n,110p,1199b,2226s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/opentype/public/f
@@ -2569,9 +2604,9 @@ tf><C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/opentype/publi
 c/tex-gyre/texgyreheros-bold.otf><C:/Users/ricca/scoop/apps/miktex/current/texmf
 s/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ricca/scoop/apps/m
 iktex/current/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on book-it.pdf (104 pages, 435504 bytes).
+Output written on book-it.pdf (108 pages, 449557 bytes).
 
-PDF statistics: 1665 PDF objects out of 1728 (max. 8388607)
- 814 named destinations out of 1000 (max. 1048576)
- 808 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1691 PDF objects out of 1728 (max. 8388607)
+ 819 named destinations out of 1000 (max. 1048576)
+ 816 words of extra memory for PDF output out of 10000 (max. 100000000)
 

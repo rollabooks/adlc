@@ -1,4 +1,4 @@
-# Capitolo 5 — `PROGRESS.md` e il cambio di fase
+﻿# Capitolo 5 — `PROGRESS.md` e il cambio di fase
 
 `_CONTEXT.md` fotografa il presente: dove sei adesso, cosa stai facendo, quali vincoli rispettare. Ma non risponde a domande come "perché abbiamo scelto Prisma invece di Drizzle?" o "cosa è successo nella sessione di giovedì scorso quando il deploy è andato storto?"
 
@@ -61,9 +61,9 @@ Motivazione: riduce duplicazione e rende il comportamento coerente per futuri en
 
 ---
 
-## 2026-06-25 — Setup iniziale ADLC
+## 2026-06-25 — Setup iniziale AI-DLC
 
-- Aggiunto framework ADLC v3.3.0 al repository
+- Aggiunto framework AI-DLC v3.3.0 al repository
 - Compilato _CONTEXT.md con stack, SEC-01..SEC-05, PERF-01..PERF-03
 - Validazione: 2 warning risolti (placeholder token est.)
 - Prima sessione di lavoro: bootstrap confermato correttamente
@@ -127,7 +127,7 @@ Questa voce serve da spartiacque: tutto sopra è storia di design, tutto sotto �
 
 ## 5.6 Aggiornare `PROGRESS.md` senza sforzo
 
-Il rischio con i diari di progetto è che vengano abbandonati perché richiedono troppo sforzo. ADLC risolve questo problema delegando la stesura all'agente.
+Il rischio con i diari di progetto è che vengano abbandonati perché richiedono troppo sforzo. AI-DLC risolve questo problema delegando la stesura all'agente.
 
 Alla fine di ogni sessione (o dopo un `@checkpoint`), chiedi:
 

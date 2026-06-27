@@ -10,7 +10,8 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 | Campo | Valore |
 |---|---|
-| Titolo | ADLC — Orchestrare Agenti AI nello Sviluppo Software |
+| Titolo | AI-DLC — Orchestrare Agenti AI nello Sviluppo Software |
+| Nome metodologia | AI-DLC (AI-Driven Development Life Cycle), nomenclatura da AWS, specializzata nel libro |
 | Autore | Riccardo Rolla |
 | Lingua | Italiano |
 | Struttura | 16 capitoli + Introduzione + 4 Appendici |

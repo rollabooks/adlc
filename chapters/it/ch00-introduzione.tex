@@ -1,4 +1,4 @@
-% ============================================================
+﻿% ============================================================
 % Introduzione — Il problema senza nome
 % ============================================================
 
@@ -46,9 +46,9 @@ Non è un problema degli agenti in sé --- è strutturale. Un agente AI, per sua
 
 La soluzione non è trovare un agente ``migliore''. La soluzione è costruire un sistema che sopravvive tra una sessione e l'altra.
 
-\section*{Cos'è ADLC}
+\section*{Cos'è AI-DLC}
 
-\textbf{ADLC} --- \textit{AI-Driven Software Development Life Cycle} --- è quel sistema. Non è un'AI, non è un tool da installare, non è un framework specifico per un linguaggio. È un insieme di file Markdown e JSON che vivono nel tuo repository e che dicono all'agente:
+\textbf{AI-DLC} --- \textit{AI-Driven Development Life Cycle} --- è quel sistema. Non è un'AI, non è un tool da installare, non è un framework specifico per un linguaggio. È un insieme di file Markdown e JSON che vivono nel tuo repository e che dicono all'agente:
 
 \begin{itemize}
   \item dove sei nel progetto (fase, task attivo)
@@ -63,7 +63,7 @@ Il risultato è un agente che lavora \textit{in continuità}: ogni sessione part
 
 Questo libro è diviso in cinque parti.
 
-\textbf{Parte I --- Il Framework} (Capitoli 1--3) ti porta da zero a una prima sessione di lavoro funzionante. Se vuoi testare ADLC subito, puoi leggere solo questa parte e tornare al resto quando ne hai bisogno.
+\textbf{Parte I --- Il Framework} (Capitoli 1--3) ti porta da zero a una prima sessione di lavoro funzionante. Se vuoi testare AI-DLC subito, puoi leggere solo questa parte e tornare al resto quando ne hai bisogno.
 
 \textbf{Parte II --- La Memoria del Progetto} (Capitoli 4--6) spiega in dettaglio \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}, i due file che costruiscono la continuità tra sessioni.
 
@@ -75,13 +75,13 @@ Questo libro è diviso in cinque parti.
 
 \section*{Il progetto di esempio}
 
-Per tutta la durata del libro useremo un progetto realistico: \textbf{TaskFlow API}, una REST API per la gestione di task e progetti, costruita con Node.js e Fastify. Il progetto è volutamente familiare --- chiunque abbia già costruito una REST API riconoscerà i pattern --- ma abbastanza ricco da far emergere i problemi reali che ADLC risolve.
+Per tutta la durata del libro useremo un progetto realistico: \textbf{TaskFlow API}, una REST API per la gestione di task e progetti, costruita con Node.js e Fastify. Il progetto è volutamente familiare --- chiunque abbia già costruito una REST API riconoscerà i pattern --- ma abbastanza ricco da far emergere i problemi reali che AI-DLC risolve.
 
 Il team è composto da tre sviluppatori: \textbf{Lorenzo}, tech lead con esperienza backend, che usa Claude Code in terminale; \textbf{Giulia}, sviluppatrice full-stack che lavora in VS Code con GitHub Copilot; e \textbf{Marco}, che si occupa di DevOps e code review, e usa Claude Code e Codex CLI. Li seguiremo in sessioni diverse nel corso del libro.
 
-Seguiremo TaskFlow API dall'analisi dei requisiti fino al deploy, passando per design, implementazione, test e release. A ogni capitolo vedremo come ADLC cambia il modo in cui l'agente AI lavora su quel progetto.
+Seguiremo TaskFlow API dall'analisi dei requisiti fino al deploy, passando per design, implementazione, test e release. A ogni capitolo vedremo come AI-DLC cambia il modo in cui l'agente AI lavora su quel progetto.
 
-Non importa se il tuo stack è diverso. ADLC è agnostico rispetto alla tecnologia. Ciò che impari su TaskFlow API si applica identico a un progetto Python, Go, Flutter o qualsiasi altra combinazione.
+Non importa se il tuo stack è diverso. AI-DLC è agnostico rispetto alla tecnologia. Ciò che impari su TaskFlow API si applica identico a un progetto Python, Go, Flutter o qualsiasi altra combinazione.
 
 \bigskip
 Cominciamo.

@@ -1,11 +1,11 @@
-% ============================================================
+﻿% ============================================================
 % Capitolo 16 — Troubleshooting, CI/CD e Manutenzione
 % ============================================================
 
 \chapter{Troubleshooting, CI/CD e Manutenzione del Framework}
 \label{ch:produzione}
 
-Arrivati in produzione, ADLC entra nella sua fase di vita più lunga: manutenzione. Il framework deve rimanere utile mentre il team cresce, gli agenti AI evolvono e il progetto accumula storia.
+Arrivati in produzione, AI-DLC entra nella sua fase di vita più lunga: manutenzione. Il framework deve rimanere utile mentre il team cresce, gli agenti AI evolvono e il progetto accumula storia.
 
 \section{Troubleshooting --- problemi comuni}
 \label{sec:16-troubleshooting}
@@ -45,8 +45,8 @@ Arrivati in produzione, ADLC entra nella sua fase di vita più lunga: manutenzio
 \section{Integrazione CI/CD}
 \label{sec:16-cicd}
 
-\begin{lstlisting}[language=yaml,caption={GitHub Actions per validazione ADLC}]
-name: ADLC Validate
+\begin{lstlisting}[language=yaml,caption={GitHub Actions per validazione AI-DLC}]
+name: AI-DLC Validate
 
 on:
   pull_request:
@@ -54,16 +54,16 @@ on:
     branches: [main]
 
 jobs:
-  adlc-validate:
+  AI-DLC-validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate ADLC
+      - name: Validate AI-DLC
         run: bash .adlc/tools/validate.sh
 
       # Con --strict i warning diventano failure
-      # - name: Validate ADLC strict
+      # - name: Validate AI-DLC strict
       #   run: bash .adlc/tools/validate.sh --strict
 
       - name: Sync Copilot check
@@ -76,7 +76,7 @@ jobs:
 \section{Manutenzione del framework nel tempo}
 \label{sec:16-manutenzione}
 
-ADLC segue semantic versioning (\texttt{MAJOR.MINOR.PATCH}):
+AI-DLC segue semantic versioning (\texttt{MAJOR.MINOR.PATCH}):
 
 \begin{table}[htbp]
   \centering

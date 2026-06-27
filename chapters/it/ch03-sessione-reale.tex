@@ -5,7 +5,7 @@
 \chapter{Una sessione di lavoro reale}
 \label{ch:sessione-reale}
 
-È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere ADLC in azione su un caso concreto.
+È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere AI-DLC in azione su un caso concreto.
 
 \begin{notebox}
 TaskFlow API ha attraversato le fasi 0--2 nelle settimane precedenti. I requisiti sono stati analizzati, l'architettura definita (schema DB, contratto API con 12 endpoint), le decisioni aperte chiuse. Lorenzo ha aggiornato \texttt{\_CONTEXT.md} a \texttt{Phase: 3-Implementation} al termine del design. Da questo punto inizia il lavoro che seguiamo ora.
@@ -165,7 +165,7 @@ Lorenzo copia i due blocchi, fa il commit, chiude il terminale. Domani l'agente 
 \section{Il ciclo completo in sintesi}
 \label{sec:03-ciclo}
 
-\begin{lstlisting}[language=,caption={Schema del ciclo ADLC per sessione}]
+\begin{lstlisting}[language=,caption={Schema del ciclo AI-DLC per sessione}]
 INIZIO SESSIONE
   +- Chiedi conferma contesto → agente legge _CONTEXT.md
 

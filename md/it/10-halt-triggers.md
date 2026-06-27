@@ -1,8 +1,8 @@
-# Capitolo 10 — HALT Triggers: il freno di emergenza
+﻿# Capitolo 10 — HALT Triggers: il freno di emergenza
 
 Ci sono zone in ogni progetto che non dovresti mai modificare di impulso. Lo schema del database. Il codice di autenticazione. I file di configurazione con le credenziali. Le pipeline CI/CD. Sono le zone dove un errore ha effetti che si propagano lontano e che possono essere difficili o impossibili da annullare.
 
-Gli HALT trigger sono il meccanismo con cui ADLC presidia queste zone. Definiscono pattern di path che, quando vengono toccati dall'agente, attivano un blocco automatico e richiedono una conferma esplicita prima di procedere.
+Gli HALT trigger sono il meccanismo con cui AI-DLC presidia queste zone. Definiscono pattern di path che, quando vengono toccati dall'agente, attivano un blocco automatico e richiedono una conferma esplicita prima di procedere.
 
 Non è un sistema di permessi — l'agente può comunque modificare quei file, con la tua autorizzazione. È un sistema di consapevolezza: garantisce che nessuna modifica ad alto impatto avvenga per inerzia o per errore.
 
@@ -78,7 +78,7 @@ triggers:
       - "GEMINI.md"
       - "OPENCLAW.md"
       - ".github/copilot-instructions.md"
-    reason: ADLC framework files and startup contracts
+    reason: AI-DLC framework files and startup contracts
     risk: HIGH
 ```
 
@@ -214,7 +214,7 @@ Se noti che un trigger si attiva sistematicamente per operazioni che non meritan
 ## Riepilogo
 
 - Gli HALT trigger definiscono pattern di path che bloccano l'agente e richiedono conferma esplicita prima di qualsiasi modifica.
-- I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework ADLC.
+- I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework AI-DLC.
 - Gli override di progetto in `.adlc/project/halt-triggers.yaml` estendono (o disattivano) i trigger predefiniti per le esigenze specifiche del progetto.
 - I trigger non si disattivano mai con i Modes — sono il livello di sicurezza che rimane costante indipendentemente dalla velocità con cui stai lavorando.
 - Un falso positivo (trigger attivato per path poi non modificato) è accettabile e preferibile al contrario.

@@ -1,6 +1,6 @@
-# Appendice C — Template Pronti all'Uso
+﻿# Appendice C — Template Pronti all'Uso
 
-Template copiabili per i file più usati di ADLC. Sostituisci i valori tra `[parentesi]` con quelli reali del tuo progetto.
+Template copiabili per i file più usati di AI-DLC. Sostituisci i valori tra `[parentesi]` con quelli reali del tuo progetto.
 
 ---
 
@@ -163,7 +163,7 @@ Motivazione: [perché questa opzione invece delle altre]
 
 ---
 
-## Template 4 — Task ADLC
+## Template 4 — Task AI-DLC
 
 ```markdown
 # [TASK-ID] — [Titolo del Task]

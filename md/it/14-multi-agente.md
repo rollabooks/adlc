@@ -1,8 +1,8 @@
-# Capitolo 14 — Multi-agente: Claude, Copilot, Codex, Gemini
+﻿# Capitolo 14 — Multi-agente: Claude, Copilot, Codex, Gemini
 
 La maggior parte degli sviluppatori usa un agente AI alla volta. Apri Claude Code per un task, chiudi, apri Copilot per un altro. O magari usi sempre lo stesso agente per tutto.
 
-ADLC è progettato per funzionare diversamente: più agenti, simultaneamente o in sequenza, sullo stesso progetto, con lo stesso `_CONTEXT.md` come fonte di verità. Ognuno legge le regole dal file di startup specifico per la sua piattaforma, ma le regole sostanziali sono le stesse.
+AI-DLC è progettato per funzionare diversamente: più agenti, simultaneamente o in sequenza, sullo stesso progetto, con lo stesso `_CONTEXT.md` come fonte di verità. Ognuno legge le regole dal file di startup specifico per la sua piattaforma, ma le regole sostanziali sono le stesse.
 
 In questo capitolo vediamo come funziona questa architettura e perché, in pratica, la combinazione di più agenti può essere più efficace di uno solo.
 
@@ -10,7 +10,7 @@ In questo capitolo vediamo come funziona questa architettura e perché, in prati
 
 ## 14.1 Uno stesso progetto, più entry point
 
-Ogni agente AI ha il suo file di startup nella radice del repository. ADLC li fornisce tutti:
+Ogni agente AI ha il suo file di startup nella radice del repository. AI-DLC li fornisce tutti:
 
 | Agente | File di startup | Note |
 |---|---|---|
@@ -93,7 +93,7 @@ bash .adlc/tools/sync-copilot.sh
 Output tipico:
 
 ```
-sync-copilot — ADLC v3.3.0
+sync-copilot — AI-DLC v3.3.0
 
 Checking alignment: AGENTS.md ↔ .github/copilot-instructions.md
 
@@ -132,7 +132,7 @@ In pratica, gli override specifici per agente dovrebbero essere minimi e giustif
 
 Il multi-agente funziona bene per il lavoro asincrono e per la divisione di ruoli stabili. Ha limiti che vale la pena conoscere.
 
-**Non è collaborazione in tempo reale.** Gli agenti non si parlano tra loro. La coerenza è garantita dal `_CONTEXT.md` condiviso, non da un canale di comunicazione diretto. Se Lorenzo e Giulia lavorano contemporaneamente sullo stesso file, ci sono conflitti git come in qualsiasi lavoro in parallelo — ADLC non li risolve.
+**Non è collaborazione in tempo reale.** Gli agenti non si parlano tra loro. La coerenza è garantita dal `_CONTEXT.md` condiviso, non da un canale di comunicazione diretto. Se Lorenzo e Giulia lavorano contemporaneamente sullo stesso file, ci sono conflitti git come in qualsiasi lavoro in parallelo — AI-DLC non li risolve.
 
 **La qualità del contesto condiviso determina la qualità del risultato.** Se `_CONTEXT.md` è obsoleto o incompleto, tutti gli agenti lavorano su informazioni sbagliate. La responsabilità di mantenere il context aggiornato è del team, non degli agenti.
 
@@ -142,7 +142,7 @@ Il multi-agente funziona bene per il lavoro asincrono e per la divisione di ruol
 
 ## Riepilogo
 
-- ADLC fornisce file di startup per ogni agente principale: `AGENTS.md` (Codex), `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `.github/copilot-instructions.md` (Copilot).
+- AI-DLC fornisce file di startup per ogni agente principale: `AGENTS.md` (Codex), `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `.github/copilot-instructions.md` (Copilot).
 - La regola d'oro: modifica solo `AGENTS.md` per le regole comuni. Gli altri file sono wrapper o eccezioni.
 - Il `_CONTEXT.md` condiviso in git è il meccanismo di coerenza: tutti gli agenti leggono lo stesso stato del progetto.
 - `sync-copilot` verifica l'allineamento di Copilot con `AGENTS.md` — eseguilo dopo ogni modifica alle regole comuni.

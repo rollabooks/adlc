@@ -1,8 +1,8 @@
-# Capitolo 15 — Monorepo, Company Extension e Codebase Legacy
+﻿# Capitolo 15 — Monorepo, Company Extension e Codebase Legacy
 
 I capitoli precedenti hanno seguito TaskFlow API come progetto singolo. Ma in molte organizzazioni il software non vive in un unico repository: ci sono monorepo con dieci servizi, codebase legacy senza documentazione, processi aziendali SDLC che l'agente deve rispettare.
 
-Questo capitolo copre tre scenari avanzati che emergono quando ADLC si incontra con la complessità reale del lavoro di squadra.
+Questo capitolo copre tre scenari avanzati che emergono quando AI-DLC si incontra con la complessità reale del lavoro di squadra.
 
 ---
 
@@ -92,7 +92,7 @@ bash .adlc/tools/update-projects.sh
 
 Molte organizzazioni hanno processi SDLC, standard di sicurezza, gate di governance e checklist di compliance che ogni progetto deve rispettare. Questi processi spesso vivono in documenti Word, PDF, Confluence — luoghi inaccessibili all'agente AI.
 
-La company extension è il meccanismo con cui ADLC porta questi processi nel contesto dell'agente.
+La company extension è il meccanismo con cui AI-DLC porta questi processi nel contesto dell'agente.
 
 ### La struttura
 
@@ -131,9 +131,9 @@ Da quel momento, quando l'agente lavora in Fase 5 (Release), legge automaticamen
 
 ### Priorità: company override framework
 
-Se c'è un conflitto tra le regole del framework ADLC e le regole aziendali, vincono quelle aziendali. È un principio esplicito del framework: `.adlc/company/` ha priorità su `.adlc/modules/`.
+Se c'è un conflitto tra le regole del framework AI-DLC e le regole aziendali, vincono quelle aziendali. È un principio esplicito del framework: `.adlc/company/` ha priorità su `.adlc/modules/`.
 
-Questo significa che se l'azienda richiede un confidence tag su ogni singolo output (non solo su HIGH-risk), la regola aziendale sovrascrive quella di ADLC che lo richiederebbe solo in certi casi.
+Questo significa che se l'azienda richiede un confidence tag su ogni singolo output (non solo su HIGH-risk), la regola aziendale sovrascrive quella di AI-DLC che lo richiederebbe solo in certi casi.
 
 ### Company extension condivisa vs per-progetto
 
@@ -147,7 +147,7 @@ L'agente carica prima la company extension del sottoprogetto (se esiste), poi qu
 
 ## 15.3 Codebase legacy: analisi e documentazione
 
-Uno dei casi d'uso più comuni di ADLC nelle organizzazioni è l'analisi di codice legacy: sistemi esistenti senza documentazione, scritti anni fa, con dipendenze obsolete e comportamenti non ovvi.
+Uno dei casi d'uso più comuni di AI-DLC nelle organizzazioni è l'analisi di codice legacy: sistemi esistenti senza documentazione, scritti anni fa, con dipendenze obsolete e comportamenti non ovvi.
 
 Il framework copre questo flusso con due moduli in sequenza: prima si analizza (`09_CODEBASE_ANALYSIS.md`), poi si documenta (`10_DOCUMENTATION.md`). L'ordine è importante — documentare senza aver prima capito produce documentazione inventata.
 

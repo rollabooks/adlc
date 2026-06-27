@@ -1,4 +1,4 @@
-# Capitolo 8 — Model Levels: quale AI per quale task
+﻿# Capitolo 8 — Model Levels: quale AI per quale task
 
 C'è un errore comune nell'uso degli agenti AI: usare sempre il modello più potente disponibile. È comprensibile — se il modello migliore fa meno errori, perché usarne uno inferiore? — ma è la scelta sbagliata per due motivi.
 
@@ -6,7 +6,7 @@ Il primo è il costo. I modelli più potenti costano di più in token. Un task d
 
 Il secondo è il latency. I modelli più potenti sono più lenti. Per task semplici e frequenti (rinomina, JSDoc, piccoli fix) la differenza di latenza è percepibile e non giustificata.
 
-ADLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che mappa la complessità del task al modello appropriato.
+AI-DLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che mappa la complessità del task al modello appropriato.
 
 ---
 
@@ -41,7 +41,7 @@ bash .adlc/tools/show-models.sh
 Output tipico (il mapping cambia con le versioni del framework):
 
 ```
-ADLC Model Level Mapping — v3.3.0
+AI-DLC Model Level Mapping — v3.3.0
 
 Level 1  │ Anthropic: Haiku Low       │ OpenAI: gpt-5.4-nano    │ Gemini: Gemini 3.1 Flash-Lite
 Level 2  │ Anthropic: Haiku Medium    │ OpenAI: gpt-5.4-mini low│ Gemini: Gemini 2.5 Flash-Lite
@@ -119,7 +119,7 @@ Il risk floor è *cumulativo*: se un task è HIGH (floor 5) e tocca codice di au
 
 ## 8.5 Dove vivono le stime
 
-Ogni task ADLC deve includere la stima. Nel `_CONTEXT.md`:
+Ogni task AI-DLC deve includere la stima. Nel `_CONTEXT.md`:
 
 ```markdown
 | Active Task Token Est.   | 2000/2500/4500 |
@@ -171,4 +171,4 @@ Più in profondità: il sistema di Model Levels ti forza a *pensare* alla comple
 - Il risk floor forza un minimum level indipendentemente dalla stima token: HIGH → 5, auth/secrets/produzione → 6, CRITICAL → 7.
 - La stima migliora con la pratica; le prime settimane è normale sbagliare — l'importante è avere una stima, non che sia perfetta.
 
-Nel prossimo capitolo affrontiamo uno dei meccanismi più sottili di ADLC: i confidence tag, il sistema con cui l'agente dichiara esplicitamente quanto è certo di ciò che dice.
+Nel prossimo capitolo affrontiamo uno dei meccanismi più sottili di AI-DLC: i confidence tag, il sistema con cui l'agente dichiara esplicitamente quanto è certo di ciò che dice.

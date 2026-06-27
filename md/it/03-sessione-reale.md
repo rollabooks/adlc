@@ -1,6 +1,6 @@
-# Capitolo 3 — Una sessione di lavoro reale
+﻿# Capitolo 3 — Una sessione di lavoro reale
 
-È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere ADLC in azione su un caso concreto.
+È martedì mattina. Lorenzo apre il terminale, avvia Claude Code e inizia la sessione su TaskFlow API. Seguiamo ogni passaggio, dal bootstrap al commit finale, per vedere AI-DLC in azione su un caso concreto.
 
 > *TaskFlow API ha attraversato le fasi 0-2 nelle settimane precedenti. I requisiti sono stati analizzati, l'architettura definita (schema DB, contratto API con 12 endpoint), le decisioni aperte chiuse. Lorenzo ha aggiornato `_CONTEXT.md` a `Phase: 3-Implementation` al termine del design. Da questo punto inizia il lavoro che seguiamo ora.*
 
@@ -22,7 +22,7 @@ In tre secondi, l'agente sa tutto. Lorenzo scrive:
 
 > "Procedi."
 
-Questo è il punto in cui, senza ADLC, Lorenzo avrebbe passato dieci minuti a riepilogare lo stack, i vincoli e il contesto del task. Con ADLC, quella conversazione è già nel file.
+Questo è il punto in cui, senza AI-DLC, Lorenzo avrebbe passato dieci minuti a riepilogare lo stack, i vincoli e il contesto del task. Con AI-DLC, quella conversazione è già nel file.
 
 > **Pattern da seguire:** all'inizio di ogni sessione, chiedi sempre la conferma del contesto prima di qualsiasi istruzione. È il modo per verificare che l'agente abbia letto `_CONTEXT.md` correttamente.
 
@@ -85,7 +85,7 @@ Risponde:
 
 L'agente implementa, caso aggiunto incluso.
 
-> **Differenza chiave rispetto al lavoro senza ADLC:** senza context strutturato, Lorenzo avrebbe dovuto specificare "ricorda che usiamo Zod, che l'auth è OIDC e che non voglio PII nei log" ogni volta. Con ADLC, queste informazioni sono già nel piano — l'agente le ha lette dal context.
+> **Differenza chiave rispetto al lavoro senza AI-DLC:** senza context strutturato, Lorenzo avrebbe dovuto specificare "ricorda che usiamo Zod, che l'auth è OIDC e che non voglio PII nei log" ogni volta. Con AI-DLC, queste informazioni sono già nel piano — l'agente le ha lette dal context.
 
 ---
 
@@ -109,7 +109,7 @@ L'agente si ferma.
 >
 > *Conferma esplicita richiesta. Procedo?*
 
-Lorenzo ha due informazioni che senza ADLC avrebbe potuto non considerare: che la migration richiede un lock temporaneo in produzione, e che la modifica è classificata come HALT perché tocca lo schema. Sa che è non-distruttiva, sa il rischio.
+Lorenzo ha due informazioni che senza AI-DLC avrebbe potuto non considerare: che la migration richiede un lock temporaneo in produzione, e che la modifica è classificata come HALT perché tocca lo schema. Sa che è non-distruttiva, sa il rischio.
 
 Risponde:
 
@@ -177,7 +177,7 @@ Domani, quando riaprirà la sessione, l'agente saprà esattamente dove erano rim
 
 ## 3.7 Il ciclo completo in sintesi
 
-Una sessione ADLC segue sempre lo stesso schema:
+Una sessione AI-DLC segue sempre lo stesso schema:
 
 ```
 INIZIO SESSIONE

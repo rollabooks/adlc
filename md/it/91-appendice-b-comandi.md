@@ -1,6 +1,6 @@
-# Appendice B — Comandi Conversazionali Completi
+﻿# Appendice B — Comandi Conversazionali Completi
 
-Riferimento completo di tutti i comandi conversazionali ADLC. I comandi usano il prefisso `@` e vengono scritti direttamente nella chat con l'agente. Non sono comandi shell.
+Riferimento completo di tutti i comandi conversazionali AI-DLC. I comandi usano il prefisso `@` e vengono scritti direttamente nella chat con l'agente. Non sono comandi shell.
 
 ---
 

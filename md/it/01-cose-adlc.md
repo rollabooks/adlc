@@ -1,4 +1,4 @@
-# Capitolo 1 — ADLC: cos'è e perché esiste
+﻿# Capitolo 1 — AI-DLC: cos'è e perché esiste
 
 TaskFlow API nasce da una decisione semplice: il team di tre sviluppatori vuole usare agenti AI per accelerare lo sviluppo, ma senza rinunciare alla qualità e senza perdere il controllo su ciò che viene generato.
 
@@ -8,57 +8,61 @@ Il terzo giorno, però, Lorenzo nota che il codice generato nel pomeriggio non r
 
 Il decimo giorno, il team ha tre conversazioni diverse con tre agenti diversi, ognuna con il proprio contesto implicito. Nessuno dei tre agenti sa cosa stanno facendo gli altri.
 
-È a questo punto che Lorenzo decide di adottare ADLC.
+È a questo punto che Lorenzo decide di adottare AI-DLC.
 
 ---
 
-## 1.1 I quattro problemi che ADLC risolve
+## 1.1 I quattro problemi che AI-DLC risolve
 
-ADLC nasce per risolvere quattro problemi specifici, tutti connessi alla natura degli agenti AI attuali.
+AI-DLC nasce per risolvere quattro problemi specifici, tutti connessi alla natura degli agenti AI attuali.
 
 ### Problema 1 — L'AI dimentica
 
 Gli agenti AI non hanno memoria persistente tra sessioni. Ogni conversazione inizia da zero. Se hai discusso la settimana scorsa che il tuo stack usa OIDC per l'autenticazione e che i token non devono mai apparire nei log, dovrai ridirlo la settimana prossima.
 
-**Soluzione ADLC:** `_CONTEXT.md`, un file Markdown alla radice del progetto che contiene tutto il contesto rilevante. L'agente lo legge a ogni sessione. Se cambia qualcosa, lo aggiorni. Non devi ripetere nulla.
+**Soluzione AI-DLC:** `_CONTEXT.md`, un file Markdown alla radice del progetto che contiene tutto il contesto rilevante. L'agente lo legge a ogni sessione. Se cambia qualcosa, lo aggiorni. Non devi ripetere nulla.
 
 ### Problema 2 — L'AI ignora i vincoli
 
 Anche quando spieghi i requisiti di sicurezza all'inizio di una conversazione, l'agente può ignorarli o dimenticarli nel corso del lavoro — specialmente in sessioni lunghe o complesse. Un vincolo che non è strutturato in modo esplicito non viene rispettato sistematicamente.
 
-**Soluzione ADLC:** I vincoli `SEC-XX` (sicurezza) e `PERF-XX` (performance) sono definiti una volta in `_CONTEXT.md` e riletti dall'agente prima di ogni operazione critica. Non sono una nota a margine: sono parte del protocollo obbligatorio.
+**Soluzione AI-DLC:** I vincoli `SEC-XX` (sicurezza) e `PERF-XX` (performance) sono definiti una volta in `_CONTEXT.md` e riletti dall'agente prima di ogni operazione critica. Non sono una nota a margine: sono parte del protocollo obbligatorio.
 
 ### Problema 3 — L'AI inventa
 
 Gli agenti AI sono progettati per rispondere, non per dire "non lo so". Questo produce output che mischiano fatti verificabili, deduzioni logiche e ipotesi non verificate — il tutto con la stessa sicurezza apparente.
 
-**Soluzione ADLC:** I confidence tag (`FACT` / `INFERRED` / `ASSUMPTION`) obbligano l'agente a classificare esplicitamente la certezza del proprio output su decisioni ad alto impatto. Un `ASSUMPTION` non è un errore — è un segnale che devi verificare prima di procedere.
+**Soluzione AI-DLC:** I confidence tag (`FACT` / `INFERRED` / `ASSUMPTION`) obbligano l'agente a classificare esplicitamente la certezza del proprio output su decisioni ad alto impatto. Un `ASSUMPTION` non è un errore — è un segnale che devi verificare prima di procedere.
 
 ### Problema 4 — L'AI fa troppo
 
 Un agente senza limiti può modificare lo schema del database mentre aggiusta un bug di UI, o cambiare la configurazione di produzione mentre aggiorna un test. Le operazioni rischiose vengono eseguite senza avvisare.
 
-**Soluzione ADLC:** Gli HALT trigger definiscono i path e le operazioni che richiedono conferma esplicita prima di procedere. L'agente si ferma, spiega cosa sta per fare e aspetta il tuo via libera.
+**Soluzione AI-DLC:** Gli HALT trigger definiscono i path e le operazioni che richiedono conferma esplicita prima di procedere. L'agente si ferma, spiega cosa sta per fare e aspetta il tuo via libera.
 
 ---
 
-## 1.2 Cosa NON è ADLC
+## 1.2 Cosa NON è AI-DLC
 
-Prima di andare avanti, è importante chiarire cosa ADLC non è.
+Prima di andare avanti, è importante chiarire cosa AI-DLC non è.
 
-**Non è un'AI.** ADLC non genera codice, non esegue comandi, non decide nulla in autonomia. È un sistema di file che struttura il dialogo tra te e l'agente AI che già usi.
+**Non è un'AI.** AI-DLC non genera codice, non esegue comandi, non decide nulla in autonomia. È un sistema di file che struttura il dialogo tra te e l'agente AI che già usi.
 
 **Non è un tool da installare.** Non c'è un pacchetto npm, una pip install, un binario. Il framework è un insieme di file Markdown e JSON che vivono nel tuo repository. Non c'è un server, non c'è una dashboard, non ci sono dipendenze esterne.
 
-**Non è specifico per un linguaggio o stack.** ADLC funziona identico su un progetto Node.js, Python, Go, Rust, Flutter. Il contenuto dei file cambia (i tuoi vincoli specifici, il tuo stack), ma il sistema è lo stesso.
+**Non è specifico per un linguaggio o stack.** AI-DLC funziona identico su un progetto Node.js, Python, Go, Rust, Flutter. Il contenuto dei file cambia (i tuoi vincoli specifici, il tuo stack), ma il sistema è lo stesso.
 
-**Non è un sostituto del processo di sviluppo.** ADLC si inserisce nel processo che già hai — o aiuta a costruirlo, se non ce l'hai. Non è un framework Agile alternativo, non è una metodologia di project management.
+**Non è un sostituto del processo di sviluppo.** AI-DLC si inserisce nel processo che già hai — o aiuta a costruirlo, se non ce l'hai. Non è un framework Agile alternativo, non è una metodologia di project management.
+
+**Non è (ancora) uno standard accademico consolidato.** AI-DLC, in questo libro, indica un framework pratico di *AI-Driven Development Life Cycle*. Non viene presentato come uno standard già codificato in letteratura nella sua forma specifica, ma come una sintesi originale e operativa di filoni maturi: software lifecycle engineering, agentic AI, prompt engineering e planning, contesto persistente nel repository, human-in-the-loop, governance del rischio, DevSecOps e architecture decision record. Il contributo di questo libro non è inventare il ciclo di vita degli agenti, ma renderlo concreto e disciplinato per chi sviluppa software con coding agent dentro un repository reale.
+
+> **Nota terminologica:** il termine *AI-Driven Development Life Cycle* (AI-DLC) riprende la nomenclatura introdotta da AWS per descrivere uno sviluppo software guidato dall'AI con contesto persistente nel repository. Questo libro adotta quel termine e lo specializza in un framework operativo per coding agent, centrato su artefatti persistenti, continuità del contesto e checkpoint di controllo umano. AI-DLC va distinto dalla sigla **ADLC**, usata in ambito enterprise soprattutto come *Agent Development Lifecycle* (IBM, Microsoft, Salesforce) per descrivere come si costruiscono e si governano sistemi agentici *come prodotto* — e, in tradizioni professionali più datate, come *Application Development Life Cycle*, quasi sinonimo di SDLC. Qui il focus è l'opposto del primo significato: usare agenti AI per *sviluppare* software, non costruire agenti.
 
 ---
 
 ## 1.3 Quando usarlo (e quando no)
 
-ADLC è uno strumento per progetti reali. Ha senso adottarlo quando:
+AI-DLC è uno strumento per progetti reali. Ha senso adottarlo quando:
 
 - Stai lavorando su un progetto che dura più di qualche giorno.
 - Usi agenti AI regolarmente, non solo per domande occasionali.
@@ -78,13 +82,13 @@ Non serve quando:
 
 ## 1.4 I prerequisiti
 
-Per usare ADLC non servono competenze avanzate, ma tre basi sono necessarie.
+Per usare AI-DLC non servono competenze avanzate, ma tre basi sono necessarie.
 
 **Riga di comando.** Devi saper aprire un terminale (PowerShell o Bash) e lanciare comandi. I tool del framework (`init.ps1`, `validate.ps1`) sono script da eseguire, non interfacce grafiche.
 
 **Markdown base.** I file del framework sono Markdown: titoli, tabelle, liste. Devi saper aprire, leggere e modificare un `.md`. Non serve sapere tutto il Markdown — bastano i costrutti di base.
 
-**Git base.** `clone`, `commit`, `push`, branching di base. Tecnicamente puoi usare ADLC senza Git su un progetto locale, ma è fortemente sconsigliato — il versionamento del contesto è parte del valore.
+**Git base.** `clone`, `commit`, `push`, branching di base. Tecnicamente puoi usare AI-DLC senza Git su un progetto locale, ma è fortemente sconsigliato — il versionamento del contesto è parte del valore.
 
 Utili ma non obbligatori: YAML (per gli HALT trigger), JSON (per il manifest), PowerShell scripting (per modificare i tool). Capirai questi file leggendoli; non è necessario scriverli da zero.
 
@@ -115,10 +119,10 @@ Nei prossimi due capitoli vedremo tutto questo in pratica, su TaskFlow API.
 
 ## Riepilogo
 
-- ADLC risolve quattro problemi: la dimenticanza, l'ignoranza dei vincoli, l'invenzione e l'eccesso di autonomia degli agenti AI.
+- AI-DLC risolve quattro problemi: la dimenticanza, l'ignoranza dei vincoli, l'invenzione e l'eccesso di autonomia degli agenti AI.
 - Non è un tool, non è un'AI, non è specifico per uno stack tecnologico.
 - Funziona tramite file Markdown e JSON che vivono nel repository e danno all'agente un contesto strutturato e persistente.
 - Ha senso su progetti reali con continuità tra sessioni; non serve per esperimenti brevi.
 - Costo di adozione: ~15 minuti iniziali, poi 1-2 minuti per sessione.
 
-Nel prossimo capitolo installiamo ADLC su TaskFlow API.
+Nel prossimo capitolo installiamo AI-DLC su TaskFlow API.

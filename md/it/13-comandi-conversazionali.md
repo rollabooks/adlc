@@ -1,6 +1,6 @@
-# Capitolo 13 — Comandi conversazionali
+﻿# Capitolo 13 — Comandi conversazionali
 
-I comandi conversazionali sono istruzioni che dai all'agente nella chat, precedute dal prefisso `@`. Non sono comandi shell — non aprono un terminale, non eseguono script. Sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo ADLC.
+I comandi conversazionali sono istruzioni che dai all'agente nella chat, precedute dal prefisso `@`. Non sono comandi shell — non aprono un terminale, non eseguono script. Sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo AI-DLC.
 
 La loro utilità è nella velocità: invece di spiegare in prosa cosa vuoi fare, scrivi `@checkpoint` e l'agente sa esattamente cosa produrre. Invece di dire "mostrami i vincoli di sicurezza attivi", scrivi `@show-constraints`.
 
@@ -232,7 +232,7 @@ Quando Lorenzo scrive `@deploy-check`, l'agente esegue tutti e quattro gli step 
 
 ## Riepilogo
 
-- I comandi conversazionali (`@`) sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo ADLC — non comandi shell.
+- I comandi conversazionali (`@`) sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo AI-DLC — non comandi shell.
 - I più usati: `@checkpoint` (fissa stato), `@context-update` (aggiorna il context), `@security-check` / `@perf-check` (verifica vincoli), `@alternatives` (opzioni strutturate), `@simplify` (riduce scope), `@stop` (ferma tutto).
 - Non bypassano il protocollo di sicurezza: nessun comando disattiva gli HALT trigger o modifica `_CONTEXT.md` senza approvazione.
 - Comandi personalizzati di progetto in `.adlc/project/instructions.md` trasformano workflow ricorrenti in shortcut.
