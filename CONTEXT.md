@@ -27,9 +27,9 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | 1 | 01-cose-adlc.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 2 | 02-setup-primo-progetto.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 3 | 03-sessione-reale.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
-| 4 | 04-context-md.md | ⬜ da fare | — | — | — |
-| 5 | 05-progress-md.md | ⬜ da fare | — | — | — |
-| 6 | 06-fasi-e-modes.md | ⬜ da fare | — | — | — |
+| 4 | 04-context-md.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 5 | 05-progress-md.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 6 | 06-fasi-e-modes.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 7 | 07-classificazione-rischio.md | ⬜ da fare | — | — | — |
 | 8 | 08-model-levels.md | ⬜ da fare | — | — | — |
 | 9 | 09-confidence-tags.md | ⬜ da fare | — | — | — |
@@ -52,7 +52,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Fase 3 — Scrittura: Capitoli 4-6 (Parte II — La Memoria del Progetto)
+- Fase 3 — Scrittura: Capitoli 7-11 (Parte III — Il Sistema di Sicurezza)
 
 ## Attività Pianificate
 
