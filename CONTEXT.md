@@ -35,10 +35,10 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | 9 | 09-confidence-tags.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 10 | 10-halt-triggers.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 11 | 11-vincoli-sec-perf.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
-| 12 | 12-moduli-e-skill.md | ⬜ da fare | — | — | — |
-| 13 | 13-comandi-conversazionali.md | ⬜ da fare | — | — | — |
-| 14 | 14-multi-agente.md | ⬜ da fare | — | — | — |
-| 15 | 15-monorepo-legacy.md | ⬜ da fare | — | — | — |
+| 12 | 12-moduli-e-skill.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 13 | 13-comandi-conversazionali.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 14 | 14-multi-agente.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 15 | 15-monorepo-legacy.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 16 | 16-produzione.md | ⬜ da fare | — | — | — |
 | A | 90-appendice-a-glossario.md | ⬜ da fare | — | — | — |
 | B | 91-appendice-b-comandi.md | ⬜ da fare | — | — | — |
@@ -52,7 +52,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Fase 3 — Scrittura: Capitoli 12-15 (Parte IV — Workflow Avanzato)
+- Fase 3 — Scrittura: Capitolo 16 + Appendici A-D (Parte V + chiusura)
 
 ## Attività Pianificate
 
