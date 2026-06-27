@@ -39,11 +39,11 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | 13 | 13-comandi-conversazionali.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 14 | 14-multi-agente.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 15 | 15-monorepo-legacy.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
-| 16 | 16-produzione.md | ⬜ da fare | — | — | — |
-| A | 90-appendice-a-glossario.md | ⬜ da fare | — | — | — |
-| B | 91-appendice-b-comandi.md | ⬜ da fare | — | — | — |
-| C | 92-appendice-c-template.md | ⬜ da fare | — | — | — |
-| D | 93-appendice-d-risorse.md | ⬜ da fare | — | — | — |
+| 16 | 16-produzione.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| A | 90-appendice-a-glossario.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| B | 91-appendice-b-comandi.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| C | 92-appendice-c-template.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| D | 93-appendice-d-risorse.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 
 ## Attività Completate
 
@@ -52,12 +52,11 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività in Corso
 
-- Fase 3 — Scrittura: Capitolo 16 + Appendici A-D (Parte V + chiusura)
+- Nessuna — Fase 3 completata. Prossima: Fase 4 (Revisione Editoriale)
 
 ## Attività Pianificate
 
-- Completare scrittura tutti i 16 capitoli + appendici
-- Fase 4: Revisione editoriale
+- Fase 4: Revisione editoriale (struttura, chiarezza, coerenza, qualità tecnica)
 - Fase 5: Copy editing
 - Fase 6: Correzione bozze
 - Fase 7: Formattazione LaTeX + compilazione PDF/EPUB
