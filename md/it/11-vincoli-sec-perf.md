@@ -223,4 +223,4 @@ L'agente tratta qualsiasi riga nella sezione Security o Performance come un vinc
 - `@show-constraints` mostra in qualsiasi momento i vincoli attivi nella sessione corrente.
 - I vincoli personalizzati si aggiungono liberamente con ID arbitrari.
 
-Con questo capitolo chiudiamo la Parte III. Abbiamo costruito il sistema di sicurezza completo: dalla classificazione del rischio ai model levels, dai confidence tags agli HALT trigger, fino alla libreria di vincoli riusabili. Nella Parte IV entriamo nel workflow avanzato: moduli e skill, comandi conversazionali, multi-agente, monorepo e codebase legacy.
+Con questo capitolo chiudiamo la Parte III. Abbiamo costruito il sistema di sicurezza completo: dalla classificazione del rischio ai model levels, dai confidence tag agli HALT trigger, fino alla libreria di vincoli riusabili. Nella Parte IV entriamo nel workflow avanzato: moduli e skill, comandi conversazionali, multi-agente, monorepo e codebase legacy.

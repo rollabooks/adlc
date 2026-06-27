@@ -21,7 +21,7 @@ Quando apri una sessione, l'agente segue questo protocollo di ricerca:
 
 Per TaskFlow API, la struttura è semplice:
 
-```
+```text
 taskflow-api/
 ├── _CONTEXT.md          ← unico context, radice del progetto
 ├── prisma/

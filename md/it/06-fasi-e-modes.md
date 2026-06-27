@@ -55,7 +55,7 @@ Per TaskFlow API, il team ci ha passato tre settimane.
 
 **Obiettivo:** verificare che il codice faccia ciò che deve fare.
 
-Test di integrazione, test end-to-end, review di sicurezza, analisi delle performance. L'agente in Fase 4 cerca problemi, non li nasconde. I confidence tags diventano particolarmente importanti: ogni claim su "questo è corretto" deve essere verificabile.
+Test di integrazione, test end-to-end, review di sicurezza, analisi delle performance. L'agente in Fase 4 cerca problemi, non li nasconde. I confidence tag diventano particolarmente importanti: ogni claim su "questo è corretto" deve essere verificabile.
 
 ### Fase 5 — Release
 
@@ -214,9 +214,9 @@ L'agente carica `05_VERIFICATION_RELEASE.md` e ti conferma le regole attive per 
 ## Riepilogo
 
 - Le **sette fasi** (0-Discovery, 1-Analysis, 2-Design, 3-Implementation, 4-Verification, 5-Release, 6-Ops) definiscono in che punto del ciclo sei e quale modulo del framework l'agente carica.
-- I **cinque Modes** (LITE, STANDARD, AUDIT, RAPID, FAST) controllano quanta cerimonia applica l'agente — dalla conferma di sessione ai confidence tags ai checkpoint.
+- I **cinque Modes** (LITE, STANDARD, AUDIT, RAPID, FAST) controllano quanta cerimonia applica l'agente — dalla conferma di sessione ai confidence tag ai checkpoint.
 - Mode e Fase sono indipendenti: puoi essere in Fase 3 con Mode LITE, o in Fase 0 con Mode AUDIT.
 - I HALT trigger non vengono mai disattivati, indipendentemente dal Mode.
 - Cambia Mode liberamente durante il progetto: STANDARD per partire, LITE per il lavoro quotidiano rodato, AUDIT per revisioni formali, RAPID solo per spike su branch dedicati.
 
-Con questo chiudiamo la Parte II. Nelle prossime cinque sessioni costruiremo il sistema di sicurezza di ADLC: classificazione del rischio, model levels, confidence tags, HALT trigger e vincoli SEC/PERF.
+Con questo chiudiamo la Parte II. Nelle prossime cinque sessioni costruiremo il sistema di sicurezza di ADLC: classificazione del rischio, model levels, confidence tag, HALT trigger e vincoli SEC/PERF.

@@ -21,7 +21,7 @@ La differenza pratica: il modulo dice "sei in fase di implementazione, segui que
 | File | Fase | Quando si carica |
 |---|---|---|
 | `00_MODE.md` | Sempre | Definisce le regole per ogni Mode (LITE, STANDARD, AUDIT, RAPID, FAST) |
-| `01_CORE_RULES.md` | Sempre | Regole base: identity, context management, risk, halt, confidence tags |
+| `01_CORE_RULES.md` | Sempre | Regole base: identity, context management, risk, halt, confidence tag |
 | `02_DISCOVERY_ANALYSIS.md` | Fase 0-1 | Discovery e analisi dei requisiti |
 | `03_DESIGN.md` | Fase 2 | Architettura e design API/DB |
 | `04_IMPLEMENTATION.md` | Fase 3 | Implementazione e test |

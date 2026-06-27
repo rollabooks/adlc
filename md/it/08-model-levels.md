@@ -171,4 +171,4 @@ Più in profondità: il sistema di Model Levels ti forza a *pensare* alla comple
 - Il risk floor forza un minimum level indipendentemente dalla stima token: HIGH → 5, auth/secrets/produzione → 6, CRITICAL → 7.
 - La stima migliora con la pratica; le prime settimane è normale sbagliare — l'importante è avere una stima, non che sia perfetta.
 
-Nel prossimo capitolo affrontiamo uno dei meccanismi più sottili di ADLC: i confidence tags, il sistema con cui l'agente dichiara esplicitamente quanto è certo di ciò che dice.
+Nel prossimo capitolo affrontiamo uno dei meccanismi più sottili di ADLC: i confidence tag, il sistema con cui l'agente dichiara esplicitamente quanto è certo di ciò che dice.

@@ -21,7 +21,7 @@ Esempi concreti:
 
 **Cosa fa l'agente:** esegue direttamente e notifica con una riga di log. Nessuna conferma richiesta.
 
-```
+```text
 [LOW] Fixed typo in error message in src/services/taskService.ts. No risk items.
 ```
 
@@ -38,7 +38,7 @@ Esempi concreti:
 
 **Cosa fa l'agente:** propone un piano dettagliato e aspetta la tua approvazione prima di scrivere codice. Dopo l'approvazione, esegue.
 
-```
+```text
 [MEDIUM] Proposta per GET /tasks con filtri e paginazione:
 1. Route handler con query params (status, assignee, cursor)
 2. Zod schema per validazione params (SEC-01)
@@ -61,7 +61,7 @@ Esempi concreti:
 
 **Cosa fa l'agente:** si ferma (HALT), presenta un piano dettagliato con analisi dei rischi e degli effetti collaterali, e aspetta una **conferma esplicita** — non basta "sì", serve un `"Confermato. Procedi."` o equivalente.
 
-```
+```text
 ⚠ HALT — HIGH risk detected
 
 Operazione: aggiunta colonna NOT NULL `completed_at` a tabella `tasks`
@@ -92,7 +92,7 @@ Esempi concreti:
 
 **Cosa fa l'agente:** HALT completo. Non propone nemmeno un piano finché non riceve una conferma che vuoi procedere in questa direzione. Poi presenta il piano e aspetta una seconda conferma per eseguire.
 
-```
+```text
 ⛔ HALT — HIGH+ risk: auth/secrets path detected
 
 File rilevato: src/middleware/auth.ts corrisponde al pattern **/middleware/auth*
@@ -112,7 +112,7 @@ Esempi concreti:
 
 **Cosa fa l'agente:** HALT. Presenta le alternative con pro, contro e trade-off. Produce un record di decisione (ADR) bozza. **Non esegue nulla** — la decisione spetta a te, eventualmente con il supporto di esperti di dominio.
 
-```
+```text
 ⛔ HALT — CRITICAL: architectural decision required
 
 Questione: strategia di paginazione per GET /tasks (AD-01 aperta)

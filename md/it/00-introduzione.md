@@ -67,7 +67,7 @@ Questo libro è diviso in cinque parti.
 
 **Parte II — La Memoria del Progetto** (Capitoli 4-6) spiega in dettaglio `_CONTEXT.md` e `PROGRESS.md`, i due file che costruiscono la continuità tra sessioni.
 
-**Parte III — Il Sistema di Sicurezza** (Capitoli 7-11) copre la classificazione del rischio, i livelli di modello, i confidence tags, gli HALT trigger e i vincoli SEC/PERF.
+**Parte III — Il Sistema di Sicurezza** (Capitoli 7-11) copre la classificazione del rischio, i livelli di modello, i confidence tag, gli HALT trigger e i vincoli SEC/PERF.
 
 **Parte IV — Workflow Avanzato** (Capitoli 12-15) affronta scenari più complessi: multi-agente, monorepo, codebase legacy, integrazione aziendale.
 

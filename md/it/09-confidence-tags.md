@@ -4,7 +4,7 @@ Gli agenti AI hanno un problema strutturale: rispondono con la stessa sicurezza 
 
 Questo crea una trappola sottile. Se un agente ti dice "la funzione `getUserById` restituisce `null` quando l'utente non esiste", potresti prenderlo per vero senza verificare. Se invece ti dice lo stesso con tono ugualmente sicuro aggiungendo in fondo "ma non ho letto il file, è una deduzione dal nome della funzione", cambieresti il tuo comportamento.
 
-I confidence tags sono il meccanismo con cui ADLC rende esplicita questa distinzione.
+I confidence tag sono il meccanismo con cui ADLC rende esplicita questa distinzione.
 
 ---
 
@@ -12,7 +12,7 @@ I confidence tags sono il meccanismo con cui ADLC rende esplicita questa distinz
 
 I tag seguono sempre lo stesso formato, in coda all'affermazione che classificano:
 
-```
+```text
 AI CONFIDENCE: [FACT | INFERRED | ASSUMPTION]
 Basis: [motivazione — file letto, pattern riconosciuto, o ipotesi]
 [TODO: azione suggerita, obbligatorio per ASSUMPTION su output ad alto rischio]
@@ -22,7 +22,7 @@ Basis: [motivazione — file letto, pattern riconosciuto, o ipotesi]
 
 L'agente ha verificato l'informazione leggendo direttamente il codice, un file, un output di test, o altra fonte presente nel contesto della sessione.
 
-```
+```text
 La funzione `getUserById` in src/services/userService.ts
 lancia `UserNotFoundError` quando l'utente non esiste (riga 47).
 
@@ -36,10 +36,9 @@ Un FACT è qualcosa su cui puoi fare affidamento — con la cautela normale che 
 
 L'agente ha dedotto l'informazione da contesto indiretto: il nome di una funzione, la struttura del codice, convenzioni del framework, pattern tipici. La deduzione è logica ma non verificata direttamente.
 
-```
-Il middleware di autenticazione probabilmente usa `express-jwt`
-basandosi sull'import in src/app.ts (riga 8) e sul pattern standard
-di Fastify per JWT.
+```text
+Il middleware di autenticazione probabilmente usa `@fastify/jwt`
+basandosi sull'import in src/app.ts (riga 8).
 
 AI CONFIDENCE: INFERRED
 Basis: import `@fastify/jwt` in src/app.ts; non ho letto la configurazione
@@ -52,7 +51,7 @@ Un INFERRED è una buona ipotesi di lavoro, ma richiede verifica prima di agire 
 
 L'agente ha fatto un'assunzione che non è supportata da evidenza diretta nel contesto. Potrebbe essere corretta, ma è un'ipotesi non verificata.
 
-```
+```text
 Ho assunto che la tabella `tasks` abbia un indice su `user_id`
 per supportare le query per utente con le performance richieste
 (PERF-01: P95 < 200ms).
@@ -69,7 +68,7 @@ Un ASSUMPTION è un segnale di allerta. Significa che l'agente sta procedendo su
 
 ## 9.2 Quando i tag sono obbligatori
 
-I confidence tags non vanno su ogni output — diventerebbero rumore. Il protocollo stabilisce quando sono richiesti:
+I confidence tag non vanno su ogni output — diventerebbero rumore. Il protocollo stabilisce quando sono richiesti:
 
 **Sempre obbligatori:**
 - Output classificati HIGH-risk o superiore
@@ -93,7 +92,7 @@ In Mode STANDARD e AUDIT, la soglia è più bassa: i tag appaiono su qualsiasi o
 
 ## 9.3 Il tag come segnale di azione
 
-Il valore dei confidence tags non è solo informativo. Ogni tag implica un'azione diversa da parte tua.
+Il valore dei confidence tag non è solo informativo. Ogni tag implica un'azione diversa da parte tua.
 
 | Tag | Azione suggerita |
 |---|---|
@@ -136,13 +135,13 @@ Guardando questo output, Lorenzo sa esattamente:
 - Il middleware è probabilmente ok, ma vale la pena controllare che sia registrato nell'ordine giusto.
 - Il mapping degli errori Prisma potrebbe non esistere — deve verificarlo prima di andare in staging.
 
-Senza i confidence tags, Lorenzo avrebbe ricevuto lo stesso testo ma senza sapere cosa è stato verificato e cosa no.
+Senza i confidence tag, Lorenzo avrebbe ricevuto lo stesso testo ma senza sapere cosa è stato verificato e cosa no.
 
 ---
 
 ## 9.5 Confidence tags e codebase legacy
 
-I confidence tags diventano particolarmente preziosi quando l'agente lavora su codice che non ha mai letto — specialmente una codebase legacy senza documentazione.
+I confidence tag diventano particolarmente preziosi quando l'agente lavora su codice che non ha mai letto — specialmente una codebase legacy senza documentazione.
 
 In quella situazione, quasi tutto è INFERRED o ASSUMPTION. Il valore non è nella certezza, ma nella trasparenza: l'agente ti sta dicendo esplicitamente "sto navigando a vista". È un segnale che devi leggere il codice con lui, non delegargli ciecamente la comprensione.
 
@@ -152,7 +151,7 @@ In quella situazione, quasi tutto è INFERRED o ASSUMPTION. Il valore non è nel
 
 ## Riepilogo
 
-- I tre confidence tags — FACT (verificato), INFERRED (dedotto), ASSUMPTION (ipotesi) — rendono esplicita la certezza dell'agente su ogni affermazione ad alto impatto.
+- I tre confidence tag — FACT (verificato), INFERRED (dedotto), ASSUMPTION (ipotesi) — rendono esplicita la certezza dell'agente su ogni affermazione ad alto impatto.
 - FACT: usa l'informazione. INFERRED: verifica prima di operazioni MEDIUM+. ASSUMPTION: stop, verifica prima di qualsiasi operazione.
 - Sono obbligatori su output HIGH-risk, claim su SEC/PERF e codice che tocca path HALT. In Mode LITE, si riducono ai soli casi critici.
 - Il loro valore è trasformare il "l'AI ha detto così" in "l'AI lo ha verificato / dedotto / ipotizzato" — tre cose molto diverse che richiedono azioni diverse da parte tua.

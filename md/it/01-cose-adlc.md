@@ -32,7 +32,7 @@ Anche quando spieghi i requisiti di sicurezza all'inizio di una conversazione, l
 
 Gli agenti AI sono progettati per rispondere, non per dire "non lo so". Questo produce output che mischiano fatti verificabili, deduzioni logiche e ipotesi non verificate — il tutto con la stessa sicurezza apparente.
 
-**Soluzione ADLC:** I confidence tags (`FACT` / `INFERRED` / `ASSUMPTION`) obbligano l'agente a classificare esplicitamente la certezza del proprio output su decisioni ad alto impatto. Un `ASSUMPTION` non è un errore — è un segnale che devi verificare prima di procedere.
+**Soluzione ADLC:** I confidence tag (`FACT` / `INFERRED` / `ASSUMPTION`) obbligano l'agente a classificare esplicitamente la certezza del proprio output su decisioni ad alto impatto. Un `ASSUMPTION` non è un errore — è un segnale che devi verificare prima di procedere.
 
 ### Problema 4 — L'AI fa troppo
 

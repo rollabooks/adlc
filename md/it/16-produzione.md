@@ -18,11 +18,11 @@ Questo capitolo copre tre argomenti: i problemi comuni e come risolverli, l'inte
 3. La sessione è molto lunga e il context è stato parzialmente perso.
 
 **Soluzione:**
-```
+```text
 @show-constraints
 ```
 Se la lista è vuota o incompleta, l'agente non ha letto correttamente il context. Chiedi esplicitamente:
-```
+```text
 "Rileggi _CONTEXT.md e confermami i vincoli SEC e PERF attivi."
 ```
 Per sessioni lunghe, usa `@checkpoint` ogni 3-5 azioni per ri-ancorare il contesto.
@@ -65,7 +65,7 @@ triggers:
 ### "Il validator fallisce su un task"
 
 **Sintomi:** `validate.ps1` produce un errore come:
-```
+```text
 ✗ T-009.1.md: missing required field 'Model Level'
 ```
 
@@ -292,7 +292,7 @@ In `_CONTEXT.md`. Da quel momento, l'agente carica `06_OPS.md` e applica il prot
 ADLC è uno strumento, non un dogma. Ci sono situazioni in cui ha senso ridurlo o rimuoverlo:
 
 - Il progetto è in maintenance mode con cambiamenti rarissimi e nessun agente AI attivo.
-- Il team ha adottato un framework agente più stringente che include già gestione del contesto, classificazione del rischio e confidence tags.
+- Il team ha adottato un framework agente più stringente che include già gestione del contesto, classificazione del rischio e confidence tag.
 - Il progetto si è concluso e il repository è archivio storico.
 
 In questi casi, la "disinstallazione" è semplice: rimuovi i file del framework dal repository. Non c'è un processo di cleanup complesso — sono file Markdown e JSON. `_CONTEXT.md` e `PROGRESS.md` vale la pena tenerli come documentazione storica, ma il resto può andare.
