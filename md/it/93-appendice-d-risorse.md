@@ -28,6 +28,24 @@ AI-DLC, come spiegato nel Capitolo 1, non è uno standard accademico consolidato
 
 ---
 
+## Vibe coding: il movimento e i suoi limiti
+
+Il Capitolo 1 posiziona AI-DLC come evoluzione disciplinata del vibe coding. Queste sono le fonti primarie di quel posizionamento.
+
+**Gene Kim, Steve Yegge — *Vibe Coding: Building Production-Grade Software with GenAI, Chat, Agents, and Beyond* (IT Revolution, 2025; prefazione di Dario Amodei)**
+La formalizzazione del vibe coding: il valore in cinque dimensioni (FAAFO — Fast, Ambitious, Autonomous, Fun, Optionality) e i tre cicli dello sviluppatore (inner / middle / outer loop). Il *middle loop* è il punto in cui l'amnesia tra sessioni morde di più — la motivazione di `_CONTEXT.md` e `PROGRESS.md`.
+
+**Addy Osmani — *Vibe Coding: The Future of Programming* (O'Reilly, 2025)**
+Formalizza "il problema del 70%" e i pattern di fallimento del vibe coding non strutturato: *house of cards code*, *two steps back*, *demo-quality trap*. È la diagnosi a cui i vincoli SEC/PERF, gli HALT trigger e i confidence tag di AI-DLC rispondono.
+
+**Andrej Karpathy — origine del termine "vibe coding" (2025)**
+Il post che ha dato un nome al passaggio dalla scrittura del codice alla sua direzione conversazionale.
+
+**Fred Brooks — *No Silver Bullet: Essence and Accidents of Software Engineering* (1986)**
+La distinzione tra complessità *essenziale* e *accidentale* spiega perché l'AI accelera il 70% facile ma il 30% difficile resta umano.
+
+---
+
 ## Il Framework AI-DLC
 
 **Repository ufficiale**
