@@ -21,7 +21,7 @@ taskflow/
 │   └── ui/           ← Componenti React condivisi
 ├── AGENTS.md         ← Framework condiviso
 ├── CLAUDE.md
-├── .adlc/            ← Framework condiviso
+├── .ai-dlc/            ← Framework condiviso
 └── _CONTEXT.md       ← Context di ROOT (opzionale)
 ```
 
@@ -42,18 +42,18 @@ Se stai lavorando su `packages/shared/src/types.ts`, non c'è un `_CONTEXT.md` i
 ### Scaffold di un nuovo sottoprogetto
 
 ```powershell
-.\.adlc\tools\init.ps1 -ProjectRoot .\apps\worker -FrameworkRoot .
+.\.ai-dlc\tools\init.ps1 -ProjectRoot .\apps\worker -FrameworkRoot .
 ```
 
 ```bash
-bash .adlc/tools/init.sh --project-root apps/worker --framework-root .
+bash .ai-dlc/tools/init.sh --project-root apps/worker --framework-root .
 ```
 
-Lo script crea `apps/worker/_CONTEXT.md`, `apps/worker/PROGRESS.md` e `apps/worker/.adlc/project/`. Il framework condiviso in `.adlc/` alla radice rimane invariato.
+Lo script crea `apps/worker/_CONTEXT.md`, `apps/worker/PROGRESS.md` e `apps/worker/.ai-dlc/project/`. Il framework condiviso in `.ai-dlc/` alla radice rimane invariato.
 
 ### L'indice dei sottoprogetti
 
-In un monorepo con molti sottoprogetti, tenere traccia di cosa esiste è utile sia per il team sia per l'agente. Il file `.adlc/projects.json` serve a questo:
+In un monorepo con molti sottoprogetti, tenere traccia di cosa esiste è utile sia per il team sia per l'agente. Il file `.ai-dlc/projects.json` serve a questo:
 
 ```json
 {
@@ -83,7 +83,7 @@ In un monorepo con molti sottoprogetti, tenere traccia di cosa esiste è utile s
 Per aggiornarlo automaticamente dopo aver aggiunto o spostato sottoprogetti:
 
 ```bash
-bash .adlc/tools/update-projects.sh
+bash .ai-dlc/tools/update-projects.sh
 ```
 
 ---
@@ -97,7 +97,7 @@ La company extension è il meccanismo con cui AI-DLC porta questi processi nel c
 ### La struttura
 
 ```
-.adlc/
+.ai-dlc/
 └── company/
     ├── README.md          ← Indice dei documenti
     ├── PROCESS.md         ← SDLC aziendale, fasi, gate
@@ -110,11 +110,11 @@ La company extension è il meccanismo con cui AI-DLC porta questi processi nel c
 L'agente legge i file Markdown in `company/` — non i binari in `source/`. Per convertire i documenti aziendali in Markdown leggibile:
 
 ```bash
-bash .adlc/tools/preprocess-company-docs.sh
+bash .ai-dlc/tools/preprocess-company-docs.sh
 ```
 
 ```powershell
-.\.adlc\tools\preprocess-company-docs.ps1
+.\.ai-dlc\tools\preprocess-company-docs.ps1
 ```
 
 Lo script converte PDF e DOCX da `company/source/` in Markdown in `company/processed/`, mantenendo la struttura del documento originale.
@@ -131,15 +131,15 @@ Da quel momento, quando l'agente lavora in Fase 5 (Release), legge automaticamen
 
 ### Priorità: company override framework
 
-Se c'è un conflitto tra le regole del framework AI-DLC e le regole aziendali, vincono quelle aziendali. È un principio esplicito del framework: `.adlc/company/` ha priorità su `.adlc/modules/`.
+Se c'è un conflitto tra le regole del framework AI-DLC e le regole aziendali, vincono quelle aziendali. È un principio esplicito del framework: `.ai-dlc/company/` ha priorità su `.ai-dlc/modules/`.
 
 Questo significa che se l'azienda richiede un confidence tag su ogni singolo output (non solo su HIGH-risk), la regola aziendale sovrascrive quella di AI-DLC che lo richiederebbe solo in certi casi.
 
 ### Company extension condivisa vs per-progetto
 
 In un monorepo, la company extension può vivere:
-- Alla **radice** (`.adlc/company/`): condivisa tra tutti i sottoprogetti — processi aziendali universali.
-- **Per sottoprogetto** (`apps/api/.adlc/company/`): specifica per quel servizio — per esempio, se l'API ha requisiti di compliance diversi dal worker.
+- Alla **radice** (`.ai-dlc/company/`): condivisa tra tutti i sottoprogetti — processi aziendali universali.
+- **Per sottoprogetto** (`apps/api/.ai-dlc/company/`): specifica per quel servizio — per esempio, se l'API ha requisiti di compliance diversi dal worker.
 
 L'agente carica prima la company extension del sottoprogetto (se esiste), poi quella della radice. Il sottoprogetto può estendere o fare override della root.
 
@@ -167,7 +167,7 @@ Mode STANDARD (non LITE) perché la documentazione è un output ad alto impatto 
 ### Step 1 — Analisi con il modulo 09
 
 ```
-Carica .adlc/modules/09_CODEBASE_ANALYSIS.md e analizza il modulo
+Carica .ai-dlc/modules/09_CODEBASE_ANALYSIS.md e analizza il modulo
 in src/auth/ di questo repository.
 
 Goal: capire l'architettura e i flussi di autenticazione per poterla
@@ -197,7 +197,7 @@ L'output sono quattro file in `docs/_analysis/`. **Revisionali prima di proceder
 Quando `MAP.md` è stato approvato:
 
 ```
-Carica .adlc/modules/10_DOCUMENTATION.md e genera la documentazione
+Carica .ai-dlc/modules/10_DOCUMENTATION.md e genera la documentazione
 del modulo src/auth/ usando docs/_analysis/ come fonte.
 
 Produci in docs/auth/:
@@ -252,9 +252,9 @@ Nota l'ultimo punto: l'analisi ha trovato un problema reale di sicurezza che non
 
 ## Riepilogo
 
-- **Monorepo:** ogni sottoprogetto ha il proprio `_CONTEXT.md`. L'agente usa quello più vicino al file su cui lavora. Lo scaffold per nuovi sottoprogetti è `init.ps1/sh --project-root`. `.adlc/projects.json` mantiene l'indice aggiornato con `update-projects`.
+- **Monorepo:** ogni sottoprogetto ha il proprio `_CONTEXT.md`. L'agente usa quello più vicino al file su cui lavora. Lo scaffold per nuovi sottoprogetti è `init.ps1/sh --project-root`. `.ai-dlc/projects.json` mantiene l'indice aggiornato con `update-projects`.
 
-- **Company extension:** `.adlc/company/` porta i processi SDLC aziendali nel contesto dell'agente. I documenti binari vengono preprocessati in Markdown con `preprocess-company-docs`. Le regole aziendali hanno priorità sul framework. Può essere condivisa (root) o per-progetto.
+- **Company extension:** `.ai-dlc/company/` porta i processi SDLC aziendali nel contesto dell'agente. I documenti binari vengono preprocessati in Markdown con `preprocess-company-docs`. Le regole aziendali hanno priorità sul framework. Può essere condivisa (root) o per-progetto.
 
 - **Codebase legacy:** il flusso è sempre analisi (`09_CODEBASE_ANALYSIS`) → documentazione (`10_DOCUMENTATION`). Non invertire l'ordine. Mode STANDARD, livello 5 minimo. Le ASSUMPTION dell'agente rivelano dove la codebase è oscura — sono il materiale di lavoro più prezioso dell'analisi.
 

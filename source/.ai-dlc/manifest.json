@@ -1,0 +1,123 @@
+{
+  "name": "ai-dlc-framework",
+  "version": "3.3.0",
+  "paths": {
+    "framework": ".ai-dlc/modules",
+    "project": ".ai-dlc/project",
+    "company": ".ai-dlc/company",
+    "projects_index": ".ai-dlc/projects.json",
+    "examples": ".ai-dlc/examples",
+    "commands": ".ai-dlc/COMMANDS.md",
+    "migration": ".ai-dlc/MIGRATION.md",
+    "install": ".ai-dlc/INSTALL.md",
+    "versioning": ".ai-dlc/VERSIONING.md",
+    "changelog": "CHANGELOG.md",
+    "validator_powershell": ".ai-dlc/tools/validate.ps1",
+    "validator_bash": ".ai-dlc/tools/validate.sh",
+    "init_powershell": ".ai-dlc/tools/init.ps1",
+    "init_bash": ".ai-dlc/tools/init.sh",
+    "preprocess_company_docs_powershell": ".ai-dlc/tools/preprocess-company-docs.ps1",
+    "preprocess_company_docs_bash": ".ai-dlc/tools/preprocess-company-docs.sh",
+    "update_projects_powershell": ".ai-dlc/tools/update-projects.ps1",
+    "update_projects_bash": ".ai-dlc/tools/update-projects.sh",
+    "show_models_powershell": ".ai-dlc/tools/show-models.ps1",
+    "show_models_bash": ".ai-dlc/tools/show-models.sh",
+    "sync_copilot_powershell": ".ai-dlc/tools/sync-copilot.ps1",
+    "sync_copilot_bash": ".ai-dlc/tools/sync-copilot.sh",
+    "test_powershell": ".ai-dlc/tests/test.ps1",
+    "test_bash": ".ai-dlc/tests/test.sh",
+    "context": "_CONTEXT.md",
+    "progress": "PROGRESS.md",
+    "github_copilot": ".github/copilot-instructions.md",
+    "codex": "AGENTS.md",
+    "claude": "CLAUDE.md",
+    "gemini": "GEMINI.md",
+    "openclaw": "OPENCLAW.md",
+    "halt_triggers": ".ai-dlc/halt-triggers.yaml"
+  },
+  "templates": {
+    "context": ".ai-dlc/modules/templates/CONTEXT_TEMPLATE.md",
+    "context_min": ".ai-dlc/modules/templates/CONTEXT_MIN.md",
+    "epic": ".ai-dlc/modules/templates/EPIC_TEMPLATE.md",
+    "task": ".ai-dlc/modules/templates/TASK_TEMPLATE.md",
+    "decision_record": ".ai-dlc/modules/templates/DECISION_RECORD_TEMPLATE.md",
+    "progress": ".ai-dlc/modules/templates/PROGRESS_TEMPLATE.md",
+    "project_instructions": ".ai-dlc/modules/templates/PROJECT_INSTRUCTIONS_TEMPLATE.md",
+    "company_process": ".ai-dlc/modules/templates/COMPANY_PROCESS_TEMPLATE.md",
+    "projects_index": ".ai-dlc/modules/templates/PROJECTS_TEMPLATE.json"
+  },
+  "schemas": {
+    "manifest": ".ai-dlc/schemas/manifest.schema.json",
+    "projects": ".ai-dlc/schemas/projects.schema.json",
+    "processed_company": ".ai-dlc/schemas/processed-company.schema.json",
+    "halt_triggers": ".ai-dlc/schemas/halt-triggers.schema.json"
+  },
+  "ci_examples": {
+    "github_actions_validate": ".ai-dlc/examples/github-actions-validate.yml"
+  },
+  "monorepo": {
+    "supported": true,
+    "project_root_marker": "_CONTEXT.md",
+    "shared_framework": ".ai-dlc/modules",
+    "project_override": ".ai-dlc/project",
+    "project_company_extension": ".ai-dlc/company"
+  },
+  "model_levels": {
+    "1": {
+      "anthropic": "Haiku Low",
+      "openai": "gpt-5.4-nano",
+      "gemini": "Gemini 3.1 Flash-Lite",
+      "purpose": "Small edits, docs, formatting, simple Q&A",
+      "token_range": "< 4k"
+    },
+    "2": {
+      "anthropic": "Haiku Medium",
+      "openai": "gpt-5.4-mini low",
+      "gemini": "Gemini 2.5 Flash-Lite",
+      "purpose": "Localized code changes, simple tests",
+      "token_range": "4k-8k"
+    },
+    "3": {
+      "anthropic": "Sonnet Low",
+      "openai": "gpt-5.4-mini medium",
+      "gemini": "Gemini 2.5 Flash",
+      "purpose": "Standard implementation, focused debugging",
+      "token_range": "8k-16k"
+    },
+    "4": {
+      "anthropic": "Sonnet Medium",
+      "openai": "gpt-5.4 medium",
+      "gemini": "Gemini 3 Flash",
+      "purpose": "Multi-file features, moderate design tradeoffs",
+      "token_range": "16k-32k"
+    },
+    "5": {
+      "anthropic": "Sonnet High",
+      "openai": "gpt-5.4 high/xhigh",
+      "gemini": "Gemini 2.5 Pro",
+      "purpose": "Complex refactors, integrations, security-sensitive work",
+      "token_range": "32k-64k"
+    },
+    "6": {
+      "anthropic": "Opus High",
+      "openai": "gpt-5.5 high",
+      "gemini": "Gemini 3.1 Pro",
+      "purpose": "Architecture, deep debugging, broad cross-module changes",
+      "token_range": "64k-120k"
+    },
+    "7": {
+      "anthropic": "Opus Max",
+      "openai": "gpt-5.5 xhigh",
+      "gemini": "Gemini Deep Research Max / Gemini 3.1 Pro",
+      "purpose": "Mission-critical architecture, high ambiguity, high-risk decisions",
+      "token_range": "> 120k"
+    }
+  },
+  "risk_floors": {
+    "MEDIUM": 3,
+    "HIGH": 5,
+    "auth_secrets_compliance_production_data": 6,
+    "architecture_or_broad_cross_module": 6,
+    "mission_critical_ambiguous_high_risk": 7
+  }
+}

@@ -99,7 +99,7 @@ Verificati tutti i riferimenti "Capitolo N" e "§N.N":
 - ✅ Cap 08 §8.1 → tabella §8.1 citata correttamente in §8.3 ✓
 - ✅ Cap 09 titolo §9.6 rimosso (spostato in §9.1 durante Fase 4) — nessun riferimento orfano ✓
 - ✅ Cap 10 → non ci sono riferimenti a sezioni inesistenti ✓
-- ✅ Cap 12 §12.8 → riferimento a `.adlc/project/instructions.md` coerente con Cap 2 ✓
+- ✅ Cap 12 §12.8 → riferimento a `.ai-dlc/project/instructions.md` coerente con Cap 2 ✓
 
 ### Livelli intestazione
 - ✅ Tutti i capitoli: `#` (h1) per titolo, `##` (h2) per sezioni, `###` (h3) per sottosezioni
@@ -109,7 +109,7 @@ Verificati tutti i riferimenti "Capitolo N" e "§N.N":
 ### Formattazione codice inline
 - ✅ Nomi file in backtick: `_CONTEXT.md`, `PROGRESS.md`, `AGENTS.md`
 - ✅ Comandi in backtick: `@checkpoint`, `@show-constraints`
-- ✅ Path in backtick: `.adlc/modules/`, `src/routes/tasks.ts`
+- ✅ Path in backtick: `.ai-dlc/modules/`, `src/routes/tasks.ts`
 - ✅ Nomi di tecnologie nei path in backtick: `@fastify/jwt`, `zod`
 - ✅ Valori di campo in backtick: `Phase: 3-Implementation`, `Mode: LITE`
 

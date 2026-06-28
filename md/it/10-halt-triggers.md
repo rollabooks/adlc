@@ -10,7 +10,7 @@ Non è un sistema di permessi — l'agente può comunque modificare quei file, c
 
 ## 10.1 Il file `halt-triggers.yaml`
 
-Il file si trova in `.adlc/halt-triggers.yaml` ed è incluso nel framework. Non devi crearlo — è già lì dopo `init`.
+Il file si trova in `.ai-dlc/halt-triggers.yaml` ed è incluso nel framework. Non devi crearlo — è già lì dopo `init`.
 
 ```yaml
 version: 1
@@ -72,7 +72,7 @@ triggers:
 
   - id: framework
     patterns:
-      - ".adlc/modules/**"
+      - ".ai-dlc/modules/**"
       - "AGENTS.md"
       - "CLAUDE.md"
       - "GEMINI.md"
@@ -120,7 +120,7 @@ Il flusso è sempre lo stesso: path rilevato → HALT → presentazione del pian
 
 I trigger predefiniti sono pensati per la maggior parte dei progetti. Ma ogni progetto ha le sue zone sensibili. TaskFlow API, per esempio, ha un modulo di billing che non è coperto dai trigger predefiniti ma che il team vuole proteggere allo stesso modo.
 
-Gli override di progetto vivono in `.adlc/project/halt-triggers.yaml` — questo file non esiste di default, lo crei quando ne hai bisogno.
+Gli override di progetto vivono in `.ai-dlc/project/halt-triggers.yaml` — questo file non esiste di default, lo crei quando ne hai bisogno.
 
 ```yaml
 version: 1
@@ -215,7 +215,7 @@ Se noti che un trigger si attiva sistematicamente per operazioni che non meritan
 
 - Gli HALT trigger definiscono pattern di path che bloccano l'agente e richiedono conferma esplicita prima di qualsiasi modifica.
 - I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, framework AI-DLC.
-- Gli override di progetto in `.adlc/project/halt-triggers.yaml` estendono (o disattivano) i trigger predefiniti per le esigenze specifiche del progetto.
+- Gli override di progetto in `.ai-dlc/project/halt-triggers.yaml` estendono (o disattivano) i trigger predefiniti per le esigenze specifiche del progetto.
 - I trigger non si disattivano mai con i Modes — sono il livello di sicurezza che rimane costante indipendentemente dalla velocità con cui stai lavorando.
 - Un falso positivo (trigger attivato per path poi non modificato) è accettabile e preferibile al contrario.
 

@@ -207,7 +207,7 @@ I comandi conversazionali non sono una scorciatoia per bypassare il protocollo d
 
 ## 13.4 Comandi personalizzati di progetto
 
-I comandi standard del framework sono generici. Se il tuo progetto ha workflow ricorrenti che si traducono sempre nelle stesse istruzioni, puoi definire shortcut personalizzati in `.adlc/project/instructions.md`.
+I comandi standard del framework sono generici. Se il tuo progetto ha workflow ricorrenti che si traducono sempre nelle stesse istruzioni, puoi definire shortcut personalizzati in `.ai-dlc/project/instructions.md`.
 
 Per TaskFlow API:
 
@@ -235,6 +235,6 @@ Quando Lorenzo scrive `@deploy-check`, l'agente esegue tutti e quattro gli step 
 - I comandi conversazionali (`@`) sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo AI-DLC — non comandi shell.
 - I più usati: `@checkpoint` (fissa stato), `@context-update` (aggiorna il context), `@security-check` / `@perf-check` (verifica vincoli), `@alternatives` (opzioni strutturate), `@simplify` (riduce scope), `@stop` (ferma tutto).
 - Non bypassano il protocollo di sicurezza: nessun comando disattiva gli HALT trigger o modifica `_CONTEXT.md` senza approvazione.
-- Comandi personalizzati di progetto in `.adlc/project/instructions.md` trasformano workflow ricorrenti in shortcut.
+- Comandi personalizzati di progetto in `.ai-dlc/project/instructions.md` trasformano workflow ricorrenti in shortcut.
 
 Nel prossimo capitolo vediamo come usare più agenti AI sullo stesso progetto: Claude Code, GitHub Copilot, Codex e Gemini insieme, con un unico `_CONTEXT.md` come fonte di verità condivisa.

@@ -26,7 +26,7 @@ Arrivati in produzione, AI-DLC entra nella sua fase di vita più lunga: manutenz
 
 \textbf{Causa:} il path non è coperto dagli HALT trigger.
 
-\textbf{Soluzione:} aggiungi il path in \texttt{.adlc/project/halt-triggers.yaml}.
+\textbf{Soluzione:} aggiungi il path in \texttt{.ai-dlc/project/halt-triggers.yaml}.
 
 \subsection*{``Il validator fallisce su un task''}
 
@@ -40,7 +40,7 @@ Arrivati in produzione, AI-DLC entra nella sua fase di vita più lunga: manutenz
 
 \subsection*{``Voglio bypassare un HALT trigger''}
 
-\textbf{Soluzione corretta:} non scavalcarlo. Disattivalo consapevolmente per la durata del lavoro intensivo in \texttt{.adlc/project/halt-triggers.yaml}, documenta in \texttt{PROGRESS.md} perché e quando pianifichi di riattivarlo.
+\textbf{Soluzione corretta:} non scavalcarlo. Disattivalo consapevolmente per la durata del lavoro intensivo in \texttt{.ai-dlc/project/halt-triggers.yaml}, documenta in \texttt{PROGRESS.md} perché e quando pianifichi di riattivarlo.
 
 \section{Integrazione CI/CD}
 \label{sec:16-cicd}
@@ -60,17 +60,17 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Validate AI-DLC
-        run: bash .adlc/tools/validate.sh
+        run: bash .ai-dlc/tools/validate.sh
 
       # Con --strict i warning diventano failure
       # - name: Validate AI-DLC strict
-      #   run: bash .adlc/tools/validate.sh --strict
+      #   run: bash .ai-dlc/tools/validate.sh --strict
 
       - name: Sync Copilot check
-        run: bash .adlc/tools/sync-copilot.sh
+        run: bash .ai-dlc/tools/sync-copilot.sh
 
       - name: Smoke tests
-        run: bash .adlc/tests/test.sh
+        run: bash .ai-dlc/tests/test.sh
 \end{lstlisting}
 
 \section{Manutenzione del framework nel tempo}
@@ -93,9 +93,9 @@ AI-DLC segue semantic versioning (\texttt{MAJOR.MINOR.PATCH}):
   \label{tab:16-versioning}
 \end{table}
 
-\textbf{Cosa aggiornare:} \texttt{.adlc/modules/}, \texttt{.adlc/schemas/}, \texttt{halt-triggers.yaml}, \texttt{manifest.json}, \texttt{VERSION}, e i file di startup degli agenti (\texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc.).
+\textbf{Cosa aggiornare:} \texttt{.ai-dlc/modules/}, \texttt{.ai-dlc/schemas/}, \texttt{halt-triggers.yaml}, \texttt{manifest.json}, \texttt{VERSION}, e i file di startup degli agenti (\texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc.).
 
-\textbf{Non toccare mai durante l'aggiornamento:} \texttt{\_CONTEXT.md}, \texttt{PROGRESS.md}, \texttt{.adlc/project/}, \texttt{.adlc/company/} --- questi sono tuoi.
+\textbf{Non toccare mai durante l'aggiornamento:} \texttt{\_CONTEXT.md}, \texttt{PROGRESS.md}, \texttt{.ai-dlc/project/}, \texttt{.ai-dlc/company/} --- questi sono tuoi.
 
 \section{L'agente in Fase 6 --- Ops}
 \label{sec:16-ops}
@@ -113,6 +113,6 @@ In \texttt{Phase: 6-Ops} il comportamento cambia:
 \begin{itemize}
   \item I problemi comuni hanno cause precise: usa \texttt{@show-constraints} per vincoli ignorati, abbassa il Mode per troppe conferme, aggiungi trigger per file toccati indebitamente.
   \item \texttt{validate.sh} in GitHub Actions verifica la presenza e validità del framework ad ogni PR.
-  \item Aggiornamenti: copia solo \texttt{.adlc/modules/} e file di startup --- mai \texttt{\_CONTEXT.md} o \texttt{.adlc/project/}.
+  \item Aggiornamenti: copia solo \texttt{.ai-dlc/modules/} e file di startup --- mai \texttt{\_CONTEXT.md} o \texttt{.ai-dlc/project/}.
   \item Phase 6 (Ops): rollback obbligatorio, non-regressione, incident response strutturata.
 \end{itemize}

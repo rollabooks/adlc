@@ -17,7 +17,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | Struttura | 16 capitoli + Introduzione + 4 Appendici |
 | Esempio ricorrente | Progetto "TaskFlow API" (REST API Node.js/Fastify) |
 | Profondità | Workflow utente (non dettaglio moduli interni) |
-| Sorgente framework | `source/.adlc/` in repo ADLC.20260403 |
+| Sorgente framework | `source/.ai-dlc/` in repo ADLC.20260403 |
 | Versione framework | 3.3.0 |
 
 ## Stato dei Capitoli
@@ -25,7 +25,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 | # | File | Stato | Fase | Ultima modifica | Note |
 |---|------|-------|------|-----------------|------|
 | 0 | 00-introduzione.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
-| 1 | 01-cose-adlc.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
+| 1 | 01-cose-ai-dlc.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 2 | 02-setup-primo-progetto.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 3 | 03-sessione-reale.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
 | 4 | 04-context-md.md | ✅ completato | Fase 3 | 2026-06-27 | Prima bozza |
@@ -48,7 +48,7 @@ Fase 3 (Scrittura) — avvio progetto; in corso scrittura Introduzione e Capitol
 
 ## Attività Completate
 
-- [2026-06-27] Fase 2 completata: indice approvato (docs/ideas/indice-adlc-manuale-it.md)
+- [2026-06-27] Fase 2 completata: indice approvato (docs/ideas/indice-ai-dlc-manuale-it.md)
 - [2026-06-27] Repository creato e struttura inizializzata
 
 ## Attività in Corso

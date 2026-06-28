@@ -213,7 +213,7 @@ Riferimento completo di tutti i comandi conversazionali AI-DLC. I comandi usano 
 
 ## Comandi personalizzati di progetto
 
-Puoi definire shortcut personalizzati in `.adlc/project/instructions.md`. Quando li scrivi nella chat, l'agente li interpreta come descritto.
+Puoi definire shortcut personalizzati in `.ai-dlc/project/instructions.md`. Quando li scrivi nella chat, l'agente li interpreta come descritto.
 
 Formato:
 

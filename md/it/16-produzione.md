@@ -49,9 +49,9 @@ LITE salta la conferma per LOW e riduce la cerimonia per MEDIUM. Torna a STANDAR
 
 **Causa:** il path non è coperto dagli HALT trigger, oppure l'override di progetto ha disattivato il trigger sbagliato.
 
-**Soluzione:** apri `.adlc/halt-triggers.yaml` e verifica quali pattern esistono. Se il path non è coperto, aggiungilo nell'override di progetto:
+**Soluzione:** apri `.ai-dlc/halt-triggers.yaml` e verifica quali pattern esistono. Se il path non è coperto, aggiungilo nell'override di progetto:
 ```yaml
-# .adlc/project/halt-triggers.yaml
+# .ai-dlc/project/halt-triggers.yaml
 triggers:
   - id: custom-config
     patterns:
@@ -88,7 +88,7 @@ triggers:
 
 **Causa:** l'epic è stato creato senza seguire il template.
 
-**Soluzione:** apri `.adlc/modules/templates/EPIC_TEMPLATE.md` e aggiungi le sezioni mancanti all'epic.
+**Soluzione:** apri `.ai-dlc/modules/templates/EPIC_TEMPLATE.md` e aggiungi le sezioni mancanti all'epic.
 
 ---
 
@@ -104,7 +104,7 @@ triggers:
 
 **Soluzione:** stima i token del task corrente e aggiorna i campi. Se sei in CI e vuoi che il warning diventi un failure:
 ```bash
-bash .adlc/tools/validate.sh --strict
+bash .ai-dlc/tools/validate.sh --strict
 ```
 
 ---
@@ -126,7 +126,7 @@ bash .adlc/tools/validate.sh --strict
 **Soluzione corretta:** non cercare di "scavalcare" il trigger. Disattivalo consapevolmente nel file di override per la durata del lavoro intensivo, poi riattivalo:
 
 ```yaml
-# .adlc/project/halt-triggers.yaml
+# .ai-dlc/project/halt-triggers.yaml
 disable:
   - schema   # disattivato temporaneamente durante la Fase 2 (Design DB)
 ```
@@ -141,7 +141,7 @@ Documenta in `PROGRESS.md` perché hai disattivato il trigger e quando pianifich
 
 **Soluzione:** carica il playbook dedicato:
 ```
-Carica .adlc/modules/11_BUGFIX_PLAYBOOK.md.
+Carica .ai-dlc/modules/11_BUGFIX_PLAYBOOK.md.
 
 Bug: [sintomo] + [repro steps] + [logs]
 Ambiente: [dev / staging / prod]
@@ -173,10 +173,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate AI-DLC
-        run: bash .adlc/tools/validate.sh
+        run: bash .ai-dlc/tools/validate.sh
 
       - name: Smoke tests
-        run: bash .adlc/tests/test.sh
+        run: bash .ai-dlc/tests/test.sh
 ```
 
 **Cosa controlla il validator in CI:**
@@ -190,7 +190,7 @@ jobs:
 
 ```yaml
 - name: Validate AI-DLC (strict)
-  run: bash .adlc/tools/validate.sh --strict
+  run: bash .ai-dlc/tools/validate.sh --strict
 ```
 
 In strict mode, anche i warning diventano failure. Utile per team che vogliono garantire che `_CONTEXT.md` sia sempre aggiornato prima del merge.
@@ -201,7 +201,7 @@ Se il team usa Copilot, aggiungi la verifica dell'allineamento:
 
 ```yaml
 - name: Sync Copilot check
-  run: bash .adlc/tools/sync-copilot.sh
+  run: bash .ai-dlc/tools/sync-copilot.sh
 ```
 
 ---
@@ -220,7 +220,7 @@ AI-DLC segue semantic versioning (`MAJOR.MINOR.PATCH`):
 
 Per verificare la versione installata:
 ```bash
-cat .adlc/VERSION
+cat .ai-dlc/VERSION
 ```
 
 ### Come aggiornare
@@ -234,12 +234,12 @@ git clone https://github.com/rollaradio/adlc-framework /tmp/adlc-new
 # 2. Leggi CHANGELOG.md e MIGRATION.md della nuova versione
 cat /tmp/adlc-new/CHANGELOG.md
 
-# 3. Copia i file del framework (NON _CONTEXT.md, PROGRESS.md, .adlc/project/)
-cp -r /tmp/adlc-new/.adlc/modules .adlc/
-cp -r /tmp/adlc-new/.adlc/schemas .adlc/
-cp /tmp/adlc-new/.adlc/halt-triggers.yaml .adlc/
-cp /tmp/adlc-new/.adlc/manifest.json .adlc/
-cp /tmp/adlc-new/.adlc/VERSION .adlc/
+# 3. Copia i file del framework (NON _CONTEXT.md, PROGRESS.md, .ai-dlc/project/)
+cp -r /tmp/adlc-new/.ai-dlc/modules .ai-dlc/
+cp -r /tmp/adlc-new/.ai-dlc/schemas .ai-dlc/
+cp /tmp/adlc-new/.ai-dlc/halt-triggers.yaml .ai-dlc/
+cp /tmp/adlc-new/.ai-dlc/manifest.json .ai-dlc/
+cp /tmp/adlc-new/.ai-dlc/VERSION .ai-dlc/
 
 # 4. Aggiorna gli entry point degli agenti
 cp /tmp/adlc-new/AGENTS.md .
@@ -247,24 +247,24 @@ cp /tmp/adlc-new/CLAUDE.md .
 # ... altri entry point
 
 # 5. Valida
-bash .adlc/tools/validate.sh
+bash .ai-dlc/tools/validate.sh
 ```
 
 **Non toccare mai durante l'aggiornamento:**
 - `_CONTEXT.md` — è il tuo stato di progetto
 - `PROGRESS.md` — è la tua storia
-- `.adlc/project/` — sono le tue personalizzazioni
-- `.adlc/company/` — sono i tuoi processi aziendali
+- `.ai-dlc/project/` — sono le tue personalizzazioni
+- `.ai-dlc/company/` — sono i tuoi processi aziendali
 
-Questi file sono tuoi. Il framework è in `.adlc/modules/`, `.adlc/schemas/`, gli entry point degli agenti. Quella è la parte che si aggiorna.
+Questi file sono tuoi. Il framework è in `.ai-dlc/modules/`, `.ai-dlc/schemas/`, gli entry point degli agenti. Quella è la parte che si aggiorna.
 
 ### Personalizzare senza rompere l'aggiornabilità
 
-La regola che garantisce aggiornabilità nel tempo è sempre la stessa: **personalizza in `.adlc/project/`, non in `.adlc/modules/`**.
+La regola che garantisce aggiornabilità nel tempo è sempre la stessa: **personalizza in `.ai-dlc/project/`, non in `.ai-dlc/modules/`**.
 
-Se vuoi aggiungere una regola al comportamento dell'agente in Fase 3, non modificare `04_IMPLEMENTATION.md`. Aggiungi la regola in `.adlc/project/instructions.md`. La prossima volta che aggiorni il framework, il tuo file di istruzioni rimane intatto.
+Se vuoi aggiungere una regola al comportamento dell'agente in Fase 3, non modificare `04_IMPLEMENTATION.md`. Aggiungi la regola in `.ai-dlc/project/instructions.md`. La prossima volta che aggiorni il framework, il tuo file di istruzioni rimane intatto.
 
-Se vuoi aggiungere una skill personalizzata, mettila in `.adlc/project/skills/`, non in `.adlc/modules/skills/`. Stessa logica.
+Se vuoi aggiungere una skill personalizzata, mettila in `.ai-dlc/project/skills/`, non in `.ai-dlc/modules/skills/`. Stessa logica.
 
 ---
 
@@ -303,8 +303,8 @@ In questi casi, la "disinstallazione" è semplice: rimuovi i file del framework 
 
 - I **problemi comuni** hanno cause precise: vincoli ignorati (bootstrap mancato), troppe conferme (Mode sbagliato), file toccati indebitamente (trigger non configurati), validator in failure (placeholder non compilati).
 - **CI/CD**: `validate.sh` in GitHub Actions verifica la presenza e validità del framework ad ogni PR. `--strict` fa fallire anche i warning, utile per team esigenti.
-- **Aggiornamenti**: copia selettiva di `.adlc/modules/`, `.adlc/schemas/` e file di startup degli agenti — mai `_CONTEXT.md`, `PROGRESS.md`, `.adlc/project/`. Leggi sempre `MIGRATION.md` prima di aggiornamenti MAJOR.
-- **Personalizzazione** senza rompere l'aggiornabilità: tutto in `.adlc/project/`, niente in `.adlc/modules/`.
+- **Aggiornamenti**: copia selettiva di `.ai-dlc/modules/`, `.ai-dlc/schemas/` e file di startup degli agenti — mai `_CONTEXT.md`, `PROGRESS.md`, `.ai-dlc/project/`. Leggi sempre `MIGRATION.md` prima di aggiornamenti MAJOR.
+- **Personalizzazione** senza rompere l'aggiornabilità: tutto in `.ai-dlc/project/`, niente in `.ai-dlc/modules/`.
 - **Phase 6 (Ops)**: rollback obbligatorio su ogni modifica, aggiornamenti con test di non-regressione, incident response strutturata.
 
 > **Nota:** il bullet "Contribuire al framework" menzionato in alcune versioni precedenti di questo riepilogo è stato rimosso — il processo di contribuzione al framework è documentato nel `README.md` del repository ufficiale e non è parte di questo manuale d'uso.

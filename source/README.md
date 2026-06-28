@@ -4,10 +4,9 @@
 > **Version:** 26.4.22
 
 > **Note on naming:** the methodology is named **AI-DLC** (AI-Driven Development Life Cycle).
-> For backward compatibility the on-disk directory remains `.adlc/`, the package id stays
-> `adlc-framework`, and tool paths are unchanged — renaming them would break every agent
-> entry point, tool and documented path. The short name in code and folders is historical;
-> the methodology name is AI-DLC.
+> The on-disk directory is `.ai-dlc/`, the package id is `ai-dlc-framework`, the manifesto file
+> is `AI-DLC.md`, and all tool paths use the `.ai-dlc/` prefix. Naming is fully aligned with the
+> methodology name across code, folders and documentation.
 
 ---
 
@@ -49,8 +48,8 @@ Technology-agnostic. Works with any language, framework, or architecture.
 ├── README.md                        ← This file
 ├── .github/
 │   └── copilot-instructions.md      ← GitHub Copilot entry point (always loaded)
-└── .adlc/
-    ├── ADLC.md                      ← Short framework manifesto
+└── .ai-dlc/
+    ├── AI-DLC.md                      ← Short framework manifesto
     ├── COMMANDS.md                  ← Conversational command specification
     ├── INSTALL.md                   ← New repository setup guide
     ├── MIGRATION.md                 ← Old layout migration guide
@@ -99,20 +98,20 @@ Technology-agnostic. Works with any language, framework, or architecture.
 ## 3-Level Architecture
 
 ```
-Level 1: .adlc/modules/               → Universal framework (read-only)
-Level 2: .adlc/company/                → Enterprise process extension
-Level 3: .adlc/project/                → Project rules + domain expertise
+Level 1: .ai-dlc/modules/               → Universal framework (read-only)
+Level 2: .ai-dlc/company/                → Enterprise process extension
+Level 3: .ai-dlc/project/                → Project rules + domain expertise
 Level 4: _CONTEXT.md + PROGRESS.md     → Session state + history
 ```
 
 **Priority** (highest → lowest):
 1. `_CONTEXT.md` — current state, constraints
-2. `.adlc/project/` — project-specific rules and skills
-3. `.adlc/company/` — enterprise process extension docs
+2. `.ai-dlc/project/` — project-specific rules and skills
+3. `.ai-dlc/company/` — enterprise process extension docs
 4. `.copilot/` — compatibility project rules and skills
-5. `.adlc/modules/` — framework (generic)
+5. `.ai-dlc/modules/` — framework (generic)
 
-In monorepos, each subproject can have its own `_CONTEXT.md`, `PROGRESS.md`, `.adlc/project/`, and optional `.adlc/company/`. Agents use the `_CONTEXT.md` closest to the active file as the project root, while `.adlc/modules/` can stay at repository root as the shared framework.
+In monorepos, each subproject can have its own `_CONTEXT.md`, `PROGRESS.md`, `.ai-dlc/project/`, and optional `.ai-dlc/company/`. Agents use the `_CONTEXT.md` closest to the active file as the project root, while `.ai-dlc/modules/` can stay at repository root as the shared framework.
 
 ---
 
@@ -120,44 +119,44 @@ In monorepos, each subproject can have its own `_CONTEXT.md`, `PROGRESS.md`, `.a
 
 ### 1. Scaffold project files:
 ```powershell
-.\.adlc\tools\init.ps1
+.\.ai-dlc\tools\init.ps1
 ```
 
 Or:
 
 ```bash
-bash .adlc/tools/init.sh
+bash .ai-dlc/tools/init.sh
 ```
 
 ### 2. Create `_CONTEXT.md` manually if not using scaffold:
 ```bash
-cp .adlc/modules/templates/CONTEXT_TEMPLATE.md ./_CONTEXT.md
+cp .ai-dlc/modules/templates/CONTEXT_TEMPLATE.md ./_CONTEXT.md
 ```
 
 ### 3. Fill the essential sections:
 - Phase, Active Task, Stack, SEC/PERF constraints
 
-### 4. Optionally create `.adlc/project/instructions.md`:
+### 4. Optionally create `.ai-dlc/project/instructions.md`:
 Project-specific conventions that override framework defaults. Use `.copilot/` only when GitHub Copilot compatibility requires it.
 
 ### 5. Start chatting:
 The AI discovers `_CONTEXT.md` automatically and loads the relevant phase module.
 
 ### Optional: Add company process documentation
-Create `.adlc/company/` when the repository must follow enterprise SDLC, governance, compliance, or engineering standards. Agents load it automatically when present.
+Create `.ai-dlc/company/` when the repository must follow enterprise SDLC, governance, compliance, or engineering standards. Agents load it automatically when present.
 
-For PDF/DOCX sources, put files in `.adlc/company/source/` and run:
+For PDF/DOCX sources, put files in `.ai-dlc/company/source/` and run:
 
 ```powershell
-.\.adlc\tools\preprocess-company-docs.ps1
+.\.ai-dlc\tools\preprocess-company-docs.ps1
 ```
 
 ```bash
-bash .adlc/tools/preprocess-company-docs.sh
+bash .ai-dlc/tools/preprocess-company-docs.sh
 ```
 
-Agents should use `.adlc/company/processed/` for normal loading.
-Preprocessing also writes `.adlc/company/processed/manifest.json`.
+Agents should use `.ai-dlc/company/processed/` for normal loading.
+Preprocessing also writes `.ai-dlc/company/processed/manifest.json`.
 
 ---
 
@@ -178,7 +177,7 @@ Preprocessing also writes `.adlc/company/processed/manifest.json`.
 
 ## Essential Commands
 
-See `.adlc/COMMANDS.md` for inputs, expected outputs, and files usually updated.
+See `.ai-dlc/COMMANDS.md` for inputs, expected outputs, and files usually updated.
 
 | Command | Purpose |
 |---------|---------|
@@ -209,17 +208,17 @@ Quick reference:
 | 6 | 64k-120k | Architecture, deep debugging, broad cross-module changes |
 | 7 | > 120k | Mission-critical architecture, high ambiguity, high-risk decisions |
 
-Vendor mapping lives in [`.adlc/manifest.json#model_levels`](.adlc/manifest.json). Print the current table:
+Vendor mapping lives in [`.ai-dlc/manifest.json#model_levels`](.ai-dlc/manifest.json). Print the current table:
 
 ```powershell
-.\.adlc\tools\show-models.ps1
+.\.ai-dlc\tools\show-models.ps1
 ```
 
 ```bash
-bash .adlc/tools/show-models.sh
+bash .ai-dlc/tools/show-models.sh
 ```
 
-Minimum levels and the full risk/approval matrix are defined in [`.adlc/modules/01_CORE_RULES.md`](.adlc/modules/01_CORE_RULES.md) §11 and `manifest.json#risk_floors`.
+Minimum levels and the full risk/approval matrix are defined in [`.ai-dlc/modules/01_CORE_RULES.md`](.ai-dlc/modules/01_CORE_RULES.md) §11 and `manifest.json#risk_floors`.
 
 ---
 
@@ -236,11 +235,11 @@ Minimum levels and the full risk/approval matrix are defined in [`.adlc/modules/
 
 ## New Repository Setup
 
-1. Follow `.adlc/INSTALL.md`
-2. Copy startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`), `.github/`, and `.adlc/` to the new repo
+1. Follow `.ai-dlc/INSTALL.md`
+2. Copy startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`), `.github/`, and `.ai-dlc/` to the new repo
 3. Create `_CONTEXT.md` from the template
-4. Optionally create `.adlc/project/instructions.md` for project-specific rules
-5. Copy relevant SKILLs to `.adlc/project/skills/`
+4. Optionally create `.ai-dlc/project/instructions.md` for project-specific rules
+5. Copy relevant SKILLs to `.ai-dlc/project/skills/`
 6. Keep `.copilot/` only for compatibility with existing GitHub Copilot setups
 
 ## Scaffold
@@ -248,43 +247,43 @@ Minimum levels and the full risk/approval matrix are defined in [`.adlc/modules/
 Create missing project state and project override files:
 
 ```powershell
-.\.adlc\tools\init.ps1
+.\.ai-dlc\tools\init.ps1
 ```
 
 ```bash
-bash .adlc/tools/init.sh
+bash .ai-dlc/tools/init.sh
 ```
 
-Use `--context minimal` for small projects or spikes. Add `-Company` in PowerShell or `--company` in Bash to scaffold `.adlc/company/`. Use `-Force` in PowerShell or `--force` in Bash only when you intentionally want to overwrite generated files.
+Use `--context minimal` for small projects or spikes. Add `-Company` in PowerShell or `--company` in Bash to scaffold `.ai-dlc/company/`. Use `-Force` in PowerShell or `--force` in Bash only when you intentionally want to overwrite generated files.
 
 For monorepos, scaffold a specific subproject while reading templates from the repository root:
 
 ```powershell
-.\.adlc\tools\init.ps1 -ProjectRoot .\apps\app-a -FrameworkRoot .
+.\.ai-dlc\tools\init.ps1 -ProjectRoot .\apps\app-a -FrameworkRoot .
 ```
 
 ```bash
-bash .adlc/tools/init.sh --project-root apps/app-a --framework-root .
+bash .ai-dlc/tools/init.sh --project-root apps/app-a --framework-root .
 ```
 
 Preprocess company docs for a specific subproject:
 
 ```powershell
-.\.adlc\tools\preprocess-company-docs.ps1 -ProjectRoot .\apps\app-a
+.\.ai-dlc\tools\preprocess-company-docs.ps1 -ProjectRoot .\apps\app-a
 ```
 
 ```bash
-bash .adlc/tools/preprocess-company-docs.sh --project-root apps/app-a
+bash .ai-dlc/tools/preprocess-company-docs.sh --project-root apps/app-a
 ```
 
-Update `.adlc/projects.json` after adding or moving subprojects:
+Update `.ai-dlc/projects.json` after adding or moving subprojects:
 
 ```powershell
-.\.adlc\tools\update-projects.ps1
+.\.ai-dlc\tools\update-projects.ps1
 ```
 
 ```bash
-bash .adlc/tools/update-projects.sh
+bash .ai-dlc/tools/update-projects.sh
 ```
 
 ## Validation
@@ -292,27 +291,27 @@ bash .adlc/tools/update-projects.sh
 Run the lightweight validator after setup or migration:
 
 ```powershell
-.\.adlc\tools\validate.ps1
+.\.ai-dlc\tools\validate.ps1
 ```
 
 ```bash
-bash .adlc/tools/validate.sh
+bash .ai-dlc/tools/validate.sh
 ```
 
-The validators always check JSON syntax and use `.adlc/schemas/` for schema validation when a local JSON Schema runtime is available.
+The validators always check JSON syntax and use `.ai-dlc/schemas/` for schema validation when a local JSON Schema runtime is available.
 
 ## Tests
 
 Run script smoke tests:
 
 ```powershell
-.\.adlc\tests\test.ps1
+.\.ai-dlc\tests\test.ps1
 ```
 
 ```bash
-bash .adlc/tests/test.sh
+bash .ai-dlc/tests/test.sh
 ```
 
 ## Versioning
 
-Version changes follow `.adlc/VERSIONING.md` and are recorded in `CHANGELOG.md`.
+Version changes follow `.ai-dlc/VERSIONING.md` and are recorded in `CHANGELOG.md`.

@@ -8,9 +8,9 @@ Il framework AI-DLC è composto da file che non vengono caricati tutti insieme a
 
 ## 12.1 La distinzione tra moduli e skill
 
-**I moduli** (`.adlc/modules/NN_*.md`) definiscono le regole operative del framework per ciascuna fase del ciclo di sviluppo. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only — non li modifichi mai per personalizzare il tuo progetto.
+**I moduli** (`.ai-dlc/modules/NN_*.md`) definiscono le regole operative del framework per ciascuna fase del ciclo di sviluppo. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only — non li modifichi mai per personalizzare il tuo progetto.
 
-**Le skill** (`.adlc/modules/skills/SKILL_*.md`) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro: progettare un'API REST, gestire la sicurezza, scrivere test, costruire un'interfaccia UI, gestire le operazioni. Puoi caricare una skill senza necessariamente essere in una fase specifica.
+**Le skill** (`.ai-dlc/modules/skills/SKILL_*.md`) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro: progettare un'API REST, gestire la sicurezza, scrivere test, costruire un'interfaccia UI, gestire le operazioni. Puoi caricare una skill senza necessariamente essere in una fase specifica.
 
 La differenza pratica: il modulo dice "sei in fase di implementazione, segui questo protocollo". La skill dice "stai progettando un'API REST, segui questi principi".
 
@@ -127,7 +127,7 @@ Senza la skill, l'agente potrebbe produrre endpoint con convenzioni incoerenti �
 
 Le skill del framework sono generiche. Il tuo progetto può avere esigenze specifiche che meritano una skill dedicata.
 
-Le skill personalizzate vanno in `.adlc/project/skills/`. Per TaskFlow API, Lorenzo ha creato `SKILL_TASKFLOW_DOMAIN.md`:
+Le skill personalizzate vanno in `.ai-dlc/project/skills/`. Per TaskFlow API, Lorenzo ha creato `SKILL_TASKFLOW_DOMAIN.md`:
 
 ```markdown
 # SKILL — TaskFlow Domain
@@ -175,9 +175,9 @@ Per attivarlo:
 
 ## 12.8 Non modificare i moduli del framework
 
-Una regola importante, già menzionata ma vale la pena ribadire: i file in `.adlc/modules/` sono **read-only** durante l'uso normale del framework.
+Una regola importante, già menzionata ma vale la pena ribadire: i file in `.ai-dlc/modules/` sono **read-only** durante l'uso normale del framework.
 
-Se vuoi sovrascrivere una regola del framework per il tuo progetto, non modificare il modulo — scrivi la regola alternativa in `.adlc/project/instructions.md`. Le regole di progetto hanno priorità sulle regole del framework.
+Se vuoi sovrascrivere una regola del framework per il tuo progetto, non modificare il modulo — scrivi la regola alternativa in `.ai-dlc/project/instructions.md`. Le regole di progetto hanno priorità sulle regole del framework.
 
 Modificare i moduli direttamente rompe l'aggiornabilità: quando esce una nuova versione del framework, non puoi aggiornare i moduli senza perdere le tue personalizzazioni.
 
@@ -187,8 +187,8 @@ Modificare i moduli direttamente rompe l'aggiornabilità: quando esce una nuova 
 
 - I **moduli** (`modules/NN_*.md`) sono le regole operative per ogni fase — caricati automaticamente in base a `Phase` in `_CONTEXT.md`.
 - Le **skill** (`modules/skills/SKILL_*.md`) sono guide tematiche — caricate su richiesta in base al tipo di task.
-- Le skill personalizzate di progetto vanno in `.adlc/project/skills/` e hanno priorità sulle skill del framework.
+- Le skill personalizzate di progetto vanno in `.ai-dlc/project/skills/` e hanno priorità sulle skill del framework.
 - `07_SPECIAL_LANES.md` copre hotfix, spike e parallel track — attivato su richiesta esplicita.
-- I moduli del framework sono read-only: personalizza in `.adlc/project/`, non modificando i file del framework.
+- I moduli del framework sono read-only: personalizza in `.ai-dlc/project/`, non modificando i file del framework.
 
 Nel prossimo capitolo vediamo i comandi conversazionali: i "comandi" che puoi digitare nella chat con l'agente per controllare il flusso di lavoro senza uscire dalla conversazione.

@@ -26,16 +26,16 @@ AI-DLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che map
 
 ## 8.2 Il mapping ai modelli vendor
 
-I livelli sono astratti — non nominano modelli specifici, perché i modelli cambiano. Il mapping concreto vive in `.adlc/manifest.json#model_levels` e viene aggiornato col framework.
+I livelli sono astratti — non nominano modelli specifici, perché i modelli cambiano. Il mapping concreto vive in `.ai-dlc/manifest.json#model_levels` e viene aggiornato col framework.
 
 Per vedere il mapping corrente:
 
 ```powershell
-.\.adlc\tools\show-models.ps1
+.\.ai-dlc\tools\show-models.ps1
 ```
 
 ```bash
-bash .adlc/tools/show-models.sh
+bash .ai-dlc/tools/show-models.sh
 ```
 
 Output tipico (il mapping cambia con le versioni del framework):

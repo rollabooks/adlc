@@ -83,11 +83,11 @@ Copilot è il caso speciale: non può importare `AGENTS.md` automaticamente, qui
 Il tool `sync-copilot` verifica che `.github/copilot-instructions.md` sia concettualmente allineato con `AGENTS.md` — non che sia identico (i due hanno strutture diverse), ma che non manchi nessun concetto chiave.
 
 ```bash
-bash .adlc/tools/sync-copilot.sh
+bash .ai-dlc/tools/sync-copilot.sh
 ```
 
 ```powershell
-.\.adlc\tools\sync-copilot.ps1
+.\.ai-dlc\tools\sync-copilot.ps1
 ```
 
 Output tipico:

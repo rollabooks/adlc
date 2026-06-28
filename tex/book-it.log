@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  28 JUN 2026 08:57
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  28 JUN 2026 11:26
  system commands enabled.
 **book-it.tex
 (./book-it.tex
@@ -1618,9 +1618,8 @@ Package biblatex Info: Automatic encoding selection.
 
 \openout3 = book-it.bcf
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'book-it.bbl' not found.
-
-No file book-it.bbl.
+Package biblatex Info: ... file 'book-it.bbl' found.
+ (./book-it.bbl)
 Package biblatex Info: Reference section=0 on input line 20.
 Package biblatex Info: Reference segment=0 on input line 20.
 
@@ -1691,6 +1690,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/InconsolataN(0)/b/n on input line 2
 0.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
 *geometry* verbose mode - [ preamble ] result:
@@ -1890,7 +1890,7 @@ LaTeX Font Info:    Font shape `TU/texgyreheros(0)/b/n' will be
 (Font)              scaled to size 22.88956pt on input line 40.
  [1
 
-] [2] (../chapters/it/ch01-cose-adlc.tex
+] [2] (../chapters/it/ch01-cose-ai-dlc.tex
 Capitolo 1.
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/b/n' will be
 (Font)              scaled to size 55.19989pt on input line 5.
@@ -2084,10 +2084,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [27]
-Overfull \hbox (8.04907pt too wide) in paragraph at lines 140--141
+Overfull \hbox (15.96912pt too wide) in paragraph at lines 140--141
 []\TU/texgyretermes(0)/b/n/10 Met-te-re trop-po nel con-text. \TU/texgyretermes
 (0)/m/n/10 Le re-go-le det-ta-glia-te del pro-get-to van-no in \TU/InconsolataN
-(0)/m/n/10 .adlc/project/instructions.md\TU/texgyretermes(0)/m/n/10 .
+(0)/m/n/10 .ai-dlc/project/instructions.md\TU/texgyretermes(0)/m/n/10 .
  []
 
 
@@ -2206,10 +2206,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 [44]
 Capitolo 8.
 
-Overfull \hbox (1.66023pt too wide) in paragraph at lines 34--35
+Overfull \hbox (9.58028pt too wide) in paragraph at lines 34--35
 []\TU/texgyretermes(0)/m/n/10 Il map-ping ai mo-del-li con-cre-ti (An-th-ro-pic,
- Ope-nAI, Ge-mi-ni) vi-ve in \TU/InconsolataN(0)/m/n/10 .adlc/manifest.json#mode
-l_levels
+ Ope-nAI, Ge-mi-ni) vi-ve in \TU/InconsolataN(0)/m/n/10 .ai-dlc/manifest.json#mo
+del_levels
  []
 
 [45
@@ -2329,12 +2329,6 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 ] [61] [62] (../chapters/it/ch12-moduli-e-skill.tex
 Capitolo 12.
-
-Underfull \hbox (badness 1442) in paragraph at lines 72--73
-\TU/texgyretermes(0)/m/n/10 Le skill del fra-mework so-no ge-ne-ri-che. Il tuo 
-pro-get-to può ave-re esi-gen-ze spe-ci-fi-che in
- []
-
 [63
 
 ]
@@ -2424,10 +2418,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 ]
 Capitolo 15.
 
-Overfull \hbox (0.77327pt too wide) in paragraph at lines 37--38
+Underfull \hbox (badness 7685) in paragraph at lines 37--38
 []\TU/texgyretermes(0)/b/n/10 Ag-gior-na-men-to in-di-ce: \TU/texgyretermes(0)/
 m/n/10 do-po ag-giun-te o spo-sta-men-ti di sot-to-pro-get-ti, ag-gior-na \TU/I
-nconsolataN(0)/m/n/10 .adlc/projects.json\TU/texgyretermes(0)/m/n/10 : 
+nconsolataN(0)/m/n/10 .ai-
  []
 
 [75]
@@ -2475,11 +2469,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [82]
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
-[]\TU/texgyretermes(0)/b/n/10 Non toc-ca-re mai du-ran-te l’ag-gior-na-men-to:
- \TU/InconsolataN(0)/m/n/10 _CONTEXT.md\TU/texgyretermes(0)/m/n/10 , \TU/Incons
-olataN(0)/m/n/10 PROGRESS.md\TU/texgyretermes(0)/m/n/10 , \TU/InconsolataN(0)/m
-/n/10 .adlc/project/\TU/texgyretermes(0)/m/n/10 ,
+Underfull \hbox (badness 5726) in paragraph at lines 116--117
+[]\TU/texgyretermes(0)/m/n/10 Ag-gior-na-men-ti: co-pia so-lo \TU/InconsolataN(
+0)/m/n/10 .ai-dlc/modules/ \TU/texgyretermes(0)/m/n/10 e fi-le di star-tup --- 
+mai \TU/InconsolataN(0)/m/n/10 _CONTEXT.md \TU/texgyretermes(0)/m/n/10 o
  []
 
 )
@@ -2590,21 +2583,21 @@ L3 programming layer <2025-12-24>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `book-it.out' has not changed.
-(rerunfilecheck)             Checksum: B53005DE124FD0B20F0AE1B518F73E08;23333.
+(rerunfilecheck)             Checksum: 86AED85BB867087D7F96FE09B7F9C441;23343.
 Package logreq Info: Writing requests to 'book-it.run.xml'.
 
 \openout1 = book-it.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 44536 strings out of 476081
- 596955,1977958 words of node,token memory allocated
- 688 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 74 glue_spec
+ 44610 strings out of 476081
+ 596939,1977958 words of node,token memory allocated
+ 693 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 75 glue_spec
 , 12 attribute_list, 3 write, 3 pdf_action nodes
-   avail lists: 1:4,2:9863,3:458,4:12657,5:11849,6:89,7:14873,8:73,9:28637,10:63
+   avail lists: 1:3,2:9863,3:459,4:12657,5:11849,6:89,7:14873,8:73,9:28637,10:63
 ,11:1456
- 65110 multiletter control sequences out of 65536+600000
+ 65179 multiletter control sequences out of 65536+600000
  87 fonts using 9899455 bytes
  108i,13n,110p,1199b,2214s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/opentype/public/t
@@ -2623,7 +2616,7 @@ t/texmfs/install/fonts/opentype/public/tex-gyre/texgyreheros-bold.otf><C:/Users/
 ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/public/amsfonts/cm/cm
 mi10.pfb><C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb>
-Output written on book-it.pdf (110 pages, 470760 bytes).
+Output written on book-it.pdf (110 pages, 470934 bytes).
 
 PDF statistics: 1715 PDF objects out of 1728 (max. 8388607)
  823 named destinations out of 1000 (max. 1048576)

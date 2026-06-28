@@ -29,7 +29,7 @@ Punto fermo fissato con `@checkpoint` ogni 3-5 azioni significative. L'agente pr
 Istruzione in formato `@keyword` che l'agente riconosce nella chat e interpreta secondo il protocollo AI-DLC. Non è un comando shell. Esempi: `@checkpoint`, `@show-constraints`, `@stop`. Lista completa in Appendice B.
 
 **Company extension**
-Cartella `.adlc/company/` che contiene processi SDLC aziendali, standard ingegneristici e requisiti di governance in formato Markdown. L'agente la carica automaticamente. Le sue regole hanno priorità sul framework.
+Cartella `.ai-dlc/company/` che contiene processi SDLC aziendali, standard ingegneristici e requisiti di governance in formato Markdown. L'agente la carica automaticamente. Le sue regole hanno priorità sul framework.
 
 **Confidence tag**
 Classificazione esplicita della certezza dell'agente su un'affermazione ad alto impatto. I tre valori: `FACT` (verificato), `INFERRED` (dedotto), `ASSUMPTION` (ipotesi). Obbligatori su output HIGH-risk, claim SEC/PERF, codice in zone HALT.
@@ -50,7 +50,7 @@ Uno dei tre confidence tag. Indica che l'agente ha verificato l'informazione leg
 L'azione con cui l'agente si ferma prima di modificare un path protetto dagli HALT trigger. Non è un blocco permanente: dopo la conferma esplicita dell'utente, il lavoro riprende.
 
 **HALT trigger**
-Pattern di path definiti in `.adlc/halt-triggers.yaml` che richiedono conferma esplicita prima di qualsiasi modifica. I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, file del framework.
+Pattern di path definiti in `.ai-dlc/halt-triggers.yaml` che richiedono conferma esplicita prima di qualsiasi modifica. I sei trigger predefiniti coprono: schema DB, auth, secrets, infra, CI/CD, file del framework.
 
 **HIGH**
 Livello di rischio per modifiche ad alto impatto o difficilmente reversibili: schema DB, autenticazione, architettura, eliminazione dati, configurazioni di deploy. L'agente produce un piano dettagliato e aspetta conferma esplicita. Model Level minimo: 5.
@@ -74,7 +74,7 @@ Parametro in `_CONTEXT.md` che controlla il livello di cerimonia dell'agente. Ci
 Scala da 1 a 7 che mappa la complessità di un task al modello AI appropriato. Il livello è determinato dalla stima dei token e dal risk floor. Il mapping a modelli concreti (Anthropic, OpenAI, Gemini) vive in `manifest.json` e si legge con `show-models`.
 
 **Modulo**
-File in `.adlc/modules/NN_*.md` che definisce le regole operative del framework per una fase del ciclo di sviluppo. I moduli `00` (MODE) e `01` (CORE_RULES) sono sempre caricati; gli altri vengono caricati in base alla fase o su richiesta. Sono read-only.
+File in `.ai-dlc/modules/NN_*.md` che definisce le regole operative del framework per una fase del ciclo di sviluppo. I moduli `00` (MODE) e `01` (CORE_RULES) sono sempre caricati; gli altri vengono caricati in base alla fase o su richiesta. Sono read-only.
 
 **Monorepo**
 Repository con più sottoprogetti. In AI-DLC, ogni sottoprogetto ha il proprio `_CONTEXT.md` e `PROGRESS.md`. Il framework è condiviso alla radice. L'agente usa il `_CONTEXT.md` più vicino al file su cui lavora.
@@ -95,13 +95,13 @@ Il model level minimo imposto da certi livelli di rischio, indipendentemente dal
 Vincolo di sicurezza riusabile definito in `SEC_CONSTRAINTS.md`. Si attiva in `_CONTEXT.md`. L'agente lo rilega prima di generare codice in zone SEC-sensibili. Nove vincoli predefiniti: SEC-01 (input validation) a SEC-09 (SSRF).
 
 **Skill**
-File in `.adlc/modules/skills/SKILL_*.md` che fornisce una guida tematica specializzata (API design, sicurezza, testing, UI, ops). Si carica su richiesta, indipendentemente dalla fase. Può essere personalizzata con skill di progetto in `.adlc/project/skills/`.
+File in `.ai-dlc/modules/skills/SKILL_*.md` che fornisce una guida tematica specializzata (API design, sicurezza, testing, UI, ops). Si carica su richiesta, indipendentemente dalla fase. Può essere personalizzata con skill di progetto in `.ai-dlc/project/skills/`.
 
 **Strict mode**
 Modalità del validator (`validate.sh --strict`) in cui i warning diventano failure. Usato in CI per garantire che `_CONTEXT.md` sia sempre aggiornato.
 
 **sync-copilot**
-Tool che verifica l'allineamento concettuale tra `AGENTS.md` e `.github/copilot-instructions.md`. Copilot non può importare file esterni, quindi il suo file di istruzioni deve essere mantenuto manualmente allineato. Si esegue con `.adlc/tools/sync-copilot.sh`.
+Tool che verifica l'allineamento concettuale tra `AGENTS.md` e `.github/copilot-instructions.md`. Copilot non può importare file esterni, quindi il suo file di istruzioni deve essere mantenuto manualmente allineato. Si esegue con `.ai-dlc/tools/sync-copilot.sh`.
 
 **Validator**
-Script cross-platform (`.adlc/tools/validate.ps1` / `validate.sh`) che verifica la presenza e validità del framework. Può girare in CI. Con `--strict` fa fallire anche i warning.
+Script cross-platform (`.ai-dlc/tools/validate.ps1` / `validate.sh`) che verifica la presenza e validità del framework. Può girare in CI. Con `--strict` fa fallire anche i warning.

@@ -17,11 +17,11 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 
 ## Minimum Protocol
 
-1. Load state in priority order: `_CONTEXT.md`, project rules, company process extensions, project skills, `.adlc/modules/`.
+1. Load state in priority order: `_CONTEXT.md`, project rules, company process extensions, project skills, `.ai-dlc/modules/`.
 2. Reread active SEC-XX and PERF-XX constraints before code or design output.
 3. Classify request risk before acting.
-4. Halt before HIGH-risk work: schema, auth, architecture, data deletion, secrets, deploys. Authoritative patterns: [`.adlc/halt-triggers.yaml`](.adlc/halt-triggers.yaml).
-5. Add confidence tags (`FACT` / `INFERRED` / `ASSUMPTION`) to high-stakes output: HIGH-risk classifications, claims about SEC-XX/PERF-XX, or code matching `.adlc/halt-triggers.yaml`. Encouraged but not required for routine LOW/MEDIUM output.
+4. Halt before HIGH-risk work: schema, auth, architecture, data deletion, secrets, deploys. Authoritative patterns: [`.ai-dlc/halt-triggers.yaml`](.ai-dlc/halt-triggers.yaml).
+5. Add confidence tags (`FACT` / `INFERRED` / `ASSUMPTION`) to high-stakes output: HIGH-risk classifications, claims about SEC-XX/PERF-XX, or code matching `.ai-dlc/halt-triggers.yaml`. Encouraged but not required for routine LOW/MEDIUM output.
 6. Every created task must include token estimate and model level 1-7.
 
 ---
@@ -29,9 +29,9 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 ## Bootstrap
 
 1. Find `_CONTEXT.md` (current dir → parent dirs → repo root)
-2. Load project rules: `.adlc/project/instructions.md`, then `.copilot/instructions.md` if present
-3. Load company process extension docs from `.adlc/company/` if present
-4. Load the relevant SKILL from `.adlc/project/skills/` or `.copilot/skills/` based on current phase/task
+2. Load project rules: `.ai-dlc/project/instructions.md`, then `.copilot/instructions.md` if present
+3. Load company process extension docs from `.ai-dlc/company/` if present
+4. Load the relevant SKILL from `.ai-dlc/project/skills/` or `.copilot/skills/` based on current phase/task
 5. Read `PROGRESS.md` if it exists
 6. Confirm once at session start, and before MEDIUM/HIGH work: `"Context: [Project] | Phase: [N] | Task: [T] | Stack: [S] | Constraints: [SEC/PERF]. Proceed?"`
 
@@ -41,10 +41,10 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 
 ```
 1. _CONTEXT.md              ← session state (phase, task, constraints)
-2. .adlc/project/           ← neutral project-specific rules and skills
-3. .adlc/company/           ← enterprise process extension docs
+2. .ai-dlc/project/           ← neutral project-specific rules and skills
+3. .ai-dlc/company/           ← enterprise process extension docs
 4. .copilot/                ← compatibility project rules and skills
-5. .adlc/modules/           ← framework (read-only, agnostic)
+5. .ai-dlc/modules/           ← framework (read-only, agnostic)
 ```
 
 ---
@@ -59,7 +59,7 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 | 4-5 Verification/Release | `05_VERIFICATION_RELEASE.md` | `SKILL_TESTING.md` |
 | 6 Operations | `06_OPS.md` | `SKILL_OPS.md` |
 
-Modules live in `.adlc/modules/`. Load only what is needed for the active phase.
+Modules live in `.ai-dlc/modules/`. Load only what is needed for the active phase.
 
 ---
 
@@ -67,7 +67,7 @@ Modules live in `.adlc/modules/`. Load only what is needed for the active phase.
 
 - **Confidence tags** required on high-stakes output (HIGH-risk, SEC/PERF claims, halt-trigger code): `FACT` / `INFERRED` / `ASSUMPTION`. Optional for routine work.
 - **Reread SEC-XX & PERF-XX** from `_CONTEXT.md` before generating code
-- **HALT** when changes touch paths listed in `.adlc/halt-triggers.yaml` (schema, auth, secrets, infra, CI/CD, framework files). Projects may override at `.adlc/project/halt-triggers.yaml`.
+- **HALT** when changes touch paths listed in `.ai-dlc/halt-triggers.yaml` (schema, auth, secrets, infra, CI/CD, framework files). Projects may override at `.ai-dlc/project/halt-triggers.yaml`.
 - **Checkpoint** every 3-5 significant actions
 
 ---
@@ -107,7 +107,7 @@ Every created task must include token and model sizing:
 | 6 | 64k-120k | Architecture, deep debugging, broad cross-module changes |
 | 7 | > 120k | Mission-critical architecture, high ambiguity, high-risk decisions |
 
-**Vendor mapping** (Anthropic / OpenAI / Gemini per level): canonical source is `.adlc/manifest.json#model_levels`. Print current mapping with `.adlc/tools/show-models.ps1` or `.adlc/tools/show-models.sh`.
+**Vendor mapping** (Anthropic / OpenAI / Gemini per level): canonical source is `.ai-dlc/manifest.json#model_levels`. Print current mapping with `.ai-dlc/tools/show-models.ps1` or `.ai-dlc/tools/show-models.sh`.
 
 Minimum levels (also in `manifest.json#risk_floors`):
 - HIGH risk: level 5 minimum
@@ -119,7 +119,7 @@ Minimum levels (also in `manifest.json#risk_floors`):
 
 ## Framework Modules
 
-All read-only. Located in `.adlc/modules/`:
+All read-only. Located in `.ai-dlc/modules/`:
 
 | File | Purpose |
 |------|---------|
@@ -143,11 +143,11 @@ All read-only. Located in `.adlc/modules/`:
 ## Agent Permissions
 
 **NEVER:**
-- Edit `.adlc/modules/` unless explicitly maintaining the framework
+- Edit `.ai-dlc/modules/` unless explicitly maintaining the framework
 - Edit startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `.github/copilot-instructions.md`) unless explicitly maintaining the framework
 - Invent facts — use confidence tags instead
 
 **MAY freely create/edit:**
 - `_CONTEXT.md`, `PROGRESS.md` (session state)
-- `.adlc/project/`, `.adlc/company/`, `.copilot/instructions.md`, `.copilot/skills/*.md` (project/company rules)
+- `.ai-dlc/project/`, `.ai-dlc/company/`, `.copilot/instructions.md`, `.copilot/skills/*.md` (project/company rules)
 - All other project source files (subject to risk classification above)

@@ -22,7 +22,7 @@ progetto/
 +-- OPENCLAW.md        ← OpenClaw
 +-- .github/
 |   +-- copilot-instructions.md  ← GitHub Copilot
-+-- .adlc/
++-- .ai-dlc/
     +-- halt-triggers.yaml
     +-- manifest.json
     +-- modules/       ← regole del framework
@@ -41,7 +41,7 @@ git clone https://github.com/rollaradio/adlc-framework /tmp/adlc
 cp /tmp/adlc/AGENTS.md .
 cp /tmp/adlc/CLAUDE.md .
 cp -r /tmp/adlc/.github .
-cp -r /tmp/adlc/.adlc .
+cp -r /tmp/adlc/.ai-dlc .
 \end{lstlisting}
 
 \begin{lstlisting}[language=,caption={Installazione su PowerShell (Windows)}]
@@ -49,11 +49,11 @@ git clone https://github.com/rollaradio/adlc-framework $env:TEMP\adlc
 Copy-Item "$env:TEMP\adlc\AGENTS.md" .
 Copy-Item "$env:TEMP\adlc\CLAUDE.md" .
 Copy-Item "$env:TEMP\adlc\.github" . -Recurse
-Copy-Item "$env:TEMP\adlc\.adlc" . -Recurse
+Copy-Item "$env:TEMP\adlc\.ai-dlc" . -Recurse
 \end{lstlisting}
 
 \begin{notebox}
-I file \texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc. sono read-only per l'uso normale --- non modificarli. Le tue personalizzazioni vanno in \texttt{.adlc/project/} (lo vediamo al §\ref{sec:02-project-dir}).
+I file \texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc. sono read-only per l'uso normale --- non modificarli. Le tue personalizzazioni vanno in \texttt{.ai-dlc/project/} (lo vediamo al §\ref{sec:02-project-dir}).
 \end{notebox}
 
 \section{Passo 2 --- Scaffold dello stato di progetto}
@@ -62,11 +62,11 @@ I file \texttt{AGENTS.md}, \texttt{CLAUDE.md}, ecc. sono read-only per l'uso nor
 Esegui lo script di inizializzazione per creare i file di stato:
 
 \begin{lstlisting}[language=bash,caption={Inizializzazione su Bash}]
-bash .adlc/tools/init.sh
+bash .ai-dlc/tools/init.sh
 \end{lstlisting}
 
 \begin{lstlisting}[language=,caption={Inizializzazione su PowerShell}]
-.\.adlc\tools\init.ps1
+.\.ai-dlc\tools\init.ps1
 \end{lstlisting}
 
 Lo script crea quattro cose:
@@ -79,8 +79,8 @@ Lo script crea quattro cose:
     \midrule
     \texttt{\_CONTEXT.md} & Stato corrente (fase, task, vincoli) \\
     \texttt{PROGRESS.md} & Diario di bordo delle sessioni \\
-    \texttt{.adlc/project/instructions.md} & Regole specifiche per il progetto \\
-    \texttt{.adlc/project/skills/} & Skill personalizzate \\
+    \texttt{.ai-dlc/project/instructions.md} & Regole specifiche per il progetto \\
+    \texttt{.ai-dlc/project/skills/} & Skill personalizzate \\
     \bottomrule
   \end{tabular}
   \caption{File creati dallo script di inizializzazione}
@@ -90,7 +90,7 @@ Lo script crea quattro cose:
 Per progetti piccoli o spike usa il context minimo:
 
 \begin{lstlisting}[language=bash,caption={Inizializzazione con context minimale}]
-bash .adlc/tools/init.sh --context minimal
+bash .ai-dlc/tools/init.sh --context minimal
 \end{lstlisting}
 
 \section{Passo 3 --- Compilare \texttt{\_CONTEXT.md}}
@@ -134,11 +134,11 @@ Compila almeno \texttt{Project}, \texttt{Phase}, \texttt{Mode} e \texttt{Stack}.
 \label{sec:02-passo4-validate}
 
 \begin{lstlisting}[language=bash,caption={Validazione su Bash}]
-bash .adlc/tools/validate.sh
+bash .ai-dlc/tools/validate.sh
 \end{lstlisting}
 
 \begin{lstlisting}[language=,caption={Validazione su PowerShell}]
-.\.adlc\tools\validate.ps1
+.\.ai-dlc\tools\validate.ps1
 \end{lstlisting}
 
 Output atteso:
@@ -176,11 +176,11 @@ Constraints: SEC-01,SEC-02,SEC-03,PERF-01. Proceed?
 
 Quando vedi questa conferma, sai che l'agente ha letto il contesto. Da questo momento puoi iniziare il dialogo reale senza ripetere nulla.
 
-\section{Struttura raccomandata per \texttt{.adlc/project/}}
+\section{Struttura raccomandata per \texttt{.ai-dlc/project/}}
 \label{sec:02-project-dir}
 
 \begin{lstlisting}[language=,caption={Struttura della cartella di personalizzazione}]
-.adlc/project/
+.ai-dlc/project/
 +-- instructions.md   ← regole specifiche del progetto
 +-- domain.md         ← business logic e regole di dominio
 +-- conventions.md    ← convenzioni di codice
@@ -189,7 +189,7 @@ Quando vedi questa conferma, sai che l'agente ha letto il contesto. Da questo mo
 
 Per TaskFlow API, Lorenzo aggiunge a \texttt{instructions.md}:
 
-\begin{lstlisting}[language=,caption={.adlc/project/instructions.md di TaskFlow API}]
+\begin{lstlisting}[language=,caption={.ai-dlc/project/instructions.md di TaskFlow API}]
 # TaskFlow API — Project Instructions
 
 ## Conventions

@@ -10,9 +10,9 @@ Il framework AI-DLC è composto da file che non vengono caricati tutti insieme a
 \section{La distinzione tra moduli e skill}
 \label{sec:12-distinzione}
 
-\textbf{I moduli} (\texttt{.adlc/modules/NN\_*.md}) definiscono le regole operative del framework per ciascuna fase. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only.
+\textbf{I moduli} (\texttt{.ai-dlc/modules/NN\_*.md}) definiscono le regole operative del framework per ciascuna fase. Sono le istruzioni strutturali: come comportarsi, cosa verificare, quando fermarsi. Sono read-only.
 
-\textbf{Le skill} (\texttt{.adlc/modules/skills/SKILL\_*.md}) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro.
+\textbf{Le skill} (\texttt{.ai-dlc/modules/skills/SKILL\_*.md}) sono guide tematiche specializzate. Definiscono come affrontare un tipo specifico di lavoro.
 
 \section{La mappa dei moduli}
 \label{sec:12-mappa-moduli}
@@ -69,7 +69,7 @@ Il framework AI-DLC è composto da file che non vengono caricati tutti insieme a
 \section{Skill personalizzate di progetto}
 \label{sec:12-skill-progetto}
 
-Le skill del framework sono generiche. Il tuo progetto può avere esigenze specifiche in \texttt{.adlc/project/skills/}:
+Le skill del framework sono generiche. Il tuo progetto può avere esigenze specifiche in \texttt{.ai-dlc/project/skills/}:
 
 \begin{lstlisting}[language=,caption={Skill di dominio per TaskFlow API}]
 # SKILL — TaskFlow Domain
@@ -99,7 +99,7 @@ Copre tre casi fuori dal ciclo normale:
 \textbf{Parallel track:} feature su più layer (API + frontend). Tre sync point obbligatori: accordo sul contratto API, integrazione, E2E.
 
 \begin{warnbox}
-Non modificare mai \texttt{.adlc/modules/}. Le personalizzazioni vanno in \texttt{.adlc/project/} --- questo garantisce che il framework possa essere aggiornato senza perdere le tue regole.
+Non modificare mai \texttt{.ai-dlc/modules/}. Le personalizzazioni vanno in \texttt{.ai-dlc/project/} --- questo garantisce che il framework possa essere aggiornato senza perdere le tue regole.
 \end{warnbox}
 
 \section*{\LabelSummary}
@@ -107,6 +107,6 @@ Non modificare mai \texttt{.adlc/modules/}. Le personalizzazioni vanno in \textt
 \begin{itemize}
   \item I \textbf{moduli} sono le regole per ogni fase --- caricati automaticamente in base a \texttt{Phase}.
   \item Le \textbf{skill} sono guide tematiche --- caricate su richiesta in base al tipo di task.
-  \item Skill personalizzate di progetto in \texttt{.adlc/project/skills/} hanno priorità sulle skill del framework.
-  \item I moduli del framework sono read-only: personalizza in \texttt{.adlc/project/}.
+  \item Skill personalizzate di progetto in \texttt{.ai-dlc/project/skills/} hanno priorità sulle skill del framework.
+  \item I moduli del framework sono read-only: personalizza in \texttt{.ai-dlc/project/}.
 \end{itemize}

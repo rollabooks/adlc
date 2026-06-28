@@ -52,10 +52,10 @@ La distinzione tra complessità *essenziale* e *accidentale* spiega perché l'AI
 `https://github.com/rollaradio/adlc-framework`
 Sorgente del framework, CHANGELOG, MIGRATION.md per gli aggiornamenti, issue tracker per segnalazioni.
 
-**`source/.adlc/MANUAL.md`** (in questo repository)
+**`source/.ai-dlc/MANUAL.md`** (in questo repository)
 Il manuale tecnico del framework in formato compatto — utile come riferimento rapido quando hai già letto questo libro e cerchi il dettaglio di un campo o di un modulo.
 
-**`source/.adlc/COMMANDS.md`**
+**`source/.ai-dlc/COMMANDS.md`**
 La specifica formale di tutti i comandi conversazionali, con output atteso e file aggiornati. Complementare all'Appendice B di questo libro.
 
 ---

@@ -23,7 +23,7 @@ taskflow/
 |       +-- _CONTEXT.md (Phase 3)
 +-- AGENTS.md          ← Framework condiviso
 +-- CLAUDE.md
-+-- .adlc/             ← Framework condiviso
++-- .ai-dlc/             ← Framework condiviso
 \end{lstlisting}
 
 L'agente usa il \texttt{\_CONTEXT.md} più vicino al file su cui lavora.
@@ -31,13 +31,13 @@ L'agente usa il \texttt{\_CONTEXT.md} più vicino al file su cui lavora.
 \textbf{Scaffold di un nuovo sottoprogetto:}
 
 \begin{lstlisting}[language=bash,caption={Inizializzazione sottoprogetto in monorepo}]
-bash .adlc/tools/init.sh --project-root apps/worker --framework-root .
+bash .ai-dlc/tools/init.sh --project-root apps/worker --framework-root .
 \end{lstlisting}
 
-\textbf{Aggiornamento indice:} dopo aggiunte o spostamenti di sottoprogetti, aggiorna \texttt{.adlc/projects.json}:
+\textbf{Aggiornamento indice:} dopo aggiunte o spostamenti di sottoprogetti, aggiorna \texttt{.ai-dlc/projects.json}:
 
 \begin{lstlisting}[language=bash,caption={Aggiornamento indice progetti}]
-bash .adlc/tools/update-projects.sh
+bash .ai-dlc/tools/update-projects.sh
 \end{lstlisting}
 
 \section{Company extension: processi SDLC aziendali}
@@ -46,7 +46,7 @@ bash .adlc/tools/update-projects.sh
 La company extension porta processi SDLC, standard di sicurezza e gate di governance nel contesto dell'agente.
 
 \begin{lstlisting}[language=,caption={Struttura della company extension}]
-.adlc/company/
+.ai-dlc/company/
 +-- README.md       ← indice
 +-- PROCESS.md      ← SDLC aziendale
 +-- GOVERNANCE.md   ← approvazioni, compliance
@@ -58,11 +58,11 @@ La company extension porta processi SDLC, standard di sicurezza e gate di govern
 Per convertire documenti aziendali in Markdown leggibile dall'agente:
 
 \begin{lstlisting}[language=bash,caption={Preprocessing documenti aziendali}]
-bash .adlc/tools/preprocess-company-docs.sh
+bash .ai-dlc/tools/preprocess-company-docs.sh
 \end{lstlisting}
 
 \begin{notebox}
-Le regole della company extension hanno priorità sulle regole del framework. Se l'azienda richiede comportamenti diversi da quelli predefiniti in \texttt{.adlc/modules/}, vincono le regole aziendali.
+Le regole della company extension hanno priorità sulle regole del framework. Se l'azienda richiede comportamenti diversi da quelli predefiniti in \texttt{.ai-dlc/modules/}, vincono le regole aziendali.
 \end{notebox}
 
 \section{Codebase legacy: analisi e documentazione}
@@ -82,7 +82,7 @@ AI-DLC copre questo flusso con due moduli in sequenza: prima si analizza (\textt
 \textbf{Step 1 --- Analisi con il modulo 09}
 
 \begin{lstlisting}[language=,caption={Prompt di analisi codebase}]
-Carica .adlc/modules/09_CODEBASE_ANALYSIS.md e analizza src/auth/.
+Carica .ai-dlc/modules/09_CODEBASE_ANALYSIS.md e analizza src/auth/.
 
 Produci in docs/_analysis/:
 1) MAP.md    — moduli, dipendenze, entry point
@@ -109,6 +109,6 @@ Non saltare l'analisi (Step 1). Documentare senza \texttt{MAP.md} produce conten
 
 \begin{itemize}
   \item \textbf{Monorepo:} ogni sottoprogetto ha il proprio \texttt{\_CONTEXT.md}; l'agente usa quello più vicino al file su cui lavora.
-  \item \textbf{Company extension:} \texttt{.adlc/company/} porta i processi SDLC aziendali nel contesto; priorità sulle regole del framework.
+  \item \textbf{Company extension:} \texttt{.ai-dlc/company/} porta i processi SDLC aziendali nel contesto; priorità sulle regole del framework.
   \item \textbf{Codebase legacy:} il flusso è sempre analisi (09) $\to$ documentazione (10). Non invertire l'ordine.
 \end{itemize}

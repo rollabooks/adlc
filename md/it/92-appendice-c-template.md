@@ -201,9 +201,9 @@ Motivazione: [perché questa opzione invece delle altre]
 ## Template 5 — Override HALT Trigger di Progetto
 
 ```yaml
-# .adlc/project/halt-triggers.yaml
+# .ai-dlc/project/halt-triggers.yaml
 # Override e estensioni dei trigger predefiniti del framework.
-# Questo file si aggiunge (non sostituisce) a .adlc/halt-triggers.yaml
+# Questo file si aggiunge (non sostituisce) a .ai-dlc/halt-triggers.yaml
 
 version: 1
 

@@ -18,7 +18,7 @@ progetto/
 ├── OPENCLAW.md                      ← OpenClaw
 ├── .github/
 │   └── copilot-instructions.md      ← GitHub Copilot
-└── .adlc/
+└── .ai-dlc/
     ├── @@AI-DLCFILE@@
     ├── COMMANDS.md
     ├── halt-triggers.yaml
@@ -43,7 +43,7 @@ cp /tmp/adlc/CLAUDE.md .
 cp /tmp/adlc/GEMINI.md .
 cp /tmp/adlc/OPENCLAW.md .
 cp -r /tmp/adlc/.github .
-cp -r /tmp/adlc/.adlc .
+cp -r /tmp/adlc/.ai-dlc .
 ```
 
 In PowerShell:
@@ -58,10 +58,10 @@ Copy-Item "$env:TEMP\adlc\CLAUDE.md" .
 Copy-Item "$env:TEMP\adlc\GEMINI.md" .
 Copy-Item "$env:TEMP\adlc\OPENCLAW.md" .
 Copy-Item "$env:TEMP\adlc\.github" . -Recurse
-Copy-Item "$env:TEMP\adlc\.adlc" . -Recurse
+Copy-Item "$env:TEMP\adlc\.ai-dlc" . -Recurse
 ```
 
-> **Nota:** i file `AGENTS.md`, `CLAUDE.md`, ecc. sono read-only per l'uso normale — non modificarli. Le tue personalizzazioni vanno in `.adlc/project/` (lo vediamo tra poco).
+> **Nota:** i file `AGENTS.md`, `CLAUDE.md`, ecc. sono read-only per l'uso normale — non modificarli. Le tue personalizzazioni vanno in `.ai-dlc/project/` (lo vediamo tra poco).
 
 ---
 
@@ -72,13 +72,13 @@ Una volta copiati i file del framework, esegui lo script di inizializzazione. Qu
 **Bash (Linux/macOS/WSL):**
 
 ```bash
-bash .adlc/tools/init.sh
+bash .ai-dlc/tools/init.sh
 ```
 
 **PowerShell (Windows):**
 
 ```powershell
-.\.adlc\tools\init.ps1
+.\.ai-dlc\tools\init.ps1
 ```
 
 Lo script crea quattro cose:
@@ -87,13 +87,13 @@ Lo script crea quattro cose:
 |---|---|
 | `_CONTEXT.md` | Stato corrente del progetto (fase, task, vincoli) |
 | `PROGRESS.md` | Diario di bordo delle sessioni |
-| `.adlc/project/instructions.md` | Regole specifiche per il tuo progetto |
-| `.adlc/project/skills/` | Cartella per skill personalizzate |
+| `.ai-dlc/project/instructions.md` | Regole specifiche per il tuo progetto |
+| `.ai-dlc/project/skills/` | Cartella per skill personalizzate |
 
 Per progetti piccoli o spike, puoi usare il context minimo:
 
 ```bash
-bash .adlc/tools/init.sh --context minimal
+bash .ai-dlc/tools/init.sh --context minimal
 ```
 
 Questo crea un `_CONTEXT.md` più snello, senza tutti i campi del template completo.
@@ -156,11 +156,11 @@ Alcuni campi che ti potrebbero sembrare oscuri:
 Prima di aprire l'agente, verifica che il framework sia correttamente installato:
 
 ```bash
-bash .adlc/tools/validate.sh
+bash .ai-dlc/tools/validate.sh
 ```
 
 ```powershell
-.\.adlc\tools\validate.ps1
+.\.ai-dlc\tools\validate.ps1
 ```
 
 L'output atteso è simile a questo:
@@ -184,7 +184,7 @@ I warning sui placeholder sono normali per la prima sessione — scompaiono appe
 Se vuoi rendere i warning dei failure (utile in CI), usa `--strict`:
 
 ```bash
-bash .adlc/tools/validate.sh --strict
+bash .ai-dlc/tools/validate.sh --strict
 ```
 
 ---
@@ -209,14 +209,14 @@ L'agente esamina il progetto, elenca le dipendenze mancanti, e — cosa importan
 
 ---
 
-## 2.6 Struttura raccomandata per `.adlc/project/`
+## 2.6 Struttura raccomandata per `.ai-dlc/project/`
 
-Dopo lo scaffold, hai una cartella `.adlc/project/` vuota (eccetto per `instructions.md`). Questa è la tua area personale — tutto ciò che scrivi qui sovrascrive le regole del framework per il tuo progetto specifico.
+Dopo lo scaffold, hai una cartella `.ai-dlc/project/` vuota (eccetto per `instructions.md`). Questa è la tua area personale — tutto ciò che scrivi qui sovrascrive le regole del framework per il tuo progetto specifico.
 
 Una struttura utile nel tempo:
 
 ```
-.adlc/project/
+.ai-dlc/project/
 ├── instructions.md      ← regole specifiche del tuo progetto
 ├── domain.md            ← business logic e regole di dominio
 ├── conventions.md       ← convenzioni di codice specifiche

@@ -6,7 +6,7 @@ This file holds only Gemini-specific guidance.
 
 ## Gemini Specifics
 
-- Tag high-stakes output (HIGH-risk, SEC/PERF claims, code matching `.adlc/halt-triggers.yaml`) with `FACT`, `INFERRED`, or `ASSUMPTION`. Optional for routine work.
+- Tag high-stakes output (HIGH-risk, SEC/PERF claims, code matching `.ai-dlc/halt-triggers.yaml`) with `FACT`, `INFERRED`, or `ASSUMPTION`. Optional for routine work.
 - Reread active SEC-XX and PERF-XX constraints before generating code.
-- Halt when changes touch paths in `.adlc/halt-triggers.yaml`.
-- Every created task: token estimate + model level 1-7 (mapping in `.adlc/manifest.json#model_levels`).
+- Halt when changes touch paths in `.ai-dlc/halt-triggers.yaml`.
+- Every created task: token estimate + model level 1-7 (mapping in `.ai-dlc/manifest.json#model_levels`).

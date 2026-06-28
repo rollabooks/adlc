@@ -1,0 +1,83 @@
+# AI-DLC HALT Triggers
+#
+# Path patterns that require an agent to HALT and request explicit confirmation
+# before making changes. Projects may override or extend by placing
+# `.ai-dlc/project/halt-triggers.yaml` next to `_CONTEXT.md`.
+#
+# Schema: .ai-dlc/schemas/halt-triggers.schema.json
+# Loaded by: agent runtimes (.ai-dlc/modules/01_CORE_RULES.md §12) and validators.
+#
+# Each trigger has:
+#   id        : short stable identifier
+#   patterns  : glob patterns (POSIX-style, ** allowed)
+#   reason    : human-readable explanation
+#   risk      : LOW | MEDIUM | HIGH | HIGH+ | CRITICAL
+#               (drives the minimum model level via manifest.json#risk_floors)
+
+version: 1
+
+triggers:
+  - id: schema
+    patterns:
+      - "**/migrations/**"
+      - "**/schema/**"
+      - "**/*.sql"
+      - "**/prisma/schema.prisma"
+      - "**/alembic/**"
+      - "**/db/changesets/**"
+    reason: Database schema migrations and structural changes
+    risk: HIGH
+
+  - id: auth
+    patterns:
+      - "**/auth/**"
+      - "**/authn/**"
+      - "**/authorization/**"
+      - "**/middleware/auth*"
+      - "**/oauth/**"
+      - "**/sso/**"
+    reason: Authentication and authorization logic
+    risk: HIGH+
+
+  - id: secrets
+    patterns:
+      - "**/.env*"
+      - "**/secrets/**"
+      - "**/*.pem"
+      - "**/*.key"
+      - "**/credentials.*"
+    reason: Secret material and credentials
+    risk: HIGH+
+
+  - id: infra
+    patterns:
+      - "**/terraform/**"
+      - "**/k8s/**"
+      - "**/helm/**"
+      - "**/Dockerfile*"
+      - "**/docker-compose*.yml"
+      - "**/*.tf"
+      - "**/cloudformation/**"
+    reason: Production infrastructure definitions
+    risk: HIGH
+
+  - id: cicd
+    patterns:
+      - ".github/workflows/**"
+      - "**/.gitlab-ci.yml"
+      - "**/Jenkinsfile"
+      - "**/.circleci/**"
+      - "**/azure-pipelines*.yml"
+    reason: Build and deployment pipelines
+    risk: HIGH
+
+  - id: framework
+    patterns:
+      - ".ai-dlc/modules/**"
+      - "AGENTS.md"
+      - "CLAUDE.md"
+      - "GEMINI.md"
+      - "OPENCLAW.md"
+      - ".github/copilot-instructions.md"
+    reason: AI-DLC framework files and startup contracts
+    risk: HIGH

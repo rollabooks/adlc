@@ -64,9 +64,9 @@ Problemi tecnici puntuali da correggere (path errati, URL fittizio non segnalato
 
 **1. Path moduli con slash iniziale errato — Cap 12 (§12.1)**
 
-Nel testo: `` `/adlc/modules/NN_*.md` `` e `` `/.adlc/modules/skills/SKILL_*.md` ``
+Nel testo: `` `/adlc/modules/NN_*.md` `` e `` `/.ai-dlc/modules/skills/SKILL_*.md` ``
 
-Corretto: `.adlc/modules/NN_*.md` e `.adlc/modules/skills/SKILL_*.md`
+Corretto: `.ai-dlc/modules/NN_*.md` e `.ai-dlc/modules/skills/SKILL_*.md`
 
 I path usano uno slash iniziale che implica un path assoluto. Tutti gli altri capitoli usano la forma corretta con il punto iniziale (path relativo alla root del repo). Va corretto per coerenza e correttezza tecnica.
 
@@ -103,7 +103,7 @@ Il lettore potrebbe chiedersi: "ho saltato qualcosa?" Il libro ha bisogno di un 
 
 Il riepilogo di Cap 16 include "Contribuire al framework (per team che condividono ADLC)" come bullet, ma questo argomento non è trattato nel capitolo. Il lettore si aspetta contenuto che non trova.
 
-**Correzione:** rimuovere la voce dal riepilogo, oppure aggiungere un breve paragrafo §16.3.X che descriva il processo base di contribuzione (fork → modifica in `.adlc/modules/` → PR → test con validate.sh).
+**Correzione:** rimuovere la voce dal riepilogo, oppure aggiungere un breve paragrafo §16.3.X che descriva il processo base di contribuzione (fork → modifica in `.ai-dlc/modules/` → PR → test con validate.sh).
 
 ---
 
@@ -224,7 +224,7 @@ La terza colonna della tabella mescola forme diverse: alcune voci descrivono lo 
 - I comandi conversazionali (`@checkpoint`, `@context-update`, ecc.) sono introdotti nel Cap 3 e poi usati naturalmente nei capitoli successivi senza ridefinizione.
 
 **Da correggere:**
-- I path `.adlc/` sono coerenti in tutti i capitoli eccetto Cap 12 §12.1 (problema #1).
+- I path `.ai-dlc/` sono coerenti in tutti i capitoli eccetto Cap 12 §12.1 (problema #1).
 - I personaggi non sono introdotti in modo uniforme (problema #5).
 - "Confidence tag" ha varianti terminologiche (problema #10).
 

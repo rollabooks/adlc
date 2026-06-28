@@ -1,8 +1,8 @@
 # Copilot Instructions: Universal AI-DLC Framework
 
 ⚠️ **THIS FILE MUST NEVER BE MODIFIED BY AI AGENTS** — Golden source for AI agent behavior.
-📁 **FRAMEWORK**: `.adlc/modules/` (read-only for agents)
-👉 **PROJECT RULES**: `<ProjectRoot>/.adlc/project/instructions.md` preferred, `<ProjectRoot>/.copilot/instructions.md` supported for compatibility
+📁 **FRAMEWORK**: `.ai-dlc/modules/` (read-only for agents)
+👉 **PROJECT RULES**: `<ProjectRoot>/.ai-dlc/project/instructions.md` preferred, `<ProjectRoot>/.copilot/instructions.md` supported for compatibility
 
 ---
 
@@ -13,9 +13,9 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 ## BOOTSTRAP (every session)
 
 1. **Discover context**: find `_CONTEXT.md` (current dir → parent dirs → repo root)
-2. **Load project rules**: `.adlc/project/instructions.md`, then `.copilot/instructions.md` if present
-3. **Load company process extension**: `.adlc/company/` if present
-4. **Load SKILL**: from `.adlc/project/skills/` or `.copilot/skills/` based on current phase/task (one at a time)
+2. **Load project rules**: `.ai-dlc/project/instructions.md`, then `.copilot/instructions.md` if present
+3. **Load company process extension**: `.ai-dlc/company/` if present
+4. **Load SKILL**: from `.ai-dlc/project/skills/` or `.copilot/skills/` based on current phase/task (one at a time)
 5. **Read history**: `PROGRESS.md` if it exists (previous session state)
 6. **Confirm** once at session start and before MEDIUM/HIGH work: `"Context: [Project] | Phase: [N] | Task: [T] | Stack: [S] | Constraints: [SEC/PERF] | Company Gates: [Y/N]. Proceed?"`
 
@@ -23,10 +23,10 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 
 ```
 1. _CONTEXT.md              ← session state (phase, task, constraints)
-2. .adlc/project/           ← neutral project-specific rules and skills
-3. .adlc/company/           ← enterprise process extension docs
+2. .ai-dlc/project/           ← neutral project-specific rules and skills
+3. .ai-dlc/company/           ← enterprise process extension docs
 4. .copilot/                ← compatibility project rules and skills
-5. .adlc/modules/           ← framework (read-only, agnostic)
+5. .ai-dlc/modules/           ← framework (read-only, agnostic)
 ```
 
 ## PHASE ACTIVATION
@@ -43,7 +43,7 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 
 - **Confidence tags** required on high-stakes output (HIGH-risk, SEC/PERF claims, halt-trigger code): `FACT` / `INFERRED` / `ASSUMPTION`. Optional for routine LOW/MEDIUM work.
 - **Reread SEC-XX & PERF-XX** from `_CONTEXT.md` before generating code
-- **HALT** when changes touch paths in `.adlc/halt-triggers.yaml` (schema, auth, secrets, infra, CI/CD, framework files). Projects may override at `.adlc/project/halt-triggers.yaml`.
+- **HALT** when changes touch paths in `.ai-dlc/halt-triggers.yaml` (schema, auth, secrets, infra, CI/CD, framework files). Projects may override at `.ai-dlc/project/halt-triggers.yaml`.
 - **Checkpoint** every 3-5 significant actions
 
 ## RISK CLASSIFICATION
@@ -84,7 +84,7 @@ Model levels (purpose-based):
 6. 64k-120k — architecture or deep debugging
 7. > 120k — mission-critical, ambiguous, high-risk decisions
 
-Vendor model mapping lives in `.adlc/manifest.json#model_levels`. Run `bash .adlc/tools/show-models.sh` (or the `.ps1` version) to print the current table.
+Vendor model mapping lives in `.ai-dlc/manifest.json#model_levels`. Run `bash .ai-dlc/tools/show-models.sh` (or the `.ps1` version) to print the current table.
 
 Minimum levels:
 - HIGH risk: level 5 minimum
@@ -94,5 +94,5 @@ Minimum levels:
 
 ## AGENT PROTECTION
 
-AI Agents must **NEVER**: edit `.adlc/modules/` or startup files unless explicitly maintaining the framework, or invent facts.
-AI Agents **MAY**: create/edit `.adlc/project/`, `.adlc/company/`, `.copilot/`, `_CONTEXT.md`, `PROGRESS.md`.
+AI Agents must **NEVER**: edit `.ai-dlc/modules/` or startup files unless explicitly maintaining the framework, or invent facts.
+AI Agents **MAY**: create/edit `.ai-dlc/project/`, `.ai-dlc/company/`, `.copilot/`, `_CONTEXT.md`, `PROGRESS.md`.

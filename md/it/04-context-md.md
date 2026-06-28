@@ -134,7 +134,7 @@ Le decisioni aperte sono quelle che non hai ancora preso e che l'agente non deve
 - Naming: snake_case per DB, camelCase per TypeScript, kebab-case per file.
 ```
 
-Le note sono istruzioni generali che non rientrano nello stack o nei vincoli ma che devono essere rispettate sistematicamente. Sono diverse da `.adlc/project/instructions.md` (che contiene regole più strutturate) — qui metti cose che vuoi sempre visibili nella context card.
+Le note sono istruzioni generali che non rientrano nello stack o nei vincoli ma che devono essere rispettate sistematicamente. Sono diverse da `.ai-dlc/project/instructions.md` (che contiene regole più strutturate) — qui metti cose che vuoi sempre visibili nella context card.
 
 ---
 
@@ -159,9 +159,9 @@ L'agente produce il blocco aggiornato da incollare nel file. Tu rivedi, aggiusti
 
 Il framework offre due template:
 
-**Template completo** (`.adlc/modules/templates/CONTEXT_TEMPLATE.md`): ha tutti i campi, incluse sezioni per decisioni architetturali, note per l'agente e parametri avanzati. Adatto a progetti di media-grande complessità o a team.
+**Template completo** (`.ai-dlc/modules/templates/CONTEXT_TEMPLATE.md`): ha tutti i campi, incluse sezioni per decisioni architetturali, note per l'agente e parametri avanzati. Adatto a progetti di media-grande complessità o a team.
 
-**Template minimo** (`.adlc/modules/templates/CONTEXT_MIN.md`): solo context card, stack e vincoli essenziali. Adatto a spike, POC o progetti personali semplici.
+**Template minimo** (`.ai-dlc/modules/templates/CONTEXT_MIN.md`): solo context card, stack e vincoli essenziali. Adatto a spike, POC o progetti personali semplici.
 
 Per TaskFlow API, Lorenzo è partito dal template minimo e ha aggiunto le sezioni man mano che il progetto cresceva.
 
@@ -175,7 +175,7 @@ Per TaskFlow API, Lorenzo è partito dal template minimo e ha aggiunto le sezion
 
 **Scrivere il contesto una volta sola e non aggiornarlo.** `_CONTEXT.md` che non viene aggiornato è un contesto che mente. Dopo una settimana senza aggiornamenti, l'agente lavora su informazioni obsolete.
 
-**Mettere troppe cose nel context.** Il file deve essere conciso. Le regole dettagliate del progetto vanno in `.adlc/project/instructions.md`. Le convenzioni di codice vanno in `.adlc/project/conventions.md`. Il context contiene lo stato attuale, non il manuale del progetto.
+**Mettere troppe cose nel context.** Il file deve essere conciso. Le regole dettagliate del progetto vanno in `.ai-dlc/project/instructions.md`. Le convenzioni di codice vanno in `.ai-dlc/project/conventions.md`. Il context contiene lo stato attuale, non il manuale del progetto.
 
 **Non committare `_CONTEXT.md`.** Il file deve essere in git. È parte del progetto, non un file temporaneo. Il suo storico di versioni è prezioso: puoi vedere come è evoluto il progetto nel tempo.
 
