@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  28 JUN 2026 11:26
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  28 JUN 2026 12:11
  system commands enabled.
 **book-it.tex
 (./book-it.tex
@@ -1805,7 +1805,7 @@ LaTeX Font Info:    Font shape `TU/InconsolataN(0)/m/n' will be
 LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
 (Font)              scaled to size 8.80005pt on input line 28.
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 52.
+(Font)              scaled to size 8.27998pt on input line 51.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -1913,12 +1913,12 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [5]
-Overfull \hbox (38.51646pt too wide) in paragraph at lines 84--94
+Overfull \hbox (38.51646pt too wide) in paragraph at lines 86--96
  [][] 
  []
 
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/b/sc' will be
-(Font)              scaled to size 9.19998pt on input line 101.
+(Font)              scaled to size 9.19998pt on input line 103.
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2097,7 +2097,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[28]) (../chapters/it/ch05-progress-md.tex
+[28]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2105,7 +2105,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[29]
+[29]) (../chapters/it/ch05-progress-md.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2113,11 +2113,11 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[30
+[30]
+Capitolo 5.
+[31
 
 ]
-Capitolo 5.
-[31]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2550,6 +2550,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 ]
 Appendice D.
 [95]
+Underfull \vbox (badness 1661) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2583,23 +2586,23 @@ L3 programming layer <2025-12-24>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `book-it.out' has not changed.
-(rerunfilecheck)             Checksum: 86AED85BB867087D7F96FE09B7F9C441;23343.
+(rerunfilecheck)             Checksum: 2FB4C2F396E4A0531B6C02B57FB5E8E2;23719.
 Package logreq Info: Writing requests to 'book-it.run.xml'.
 
 \openout1 = book-it.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 44610 strings out of 476081
- 596939,1977958 words of node,token memory allocated
+ 44657 strings out of 476081
+ 596944,1977958 words of node,token memory allocated
  693 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 75 glue_spec
 , 12 attribute_list, 3 write, 3 pdf_action nodes
-   avail lists: 1:3,2:9863,3:459,4:12657,5:11849,6:89,7:14873,8:73,9:28637,10:63
+   avail lists: 1:4,2:9863,3:460,4:12657,5:11850,6:89,7:14873,8:73,9:28637,10:63
 ,11:1456
- 65179 multiletter control sequences out of 65536+600000
+ 65225 multiletter control sequences out of 65536+600000
  87 fonts using 9899455 bytes
- 108i,13n,110p,1199b,2214s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,13n,110p,1199b,2228s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/opentype/public/t
 ex-gyre/texgyretermes-bolditalic.otf><C:/Users/ricca/scoop/apps/miktex/current/t
 exmfs/install/fonts/opentype/public/fontawesome5/FontAwesome5Free-Solid-900.otf>
@@ -2616,9 +2619,9 @@ t/texmfs/install/fonts/opentype/public/tex-gyre/texgyreheros-bold.otf><C:/Users/
 ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/public/amsfonts/cm/cm
 mi10.pfb><C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb>
-Output written on book-it.pdf (110 pages, 470934 bytes).
+Output written on book-it.pdf (110 pages, 478204 bytes).
 
-PDF statistics: 1715 PDF objects out of 1728 (max. 8388607)
- 823 named destinations out of 1000 (max. 1048576)
- 824 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1721 PDF objects out of 1728 (max. 8388607)
+ 824 named destinations out of 1000 (max. 1048576)
+ 832 words of extra memory for PDF output out of 10000 (max. 100000000)
 

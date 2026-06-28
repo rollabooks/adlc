@@ -14,9 +14,9 @@ AI-DLC, come spiegato nel Capitolo 1, non è uno standard accademico consolidato
 
 **Planning before action** → Wei et al., *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* (arXiv 2201.11903) e Yao et al., *ReAct: Synergizing Reasoning and Acting in Language Models* (arXiv 2210.03629). Fondano l'idea che l'agente debba esplicitare un piano prima di agire — il cuore dei task MEDIUM e HIGH di AI-DLC.
 
-**Contesto persistente nel repository** → la documentazione vendor è già pratica prodotto: `AGENTS.md` (OpenAI Codex), memoria di progetto `CLAUDE.md` (Anthropic), e il *persistent context across all phases* di AWS AI-DLC. Sono l'equivalente industriale di `_CONTEXT.md` e `PROGRESS.md`.
+**Contesto persistente nel repository** → la documentazione vendor è già pratica prodotto: `AGENTS.md` (OpenAI Codex), memoria di progetto `CLAUDE.md` (Anthropic), e gli artefatti persistiti come *context memory* attraverso il ciclo di vita nell'AI-DLC di AWS (vedi "Origine del nome" più sotto). Sono l'equivalente industriale di `_CONTEXT.md` e `PROGRESS.md`.
 
-**Context rot e disciplina del contesto** → *Context Rot in AI-Assisted Software Development* (arXiv 2606.09090, 2026) documenta l'invecchiamento degli artefatti di contesto rispetto al codice. *Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?* (arXiv 2602.11988, 2026) mostra evidenza empirica mista: i file di contesto non sono "magici" e il loro valore dipende da qualità, minimalità e aggiornamento. Sono la base del Capitolo 4 §4.7.
+**Context engineering, attenzione e context rot** → Anthropic, *Effective Context Engineering for AI Agents*, definisce la disciplina (l'evoluzione del prompt engineering), il *budget di attenzione* e il problema *lost-in-the-middle*. *Context Rot in AI-Assisted Software Development* (arXiv 2606.09090, 2026, Treude & Baltes) documenta l'invecchiamento degli artefatti di contesto rispetto al codice (23,0% di 356 repo con riferimenti obsoleti). *Evaluating AGENTS.md* (arXiv 2602.11988, 2026, Gloaguen et al., ETH Zürich) mostra che i file di contesto non migliorano di per sé il task success rate e aumentano il costo di oltre il 20%: non sono "magici", il loro valore dipende da qualità, minimalità e aggiornamento. Sono la base del Capitolo 4 (§4.7 e §4.8).
 
 **Confidence tag** → la pratica degli Architecture Decision Record con livello di confidenza esplicito (Microsoft) e la letteratura su metacognizione ed epistemologia degli LLM giustificano la tassonomia FACT/INFERRED/ASSUMPTION.
 
@@ -25,6 +25,8 @@ AI-DLC, come spiegato nel Capitolo 1, non è uno standard accademico consolidato
 **Vincoli e DevSecOps** → NIST *Secure Software Development Framework* (SSDF) per l'integrazione della sicurezza nel lifecycle; i vincoli SEC/PERF di AI-DLC ne sono la versione operativa per agenti.
 
 **Lifecycle vendor per agenti (per confronto)** → IBM *Agent Development Lifecycle*, Microsoft Foundry *Agent development lifecycle*, Salesforce Agentforce. Trattano il ciclo di vita degli agenti *come prodotto* — il complemento, non il sostituto, dell'AI-DLC di questo libro.
+
+**Origine del nome "AI-DLC"** → Raja SP (AWS), *AI-Driven Development Lifecycle (AI-DLC) Method Definition*. AWS definisce l'AI-DLC come una metodologia AI-driven con fasi proprie (Inception, Construction, Operations), artefatti (Intent, Unit, Bolt) e rituali collaborativi ("Mob Elaboration/Construction"), posizionata come reimmaginazione di Agile/Scrum. Questo libro ne riprende *il nome* e il principio di fondo — sviluppo guidato dall'AI con contesto persistente e supervisione umana — ma lo specializza in un sistema più leggero, *file-based* e developer-driven, che si innesta nel processo esistente invece di sostituirlo.
 
 ---
 

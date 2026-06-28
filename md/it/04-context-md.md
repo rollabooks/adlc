@@ -195,6 +195,22 @@ Il valore di `_CONTEXT.md` non è automatico: dipende interamente da quanto bene
 
 ---
 
+## 4.8 Context engineering: perché meno contesto rende di più
+
+I tre principi del paragrafo precedente non sono regole arbitrarie: discendono da una disciplina che nel 2026 ha un nome preciso, il **context engineering**. Se il *prompt engineering* ottimizza la singola istruzione, il context engineering progetta l'**architettura minima di informazioni, vincoli e strumenti** che permette all'agente di lavorare bene per un'intera sessione. Anthropic lo descrive come l'evoluzione naturale del prompt engineering, resa necessaria dagli agenti che operano in cicli lunghi. In fondo, AI-DLC è context engineering applicato: `_CONTEXT.md`, il caricamento modulare per fase e il ciclo di `@checkpoint` sono tutte sue mosse.
+
+Capire *perché* il contesto minimale rende di più aiuta ad applicarlo bene. Tre meccanismi, tutti documentati:
+
+- **Budget di attenzione.** Il modello ha un'attenzione finita: ogni token irrilevante diluisce quella disponibile per i token che contano. Una sessione che si riempie di rumore — scambi ridondanti, riletture degli stessi file, output prolissi dei tool — degrada le prestazioni *anche molto prima* di saturare il limite teorico della finestra di contesto. È il lato dinamico del *context rot*.
+- **"Lost in the middle".** I modelli Transformer tendono a "vedere" meglio l'inizio e la fine dell'input che la sua parte centrale: un vincolo di sicurezza sepolto a metà di un contesto gonfio rischia di essere ignorato. Tradotto: tieni `_CONTEXT.md` corto e i vincoli in evidenza.
+- **Costo.** L'attenzione cresce in modo quadratico con la lunghezza del contesto. Un prompt gonfio non è solo più lento e costoso (gli studi misurano oltre il 20% di costo in più con file di contesto mal progettati): è anche più rumoroso.
+
+Per questo AI-DLC non carica tutto in una volta. Tiene sempre attivo solo `_CONTEXT.md` (stato e vincoli invalicabili) e include il modulo di fase (es. `04_IMPLEMENTATION.md`) o la skill tematica solo quando servono, scaricandoli dopo. Lo stesso vale per `@checkpoint`: comprimere periodicamente il lavoro svolto in uno stato pulito è una tecnica di *context compaction* che riporta il rapporto segnale-rumore a livelli sani.
+
+> **E l'MCP?** Il *Model Context Protocol* (MCP), molto diffuso nel 2026, permette agli agenti di connettersi a fonti dati e strumenti esterni (database, API, log). Non sostituisce i file di contesto: i due livelli sono complementari. File come `_CONTEXT.md` e `AGENTS.md` danno all'agente il **discernimento** (cosa fare, perché, con quali vincoli); l'MCP fornisce gli **strumenti** per agire (come accedere ai dati). Il cervello resta nei file versionati nel repository; l'MCP sono i muscoli.
+
+---
+
 ## Riepilogo
 
 - `_CONTEXT.md` è il singolo file che dà all'agente il contesto strutturato per lavorare correttamente senza istruzioni ripetute.
@@ -202,5 +218,6 @@ Il valore di `_CONTEXT.md` non è automatico: dipende interamente da quanto bene
 - Va aggiornato a ogni cambio di fase, task o vincolo — idealmente con `@context-update` alla fine di ogni sessione.
 - Inizia dal template minimo; aggiungi sezioni man mano che il progetto cresce.
 - È un file git come gli altri: committalo, versionalo, non lasciarlo stale.
+- Tienilo **minimale**: il valore del contesto dipende dal rapporto segnale-rumore (*context engineering*), non dalla quantità.
 
 Nel prossimo capitolo vediamo il compagno di `_CONTEXT.md`: `PROGRESS.md`, il diario di bordo delle sessioni.

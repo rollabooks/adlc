@@ -156,6 +156,25 @@ Tre principi che la letteratura conferma:
 
 Il valore di \texttt{\_CONTEXT.md} non è automatico: dipende interamente da quanto bene lo mantieni. La classificazione del rischio e i confidence tag (Parte III) e il ciclo di checkpoint (Capitolo~\ref{ch:sessione-reale}) esistono proprio per imporre questa disciplina.
 
+\section{Context engineering: perché meno contesto rende di più}
+\label{sec:04-context-engineering}
+
+I tre principi del paragrafo precedente non sono regole arbitrarie: discendono da una disciplina che nel 2026 ha un nome preciso, il \textbf{context engineering}. Se il \textit{prompt engineering} ottimizza la singola istruzione, il context engineering progetta l'\textbf{architettura minima di informazioni, vincoli e strumenti} che permette all'agente di lavorare bene per un'intera sessione. Anthropic lo descrive come l'evoluzione naturale del prompt engineering, resa necessaria dagli agenti che operano in cicli lunghi. In fondo, AI-DLC è context engineering applicato: \texttt{\_CONTEXT.md}, il caricamento modulare per fase e il ciclo di \texttt{@checkpoint} sono tutte sue mosse.
+
+Capire \textit{perché} il contesto minimale rende di più aiuta ad applicarlo bene. Tre meccanismi, tutti documentati:
+
+\begin{itemize}
+  \item \textbf{Budget di attenzione.} Il modello ha un'attenzione finita: ogni token irrilevante diluisce quella disponibile per i token che contano. Una sessione che si riempie di rumore --- scambi ridondanti, riletture degli stessi file, output prolissi dei tool --- degrada le prestazioni \textit{anche molto prima} di saturare il limite teorico della finestra di contesto. È il lato dinamico del \textit{context rot}.
+  \item \textbf{``Lost in the middle''.} I modelli Transformer tendono a ``vedere'' meglio l'inizio e la fine dell'input che la sua parte centrale: un vincolo di sicurezza sepolto a metà di un contesto gonfio rischia di essere ignorato. Tradotto: tieni \texttt{\_CONTEXT.md} corto e i vincoli in evidenza.
+  \item \textbf{Costo.} L'attenzione cresce in modo quadratico con la lunghezza del contesto. Un prompt gonfio non è solo più lento e costoso (gli studi misurano oltre il 20\% di costo in più con file di contesto mal progettati): è anche più rumoroso.
+\end{itemize}
+
+Per questo AI-DLC non carica tutto in una volta. Tiene sempre attivo solo \texttt{\_CONTEXT.md} (stato e vincoli invalicabili) e include il modulo di fase (es. \texttt{04\_IMPLEMENTATION.md}) o la skill tematica solo quando servono, scaricandoli dopo. Lo stesso vale per \texttt{@checkpoint}: comprimere periodicamente il lavoro svolto in uno stato pulito è una tecnica di \textit{context compaction} che riporta il rapporto segnale--rumore a livelli sani.
+
+\begin{notebox}
+\textbf{E l'MCP?} Il \textit{Model Context Protocol} (MCP), molto diffuso nel 2026, permette agli agenti di connettersi a fonti dati e strumenti esterni (database, API, log). Non sostituisce i file di contesto: i due livelli sono complementari. File come \texttt{\_CONTEXT.md} e \texttt{AGENTS.md} danno all'agente il \textbf{discernimento} (cosa fare, perché, con quali vincoli); l'MCP fornisce gli \textbf{strumenti} per agire (come accedere ai dati). Il cervello resta nei file versionati nel repository; l'MCP sono i muscoli.
+\end{notebox}
+
 \section*{\LabelSummary}
 
 \begin{itemize}
@@ -164,4 +183,5 @@ Il valore di \texttt{\_CONTEXT.md} non è automatico: dipende interamente da qua
   \item Va aggiornato a ogni cambio di fase, task o vincolo.
   \item Inizia dal template minimo; aggiungi sezioni man mano che il progetto cresce.
   \item Committalo in git e non lasciarlo mai stale.
+  \item Tienilo \textbf{minimale}: il valore del contesto dipende dal rapporto segnale--rumore (\textit{context engineering}), non dalla quantità.
 \end{itemize}
