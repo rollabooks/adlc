@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adlc.local/schemas/manifest.schema.json",
+  "type": "object",
+  "required": ["name", "version", "paths", "templates", "model_levels"],
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "paths": { "type": "object", "additionalProperties": { "type": "string" } },
+    "templates": { "type": "object", "additionalProperties": { "type": "string" } },
+    "schemas": { "type": "object", "additionalProperties": { "type": "string" } },
+    "ci_examples": { "type": "object", "additionalProperties": { "type": "string" } },
+    "monorepo": {
+      "type": "object",
+      "required": ["supported", "project_root_marker", "shared_framework"],
+      "properties": {
+        "supported": { "type": "boolean" },
+        "project_root_marker": { "type": "string" },
+        "shared_framework": { "type": "string" },
+        "project_override": { "type": "string" },
+        "project_company_extension": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "model_levels": {
+      "type": "object",
+      "required": ["1", "2", "3", "4", "5", "6", "7"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["anthropic", "openai", "gemini"],
+        "properties": {
+          "anthropic": { "type": "string" },
+          "openai": { "type": "string" },
+          "gemini": { "type": "string" },
+          "purpose": { "type": "string" },
+          "token_range": { "type": "string" }
+        }
+      }
+    },
+    "risk_floors": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 1, "maximum": 7 }
+    }
+  },
+  "additionalProperties": true
+}
