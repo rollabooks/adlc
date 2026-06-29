@@ -4,6 +4,7 @@ These commands are conversational controls for agents. They are not shell comman
 
 | Command | Purpose | Expected Output | Files Usually Updated |
 |---------|---------|-----------------|-----------------------|
+| `@Task [goal]` | Create and start an implementation task | Task with AI Sizing, acceptance criteria, and the tests that encode them; plan awaiting approval for MEDIUM+ | task docs, then code/tests |
 | `@checkpoint` | Capture current state after 3-5 significant actions | Completed, next, blockers, context update needed | `PROGRESS.md`, optionally `_CONTEXT.md` |
 | `@context-update` | Propose an updated context card | Replacement block or full `_CONTEXT.md` draft | `_CONTEXT.md` |
 | `@show-constraints` | Show active SEC/PERF constraints | Constraint table with source | none |
@@ -20,6 +21,7 @@ These commands are conversational controls for agents. They are not shell comman
 
 ## Command Rules
 
+- `@Task` is test-driven: write or agree the task's tests first (they encode the acceptance criteria), implement until they pass, then run the full regression suite. A task is done only when the task tests pass AND no previously passing test breaks. `@Task` respects HALT triggers and risk floors and does not write code without approval for MEDIUM+ tasks.
 - Commands do not override risk classification.
 - `@security-check` and `@perf-check` must cite active `_CONTEXT.md` constraints.
 - `@context-update` proposes changes; the user or repository policy decides whether to write them.

@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'book-it.blg'
+[228] biber-MSWIN64:342> INFO - === 
+[314] Biber.pm:421> INFO - Reading 'book-it.bcf'
+[409] Biber.pm:999> INFO - Using all citekeys in bib section 0
+[421] Biber.pm:4487> INFO - Processing section 0
+[442] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[499] bibtex.pm:1713> INFO - LaTeX decoding ...
+[536] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[728] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[729] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[729] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'it-IT'
+[729] Biber.pm:4313> INFO - No sort tailoring available for locale 'it-IT'
+[796] bbl.pm:676> INFO - Writing 'book-it.bbl' with encoding 'UTF-8'
+[810] bbl.pm:779> INFO - Output to book-it.bbl

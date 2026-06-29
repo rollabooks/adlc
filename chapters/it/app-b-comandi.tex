@@ -15,6 +15,7 @@ Riferimento completo di tutti i comandi conversazionali AI-DLC.
     \toprule
     \textbf{Comando} & \textbf{Scopo} & \textbf{Bypass sicurezza?} \\
     \midrule
+    \texttt{@Task [obiettivo]} & Crea e avvia un task (test-driven) & No \\
     \texttt{@checkpoint} & Fissa stato avanzamento & No \\
     \texttt{@context-update} & Propone aggiornamento context & No \\
     \texttt{@show-constraints} & Mostra vincoli SEC/PERF & No \\
@@ -33,6 +34,10 @@ Riferimento completo di tutti i comandi conversazionali AI-DLC.
   \caption{Riferimento rapido comandi AI-DLC}
   \label{tab:app-b-comandi}
 \end{table}
+
+\section*{\texttt{@Task} --- avvio dell'implementazione}
+
+Crea l'unità di implementazione e ne avvia il ciclo test-driven (Capitolo~\ref{ch:fasi-e-modes}, §\ref{sec:06-task-tdd}). Input: un obiettivo o un riferimento a un Epic/requisito. Produce il task \texttt{T-NNN} con AI Sizing, criteri di accettazione e i test che li codificano (da scrivere prima del codice). Per i task MEDIUM o superiori il piano resta in attesa di approvazione; dopo l'approvazione l'agente implementa finché i test del task passano, poi esegue l'intera suite (test del task + regressione) e propone il \texttt{@checkpoint}. Rispetta sempre HALT trigger e risk floor.
 
 \section*{Regole di tutti i comandi}
 

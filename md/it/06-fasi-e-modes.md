@@ -211,6 +211,33 @@ L'agente carica `05_VERIFICATION_RELEASE.md` e ti conferma le regole attive per 
 
 ---
 
+## 6.7 Dal task al codice: il ciclo test-driven
+
+Nella Fase 3 (Implementation) il lavoro non procede "a tema libero": procede **un task alla volta**. Il **task** è l'unità da cui parte l'implementazione del codice. Ogni task ha un identificativo (`T-NNN`), un obiettivo in una-tre frasi, criteri di accettazione verificabili, i deliverable attesi, i vincoli SEC/PERF rilevanti e l'AI Sizing (stima token, model level, risk floor). Il template completo è nell'Appendice C; lo si crea e avvia con il comando `@Task` (Capitolo 13).
+
+Perché passare per i task invece di chiedere genericamente "implementa la feature X"? Perché un task ben definito è un **contratto verificabile**: stabilisce *cosa* significa "fatto" prima che l'agente scriva una riga. È la differenza tra dirigere un collaboratore disciplinato e sperare che il prototipo regga.
+
+### Ogni task è guidato dai test
+
+In AI-DLC ogni task segue un ciclo **test-driven**, e i test sono di due tipi:
+
+1. **I test del task.** Prima dell'implementazione si scrivono (o si concordano) i test che codificano i criteri di accettazione del task. Sono la definizione *eseguibile* di "fatto": finché non passano, il task non è completo.
+2. **La regressione di tutto ciò che è stato fatto prima.** Un task è completo solo se i suoi test passano *e* nessun test precedente si rompe. La suite completa gira a ogni task.
+
+Questo secondo punto è la differenza tra AI-DLC e il vibe coding lasciato a sé stesso. Nel Capitolo 1 abbiamo visto il pattern *two steps back* (l'agente corregge un bug e ne introduce due) e il *house of cards code* (codice che crolla alla prima pressione). La regressione completa a ogni task è proprio la barriera che li previene: l'agente non può "sistemare" qualcosa rompendo silenziosamente qualcos'altro, perché la suite lo rivela subito.
+
+Il ciclo, in pratica:
+
+1. **`@Task`** — l'agente genera il task (sizing, AC, vincoli) e propone i test che ne verificano i criteri.
+2. **Approvi** il piano e i test (per task MEDIUM o superiori l'approvazione è obbligatoria — è il pattern Planner–Executor–Reviewer).
+3. L'agente **implementa** finché i test del task passano.
+4. Gira **l'intera** suite: i test del task *più* tutta la regressione.
+5. **`@checkpoint`** — si fissa lo stato e si aggiorna `PROGRESS.md`.
+
+Se al punto 4 si rompe un test precedente, il task non è "fatto": si torna al punto 3. Niente "due passi avanti e due indietro".
+
+---
+
 ## Riepilogo
 
 - Le **sette fasi** (0-Discovery, 1-Analysis, 2-Design, 3-Implementation, 4-Verification, 5-Release, 6-Ops) definiscono in che punto del ciclo sei e quale modulo del framework l'agente carica.
@@ -218,5 +245,6 @@ L'agente carica `05_VERIFICATION_RELEASE.md` e ti conferma le regole attive per 
 - Mode e Fase sono indipendenti: puoi essere in Fase 3 con Mode LITE, o in Fase 0 con Mode AUDIT.
 - I HALT trigger non vengono mai disattivati, indipendentemente dal Mode.
 - Cambia Mode liberamente durante il progetto: STANDARD per partire, LITE per il lavoro quotidiano rodato, AUDIT per revisioni formali, RAPID solo per spike su branch dedicati.
+- In Fase 3 l'implementazione procede **un task alla volta**: ogni task (`@Task`) è test-driven e si chiude solo se i suoi test passano *e* la regressione completa resta verde.
 
 Con questo chiudiamo la Parte II. Nelle prossime cinque sessioni costruiremo il sistema di sicurezza di AI-DLC: classificazione del rischio, model levels, confidence tag, HALT trigger e vincoli SEC/PERF.

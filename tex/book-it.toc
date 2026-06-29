@@ -1,6 +1,7 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 \contentsline {chapter}{Introduzione}{ix}{chapter*.2}%
+\contentsline {chapter}{AI-DLC in una schermata}{xiii}{chapter*.3}%
 \contentsline {part}{I\hspace {1em}Il Framework}{1}{part.1}%
 \contentsline {chapter}{\numberline {1}AI-DLC: cos'è e perché esiste}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}I quattro problemi che AI-DLC risolve}{3}{section.1.1}%
@@ -47,58 +48,59 @@
 \contentsline {section}{\numberline {6.2}I cinque Modes}{35}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Scenario tipico su TaskFlow API}{36}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Errori comuni con Fasi e Modes}{37}{section.6.4}%
-\contentsline {part}{III\hspace {1em}Il Sistema di Sicurezza}{39}{part.3}%
-\contentsline {chapter}{\numberline {7}Classificazione del rischio}{41}{chapter.7}%
-\contentsline {section}{\numberline {7.1}I cinque livelli}{41}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Come l'agente classifica le richieste}{43}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Il risk floor per i Model Level}{43}{section.7.3}%
-\contentsline {chapter}{\numberline {8}Model Levels: quale AI per quale task}{45}{chapter.8}%
-\contentsline {section}{\numberline {8.1}La scala 1--7}{45}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Come stimare il livello di un task}{46}{section.8.2}%
-\contentsline {section}{\numberline {8.3}I risk floor in dettaglio}{46}{section.8.3}%
-\contentsline {chapter}{\numberline {9}Confidence Tag: FACT, INFERRED, ASSUMPTION}{49}{chapter.9}%
-\contentsline {section}{\numberline {9.1}I tre tag}{49}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Quando i tag sono obbligatori}{50}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Il tag come segnale di azione}{50}{section.9.3}%
-\contentsline {section}{\numberline {9.4}In pratica su TaskFlow API}{51}{section.9.4}%
-\contentsline {chapter}{\numberline {10}HALT Triggers: il freno di emergenza}{53}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Il file \texttt {halt-triggers.yaml}}{53}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Override di progetto}{54}{section.10.2}%
-\contentsline {section}{\numberline {10.3}I trigger non si disattivano mai con i Modes}{54}{section.10.3}%
-\contentsline {chapter}{\numberline {11}Vincoli SEC e PERF}{57}{chapter.11}%
-\contentsline {section}{\numberline {11.1}La libreria SEC (sicurezza)}{57}{section.11.1}%
-\contentsline {section}{\numberline {11.2}La libreria PERF (performance)}{57}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Come attivare i vincoli in \texttt {\_CONTEXT.md}}{58}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Come l'agente usa i vincoli}{58}{section.11.4}%
-\contentsline {part}{IV\hspace {1em}Workflow Avanzato}{61}{part.4}%
-\contentsline {chapter}{\numberline {12}Moduli e Skill: caricare solo ciò che serve}{63}{chapter.12}%
-\contentsline {section}{\numberline {12.1}La distinzione tra moduli e skill}{63}{section.12.1}%
-\contentsline {section}{\numberline {12.2}La mappa dei moduli}{63}{section.12.2}%
-\contentsline {section}{\numberline {12.3}La mappa delle skill}{63}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Skill personalizzate di progetto}{63}{section.12.4}%
-\contentsline {section}{\numberline {12.5}Il modulo \texttt {07\_SPECIAL\_LANES.md}}{65}{section.12.5}%
-\contentsline {chapter}{\numberline {13}Comandi conversazionali}{67}{chapter.13}%
-\contentsline {section}{\numberline {13.1}La lista completa}{67}{section.13.1}%
-\contentsline {section}{\numberline {13.2}I comandi più usati in dettaglio}{67}{section.13.2}%
-\contentsline {section}{\numberline {13.3}Regole che i comandi non possono violare}{69}{section.13.3}%
-\contentsline {section}{\numberline {13.4}Comandi personalizzati di progetto}{69}{section.13.4}%
-\contentsline {chapter}{\numberline {14}Multi-agente: Claude, Copilot, Codex, Gemini}{71}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Uno stesso progetto, più entry point}{71}{section.14.1}%
-\contentsline {section}{\numberline {14.2}Un workflow multi-agente su TaskFlow API}{72}{section.14.2}%
-\contentsline {section}{\numberline {14.3}Mantenere Copilot allineato}{72}{section.14.3}%
-\contentsline {section}{\numberline {14.4}I limiti del multi-agente}{72}{section.14.4}%
-\contentsline {chapter}{\numberline {15}Monorepo, Company Extension e Codebase Legacy}{75}{chapter.15}%
-\contentsline {section}{\numberline {15.1}Monorepo: un framework, più progetti}{75}{section.15.1}%
-\contentsline {section}{\numberline {15.2}Company extension: processi SDLC aziendali}{76}{section.15.2}%
-\contentsline {section}{\numberline {15.3}Codebase legacy: analisi e documentazione}{76}{section.15.3}%
-\contentsline {part}{V\hspace {1em}In Produzione}{79}{part.5}%
-\contentsline {chapter}{\numberline {16}Troubleshooting, CI/CD e Manutenzione del Framework}{81}{chapter.16}%
-\contentsline {section}{\numberline {16.1}Troubleshooting --- problemi comuni}{81}{section.16.1}%
-\contentsline {section}{\numberline {16.2}Integrazione CI/CD}{82}{section.16.2}%
-\contentsline {section}{\numberline {16.3}Manutenzione del framework nel tempo}{83}{section.16.3}%
-\contentsline {section}{\numberline {16.4}L'agente in Fase 6 --- Ops}{83}{section.16.4}%
-\contentsline {part}{VI\hspace {1em}Appendici}{85}{part.6}%
-\contentsline {chapter}{\numberline {A}Glossario}{87}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Comandi Conversazionali Completi}{89}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Template Pronti all'Uso}{91}{appendix.Alph3}%
-\contentsline {chapter}{\numberline {D}Risorse e Letture Consigliate}{95}{appendix.Alph4}%
+\contentsline {section}{\numberline {6.5}Dal task al codice: il ciclo test-driven}{37}{section.6.5}%
+\contentsline {part}{III\hspace {1em}Il Sistema di Sicurezza}{41}{part.3}%
+\contentsline {chapter}{\numberline {7}Classificazione del rischio}{43}{chapter.7}%
+\contentsline {section}{\numberline {7.1}I cinque livelli}{43}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Come l'agente classifica le richieste}{45}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Il risk floor per i Model Level}{45}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Model Levels: quale AI per quale task}{47}{chapter.8}%
+\contentsline {section}{\numberline {8.1}La scala 1--7}{47}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Come stimare il livello di un task}{48}{section.8.2}%
+\contentsline {section}{\numberline {8.3}I risk floor in dettaglio}{48}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Confidence Tag: FACT, INFERRED, ASSUMPTION}{51}{chapter.9}%
+\contentsline {section}{\numberline {9.1}I tre tag}{51}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Quando i tag sono obbligatori}{52}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Il tag come segnale di azione}{52}{section.9.3}%
+\contentsline {section}{\numberline {9.4}In pratica su TaskFlow API}{53}{section.9.4}%
+\contentsline {chapter}{\numberline {10}HALT Triggers: il freno di emergenza}{55}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Il file \texttt {halt-triggers.yaml}}{55}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Override di progetto}{56}{section.10.2}%
+\contentsline {section}{\numberline {10.3}I trigger non si disattivano mai con i Modes}{56}{section.10.3}%
+\contentsline {chapter}{\numberline {11}Vincoli SEC e PERF}{59}{chapter.11}%
+\contentsline {section}{\numberline {11.1}La libreria SEC (sicurezza)}{59}{section.11.1}%
+\contentsline {section}{\numberline {11.2}La libreria PERF (performance)}{59}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Come attivare i vincoli in \texttt {\_CONTEXT.md}}{60}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Come l'agente usa i vincoli}{60}{section.11.4}%
+\contentsline {part}{IV\hspace {1em}Workflow Avanzato}{63}{part.4}%
+\contentsline {chapter}{\numberline {12}Moduli e Skill: caricare solo ciò che serve}{65}{chapter.12}%
+\contentsline {section}{\numberline {12.1}La distinzione tra moduli e skill}{65}{section.12.1}%
+\contentsline {section}{\numberline {12.2}La mappa dei moduli}{65}{section.12.2}%
+\contentsline {section}{\numberline {12.3}La mappa delle skill}{65}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Skill personalizzate di progetto}{65}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Il modulo \texttt {07\_SPECIAL\_LANES.md}}{67}{section.12.5}%
+\contentsline {chapter}{\numberline {13}Comandi conversazionali}{69}{chapter.13}%
+\contentsline {section}{\numberline {13.1}La lista completa}{69}{section.13.1}%
+\contentsline {section}{\numberline {13.2}I comandi più usati in dettaglio}{69}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Regole che i comandi non possono violare}{71}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Comandi personalizzati di progetto}{72}{section.13.4}%
+\contentsline {chapter}{\numberline {14}Multi-agente: Claude, Copilot, Codex, Gemini}{73}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Uno stesso progetto, più entry point}{73}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Un workflow multi-agente su TaskFlow API}{74}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Mantenere Copilot allineato}{74}{section.14.3}%
+\contentsline {section}{\numberline {14.4}I limiti del multi-agente}{74}{section.14.4}%
+\contentsline {chapter}{\numberline {15}Monorepo, Company Extension e Codebase Legacy}{77}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Monorepo: un framework, più progetti}{77}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Company extension: processi SDLC aziendali}{78}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Codebase legacy: analisi e documentazione}{78}{section.15.3}%
+\contentsline {part}{V\hspace {1em}In Produzione}{81}{part.5}%
+\contentsline {chapter}{\numberline {16}Troubleshooting, CI/CD e Manutenzione del Framework}{83}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Troubleshooting --- problemi comuni}{83}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Integrazione CI/CD}{84}{section.16.2}%
+\contentsline {section}{\numberline {16.3}Manutenzione del framework nel tempo}{85}{section.16.3}%
+\contentsline {section}{\numberline {16.4}L'agente in Fase 6 --- Ops}{85}{section.16.4}%
+\contentsline {part}{VI\hspace {1em}Appendici}{87}{part.6}%
+\contentsline {chapter}{\numberline {A}Glossario}{89}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Comandi Conversazionali Completi}{91}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Template Pronti all'Uso}{93}{appendix.Alph3}%
+\contentsline {chapter}{\numberline {D}Risorse e Letture Consigliate}{101}{appendix.Alph4}%

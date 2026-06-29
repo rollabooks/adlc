@@ -311,4 +311,30 @@ In questi casi, la "disinstallazione" è semplice: rimuovi i file del framework 
 
 ---
 
+## Checklist: applica AI-DLC a un progetto reale
+
+Una sequenza minima per partire oggi, su un progetto nuovo o esistente.
+
+**Setup (~15 min)**
+- [ ] Esegui lo scaffold: `init.ps1` / `init.sh` (o copia i file del framework).
+- [ ] Compila `_CONTEXT.md`: Project, Phase, Mode, Stack, vincoli SEC/PERF essenziali.
+- [ ] Verifica con `validate.ps1` / `validate.sh`.
+- [ ] Committa `_CONTEXT.md`, `PROGRESS.md` e `.ai-dlc/`.
+
+**Prima sessione (~15 min)**
+- [ ] Apri l'agente: deve confermare Context / Phase / Task / Stack / Constraints.
+- [ ] Avvia il primo lavoro con `@Task [obiettivo]`; rivedi sizing, AC e test proposti.
+- [ ] Approva piano e test (per i task MEDIUM o superiori); lascia implementare fino al verde.
+- [ ] Fai girare l'intera suite (test del task + regressione).
+- [ ] `@checkpoint`: applica gli aggiornamenti a `_CONTEXT.md` e la voce in `PROGRESS.md`.
+
+**A regime**
+- [ ] Tieni `_CONTEXT.md` minimale e aggiornato (*context engineering*, §4.8).
+- [ ] Lascia attivi gli HALT trigger; non bypassarli.
+- [ ] Usa i confidence tag sulle decisioni ad alto impatto.
+- [ ] Registra le decisioni importanti come ADR (Appendice C).
+- [ ] In multi-agente: un solo `AGENTS.md` come fonte, gli altri file come wrapper.
+
+---
+
 *Fine dei capitoli. Nelle appendici trovi glossario, comandi completi, template pronti all'uso e risorse.*

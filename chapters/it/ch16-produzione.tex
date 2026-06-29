@@ -116,3 +116,33 @@ In \texttt{Phase: 6-Ops} il comportamento cambia:
   \item Aggiornamenti: copia solo \texttt{.ai-dlc/modules/} e file di startup --- mai \texttt{\_CONTEXT.md} o \texttt{.ai-dlc/project/}.
   \item Phase 6 (Ops): rollback obbligatorio, non-regressione, incident response strutturata.
 \end{itemize}
+
+\section*{Checklist: applica AI-DLC a un progetto reale}
+
+Una sequenza minima per partire oggi, su un progetto nuovo o esistente.
+
+\textbf{Setup ($\sim$15 min)}
+\begin{itemize}
+  \item[$\square$] Esegui lo scaffold: \texttt{init.ps1} / \texttt{init.sh} (o copia i file del framework).
+  \item[$\square$] Compila \texttt{\_CONTEXT.md}: Project, Phase, Mode, Stack, vincoli SEC/PERF essenziali.
+  \item[$\square$] Verifica con \texttt{validate.ps1} / \texttt{validate.sh}.
+  \item[$\square$] Committa \texttt{\_CONTEXT.md}, \texttt{PROGRESS.md} e \texttt{.ai-dlc/}.
+\end{itemize}
+
+\textbf{Prima sessione ($\sim$15 min)}
+\begin{itemize}
+  \item[$\square$] Apri l'agente: deve confermare Context / Phase / Task / Stack / Constraints.
+  \item[$\square$] Avvia il primo lavoro con \texttt{@Task [obiettivo]}; rivedi sizing, AC e test proposti.
+  \item[$\square$] Approva piano e test (per i task MEDIUM o superiori); lascia implementare fino al verde.
+  \item[$\square$] Fai girare l'intera suite (test del task + regressione).
+  \item[$\square$] \texttt{@checkpoint}: applica gli aggiornamenti a \texttt{\_CONTEXT.md} e la voce in \texttt{PROGRESS.md}.
+\end{itemize}
+
+\textbf{A regime}
+\begin{itemize}
+  \item[$\square$] Tieni \texttt{\_CONTEXT.md} minimale e aggiornato (\textit{context engineering}, §\ref{sec:04-context-engineering}).
+  \item[$\square$] Lascia attivi gli HALT trigger; non bypassarli.
+  \item[$\square$] Usa i confidence tag sulle decisioni ad alto impatto.
+  \item[$\square$] Registra le decisioni importanti come ADR (Appendice~\ref{app:template}).
+  \item[$\square$] In multi-agente: un solo \texttt{AGENTS.md} come fonte, gli altri file come wrapper.
+\end{itemize}

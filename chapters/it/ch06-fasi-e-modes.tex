@@ -122,6 +122,36 @@ Alla sessione successiva, l'agente non chiede la conferma di bootstrap --- la pr
 
 \textbf{Pensare che i Modes disattivino gli HALT trigger.} Non è così. In nessun mode gli HALT trigger vengono disattivati.
 
+\section{Dal task al codice: il ciclo test-driven}
+\label{sec:06-task-tdd}
+
+Nella Fase 3 (Implementation) il lavoro non procede ``a tema libero'': procede \textbf{un task alla volta}. Il \textbf{task} è l'unità da cui parte l'implementazione del codice. Ogni task ha un identificativo (\texttt{T-NNN}), un obiettivo in una-tre frasi, criteri di accettazione verificabili, i deliverable attesi, i vincoli SEC/PERF rilevanti e l'AI Sizing (stima token, model level, risk floor). Il template completo è nell'Appendice~\ref{app:template}; lo si crea e avvia con il comando \texttt{@Task} (Capitolo~\ref{ch:comandi-conversazionali}).
+
+Perché passare per i task invece di chiedere genericamente ``implementa la feature X''? Perché un task ben definito è un \textbf{contratto verificabile}: stabilisce \textit{cosa} significa ``fatto'' prima che l'agente scriva una riga. È la differenza tra dirigere un collaboratore disciplinato e sperare che il prototipo regga.
+
+\subsection*{Ogni task è guidato dai test}
+
+In AI-DLC ogni task segue un ciclo \textbf{test-driven}, e i test sono di due tipi:
+
+\begin{enumerate}
+  \item \textbf{I test del task.} Prima dell'implementazione si scrivono (o si concordano) i test che codificano i criteri di accettazione del task. Sono la definizione \textit{eseguibile} di ``fatto'': finché non passano, il task non è completo.
+  \item \textbf{La regressione di tutto ciò che è stato fatto prima.} Un task è completo solo se i suoi test passano \textit{e} nessun test precedente si rompe. La suite completa gira a ogni task.
+\end{enumerate}
+
+Questo secondo punto è la differenza tra AI-DLC e il vibe coding lasciato a sé stesso. Nel Capitolo~\ref{ch:cose-ai-dlc} abbiamo visto il pattern \textit{two steps back} (l'agente corregge un bug e ne introduce due) e il \textit{house of cards code} (codice che crolla alla prima pressione). La regressione completa a ogni task è proprio la barriera che li previene: l'agente non può ``sistemare'' qualcosa rompendo silenziosamente qualcos'altro, perché la suite lo rivela subito.
+
+Il ciclo, in pratica:
+
+\begin{enumerate}
+  \item \texttt{@Task} --- l'agente genera il task (sizing, AC, vincoli) e propone i test che ne verificano i criteri.
+  \item \textbf{Approvi} il piano e i test (per task MEDIUM o superiori l'approvazione è obbligatoria --- è il pattern Planner--Executor--Reviewer).
+  \item L'agente \textbf{implementa} finché i test del task passano.
+  \item Gira \textbf{l'intera} suite: i test del task \textit{più} tutta la regressione.
+  \item \texttt{@checkpoint} --- si fissa lo stato e si aggiorna \texttt{PROGRESS.md}.
+\end{enumerate}
+
+Se al punto~4 si rompe un test precedente, il task non è ``fatto'': si torna al punto~3. Niente ``due passi avanti e due indietro''.
+
 \section*{\LabelSummary}
 
 \begin{itemize}
@@ -130,4 +160,5 @@ Alla sessione successiva, l'agente non chiede la conferma di bootstrap --- la pr
   \item Mode e Fase sono indipendenti: puoi essere in Fase 3 con Mode LITE.
   \item Gli HALT trigger non vengono mai disattivati, indipendentemente dal Mode.
   \item Cambia Mode liberamente durante il progetto: STANDARD per partire, LITE per il lavoro quotidiano rodato.
+  \item In Fase 3 l'implementazione procede \textbf{un task alla volta}: ogni task (\texttt{@Task}) è test-driven e si chiude solo se i suoi test passano \textit{e} la regressione completa resta verde.
 \end{itemize}

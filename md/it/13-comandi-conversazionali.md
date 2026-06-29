@@ -10,6 +10,7 @@ La loro utilità è nella velocità: invece di spiegare in prosa cosa vuoi fare,
 
 | Comando | Scopo | Output atteso |
 |---|---|---|
+| `@Task [obiettivo]` | Crea e avvia un task di implementazione | Task con AI Sizing, criteri di accettazione e test proposti; piano in attesa di approvazione |
 | `@checkpoint` | Fissa il punto di avanzamento corrente | Completato, prossimi passi, blocchi, proposta update `_CONTEXT.md` e voce `PROGRESS.md` |
 | `@context-update` | Propone un aggiornamento al context | Blocco Markdown da incollare in `_CONTEXT.md` |
 | `@show-constraints` | Mostra i vincoli SEC/PERF attivi | Tabella con vincoli e spec |
@@ -27,6 +28,36 @@ La loro utilità è nella velocità: invece di spiegare in prosa cosa vuoi fare,
 ---
 
 ## 13.2 I comandi più usati in dettaglio
+
+### `@Task`
+
+Il comando con cui inizia l'implementazione. Crea l'unità di lavoro (il task) e ne avvia il ciclo test-driven descritto nel Capitolo 6. Input: un obiettivo, oppure un riferimento a un Epic o a un requisito.
+
+> "@Task implementa POST /tasks con validazione e auth"
+
+```text
+T-007 — POST /tasks
+
+AI Sizing: 3000 / 1500 / 4500 token · Model Level 3 (Sonnet) · Risk: MEDIUM
+
+Acceptance Criteria:
+- [ ] POST /tasks crea un task per l'utente autenticato (userId dal JWT)
+- [ ] Validazione Zod: title obbligatorio, dueDate ISO 8601
+- [ ] Errori in formato RFC 7807
+
+Test proposti (da scrivere prima dell'implementazione):
+- title mancante → 400 con dettaglio del campo
+- richiesta senza token → 401
+- creazione valida → 201 + body con id e userId corretti
+
+Vincoli rilevanti: SEC-01, SEC-02, SEC-03
+
+Rischio MEDIUM → piano e test in attesa di approvazione. Procedo?
+```
+
+L'agente non scrive codice finché non approvi (per i task MEDIUM o superiori). Dopo l'approvazione implementa fino a far passare i test del task, poi esegue **l'intera suite** (test del task + regressione) prima di proporre il `@checkpoint`. `@Task` rispetta sempre gli HALT trigger e i risk floor: se l'obiettivo tocca un path sensibile, parte come HIGH e si ferma per conferma esplicita.
+
+---
 
 ### `@checkpoint`
 
@@ -233,6 +264,7 @@ Quando Lorenzo scrive `@deploy-check`, l'agente esegue tutti e quattro gli step 
 ## Riepilogo
 
 - I comandi conversazionali (`@`) sono segnali semantici che l'agente riconosce e interpreta secondo il protocollo AI-DLC — non comandi shell.
+- `@Task` crea e avvia l'unità di implementazione (AI Sizing, criteri di accettazione, test) e ne governa il ciclo test-driven.
 - I più usati: `@checkpoint` (fissa stato), `@context-update` (aggiorna il context), `@security-check` / `@perf-check` (verifica vincoli), `@alternatives` (opzioni strutturate), `@simplify` (riduce scope), `@stop` (ferma tutto).
 - Non bypassano il protocollo di sicurezza: nessun comando disattiva gli HALT trigger o modifica `_CONTEXT.md` senza approvazione.
 - Comandi personalizzati di progetto in `.ai-dlc/project/instructions.md` trasformano workflow ricorrenti in shortcut.

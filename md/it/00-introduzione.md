@@ -1,5 +1,7 @@
 ﻿# Introduzione — Il problema senza nome
 
+> **Perché questo libro, in 30 secondi.** Gli agenti AI scrivono codice a una velocità sbalorditiva, ma dimenticano il contesto, ignorano i vincoli, a volte inventano e fanno troppo. **AI-DLC** è un metodo pratico — solo file Markdown e JSON nel tuo repository — che dà all'agente memoria persistente (`_CONTEXT.md`, `PROGRESS.md`), vincoli sempre visibili (SEC/PERF), un freno per le operazioni rischiose (HALT trigger), un modo per dichiarare l'incertezza (confidence tag) e un'unità di lavoro test-driven (il *task*). Il risultato: la velocità del *vibe coding* senza perdere il controllo. Se hai fretta, la mappa è nella pagina *"AI-DLC in una schermata"* qui dopo; se hai 30 minuti, il Capitolo 2 ti mette in piedi su un progetto reale.
+
 Hai già lavorato con un agente AI per qualche ora e hai visto come può essere straordinariamente utile. Gli chiedi di progettare un endpoint, lui risponde con codice pulito, test inclusi. Gli chiedi di rivedere un modulo, individua tre problemi che non avevi notato. Sembra quasi troppo bello.
 
 Poi riapri il progetto il giorno dopo.

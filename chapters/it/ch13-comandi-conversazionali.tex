@@ -16,6 +16,7 @@ I comandi conversazionali sono istruzioni che dai all'agente nella chat, precedu
     \toprule
     \textbf{Comando} & \textbf{Scopo} & \textbf{Modifica file?} \\
     \midrule
+    \texttt{@Task [obiettivo]} & Crea e avvia un task & Propone task + test (no auto) \\
     \texttt{@checkpoint} & Fissa stato avanzamento & Propone (no auto) \\
     \texttt{@context-update} & Aggiorna il context & Propone (no auto) \\
     \texttt{@show-constraints} & Mostra vincoli SEC/PERF & No \\
@@ -35,6 +36,32 @@ I comandi conversazionali sono istruzioni che dai all'agente nella chat, precedu
 
 \section{I comandi più usati in dettaglio}
 \label{sec:13-dettaglio}
+
+\subsection*{\texttt{@Task}}
+
+Il comando con cui inizia l'implementazione. Crea l'unità di lavoro (il task) e ne avvia il ciclo test-driven descritto nel Capitolo~\ref{ch:fasi-e-modes} (§\ref{sec:06-task-tdd}). Input: un obiettivo, oppure un riferimento a un Epic o a un requisito.
+
+\begin{lstlisting}[language=,caption={Output tipico di @Task}]
+T-007 — POST /tasks
+
+AI Sizing: 3000 / 1500 / 4500 token · Model Level 3 (Sonnet) · Risk: MEDIUM
+
+Acceptance Criteria:
+- [ ] POST /tasks crea un task per l'utente autenticato (userId dal JWT)
+- [ ] Validazione Zod: title obbligatorio, dueDate ISO 8601
+- [ ] Errori in formato RFC 7807
+
+Test proposti (da scrivere prima dell'implementazione):
+- title mancante -> 400 con dettaglio del campo
+- richiesta senza token -> 401
+- creazione valida -> 201 + body con id e userId corretti
+
+Vincoli rilevanti: SEC-01, SEC-02, SEC-03
+
+Rischio MEDIUM -> piano e test in attesa di approvazione. Procedo?
+\end{lstlisting}
+
+L'agente non scrive codice finché non approvi (per i task MEDIUM o superiori). Dopo l'approvazione implementa fino a far passare i test del task, poi esegue \textbf{l'intera suite} (test del task + regressione) prima di proporre il \texttt{@checkpoint}. \texttt{@Task} rispetta sempre gli HALT trigger e i risk floor: se l'obiettivo tocca un path sensibile, parte come HIGH e si ferma per conferma esplicita.
 
 \subsection*{\texttt{@checkpoint}}
 
@@ -112,6 +139,7 @@ In \texttt{.ai-dlc/project/instructions.md}:
 
 \begin{itemize}
   \item I comandi \texttt{@} sono segnali semantici --- non comandi shell.
+  \item \texttt{@Task} crea e avvia l'unità di implementazione (sizing, AC, test) e ne governa il ciclo test-driven.
   \item I più usati: \texttt{@checkpoint}, \texttt{@context-update}, \texttt{@security-check}, \texttt{@alternatives}, \texttt{@simplify}, \texttt{@stop}.
   \item Non bypassano il protocollo di sicurezza; non modificano file automaticamente.
   \item Comandi personalizzati in \texttt{.ai-dlc/project/instructions.md} trasformano workflow ricorrenti in shortcut.

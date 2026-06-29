@@ -8,6 +8,7 @@ Riferimento completo di tutti i comandi conversazionali AI-DLC. I comandi usano 
 
 | Comando | Scopo | Risk bypass? | Modifica file? |
 |---|---|---|---|
+| `@Task [obiettivo]` | Crea e avvia un task di implementazione | No | Propone task + test (no auto) |
 | `@checkpoint` | Fissa stato avanzamento | No | Propone (no auto) |
 | `@context-update` | Aggiorna il context | No | Propone (no auto) |
 | `@show-constraints` | Mostra vincoli SEC/PERF attivi | No | No |
@@ -25,6 +26,28 @@ Riferimento completo di tutti i comandi conversazionali AI-DLC. I comandi usano 
 ---
 
 ## Dettaglio comandi
+
+### `@Task`
+
+**Uso:** per creare l'unità di implementazione e avviarne il ciclo test-driven (Capitolo 6). Input: un obiettivo, o un riferimento a un Epic/requisito.
+
+```text
+@Task implementa POST /tasks con validazione e auth
+@Task da E-002: gestione assegnatari
+```
+
+**Output:**
+- Il task (`T-NNN`) con **AI Sizing** (token estimate, model level, risk floor)
+- **Acceptance Criteria** verificabili
+- I **test proposti** che codificano i criteri (da scrivere prima del codice)
+- I vincoli SEC/PERF rilevanti
+- Per task MEDIUM o superiori: il piano resta **in attesa di approvazione**
+
+**Ciclo:** dopo l'approvazione l'agente implementa fino a far passare i test del task, poi esegue **l'intera suite** (test del task + regressione di tutto il lavoro precedente). Il task è "fatto" solo se tutto resta verde. Chiudi con `@checkpoint`.
+
+**Note:** rispetta sempre HALT trigger e risk floor; non scrive codice senza approvazione per i task MEDIUM+; non bypassa il protocollo di sicurezza.
+
+---
 
 ### `@checkpoint`
 

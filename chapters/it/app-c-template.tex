@@ -7,6 +7,35 @@
 
 Template copiabili per i file più usati di AI-DLC. Sostituisci i valori tra \texttt{[parentesi]} con quelli reali del tuo progetto. I template completi in formato Markdown sono in \texttt{.ai-dlc/modules/templates/}.
 
+\section*{Catalogo degli artefatti AI-DLC}
+
+Il framework produce un insieme definito di documenti. Ognuno ha uno scopo, un momento in cui nasce e un posto dove vive (versionato nel repository). Questa è la mappa; i template seguono.
+
+\begin{table}[htbp]
+  \centering\small
+  \begin{tabular}{p{0.21\textwidth}p{0.45\textwidth}p{0.24\textwidth}}
+    \toprule
+    \textbf{Artefatto} & \textbf{Cos'è / quando} & \textbf{Dove vive} \\
+    \midrule
+    \texttt{\_CONTEXT.md} & Stato corrente + vincoli invalicabili (fonte di verità); ogni sessione & radice progetto \\
+    \texttt{PROGRESS.md} & Diario cronologico di sessioni, decisioni, scoperte; in append & radice progetto \\
+    Requisiti FR/NFR & Requisiti funzionali e non funzionali; Fase 1 & \texttt{docs/01\_ANALYSIS/} \\
+    Glossario dominio & Termini condivisi del dominio; Fase 0--1 & \texttt{docs/01\_ANALYSIS/} \\
+    User Story & Requisito lato utente + criteri di accettazione; Fase 1 & backlog \\
+    Modello dati & Entità e relazioni, tecnologia-agnostico; Fase 1 & \texttt{docs/01\_ANALYSIS/} \\
+    Threat model & Asset, attori, superfici, mitigazioni; Fase 1--2 & \texttt{docs/02\_DATA\_GOVERNANCE/} \\
+    ADR & Decisione architetturale: contesto, opzioni, scelta, conseguenze; su decisione HIGH/CRITICAL & \texttt{docs/} (vicino al codice) \\
+    EPIC & Contenitore di valore con user story, AC e task; pianificazione feature ampia & backlog / \texttt{docs/} \\
+    TASK & Unità di implementazione (sizing, AC, test); Fase 3, prima del codice & task docs \\
+    Analisi codebase & MAP/RISKS/HOTSPOTS/RUN di codice esistente; prima di modifiche legacy & \texttt{docs/} \\
+    Company process & Gate e standard aziendali; setup enterprise & \texttt{.ai-dlc/company/} \\
+    Project instructions & Regole specifiche di progetto; setup & \texttt{.ai-dlc/project/} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Gli artefatti prodotti dal framework AI-DLC}
+  \label{tab:appc-artefatti}
+\end{table}
+
 \section*{Template 1 --- \texttt{\_CONTEXT.md} Minimo (spike/POC)}
 
 \begin{lstlisting}[language=,caption={Context minimale per spike}]
@@ -73,6 +102,14 @@ Motivazione: [perché questa opzione]
 - [ ] [criterio verificabile 1]
 - [ ] [criterio verificabile 2]
 
+## Test Plan (TDD)
+Test da scrivere PRIMA del codice (codificano gli AC):
+- [ ] [test caso nominale]
+- [ ] [test caso d'errore]
+- [ ] [test edge case / sicurezza]
+Definizione di "fatto": test del task verdi
++ regressione completa verde.
+
 ## Vincoli rilevanti
 - [SEC-XX o PERF-XX applicabili]
 \end{lstlisting}
@@ -114,4 +151,101 @@ Sei [ruolo specializzato]. Priorità: [principio].
 
 ## Checklist di Verifica
 - [ ] [controllo 1]
+\end{lstlisting}
+
+\section*{Template 6 --- EPIC}
+
+\begin{lstlisting}[language=,caption={Template di EPIC}]
+# EPIC: [E-NNN] [Titolo]
+Status: Proposed | Active | Done | Deferred
+Owner: [team/persona]   Target: [sprint/release]
+
+## Summary
+[Valore di business in 2-3 frasi]
+
+## Scope
+In scope: [...]
+Out of scope: [...]
+
+## User Stories
+- [US-001] Come [ruolo] voglio [capacità]
+  così da [risultato].
+
+## Acceptance Criteria
+- [ ] [AC a livello epic]
+
+## Task Breakdown
+| ID | Task | Tipo | Token Est. | Model Lvl | Risk |
+
+## Definition of Done
+- [ ] Tutti i task collegati completati
+- [ ] Test verdi (task + regressione)
+- [ ] SEC/PERF verificati; doc aggiornata
+\end{lstlisting}
+
+\section*{Template 7 --- ADR (Architecture Decision Record)}
+
+\begin{lstlisting}[language=,caption={Template di ADR / Decision Record}]
+# ADR-NNN: [Titolo decisione]
+Status: Proposed | Accepted | Deprecated | Superseded
+Date: YYYY-MM-DD   Owner: [team/persona]
+Risk: LOW|MEDIUM|HIGH|HIGH+|CRITICAL
+Model Level: [1-7]
+
+## Contesto
+[Problema, vincoli, riferimenti FR/NFR/SEC/PERF]
+
+## Opzioni
+| Opzione | Descrizione | Pro | Contro | Rischio |
+| A       | ...         | ... | ...    | ...     |
+| B       | ...         | ... | ...    | ...     |
+
+## Decisione
+[Opzione scelta e motivazione concisa]
+
+## Conseguenze
+Positive: [...]   Negative: [...]
+Mitigazioni: [...]
+
+## Follow-up
+- [ ] [task/riferimento]
+\end{lstlisting}
+
+\section*{Template 8 --- Requisiti (Fase Analysis)}
+
+\begin{lstlisting}[language=,caption={Requisiti funzionali, user story e NFR}]
+## Requisiti Funzionali
+| ID   | Descrizione | Priorità         | Fonte |
+| FR01 | ...         | Must/Should/Could | ...   |
+
+## User Story
+[US-XXX] Titolo
+Come [ruolo] voglio [azione] così da [beneficio]
+Acceptance Criteria:
+- [ ] GIVEN [contesto] WHEN [azione] THEN [risultato]
+Security: [...]  Performance: [...]
+Priorità: Must/Should/Could
+
+## Requisiti Non Funzionali (NFR)
+- Sicurezza: SEC-01..SEC-09 applicabili
+- Performance: PERF-01..PERF-05 (P95, throughput...)
+\end{lstlisting}
+
+\section*{Template 9 --- Analisi di codebase esistente (legacy)}
+
+Prodotti dal modulo \texttt{09\_CODEBASE\_ANALYSIS.md} prima di modificare codice esistente: \texttt{MAP.md} (moduli, dipendenze, entry point), \texttt{RISKS.md} (rischi sicurezza/performance e debito), \texttt{HOTSPOTS.md} (file/classi critici con motivazione), \texttt{RUN.md} (comandi build/test/run).
+
+\begin{lstlisting}[language=,caption={Architecture Snapshot e Change Map}]
+## Architecture Snapshot
+- Pattern: [layered/clean/hex/monolite modulare]
+- Entry point: [...]
+- Domini/moduli core: [...]
+- Data store: [...]   Integrazioni: [...]
+
+## Change Map (per una modifica specifica)
+Target: [feature/bug]
+- Percorso primario: [file/classe/funzione]
+- Impatti secondari: [...]
+- Test da toccare: [...]
+- Piano di rollback: [...]
 \end{lstlisting}

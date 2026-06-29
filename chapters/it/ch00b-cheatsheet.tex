@@ -1,0 +1,85 @@
+% ============================================================
+% AI-DLC in una schermata — cheat sheet
+% ============================================================
+
+\chapter*{AI-DLC in una schermata}
+\addcontentsline{toc}{chapter}{AI-DLC in una schermata}
+\label{ch:cheatsheet}
+
+Tutto il framework su una pagina. I dettagli sono nei capitoli indicati.
+
+\vspace{0.4em}
+\noindent\textbf{I quattro problemi $\rightarrow$ i quattro meccanismi} \hfill {\small (Cap.~\ref{ch:cose-ai-dlc})}
+
+{\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Problema} & \textbf{Meccanismo AI-DLC} \\
+\midrule
+L'AI dimentica & \texttt{\_CONTEXT.md} + \texttt{PROGRESS.md} \\
+Ignora i vincoli & \texttt{SEC-XX} / \texttt{PERF-XX} \\
+Inventa & Confidence tag \texttt{FACT}/\texttt{INFERRED}/\texttt{ASSUMPTION} \\
+Fa troppo & HALT trigger + classificazione del rischio \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.6em}
+\noindent\textbf{File del progetto}
+
+{\small
+\begin{tabular}{ll}
+\toprule
+\texttt{\_CONTEXT.md} & Stato corrente + vincoli (sempre letto) \\
+\texttt{PROGRESS.md} & Diario di sessioni e decisioni \\
+\texttt{.ai-dlc/} & Framework: moduli, template, tool \\
+\texttt{AGENTS.md}, \texttt{CLAUDE.md}\dots & Entry point degli agenti \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.6em}
+\noindent\textbf{Fasi} (campo \texttt{Phase}, Cap.~\ref{ch:fasi-e-modes}): \quad
+{\small 0 Discovery · 1 Analysis · 2 Design · 3 Implementation · 4 Verification · 5 Release · 6 Ops}
+
+\vspace{0.3em}
+\noindent\textbf{Modes} (quanta cerimonia, non la sicurezza): \quad
+{\small LITE · STANDARD · AUDIT · RAPID · FAST}
+
+\vspace{0.6em}
+\noindent\textbf{Rischio $\rightarrow$ azione} \hfill {\small (Cap.~\ref{ch:classificazione-rischio})}
+
+{\small
+\begin{tabular}{ll}
+\toprule
+LOW & Esegui $\rightarrow$ notifica \\
+MEDIUM & Proponi un piano $\rightarrow$ attendi approvazione \\
+HIGH & Piano dettagliato + conferma esplicita \\
+HIGH+ & HALT $\rightarrow$ piano + conferma \\
+CRITICAL & HALT $\rightarrow$ alternative + ADR \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.6em}
+\noindent\textbf{Confidence tag}: \quad
+{\small \texttt{FACT} (verificato) · \texttt{INFERRED} (dedotto) · \texttt{ASSUMPTION} (ipotesi $\rightarrow$ TODO di verifica)}
+
+\vspace{0.6em}
+\noindent\textbf{Comandi chiave} \hfill {\small (Cap.~\ref{ch:comandi-conversazionali})}
+
+{\small
+\begin{tabular}{ll}
+\texttt{@Task [obiettivo]} & Avvia l'unità di implementazione test-driven \\
+\texttt{@checkpoint} & Fissa lo stato, propone update di context e progress \\
+\texttt{@security-check} / \texttt{@perf-check} & Verifica vs vincoli attivi \\
+\texttt{@alternatives} & 2--3 opzioni con trade-off \\
+\texttt{@stop} & Ferma immediatamente \\
+\end{tabular}}
+
+\vspace{0.6em}
+\noindent\textbf{Il ciclo del task} (Fase 3, §\ref{sec:06-task-tdd}):
+
+{\small \texttt{@Task} $\rightarrow$ approva piano + test $\rightarrow$ implementa fino al verde $\rightarrow$ regressione completa $\rightarrow$ \texttt{@checkpoint}}
+
+\vspace{0.4em}
+\begin{tipbox}
+Hai 30 minuti? Vai al Capitolo~\ref{ch:setup-primo-progetto} per lo scaffold, poi al Capitolo~\ref{ch:sessione-reale} per una sessione reale. La checklist di adozione è in fondo al Capitolo~\ref{ch:produzione}.
+\end{tipbox}
