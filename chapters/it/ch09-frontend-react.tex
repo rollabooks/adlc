@@ -1,0 +1,284 @@
+% ============================================================
+% CAPITOLO 9 — Progetto 6: Frontend Web con React e Autenticazione
+% ============================================================
+\chapter{Progetto 6: Frontend Web con React e Autenticazione}\index{React}\index{Tailwind CSS}\index{Vite}\index{SKILL.md}
+
+\section*{Cosa Costruirai}
+Un'applicazione frontend React completa che:
+\begin{itemize}
+  \item Si collega al backend Notes API
+  \item Permette login con Google e GitHub
+  \item Mostra una dashboard con le note dell'utente
+  \item Supporta operazioni CRUD complete
+  \item Ha rotte protette
+  \item Usa un design system coerente con Tailwind~CSS
+\end{itemize}
+
+\textbf{Tempo stimato}: 60--90 minuti\\
+\textbf{Prerequisito}: Backend Notes API con autenticazione (Capitoli~6--8)
+
+\begin{notebox}
+\textbf{Box Tooling --- Stack scelto per questo esempio.}
+\begin{itemize}
+  \item \textbf{Framework:} React~19 con Vite
+  \item \textbf{Styling:} Tailwind~CSS~4
+  \item \textbf{Routing:} React Router~7
+  \item \textbf{HTTP Client:} Axios
+\end{itemize}
+\textbf{Alternative equivalenti:} Vue.js/Nuxt, Svelte/SvelteKit, Angular, Next.js, Astro. Il \textbf{pattern} (componenti, routing protetto, gestione stato, chiamate API) \`e lo stesso in qualunque framework frontend moderno. Il file \texttt{SKILL.md} che creerai in questo capitolo funziona con qualsiasi stack --- basta adattare le convenzioni.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Setup del Progetto Frontend}
+
+\begin{praticabox}[title={Pratica --- Creare il progetto React}]
+Apri un terminale nella directory padre del backend:
+\begin{lstlisting}[language=bash]
+cd ..
+npm create vite@latest notes-frontend -- --template react
+cd notes-frontend
+npm install
+npm install react-router-dom axios
+npm install -D tailwindcss @tailwindcss/vite
+\end{lstlisting}
+Ora hai due progetti affiancati:
+\begin{lstlisting}[language={}]
+workspace/
++-- notes-api/          <- Backend (Capitoli 6-8)
++-- notes-frontend/     <- Frontend (questo capitolo)
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Agent Skill per il Frontend}
+
+Questo è il momento di introdurre il tuo primo \textbf{SKILL.md} --- un documento che conferisce all'IA competenze specializzate.
+
+\begin{praticabox}[title={Pratica --- Crea il file \texttt{SKILL.md}}]
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{SKILL.md} --- React Frontend Developer}]
+# React Frontend Developer Skill
+
+## Principi di Design
+- Mobile-first
+- Componenti piccoli: ogni componente fa UNA cosa
+- Nessuna logica di business nei componenti UI
+- Accessibilita': elementi interattivi con supporto tastiera
+
+## Struttura Componenti
+src/
+  components/
+    ui/         <- Button, Input, Card, Modal
+    layout/     <- Header, Footer, PageContainer
+    notes/      <- NoteCard, NoteForm, NoteList
+    auth/       <- LoginButton, ProtectedRoute, UserMenu
+  pages/
+    LoginPage.jsx
+    DashboardPage.jsx
+    NoteDetailPage.jsx
+    NotFoundPage.jsx
+  hooks/
+    useAuth.js     <- Hook per autenticazione
+    useNotes.js    <- Hook per CRUD note
+    useApi.js      <- Hook per chiamate API
+  context/
+    AuthContext.jsx
+  services/
+    api.js         <- Istanza Axios configurata
+
+## Convenzioni React
+- Componenti: PascalCase, un file per componente
+- Hook: camelCase con prefisso "use"
+- Event handler: prefisso "handle"
+- Solo functional component con hooks
+- MAI fare fetch/axios nei componenti
+
+## Vincoli
+- NON usare localStorage per token JWT
+- NON hardcodare l'URL del backend. Usa VITE_API_URL
+- Ogni pagina deve avere loading state e error state
+- Form con validazione client-side prima del submit
+\end{lstlisting}
+
+\begin{notebox}
+Il file \texttt{SKILL.md} funziona come il \texttt{\_CONTEXT.md} ma è \textbf{specializzato}. Viene caricato dall'IA solo quando il tipo di lavoro lo richiede (Progressive Disclosure). Questo evita di sovraccaricare il contesto.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Il Contesto del Frontend}
+
+\begin{praticabox}[title={Pratica --- Crea \texttt{\_CONTEXT.md} nel frontend}]
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} per Notes Frontend}]
+# Progetto: Notes Frontend
+
+## Scopo
+Frontend React per l'applicazione Notes. Si connette al
+backend Notes API (http://localhost:3000).
+
+## Tecnologie
+React 18 + Vite, React Router 6, Tailwind CSS 4, Axios,
+React Context per stato globale (auth).
+
+## Flusso di Autenticazione
+1. Utente clicca "Login con Google/GitHub"
+2. Redirect al backend /api/auth/google
+3. Backend gestisce OAuth, restituisce JWT come cookie
+4. Frontend chiama /api/auth/me per il profilo
+5. AuthContext salva l'utente in memoria
+6. Chiamate API successive includono il cookie
+
+## Pagine
+/              LoginPage (se non autenticato)
+/dashboard     DashboardPage (lista note + creazione)
+/notes/:id     NoteDetailPage (dettaglio + modifica)
+*              NotFoundPage
+
+## Vincoli
+- NON usare localStorage per token JWT
+- Axios con withCredentials: true
+- Proxy Vite per evitare problemi CORS
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Generazione del Frontend}
+
+\begin{praticabox}[title={Pratica --- Generare l'applicazione}]
+In Copilot Agent Mode:
+\begin{lstlisting}[language={}]
+Leggi il _CONTEXT.md e il SKILL.md. Implementa l'intero
+frontend React.
+
+Ordine:
+ 1. Configura Tailwind CSS con Vite
+ 2. Crea src/services/api.js (Axios configurato)
+ 3. Crea src/context/AuthContext.jsx
+ 4. Crea componenti UI base (Button, Input, Card)
+ 5. Crea layout (Header con UserMenu, PageContainer)
+ 6. Crea LoginPage con bottoni Google e GitHub
+ 7. Crea ProtectedRoute
+ 8. Crea src/hooks/useNotes.js
+ 9. Crea DashboardPage
+10. Crea componenti notes (NoteCard, NoteForm)
+11. Crea NoteDetailPage
+12. Configura React Router in App.jsx
+13. Configura proxy Vite
+14. Crea .env con VITE_API_URL
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Configurazione del Proxy Vite}
+
+Per evitare problemi CORS durante lo sviluppo:
+
+\begin{lstlisting}[language=JavaScript,title={\texttt{vite.config.js}}]
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
+});
+\end{lstlisting}
+
+\begin{tipbox}
+Con questo proxy, nel frontend puoi chiamare \texttt{/api/notes} invece di \texttt{http://localhost:3000/api/notes}. Vite inoltra automaticamente le richieste al backend.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{Test dell'Applicazione}
+
+\begin{praticabox}[title={Pratica --- Avvio}]
+Apri \textbf{due} terminali:
+
+\textbf{Terminale 1 --- Backend:}
+\begin{lstlisting}[language=bash]
+cd notes-api && npm run dev
+\end{lstlisting}
+
+\textbf{Terminale 2 --- Frontend:}
+\begin{lstlisting}[language=bash]
+cd notes-frontend && npm run dev
+\end{lstlisting}
+
+Apri nel browser: \texttt{http://localhost:5173}
+\end{praticabox}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Funzionalità} & \textbf{Test} \\
+\midrule
+Login Page & Vedi i bottoni Google e GitHub \\
+OAuth Google & Click $\rightarrow$ redirect $\rightarrow$ login $\rightarrow$ dashboard \\
+Dashboard & Lista note (vuota all'inizio) \\
+Crea nota & Compila form $\rightarrow$ appare nella lista \\
+Dettaglio & Click su nota $\rightarrow$ pagina dettaglio \\
+Modifica & Modifica titolo/contenuto $\rightarrow$ salva $\rightarrow$ verifica \\
+Elimina & Click elimina $\rightarrow$ conferma $\rightarrow$ scompare \\
+Logout & Click logout $\rightarrow$ redirect a login \\
+Protezione route & Vai a /dashboard senza login $\rightarrow$ redirect \\
+User Menu & Nome e avatar dell'utente nel header \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{checkpointbox}
+Se riesci a fare login, creare una nota, modificarla ed eliminarla, il frontend è completo.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Iterazioni di Design}
+
+\begin{praticabox}[title={Pratica --- Migliorare l'aspetto}]
+\begin{lstlisting}[language={}]
+Migliora il design:
+1. EmptyState quando non ci sono note
+2. Animazioni hover sulle card (scale-[1.02])
+3. Tag come badge colorati sulle NoteCard
+4. Campo ricerca nella dashboard
+5. Data di creazione relativa ("2 ore fa", "ieri")
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Pratica --- Responsive design}]
+\begin{lstlisting}[language={}]
+Verifica che l'interfaccia sia responsive:
+1. Griglia note: 1 col mobile, 2 tablet, 3 desktop
+2. Header hamburger su mobile
+3. Form full-width su mobile
+4. Bottoni con touch target >= 44px
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section*{Riepilogo}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Aspetto} & \textbf{Dettaglio} \\
+\midrule
+Framework & React~18 + Vite \\
+Styling & Tailwind~CSS~4 \\
+Auth & OAuth~2.0 via backend proxy \\
+State & React Context (AuthContext) \\
+Pagine & Login, Dashboard, NoteDetail, 404 \\
+Primo SKILL.md & react-frontend-developer \\
+Tempo & $\sim$60--90 minuti \\
+\bottomrule
+\end{tabularx}
+\end{center}

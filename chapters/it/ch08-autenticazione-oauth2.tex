@@ -1,0 +1,247 @@
+% ============================================================
+% CAPITOLO 8 — Progetto 5: Autenticazione OAuth 2.0 e JWT
+% ============================================================
+\chapter{Progetto 5: Autenticazione OAuth~2.0 e JWT}\index{autenticazione}\index{Passport.js}
+
+\section*{Cosa Costruirai}
+Aggiungerai alla Notes API un sistema di autenticazione completo:
+\begin{itemize}
+  \item Login con Google e GitHub tramite OAuth~2.0
+  \item Token JWT per le sessioni
+  \item Middleware di protezione degli endpoint
+  \item Ogni utente vede solo le proprie note
+  \item Refresh token per sessioni persistenti
+\end{itemize}
+
+\textbf{Tempo stimato}: 60--90 minuti\\
+\textbf{Prerequisito}: Progetto \texttt{notes-api} con PostgreSQL (Capitolo~7)
+
+\begin{notebox}
+\textbf{Box Teoria --- Autenticazione e Autorizzazione.} L'\textbf{autenticazione} risponde alla domanda ``Chi sei?'' (es.\ login con Google). L'\textbf{autorizzazione} risponde a ``Cosa puoi fare?'' (es.\ vedere solo le \textit{tue} note). \textbf{OAuth~2.0}\index{OAuth 2.0} è un protocollo che delega l'autenticazione a un servizio esterno (Google, GitHub): tu non gestisci password, il servizio conferma l'identità dell'utente~\cite{rfc6749}. Un \textbf{JWT}\index{JWT}\index{JSON Web Token|see{JWT}} (JSON Web Token) è un ``biglietto digitale'' firmato che il server rilascia dopo il login: l'utente lo allega a ogni richiesta successiva per dimostrare la sua identità senza rifare il login~\cite{rfc7519}. Un \textbf{middleware} è codice che si inserisce tra la richiesta e la risposta per svolgere un compito trasversale (come verificare il JWT).
+\end{notebox}
+
+\begin{notebox}
+\textbf{Box Tooling --- Stack scelto per questo esempio.}
+\begin{itemize}
+  \item \textbf{Protocollo:} OAuth~2.0 (provider Google e GitHub)
+  \item \textbf{Token:} JWT (JSON Web Token)
+  \item \textbf{Libreria:} Passport.js
+\end{itemize}
+\textbf{Alternative equivalenti:} Auth0, Firebase Auth, Clerk, Supabase Auth. Il \textbf{pattern} (autenticazione delegata + token di sessione + middleware di protezione) resta identico qualunque sia la libreria o il servizio scelto. In altri linguaggi: Python/Authlib, Go/golang-jwt, Java/Spring Security.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{OAuth~2.0 in 5 Minuti}
+
+OAuth~2.0 è il protocollo che permette a un utente di fare login con Google/GitHub senza che tu debba gestire password.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{04-oauth2-flusso}
+\caption{Il Flusso OAuth~2.0 Semplificato}
+\end{figure}
+
+\textbf{In sintesi}: l'utente si autentica su Google, Google conferma la sua identità al tuo backend, il tuo backend crea un JWT (un ``biglietto'' digitale) che l'utente usa per ogni richiesta successiva.
+
+\begin{warnbox}
+Non scriverai manualmente questo flusso. L'IA lo implementerà per te. Ma devi capirlo per verificare che l'implementazione sia corretta e sicura.
+\end{warnbox}
+
+% ---------------------------------------------------------
+\section{Creare le Credenziali OAuth}
+
+\begin{praticabox}[title={Pratica --- Google OAuth}]
+\begin{enumerate}
+  \item Vai su \url{https://console.cloud.google.com}
+  \item Crea un nuovo progetto
+  \item Vai su \textbf{API e Servizi $\rightarrow$ Credenziali}
+  \item Clicca \textbf{Crea Credenziali $\rightarrow$ ID client OAuth}
+  \item Tipo: \textbf{Applicazione Web}
+  \item URI di reindirizzamento: \texttt{http://localhost:3000/api/auth/google/callback}
+  \item Copia \textbf{Client ID} e \textbf{Client Secret}
+\end{enumerate}
+\end{praticabox}
+
+\begin{praticabox}[title={Pratica --- GitHub OAuth}]
+\begin{enumerate}
+  \item Vai su \url{https://github.com/settings/developers}
+  \item Clicca \textbf{New OAuth App}
+  \item Homepage URL: \texttt{http://localhost:3000}
+  \item Callback URL: \texttt{http://localhost:3000/api/auth/github/callback}
+  \item Copia \textbf{Client ID} e \textbf{Client Secret}
+\end{enumerate}
+\end{praticabox}
+
+\begin{praticabox}[title={Pratica --- File \texttt{.env}}]
+\begin{lstlisting}[language=bash]
+DATABASE_URL="postgresql://notes:notes123@localhost:5432/notesdb"
+
+# OAuth Google
+GOOGLE_CLIENT_ID=il-tuo-client-id
+GOOGLE_CLIENT_SECRET=il-tuo-client-secret
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/auth/google/callback
+
+# OAuth GitHub
+GITHUB_CLIENT_ID=il-tuo-client-id
+GITHUB_CLIENT_SECRET=il-tuo-client-secret
+GITHUB_CALLBACK_URL=http://localhost:3000/api/auth/github/callback
+
+# JWT
+JWT_SECRET=una-stringa-lunga-e-casuale-almeno-32-caratteri
+JWT_EXPIRES_IN=1h
+JWT_REFRESH_EXPIRES_IN=7d
+\end{lstlisting}
+\end{praticabox}
+
+\begin{dangerbox}
+Il file \texttt{.env} NON deve MAI essere committato su Git. Verifica che \texttt{.gitignore} lo includa. Non condividere mai i client secret.
+\end{dangerbox}
+
+% ---------------------------------------------------------
+\section{Aggiornare il Contesto}
+
+\begin{praticabox}[title={Pratica --- Sezione autenticazione nel contesto}]
+Aggiungi queste sezioni al \texttt{\_CONTEXT.md}:
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={Schema Database --- Tabelle User e RefreshToken}]
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  avatarUrl   String?  @map("avatar_url")
+  provider    String   // "google" | "github"
+  providerId  String   @map("provider_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  notes       Note[]
+  @@unique([provider, providerId])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  user      User     @relation(...)
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  @@map("refresh_tokens")
+}
+\end{lstlisting}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l X c}
+\toprule
+\textbf{Metodo} & \textbf{Path} & \textbf{Descrizione} & \textbf{Protetto} \\
+\midrule
+GET & \texttt{/api/auth/google} & Redirect a Google login & No \\
+GET & \texttt{/api/auth/google/callback} & Callback Google & No \\
+GET & \texttt{/api/auth/github} & Redirect a GitHub login & No \\
+GET & \texttt{/api/auth/github/callback} & Callback GitHub & No \\
+POST & \texttt{/api/auth/refresh} & Rinnova access token & No \\
+POST & \texttt{/api/auth/logout} & Invalida refresh token & Sì \\
+GET & \texttt{/api/auth/me} & Profilo utente corrente & Sì \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{notebox}
+Nota la sezione ``Classificazione del Rischio'' nel contesto. Definendo il livello di rischio di ogni operazione, l'IA sarà più attenta nella generazione del codice di sicurezza. È l'equivalente di dire ``fai attenzione qui --- questa parte è delicata.''
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{Generazione dell'Autenticazione}
+
+\begin{praticabox}[title={Pratica --- Implementazione}]
+In Copilot Agent Mode:
+\begin{lstlisting}[language={}]
+Rileggi il _CONTEXT.md aggiornato. Implementa il sistema di
+autenticazione OAuth 2.0 per la Notes API.
+
+Ordine di implementazione:
+ 1. Aggiorna schema Prisma con User, RefreshToken, Note->User
+ 2. Genera la migrazione
+ 3. Installa: passport, passport-google-oauth20,
+    passport-github2, jsonwebtoken, cookie-parser
+ 4. Crea src/config/passport.js
+ 5. Crea src/services/authService.js
+ 6. Crea src/middleware/authenticate.js (middleware JWT)
+ 7. Crea src/controllers/authController.js
+ 8. Crea src/routes/auth.js
+ 9. Aggiorna src/app.js
+10. Aggiorna notesService.js per filtrare per userId
+11. Aggiorna notesController.js
+12. Aggiorna i test
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Verifica dell'Autenticazione}
+
+\begin{praticabox}[title={Pratica --- Test del flusso OAuth}]
+\begin{enumerate}
+  \item Avvia il server: \texttt{npm run dev}
+  \item Apri nel browser: \texttt{http://localhost:3000/api/auth/google}
+  \item Dopo il login Google, copia il JWT dalla risposta
+  \item Testa un endpoint protetto:
+\end{enumerate}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/notes \
+  -H "Authorization: Bearer IL_TUO_TOKEN_JWT"
+\end{lstlisting}
+Testa senza token (deve fallire con 401):
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/notes
+\end{lstlisting}
+\begin{lstlisting}[language=json]
+{ "success": false,
+  "error": { "message": "Authentication required",
+             "code": "UNAUTHORIZED" } }
+\end{lstlisting}
+\end{praticabox}
+
+\begin{checkpointbox}
+OAuth Google/GitHub funziona. JWT protegge gli endpoint. Utente vede solo le proprie note. Refresh token rinnova il JWT. Logout invalida il refresh token.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Sicurezza: Checklist OWASP}
+
+\begin{praticabox}[title={Pratica --- Verifica sicurezza}]
+Chiedi a Copilot di verificare:
+\begin{lstlisting}[language={}]
+Analizza il codice di autenticazione e verifica:
+1. JWT secret >= 32 caratteri?
+2. Token con scadenza ragionevole?
+3. Refresh token nel database e invalidato al logout?
+4. Callback OAuth validano il parametro state anti-CSRF?
+5. Header di sicurezza impostati (helmet)?
+6. Rate limiting sugli endpoint auth?
+7. Connection string non esposta nell'output?
+
+Per ogni punto, rispondi OK o ERRORE con la correzione.
+\end{lstlisting}
+\end{praticabox}
+
+\begin{dangerbox}
+La sicurezza è l'area dove il review umano è più critico. Non fidarti ciecamente dell'IA su questioni di sicurezza --- verifica sempre che JWT secret, gestione token e validazione input siano implementati correttamente.
+\end{dangerbox}
+
+% ---------------------------------------------------------
+\section*{Riepilogo}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Aspetto} & \textbf{Dettaglio} \\
+\midrule
+Autenticazione & OAuth~2.0 (Google + GitHub) \\
+Sessione & JWT + Refresh Token \\
+Librerie & Passport.js, jsonwebtoken \\
+Sicurezza & Isolamento utente, scadenza token, CSRF protection \\
+File nuovi & $\sim$6 file \\
+Tempo & $\sim$60--90 minuti \\
+\bottomrule
+\end{tabularx}
+\end{center}

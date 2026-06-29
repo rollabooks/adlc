@@ -1,0 +1,414 @@
+% ============================================================
+% APPENDICE B — Template Pronti all'Uso
+% ============================================================
+\chapter{Template Pronti all'Uso}
+
+Tutti i template di questo libro, pronti da copiare e adattare ai tuoi progetti.
+
+% ---------------------------------------------------------
+\section{Template \texttt{\_CONTEXT.md} Base}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- Template base}]
+# Progetto: [Nome Progetto]
+
+## Scopo
+[Descrizione in 2-3 frasi di cosa fa l'applicazione]
+
+## Tecnologie
+- Linguaggio: [es. Python 3.12, Node.js 20, Dart]
+- Framework: [es. Express.js, React, Flutter]
+- Database: [es. PostgreSQL 16 con Prisma]
+- Altro: [dipendenze chiave]
+
+## Architettura
+[Diagramma ASCII o descrizione della struttura]
+
+src/
+  [struttura directory con commento per ogni cartella]
+
+## Convenzioni
+- [Naming conventions]
+- [Pattern architetturali]
+- [Formato risposta API se applicabile]
+
+## Vincoli
+- [NON fare X perche Y]
+- [SEMPRE fare Z]
+- [Limiti tecnici o di sicurezza]
+
+## Comandi
+- Avviare: [comando]
+- Test: [comando]
+- Build: [comando]
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{\_CONTEXT.md} REST API}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- REST API}]
+# Progetto: [Nome] API
+
+## Scopo
+[Descrizione del servizio API]
+
+## Tecnologie
+- Runtime: Node.js 20
+- Framework: Express.js
+- Validazione: Zod
+- Database: PostgreSQL 16 con Prisma ORM
+- Auth: JWT + OAuth 2.0
+- Docs: Swagger/OpenAPI
+
+## Architettura
+src/
+  index.js          <- Entry point, avvio server
+  app.js            <- Express app, middleware, route
+  routes/           <- Definizione endpoint
+  controllers/      <- Gestione request/response
+  services/         <- Logica business
+  middleware/       <- Auth, validazione, error handling
+  prisma/           <- Schema e migrazioni
+
+## Endpoint
+| Metodo | Path            | Auth | Descrizione     |
+|--------|-----------------|------|-----------------|
+| GET    | /api/resource   | Si   | Lista risorse   |
+| POST   | /api/resource   | Si   | Crea risorsa    |
+| GET    | /api/resource/:id | Si | Dettaglio       |
+| PUT    | /api/resource/:id | Si | Aggiorna        |
+| DELETE | /api/resource/:id | Si | Elimina         |
+
+## Formato Risposte
+Successo: { "success": true, "data": { ... } }
+Errore:   { "success": false, "error": { "message": "..." } }
+
+## Vincoli
+- Validazione Zod PRIMA del controller
+- Ogni query filtra per userId (autorizzazione)
+- Errori in produzione: solo messaggi generici
+- Rate limiting su endpoint auth
+
+## Comandi
+- Dev: npm run dev
+- Test: npx vitest run
+- Migrate: npx prisma migrate dev
+- Studio: npx prisma studio
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{SKILL.md} React}
+
+\begin{lstlisting}[language={},title={SKILL.md --- React Developer}]
+---
+name: react-developer
+description: Skill per sviluppo frontend React con Tailwind CSS.
+---
+
+# React Developer Skill
+
+## Stack
+- React 18+ con Vite
+- Tailwind CSS 4
+- React Router 6
+- Axios per HTTP
+
+## Struttura
+src/
+  components/ui/     <- Componenti riutilizzabili
+  components/layout/ <- Header, Footer, Container
+  pages/             <- Pagine (una per route)
+  hooks/             <- Hook personalizzati
+  context/           <- Context API per stato globale
+  services/          <- Chiamate API (Axios)
+
+## Convenzioni
+- Componenti: PascalCase, functional only
+- Hook: camelCase con prefisso "use"
+- NON fare fetch nei componenti, usa hook
+- NON usare localStorage per token JWT
+- Ogni pagina: loading + error + empty state
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{SKILL.md} Flutter}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Flutter Developer}]
+---
+name: flutter-developer
+description: Skill per sviluppo app mobile Flutter.
+---
+
+# Flutter Developer Skill
+
+## Stack
+- Flutter 3.x / Dart
+- Riverpod 2 per state management
+- GoRouter per navigazione
+- Dio per HTTP
+- flutter_secure_storage per token
+
+## Struttura
+lib/
+  config/      <- Configurazione (API URL, tema)
+  models/      <- Classi immutabili con fromJson/toJson
+  services/    <- Client HTTP, auth, business logic
+  providers/   <- Riverpod StateNotifier
+  screens/     <- Schermate (una per route)
+  widgets/     <- Widget riutilizzabili
+
+## Convenzioni
+- File: snake_case.dart, Classi: PascalCase
+- Widget: ConsumerWidget per accedere ai provider
+- Modelli: classi immutabili con factory constructor
+- NON usare setState per stato condiviso
+- NON usare SharedPreferences per token
+- Material Design 3 con useMaterial3: true
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{SKILL.md} Analisi}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Discovery \& Analysis Specialist}]
+---
+name: analysis-specialist
+description: Skill per fasi Discovery (0) e Analysis (1).
+---
+
+# Discovery & Analysis Specialist
+
+## Principi
+- Technology-agnostic: definisci COSA, mai COME
+- Requisiti verificabili: ogni requisito ha un criterio di accettazione
+- Sicurezza e Performance obbligatorie (SEC/PERF)
+- Scope discipline: definire esplicitamente OUT OF SCOPE
+
+## Output Attesi
+- Glossario condiviso
+- Requisiti funzionali (FR-01..FR-NN)
+- NFR: Sicurezza (SEC-01..SEC-05) + Performance (PERF-01..PERF-05)
+- User story con GIVEN/WHEN/THEN
+- Modello dati concettuale (NO tipi fisici)
+- Threat model preliminare
+
+## Formato User Story
+[US-XXX] Titolo
+As a [RUOLO] I want [AZIONE] So that [BENEFICIO]
+Acceptance Criteria:
+- GIVEN [contesto] WHEN [azione] THEN [risultato]
+
+## Vincoli
+- MAI scegliere tecnologie (e' compito della fase Design)
+- MAI scrivere codice o pseudocodice
+- MAI saltare i requisiti NFR di sicurezza e performance
+- MAI creare una user story senza almeno un criterio GIVEN/WHEN/THEN
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{SKILL.md} Design}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Architecture \& Design Specialist}]
+---
+name: design-specialist
+description: Skill per fase Design (2).
+---
+
+# Architecture & Design Specialist
+
+## Principi
+- Ogni decisione tracciabile a un requisito (FR o NFR)
+- Trade-off trasparenti: documenta pro, contro, rationale in ADR
+- Security by design e Performance by design
+- Task piccoli e stimabili (max 8 story point)
+
+## Output Attesi
+- Valutazione stack (matrice pesata)
+- ADR per ogni scelta tecnologica significativa
+- Architettura di sicurezza e performance
+- Contratto API (OpenAPI o equivalente)
+- Schema database con indici
+- EPIC con task breakdown e Definition of Done
+
+## Formato ADR
+# ADR-NNN: [Titolo]
+Status: Proposed | Accepted | Deprecated
+Date: YYYY-MM-DD
+## Context - ## Decision - ## Consequences
+
+## Vincoli
+- MAI iniziare il design senza requisiti approvati
+- MAI scegliere stack senza matrice di valutazione pesata
+- MAI creare task piu' grandi di 8 story point
+- SEMPRE scrivere un ADR per ogni scelta tecnologica
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{SKILL.md} Operations}
+
+\begin{lstlisting}[language={},title={SKILL.md --- Operations \& Monitoring Specialist}]
+---
+name: ops-specialist
+description: Skill per fase Operations (6).
+---
+
+# Operations & Monitoring Specialist
+
+## Principi
+- Observe, don't guess: decisioni basate su metriche e log
+- Automate repeatables: se un runbook gira piu' di 2 volte, scriptalo
+- Blameless post-mortem: focus sui sistemi, non sulle persone
+- Recovery over root cause: ripristina il servizio PRIMA
+
+## SLA Target
+- Availability: 99.9% (alert < 99.5%)
+- Response Time P95: < 200ms (alert > 500ms)
+- Error Rate: < 0.1% (alert > 1%)
+
+## Incident Response
+1. ALERT TRIGGERED
+2. ACKNOWLEDGE (entro 5 min)
+3. CLASSIFY SEVERITY (P1 Critical -> P4 Low)
+4. INVESTIGATE (dashboard, deploy recenti, log)
+5. MITIGATE (rollback, scale, feature-flag)
+6. ROOT CAUSE ANALYSIS (solo dopo ripristino)
+7. POST-MORTEM (blameless, action items)
+8. UPDATE RUNBOOK
+
+## Vincoli
+- MAI applicare fix senza verificare il risultato
+- MAI saltare il post-mortem dopo un incidente P1/P2
+- MAI modificare dati di produzione senza backup
+- MAI silenziare un alert senza creare un ticket
+- SEMPRE ripristinare il servizio PRIMA di investigare
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{\_CONTEXT.md} Full-Stack}
+
+\begin{lstlisting}[language={},title={\_CONTEXT.md --- Full-Stack}]
+# Progetto: [Nome] Full-Stack
+
+## Panoramica
+[Descrizione in 3-4 frasi]
+
+## Architettura
+[Browser] -> [Frontend :5173] -> [Proxy /api]
+  -> [Backend :3000] -> [PostgreSQL]
+
+## Componenti
+
+### Backend (./backend/)
+- Contesto: ./backend/_CONTEXT.md
+- Porta: 3000
+
+### Frontend (./frontend/)
+- Contesto: ./frontend/_CONTEXT.md
+- Skill: ./frontend/SKILL.md
+- Porta: 5173
+
+### Mobile (./mobile/) -- opzionale
+- Contesto: ./mobile/_CONTEXT.md
+- Skill: ./mobile/SKILL.md
+
+## Contratto API
+[Tabella endpoint condivisa tra tutti i componenti]
+
+## Variabili d'Ambiente
+### Backend: DATABASE_URL, JWT_SECRET, ...
+### Frontend: VITE_API_URL
+
+## Comandi
+- Tutto: npm run dev (con concurrently)
+- Backend: cd backend && npm run dev
+- Frontend: cd frontend && npm run dev
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{PROGRESS.md}}
+
+\begin{lstlisting}[language={},title={PROGRESS.md}]
+# [Nome Progetto] -- Progresso
+
+## Stato Attuale
+- [x] Task completato 1
+- [x] Task completato 2
+- [ ] Task in corso
+- [ ] Task futuro
+
+## Decisioni Architetturali
+- [Decisione]: [Motivazione]
+
+## Problemi Risolti
+- [Problema]: [Soluzione adottata]
+
+## Note per la Prossima Sessione
+- [Cosa ricordare per continuare il lavoro]
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Template \texttt{.gitignore} Full-Stack}
+
+\begin{lstlisting}[language={},title={.gitignore}]
+# Environment
+.env
+.env.local
+.env.production
+
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.jks
+*.keystore
+key.properties
+
+# Flutter
+.dart_tool/
+.packages
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Checklist Pre-Deploy}
+
+\begin{lstlisting}[language={},title={Checklist pre-deploy}]
+## Sicurezza
+- [ ] JWT_SECRET >= 256 bit, in variabile d'ambiente
+- [ ] Token scade (access: 1h, refresh: 7d)
+- [ ] Logout invalida refresh token
+- [ ] Input validato con Zod
+- [ ] Errori non espongono stack trace
+- [ ] Helmet.js attivo
+- [ ] Rate limiting su auth
+- [ ] CORS solo domini consentiti
+- [ ] npm audit clean
+- [ ] .env nel .gitignore
+
+## Funzionalita
+- [ ] Login OAuth funziona
+- [ ] CRUD completo funziona
+- [ ] Protezione route funziona
+- [ ] Error handling end-to-end
+- [ ] Mobile connesso al backend
+- [ ] Health check endpoint
+
+## Infrastruttura
+- [ ] Database migrato in produzione
+- [ ] Variabili d'ambiente impostate
+- [ ] HTTPS attivo
+- [ ] Monitoring attivo
+\end{lstlisting}

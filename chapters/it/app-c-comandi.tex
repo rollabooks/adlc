@@ -1,0 +1,163 @@
+% ============================================================
+% APPENDICE C — Comandi e Scorciatoie
+% ============================================================
+\chapter{Comandi e Scorciatoie}
+
+% ---------------------------------------------------------
+\section{VS Code}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Scorciatoia} & \textbf{Azione} \\
+\midrule
+\texttt{Ctrl+Shift+P} / \texttt{Cmd+Shift+P} & Command Palette \\
+\texttt{Ctrl+Shift+I} / \texttt{Cmd+Shift+I} & Apri Copilot Chat (Agent Mode) \\
+\texttt{Ctrl+I} / \texttt{Cmd+I} & Copilot Inline Chat \\
+\texttt{Tab} & Accetta suggerimento Copilot \\
+\texttt{Esc} & Rifiuta suggerimento Copilot \\
+\texttt{Ctrl+`} & Apri/chiudi terminale integrato \\
+\texttt{Ctrl+Shift+E} & Explorer (file) \\
+\texttt{Ctrl+Shift+G} & Source Control (Git) \\
+\texttt{Ctrl+P} & Quick Open (cerca file) \\
+\texttt{Ctrl+Shift+F} & Cerca in tutti i file \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Node.js e npm}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{npm init -y} & Crea package.json \\
+\texttt{npm install <pacchetto>} & Installa dipendenza \\
+\texttt{npm install -D <pacchetto>} & Installa come dev dependency \\
+\texttt{npm run dev} & Avvia in modalità sviluppo \\
+\texttt{npm run build} & Build di produzione \\
+\texttt{npm audit} & Controlla vulnerabilità \\
+\texttt{npm audit fix} & Correggi vulnerabilità \\
+\texttt{npx <comando>} & Esegui pacchetto senza installare \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Prisma}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{npx prisma init} & Inizializza Prisma \\
+\texttt{npx prisma migrate dev -{}-name <n>} & Crea e applica migrazione (dev) \\
+\texttt{npx prisma migrate deploy} & Applica migrazioni (produzione) \\
+\texttt{npx prisma generate} & Rigenera il client Prisma \\
+\texttt{npx prisma studio} & Interfaccia web per il database \\
+\texttt{npx prisma db push} & Sincronizza schema senza migrazione \\
+\texttt{npx prisma db seed} & Esegui seed del database \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Git}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{git init} & Inizializza repository \\
+\texttt{git add .} & Aggiungi tutti i file modificati \\
+\texttt{git commit -m "messaggio"} & Crea commit \\
+\texttt{git status} & Stato dei file \\
+\texttt{git log -{}-oneline} & Cronologia commit compatta \\
+\texttt{git branch <nome>} & Crea branch \\
+\texttt{git checkout <nome>} & Cambia branch \\
+\texttt{git merge <nome>} & Unisci branch \\
+\texttt{git push origin main} & Pusha su remote \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Flutter}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{flutter create <nome>} & Crea nuovo progetto \\
+\texttt{flutter run} & Avvia app (emulatore/dispositivo) \\
+\texttt{flutter run -d chrome} & Avvia app nel browser \\
+\texttt{flutter pub get} & Installa dipendenze \\
+\texttt{flutter pub add <pacchetto>} & Aggiungi dipendenza \\
+\texttt{flutter test} & Esegui test \\
+\texttt{flutter analyze} & Analisi statica del codice \\
+\texttt{flutter build apk -{}-release} & Build APK Android \\
+\texttt{flutter build appbundle} & Build AAB per Play Store \\
+\texttt{flutter build ipa} & Build IPA per App Store \\
+\texttt{flutter doctor} & Verifica ambiente di sviluppo \\
+\texttt{flutter devices} & Lista dispositivi disponibili \\
+\texttt{flutter screenshot} & Cattura screenshot dall'emulatore \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Docker (PostgreSQL)}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{docker run -{}-name pg -e POSTGRES\_PASSWORD=password -p 5432:5432 -d postgres:16} & Avvia PostgreSQL \\
+\texttt{docker start pg} & Riavvia container \\
+\texttt{docker stop pg} & Ferma container \\
+\texttt{docker exec -it pg psql -U postgres} & Apri console PostgreSQL \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Claude Code}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Comando} & \textbf{Descrizione} \\
+\midrule
+\texttt{claude} & Avvia sessione interattiva \\
+\texttt{claude "richiesta"} & Esegui richiesta singola \\
+\texttt{claude -{}-model sonnet} & Specifica modello \\
+\texttt{/clear} & Pulisci contesto della sessione \\
+\texttt{/cost} & Mostra costo della sessione \\
+\texttt{/help} & Mostra comandi disponibili \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------
+\section{Comandi di Deploy}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Piattaforma} & \textbf{Comando/Azione} \\
+\midrule
+Railway & \texttt{git push origin main} (deploy automatico) \\
+Vercel & \texttt{git push origin main} (deploy automatico) \\
+Vercel CLI & \texttt{npx vercel -{}-prod} (deploy manuale) \\
+Railway CLI & \texttt{railway up} (deploy manuale) \\
+\bottomrule
+\end{tabularx}
+\end{center}

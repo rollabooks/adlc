@@ -1,0 +1,197 @@
+% ============================================================
+% CHAPTER 1 — The 0-Code Revolution: Seeing It in Action
+% ============================================================
+\chapter{The 0-Code Revolution: Seeing It in Action}\index{0-code}\index{Context Engineering}
+
+\section*{What You Will Learn}
+By the end of this chapter you will know:
+\begin{itemize}
+  \item What a 0-code working session looks like in practice
+  \item Why context is everything and how it changes the result
+  \item What you will build throughout the book
+\end{itemize}
+
+\begin{notebox}
+If you have not read the Introduction yet, do so now. It explains the ADLC framework, the comparison with the traditional SDLC, and the three core competencies --- Context Engineering, Risk Design, and Confidence Tagging --- that support the entire book.
+\end{notebox}
+
+% ---------------------------------------------------------
+\section{A 0-Code Working Session: Live}
+
+You already know the theory from the Introduction. Now let us see how it works \textbf{in practice}: what appears on the screen, what you do, and what the AI does.
+
+\subsection{The setup: 30 seconds}
+
+Open VS Code. Open an empty folder. Open Copilot Chat in Agent Mode. Type:
+
+\begin{lstlisting}[language={}]
+Create a Python application that converts temperatures between Celsius,
+Fahrenheit, and Kelvin. The user chooses the conversion from an interactive
+terminal menu. Add a test file using pytest.
+\end{lstlisting}
+
+\subsection{What happens in the next 60 seconds}
+
+Copilot in Agent Mode will typically:
+\begin{enumerate}
+  \item \textbf{Create} the file \texttt{converter.py} with the conversion functions
+  \item \textbf{Create} the file \texttt{test\_converter.py} with the unit tests
+  \item \textbf{Run} \texttt{pytest} in the integrated terminal
+  \item \textbf{Read} the output and verify that all tests pass
+  \item \textbf{Report back} with a summary of what it changed
+\end{enumerate}
+
+You wrote three lines of instructions. The AI produced roughly $\sim$80 lines of working, tested code.
+
+The important point is this: the code is often \textbf{generic}. It works, but it may not follow a specific structure, may lack robust validation, and may not document the internal logic clearly.
+
+\subsection{The same task, with context}
+
+Now imagine writing a \texttt{\_CONTEXT.md} file first:
+
+\begin{lstlisting}[language=yaml,title={\texttt{\_CONTEXT.md} for Temperature Converter}]
+# Project: Temperature Converter
+
+## Purpose
+CLI tool for temperature conversion with a focus on scientific precision.
+
+## Constraints
+- Kelvin cannot be negative (0 K = absolute zero)
+- Always round to 2 decimal places
+- Error messages must be in English
+- Naming: snake_case everywhere
+
+## Structure
+converter/
+├── main.py          ← Entry point with menu
+├── conversions.py   ← Pure conversion functions
+├── validators.py    ← Input validation
+└── tests/
+    ├── test_conversions.py
+    └── test_validators.py
+\end{lstlisting}
+
+And then asking:
+
+\begin{lstlisting}[language={}]
+Read the _CONTEXT.md and implement the complete application
+following all the specifications.
+\end{lstlisting}
+
+The result is \textbf{radically different}: separate modules, absolute-zero validation, edge-case tests, messages in English, and a cleaner internal structure.
+
+\begin{quote}
+\textbf{Same request. Completely different result.} The variable that changed is the context.
+\end{quote}
+
+% ---------------------------------------------------------
+\section{Context Is Everything}
+
+This is the most important principle in the entire book.
+
+\textbf{Vague request:}
+\begin{lstlisting}[language={}]
+Create an API to manage users
+\end{lstlisting}
+
+Result: generic code, probably without validation, authentication, or consistent naming.
+
+\textbf{Request with context:}
+\begin{lstlisting}[language={}]
+Create a REST API with Express.js for user management.
+Structure: src/routes/, src/controllers/, src/models/.
+Database: PostgreSQL with Prisma ORM.
+Endpoints: GET /users, GET /users/:id, POST /users,
+PUT /users/:id, DELETE /users/:id.
+Input validation with Zod.
+Standard JSON responses: { success: boolean, data: T, error?: string }.
+Centralized error handling with middleware.
+\end{lstlisting}
+
+Result: structured, validated code with repeatable patterns and a foundation suitable for production.
+
+In Chapter~3 you will learn how to write professional \texttt{\_CONTEXT.md} files. In Chapter~4 you will start building your first real project.
+
+\begin{warnbox}
+\textbf{A note on expectations.} This book does not require prior programming experience, but it does require \textbf{curiosity} and a willingness to learn new concepts. Starting from Chapter~6 you will meet terms such as API, middleware, database, authentication, and JWT tokens. The AI writes the code, but your role as a \emph{context architect} requires understanding \emph{what} you are asking it to build --- not \emph{how} to type it line by line.
+\end{warnbox}
+
+% ---------------------------------------------------------
+\section{What You Will Build with This Book}
+
+This book is a \textbf{progression of real projects}, each one more ambitious than the previous.
+
+\subsection*{Project 1 --- Hello World (Chapter 4)}
+Your first program generated entirely by AI. You will learn how to formulate requests, inspect the output, and iterate safely.
+
+\subsection*{Project 2 --- CLI Tool (Chapter 5)}
+A complete command-line application with CSV/JSON parsing, arguments, and automated tests. This is your first structured \texttt{\_CONTEXT.md}.
+
+\subsection*{Project 3 --- REST API (Chapter 6)}
+A web server with Express.js, CRUD endpoints, validation, and Swagger documentation.
+
+\subsection*{Projects 4--7 --- Full-Stack Web Application with OAuth 2.0 (Chapters 7--10)}
+\begin{itemize}
+  \item \textbf{Project 4} (Ch.~7): Node.js/Express backend with PostgreSQL and Prisma
+  \item \textbf{Project 5} (Ch.~8): OAuth~2.0 authentication with JWT
+  \item \textbf{Project 6} (Ch.~9): React frontend with protected routes and your first \texttt{SKILL.md}
+  \item \textbf{Project 7} (Ch.~10): end-to-end integration and a complete CRUD dashboard
+\end{itemize}
+
+\subsection*{Projects 8--9 --- Flutter Mobile App (Chapters 11--12)}
+\begin{itemize}
+  \item \textbf{Project 8} (Ch.~11): Flutter setup, first mobile app, and Flutter skill file
+  \item \textbf{Project 9} (Ch.~12): mobile OAuth login, synchronized CRUD, and deep links
+\end{itemize}
+
+\subsection*{Final project --- Full deployment (Chapters 13--15)}
+You will bring everything to production: backend on the cloud, frontend on Vercel, managed PostgreSQL, mobile app release, and CI/CD.
+
+% ---------------------------------------------------------
+\section{Requirements to Follow This Book}
+
+\subsection*{What you need to know}
+\begin{itemize}
+  \item How to use a computer (Windows, macOS, or Linux)
+  \item The basic idea of how an application works, even just as a user
+  \item Basic technical English, because many commands and tools keep their original names
+\end{itemize}
+
+\subsection*{What you do \emph{not} need to know}
+\begin{itemize}
+  \item You do not need to know Python, JavaScript, Dart, or any other language
+  \item You do not need prior experience with React, Node.js, Flutter, or PostgreSQL
+  \item You do not need to have used the terminal before
+  \item You do not need to know Git in advance
+\end{itemize}
+
+\subsection*{What you need}
+\begin{itemize}
+  \item A computer running Windows~10/11, macOS~10.15+, or Linux
+  \item A stable internet connection
+  \item A free GitHub account
+  \item GitHub Copilot or Claude Code access
+  \item VS Code installed
+\end{itemize}
+
+\begin{costbox}
+GitHub Copilot Individual costs about \$10/month. Claude Code operates on a usage basis through the Anthropic API. For most readers, the cost of completing all projects in the book is comparable to an online course or a few hours of technical coaching.
+\end{costbox}
+
+% ---------------------------------------------------------
+\section{The Promise of This Book}
+
+By the end of this journey you will have:
+\begin{enumerate}
+  \item \textbf{Built} a complete web application with backend, frontend, and OAuth~2.0 authentication
+  \item \textbf{Built} a Flutter mobile app connected to your backend
+  \item \textbf{Deployed} everything to production
+  \item \textbf{Without manually writing} the code in the traditional way
+\end{enumerate}
+
+And above all, you will have acquired a \textbf{method} --- Context Engineering and the ADLC --- that you can reuse for any future application.
+
+\bigskip
+\begin{quote}
+\itshape ``In the era of 0-code development, human words lose their role as an informal means of communication and take on the weight and consequences of directives in a high-level procedural programming language.''
+\end{quote}

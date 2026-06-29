@@ -1,0 +1,80 @@
+% ============================================================
+% FRONT MATTER — Title page and copyright
+% ============================================================
+
+% --- Title page ---
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+% Decorative top line
+{\color{manning-red}\rule{\textwidth}{2pt}}
+\vspace{1.5cm}
+
+{\fontsize{28}{34}\selectfont\sffamily\bfseries\color{manning-dark} \BookTitle\par}
+\vspace{0.8cm}
+{\Large\sffamily\color{manning-gray} \BookSubtitle\par}
+\vspace{2.5cm}
+{\large\sffamily \BookAuthor\par}
+\vfill
+
+% Decorative bottom line
+{\color{manning-red}\rule{\textwidth}{2pt}}
+\vspace{0.5cm}
+{\normalsize\sffamily\color{manning-gray} \BookEdition\ --- \BookYear\par}
+\end{titlepage}
+
+% --- Copyright page ---
+\thispagestyle{empty}
+\vspace*{\fill}
+\noindent\textsf{\textbf{\BookTitle}}\\
+\textsf{\textit{\BookSubtitle}}\\[1em]
+\noindent Copyright \textcopyright\ \BookYear\ \BookCopyright\\
+All rights reserved.\\[1em]
+\noindent First edition: \BookMonth\ \BookYear\\[1em]
+\noindent Product names, trademarks, and company names mentioned in this book are the property of their respective owners. Their use in this text is for identification purposes only and does not imply any affiliation or endorsement.\\[1em]
+\noindent Compiled with \LuaLaTeX.
+\newpage
+
+% --- How to read this book ---
+\chapter*{How to Read This Book}
+\addcontentsline{toc}{chapter}{How to Read This Book}
+
+This book uses several special boxes to highlight important information during reading. Learn to recognize them before you begin: each type has a precise purpose.
+
+\begin{tipbox}
+\textbf{Tips} offer practical advice, shortcuts, and best practices that make your work more efficient. They come from direct experience with the tools described in this book.
+\end{tipbox}
+
+\begin{warnbox}
+\textbf{Warning} boxes point out common pitfalls, frequent mistakes, or non-obvious tool behavior. Reading them carefully will save you trouble.
+\end{warnbox}
+
+\begin{notebox}
+\textbf{Notes} provide extra context, useful references, or deeper explanations. They are not strictly required to follow the text, but they enrich your understanding.
+\end{notebox}
+
+\begin{dangerbox}
+\textbf{Danger} boxes warn about serious risks: operations that may cause data loss, unexpected costs, or security problems. Never ignore them.
+\end{dangerbox}
+
+\begin{versionbox}
+\textbf{Version notes} indicate features tied to specific tool versions. The AI ecosystem evolves quickly, and these notes help you understand what may have changed.
+\end{versionbox}
+
+\begin{costbox}
+\textbf{How much does it cost?} boxes show when an operation may involve costs (APIs, cloud services, licenses), so you can decide consciously whether to proceed.
+\end{costbox}
+
+\begin{checkpointbox}
+\textbf{Checkpoints} are verification moments: they confirm that your project is in the correct state before you move on to the next step.
+\end{checkpointbox}
+
+\begin{praticabox}
+\textbf{Practice} boxes propose guided exercises to help you get hands-on. They are designed to consolidate the concepts you have just learned.
+\end{praticabox}
+
+\medskip
+\noindent \textbf{Code blocks} are highlighted with a gray background and a side bar. You can type them manually for practice, but remember: the point of the 0-code method is that the AI will often generate them for you.
+
+\newpage

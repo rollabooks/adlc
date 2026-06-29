@@ -1,0 +1,284 @@
+% ============================================================
+% CHAPTER 15 — Production Deploy
+% ============================================================
+\chapter{Production Deploy}\index{deploy}\index{CI/CD}
+
+\section*{What You Will Build}
+The entire stack deployed on cloud platforms:
+\begin{itemize}
+  \item PostgreSQL database on \textbf{Neon} (serverless, free)
+  \item Express.js backend on \textbf{Railway} (simple PaaS)
+  \item React frontend on \textbf{Vercel} (optimized for frontend)
+  \item Mobile app published to the stores (Ch.~13)
+  \item Custom domain and HTTPS
+\end{itemize}
+
+\textbf{Estimated time}: 60--90 minutes\\
+\textbf{Prerequisite}: Tested application (Ch.~14)
+
+% ---------------------------------------------------------
+\section{Deploy Strategy}
+
+\subsection{Production architecture}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{07-deploy-produzione}
+\caption{Production architecture}
+\end{figure}
+
+\subsection{Why these platforms}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X l}
+\toprule
+\textbf{Platform} & \textbf{Reason} & \textbf{Free tier} \\
+\midrule
+Neon & Serverless PostgreSQL, shuts down when not in use & 512~MB storage \\
+Railway & Deploy with git push, zero config for Node.js & \$5 credit/month \\
+Vercel & Global CDN, instant deploy for React & Unlimited (hobby) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+Equivalent alternatives: Supabase (database), Render (backend), Netlify (frontend). The procedure is similar --- the \texttt{\_CONTEXT.md} is the same, only the platform changes.
+\end{tipbox}
+\begin{notebox}
+\textbf{Tooling Box --- Stack chosen for this example.}
+\begin{itemize}
+  \item \textbf{Database:} Neon (serverless PostgreSQL)
+  \item \textbf{Backend:} Railway (PaaS with Git deploy)
+  \item \textbf{Frontend:} Vercel (global CDN)
+\end{itemize}
+\textbf{Equivalent alternatives:} Supabase/PlanetScale (database), Render/Fly.io/AWS App Runner (backend), Netlify/Cloudflare Pages (frontend). The \textbf{deploy pattern} (managed database + backend PaaS + frontend CDN) and configuration through environment variables are identical on any platform combination. The 0-code method guides you in the same way.
+\end{notebox}
+% ---------------------------------------------------------
+\section{Database: Neon}
+
+\begin{praticabox}[title={Practice --- Neon setup}]
+\begin{enumerate}
+  \item Go to \texttt{neon.tech} and sign up
+  \item Create a new project: ``notes-app''
+  \item Copy the \textbf{connection string} (format: \texttt{postgresql://user:pass@host/db?sslmode=require})
+\end{enumerate}
+\end{praticabox}
+
+\begin{praticabox}[title={Practice --- Migrate the schema}]
+\begin{lstlisting}[language=bash]
+cd backend
+
+# Update .env with the Neon connection string
+# DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/neondb
+
+# Run migrations on the production database
+npx prisma migrate deploy
+
+# Verify
+npx prisma studio
+\end{lstlisting}
+\end{praticabox}
+
+\begin{warnbox}
+Use \texttt{prisma migrate deploy} in production, \textbf{never} \texttt{prisma migrate dev}. The \texttt{dev} command is interactive and can delete data. The \texttt{deploy} command only applies pending migrations.
+\end{warnbox}
+
+% ---------------------------------------------------------
+\section{Backend: Railway}\index{Railway}
+
+\begin{praticabox}[title={Practice --- Railway setup}]
+\begin{enumerate}
+  \item Go to \texttt{railway.app} and sign up with GitHub
+  \item Click ``New Project'' $\rightarrow$ ``Deploy from GitHub repo''
+  \item Select the repository \texttt{notes-fullstack}
+  \item Railway automatically detects that it is a Node.js project
+\end{enumerate}
+\end{praticabox}
+
+\subsection{Environment variables}
+
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Variable} & \textbf{Value} \\
+\midrule
+\texttt{DATABASE\_URL} & Neon connection string \\
+\texttt{JWT\_SECRET} & Random string $\geq$ 64 characters \\
+\texttt{JWT\_EXPIRES\_IN} & 1h \\
+\texttt{REFRESH\_TOKEN\_EXPIRES\_IN} & 7d \\
+\texttt{GOOGLE\_CLIENT\_ID} & Your Google client ID \\
+\texttt{GOOGLE\_CLIENT\_SECRET} & Your Google client secret \\
+\texttt{GITHUB\_CLIENT\_ID} & Your GitHub client ID \\
+\texttt{GITHUB\_CLIENT\_SECRET} & Your GitHub client secret \\
+\texttt{FRONTEND\_URL} & https://notes-app.vercel.app \\
+\texttt{NODE\_ENV} & production \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+
+\begin{praticabox}[title={Practice --- Configure the build}]
+\begin{lstlisting}[language={}]
+Configure the backend for deployment on Railway:
+1. Add "start": "node src/index.js" in package.json
+2. Specify the root directory as "backend/"
+3. The server must listen on the port from the PORT variable
+4. Add a health check: GET /api/health -> { status: "ok" }
+\end{lstlisting}
+\end{praticabox}
+
+\subsection{Deploy and verification}
+
+\begin{lstlisting}[language=bash]
+git push origin main
+# Railway detects the push and deploys automatically
+
+# Verify (after 1-2 minutes)
+curl https://notes-api-production.up.railway.app/api/health
+# {"status":"ok"}
+\end{lstlisting}
+
+% ---------------------------------------------------------
+\section{Frontend: Vercel}\index{Vercel}
+
+\begin{praticabox}[title={Practice --- Vercel setup}]
+\begin{enumerate}
+  \item Go to \texttt{vercel.com} and sign up with GitHub
+  \item Click ``Add New Project'' $\rightarrow$ Select the repository
+  \item Configure:
+  \begin{itemize}
+    \item \textbf{Root Directory}: \texttt{frontend}
+    \item \textbf{Framework Preset}: Vite
+    \item \textbf{Build Command}: \texttt{npm run build}
+    \item \textbf{Output Directory}: \texttt{dist}
+  \end{itemize}
+\end{enumerate}
+\end{praticabox}
+
+Environment variable:
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Variable} & \textbf{Value} \\
+\midrule
+\texttt{VITE\_API\_URL} & \texttt{https://notes-api-production.up.railway.app/api} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{praticabox}[title={Practice --- Update CORS and OAuth}]
+\begin{lstlisting}[language={}]
+After deployment, update:
+1. Backend (Railway): add the Vercel domain to FRONTEND_URL
+2. Google Cloud Console: add the Vercel domain to the authorized
+   redirect URIs
+3. GitHub OAuth Settings: add the Vercel domain to the callback
+
+Update CORS to accept requests from:
+- http://localhost:5173 (development)
+- https://notes-app.vercel.app (production)
+\end{lstlisting}
+\end{praticabox}
+
+% ---------------------------------------------------------
+\section{Custom Domain}
+
+\textbf{Vercel (Frontend):}
+\begin{enumerate}
+  \item Settings $\rightarrow$ Domains $\rightarrow$ Add
+  \item Enter the domain (e.g.\ \texttt{notes.yourdomain.com})
+  \item Configure DNS with a CNAME pointing to \texttt{cname.vercel-dns.com}
+\end{enumerate}
+
+\textbf{Railway (Backend):}
+\begin{enumerate}
+  \item Settings $\rightarrow$ Domains $\rightarrow$ Add Custom Domain
+  \item Enter the subdomain (e.g.\ \texttt{api.notes.yourdomain.com})
+  \item Configure DNS with the CNAME provided by Railway
+\end{enumerate}
+
+HTTPS is automatic on both platforms.
+
+% ---------------------------------------------------------
+\section{Monitoring}
+
+\begin{praticabox}[title={Practice --- Production logging}]
+\begin{lstlisting}[language={}]
+Add structured logging to the backend:
+1. Install pino (fast JSON logger for Node.js)
+2. Log every request: method, path, status code, time
+3. Log errors with stack trace (only in logs, NEVER in responses)
+4. In development: readable output. In production: JSON
+5. Exclude sensitive data from the logs (token, password, cookie)
+\end{lstlisting}
+\end{praticabox}
+
+\begin{praticabox}[title={Practice --- Health check}]
+\begin{lstlisting}[language={}]
+Create a /api/health endpoint that returns:
+{
+  "status": "ok",
+  "version": "1.0.0",
+  "uptime": 12345,
+  "database": "connected"
+}
+
+The endpoint verifies the database connection with a
+simple Prisma query (SELECT 1).
+\end{lstlisting}
+\end{praticabox}
+
+Use a free service such as UptimeRobot to monitor the health check every 5~minutes and receive notifications if the backend goes down.
+
+% ---------------------------------------------------------
+\section{Production Checklist}
+
+\begin{praticabox}[title={Practice --- Full verification}]
+\begin{center}
+\begin{small}
+\begin{tabularx}{\textwidth}{c X c}
+\toprule
+\textbf{\#} & \textbf{Check} & \textbf{Status} \\
+\midrule
+1 & Neon database reachable with SSL & $\square$ \\
+2 & Migrations applied with \texttt{prisma migrate deploy} & $\square$ \\
+3 & Railway backend responds on \texttt{/api/health} & $\square$ \\
+4 & Environment variables set (no development values) & $\square$ \\
+5 & \texttt{JWT\_SECRET} different from the development one & $\square$ \\
+6 & \texttt{NODE\_ENV} = production & $\square$ \\
+7 & Vercel frontend loads without console errors & $\square$ \\
+8 & \texttt{VITE\_API\_URL} points to the Railway backend & $\square$ \\
+9 & Google OAuth works in production & $\square$ \\
+10 & GitHub OAuth works in production & $\square$ \\
+11 & CORS accepts only the frontend domain & $\square$ \\
+12 & HTTPS active on frontend and backend & $\square$ \\
+13 & Mobile app connected to the production backend & $\square$ \\
+14 & Health check monitored & $\square$ \\
+15 & Production \texttt{.env} \textsc{not} committed to git & $\square$ \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\end{center}
+\end{praticabox}
+
+\begin{checkpointbox}
+If all checks pass, your application is \textbf{live in production}: anyone in the world can sign up and create notes from the web or mobile.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section*{Summary}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Component} & \textbf{Platform} & \textbf{URL} \\
+\midrule
+Database & Neon & (internal connection string) \\
+Backend & Railway & https://api.notes.yourdomain.com \\
+Frontend & Vercel & https://notes.yourdomain.com \\
+Mobile & Play Store / App Store & (store link) \\
+Monitoring & UptimeRobot & (dashboard) \\
+\bottomrule
+\end{tabularx}
+\end{center}

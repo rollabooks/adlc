@@ -1,0 +1,593 @@
+% ============================================================
+% CAPITOLO 3 — Il Metodo ADLC
+% ============================================================
+\chapter{Il Metodo ADLC: Come si Lavora in 0-Code}
+
+\section*{Cosa Imparerai}
+Alla fine di questo capitolo saprai:
+\begin{itemize}
+  \item Le 7 fasi dell'Agent Development Life Cycle applicate allo sviluppo di applicazioni
+  \item Come scrivere un file \texttt{\_CONTEXT.md} efficace
+  \item Cos'è il Context Engineering e perché è la competenza chiave del paradigma 0-code
+  \item Come strutturare un progetto per massimizzare la qualità dell'output dell'IA
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{Il Ciclo di Vita: Le 7 Fasi dell'ADLC}
+
+L'ADLC (Agent Development Life Cycle) è il metodo di lavoro strutturato per sviluppare con l'IA. Non è teoria accademica --- è la sequenza di passi che seguirai in ogni progetto di questo libro.
+
+\begin{small}
+\begin{longtable}{c l l l}
+\toprule
+\textbf{Fase} & \textbf{Nome} & \textbf{Cosa fai} & \textbf{Deliverable} \\
+\midrule
+\endhead
+\textbf{0} & Preparazione & Definisci il problema, valuti adeguatezza & Ipotesi di soluzione \\
+\textbf{1} & Inquadramento & Stabilisci confini, tecnologie, vincoli & Requisiti in linguaggio naturale \\
+\textbf{2} & Definizione & Scrivi \texttt{\_CONTEXT.md} e \texttt{SKILL.md} & Documenti di contesto \\
+\textbf{3} & Simulazione & Testi con un piccolo caso & Proof of Value \\
+\textbf{4} & Implementazione & L'IA genera codice, tu supervisioni & Codice funzionante \\
+\textbf{5} & Rilascio & Test, fix, deploy & Applicazione in produzione \\
+\textbf{6} & Apprendimento & Aggiorni il contesto & Contesto migliorato \\
+\bottomrule
+\end{longtable}
+\end{small}
+
+\begin{notebox}
+\textbf{Verso il framework professionale.} In questo capitolo vedremo un contesto base con un singolo \texttt{\_CONTEXT.md}. Se ti stai chiedendo come questo metodo scali su team reali e architetture complesse, nell'\textbf{Appendice~E} analizzeremo un framework ADLC professionale da 17~file usato in produzione --- con moduli per fase, NemoClaw e governance infrastrutturale. I principi che impari qui sono gli stessi; cambiano solo scala e sofisticazione.
+\end{notebox}
+
+\subsection{Come si applica nella pratica quotidiana}
+
+Per un progetto semplice (Hello World, CLI tool), le fasi 0--3 si comprimono in 5~minuti di riflessione. Per un progetto complesso (web app full-stack), ogni fase ha un suo peso specifico.
+
+\textbf{Esempio: costruire un'API REST per un blog}
+\begin{itemize}
+  \item \textbf{Fase~0}: ``Mi serve un backend per il mio blog, con post, commenti e autenticazione''
+  \item \textbf{Fase~1}: ``Userò Node.js con Express, PostgreSQL con Prisma, autenticazione JWT''
+  \item \textbf{Fase~2}: Scrivo il \texttt{\_CONTEXT.md} con architettura, struttura, vincoli
+  \item \textbf{Fase~3}: Chiedo all'IA di generare solo l'endpoint \texttt{/health} per verificare
+  \item \textbf{Fase~4}: Procedo con tutti gli endpoint, modello dati, middleware
+  \item \textbf{Fase~5}: Test, fix, deploy su Railway
+  \item \textbf{Fase~6}: Noto che l'IA ha generato password in plain text $\rightarrow$ aggiorno il contesto
+\end{itemize}
+
+\begin{quote}
+La Fase~6 è cruciale: il \texttt{\_CONTEXT.md} è un \textbf{documento vivente} che migliora a ogni progetto.
+\end{quote}
+
+% ---------------------------------------------------------
+\subsection{Quando l'IA Deraglia: Gestire i Fallimenti}
+
+Prima o poi succederà: l'IA entrerà in un \textbf{loop di errori} --- corregge un bug, ne introduce un altro, tenta di risolvere il secondo e rompe il codice che funzionava. È un comportamento noto come ``loop di allucinazioni'' ed è importante sapere come gestirlo.
+
+\begin{warnbox}
+\textbf{Le 5 tecniche di recupero quando l'IA si incarta:}
+\begin{enumerate}
+  \item \textbf{Ferma e resetta la conversazione.} Chiudi la chat corrente e aprine una nuova. Spesso l'IA accumula contesto errato nella memoria della sessione, e una chat pulita risolve il problema.
+  \item \textbf{Torna all'ultima versione funzionante.} Se usi Git (e dovresti), esegui \texttt{git stash} o \texttt{git checkout .} per eliminare tutte le modifiche non salvate. Se non usi Git, tieni sempre una copia di backup prima di sessioni complesse.
+  \item \textbf{Spezza il task in parti più piccole.} Invece di ``Implementa l'autenticazione completa'', chiedi prima ``Genera solo il middleware di verifica JWT'', verifica che funzioni, poi procedi con il passo successivo.
+  \item \textbf{Sii più specifico nel contesto.} Se l'IA genera codice sbagliato, spesso il problema è nel \texttt{\_CONTEXT.md}. Aggiungi un vincolo esplicito: ``NON usare CommonJS. Usa SOLO import/export ESModules.''
+  \item \textbf{Cambia modello o strumento.} Se Copilot non riesce, prova Claude Code (o viceversa). Modelli diversi hanno punti di forza diversi.
+\end{enumerate}
+\end{warnbox}
+
+\begin{tipbox}
+\textbf{Regola d'oro}: se l'IA ha fallito due volte sullo stesso problema con lo stesso approccio, \textbf{non insistere}. Cambia strategia: spezza il task, aggiungi contesto, o resetta la conversazione. Insistere produce solo codice sempre più fragile.
+\end{tipbox}
+
+\subsection{Fase~6 in Pratica: Come un Vincolo Salva il Progetto}
+
+L'apprendimento continuo (Fase~6) non è un'attività teorica. È il meccanismo che trasforma errori in difese permanenti. Ecco tre scenari reali dove un \texttt{\_CONTEXT.md} lacunoso ha causato problemi --- e come una singola riga di vincolo li ha risolti.
+
+\begin{dangerbox}
+\textbf{Disastro~1: Password salvate in chiaro.} L'IA genera un endpoint di registrazione utente e salva la password nel database come testo semplice. L'output ha superato i test funzionali (la registrazione funziona), ma un audit di sicurezza rivelerebbe tutte le password visibili.\\[4pt]
+\textbf{Il vincolo che risolve}: aggiungere al \texttt{\_CONTEXT.md}:\\
+\texttt{SEC-01: Le password DEVONO essere hashate con bcrypt (costo~12). Mai salvare password in chiaro.}\\[4pt]
+Da quel momento, \textbf{ogni} generazione successiva usa bcrypt automaticamente.
+\end{dangerbox}
+
+\begin{dangerbox}
+\textbf{Disastro~2: L'IA cambia stack a metà progetto.} Stai lavorando con ESModules (\texttt{import/export}) e l'IA, in una nuova sessione di chat, genera codice CommonJS (\texttt{require/module.exports}). Il progetto smette di compilare.\\[4pt]
+\textbf{Il vincolo che risolve}:\\
+\texttt{Linguaggio: JavaScript ES2022+ con ESModules. NON usare require() o module.exports. Solo import/export.}\\[4pt]
+Senza questo vincolo l'IA ``dimentica'' la convenzione ad ogni nuova sessione.
+\end{dangerbox}
+
+\begin{dangerbox}
+\textbf{Disastro~3: Dipendenze fantasma.} L'IA installa una libreria che non era prevista (es.\ \texttt{lodash}) quando bastavano le funzioni native. Il progetto accumula dipendenze inutili, aumentando superficie d'attacco e dimensione del bundle.\\[4pt]
+\textbf{Il vincolo che risolve}:\\
+\texttt{Dipendenze: SOLO quelle elencate nel \_CONTEXT.md. Non aggiungere nuove dipendenze senza approvazione esplicita.}
+\end{dangerbox}
+
+\begin{tipbox}
+\textbf{Dopo ogni errore}, poniti la domanda: ``Quale riga avrei potuto aggiungere al \texttt{\_CONTEXT.md} per prevenire questo problema?'' Poi aggiungila. È l'essenza della Fase~6.
+\end{tipbox}
+
+% ---------------------------------------------------------
+\section{Context Engineering: L'Arte di Comunicare con l'IA}\index{Context Engineering}
+
+Il Context Engineering è la disciplina fondamentale dello sviluppo 0-code. È la differenza tra un'IA che genera codice mediocre e un'IA che genera software di qualità professionale.
+
+\subsection{Il Problema dell'Amnesia}
+
+I modelli IA (LLM) hanno una proprietà fondamentale: sono \textbf{stateless} --- non hanno memoria tra le sessioni. Ogni volta che apri una nuova finestra di chat o riavvii Copilot, l'IA parte da zero. Non ricorda:
+\begin{itemize}
+  \item Le decisioni architetturali prese ieri
+  \item Le convenzioni di naming del tuo progetto
+  \item I bug che avete già risolto insieme
+  \item Lo stack tecnologico scelto
+\end{itemize}
+
+Se non le fornisci queste informazioni, l'IA \textbf{inventerà} le proprie (un fenomeno chiamato ``allucinazione''). Potrebbe usare MongoDB quando il tuo database è PostgreSQL, o generare codice in CommonJS quando il progetto usa ESModules.
+
+\subsection{La Soluzione: Il file \texttt{\_CONTEXT.md}}\index{CONTEXT.md@\texttt{\_CONTEXT.md}}
+
+Il file \texttt{\_CONTEXT.md} (o \texttt{AGENTS.md}\index{AGENTS.md}) è il \textbf{contratto} tra te e l'IA~\cite{agents-md}. Viene letto automaticamente dall'agente all'inizio di ogni sessione. Contiene tutto ciò che l'IA deve sapere per lavorare correttamente nel tuo progetto.
+
+\begin{quote}
+Pensa al \texttt{\_CONTEXT.md} come al brief che daresti a un nuovo sviluppatore il suo primo giorno di lavoro: ``Ecco come è strutturato il progetto, queste sono le tecnologie che usiamo, queste le convenzioni da seguire, e queste le cose da NON fare mai.''
+\end{quote}
+
+% ---------------------------------------------------------
+\section{Anatomia di un \texttt{\_CONTEXT.md}}
+
+Un buon file di contesto ha 5 sezioni:
+
+\subsection{1.\ Identità e Scopo}
+
+\begin{lstlisting}[language={}]
+# Progetto: BlogAPI
+
+Stai lavorando su un backend REST API per un blog personale.
+Tecnologie: Node.js 20, Express.js, PostgreSQL 16, Prisma ORM.
+Ambiente: sviluppo locale su Windows/macOS.
+\end{lstlisting}
+
+Dice all'IA \textbf{cosa} è il progetto e \textbf{con cosa} lavora.
+
+\subsection{2.\ Architettura e Struttura}
+
+\begin{lstlisting}[language={}]
+## Struttura del Progetto
+
+src/
+  routes/          -> Definizioni degli endpoint (solo routing)
+  controllers/     -> Logica dei controller
+  services/        -> Business logic (interazione con DB)
+  middleware/      -> Auth, error handling, logging
+  utils/           -> Funzioni helper
+prisma/
+  schema.prisma    -> Schema database
+tests/
+  unit/
+  integration/
+\end{lstlisting}
+
+Dice all'IA \textbf{dove} mettere le cose. Senza questa sezione, l'IA potrebbe creare strutture diverse ogni volta.
+
+\subsection{3.\ Convenzioni e Standard}
+
+\begin{lstlisting}[language={}]
+## Convenzioni
+
+- Naming: camelCase per variabili e funzioni, PascalCase per classi
+- Risposte API: sempre { success: boolean, data: T, error?: string }
+- Validazione: usa Zod per la validazione degli input
+- Errori: gestiti centralmente tramite middleware errorHandler
+- Async: usa async/await, mai callback
+- Import: usa ESModules (import/export), mai require()
+\end{lstlisting}
+
+Dice all'IA \textbf{come} scrivere il codice.
+
+\subsection{4.\ Vincoli e Divieti}
+
+\begin{lstlisting}[language={}]
+## Vincoli (OBBLIGATORI)
+
+- NON usare mai query SQL raw. Usa SEMPRE Prisma ORM.
+- NON salvare mai password in chiaro. Usa bcrypt con salt >= 12.
+- NON esporre mai stack trace negli errori di produzione.
+- NON usare `any` in TypeScript. Definisci sempre i tipi.
+- NON installare dipendenze senza motivo documentato.
+\end{lstlisting}
+
+Dice all'IA cosa \textbf{non deve mai fare}. Questa è la sezione più importante per la sicurezza e la qualità.
+
+\subsection{5.\ Comandi e Workflow}
+
+\begin{lstlisting}[language={}]
+## Comandi
+
+- Avviare il server: npm run dev
+- Eseguire i test: npm test
+- Migrare il database: npx prisma migrate dev
+- Generare il client Prisma: npx prisma generate
+
+## Workflow di Sviluppo
+
+Quando implementi una nuova funzionalita':
+1. Crea/modifica lo schema Prisma se serve
+2. Genera la migrazione
+3. Implementa service -> controller -> route
+4. Aggiungi test per il nuovo endpoint
+5. Verifica che tutti i test passino
+\end{lstlisting}
+
+Dice all'IA \textbf{come lavorare} nel progetto.
+
+% ---------------------------------------------------------
+\section{Il Tuo Primo \texttt{\_CONTEXT.md} Completo}
+
+Ecco un esempio completo che useremo come base per i prossimi capitoli:
+
+\begin{praticabox}[title={Pratica --- Crea il tuo primo file di contesto}]
+Crea un file \texttt{\_CONTEXT.md} nella root di un nuovo progetto:
+\end{praticabox}
+
+\begin{lstlisting}[language={},title={\texttt{\_CONTEXT.md} per TaskMaster CLI}]
+# Progetto: TaskMaster CLI
+
+## Scopo
+Un'applicazione da riga di comando per la gestione di task.
+L'utente puo' aggiungere, listare, completare e eliminare task.
+I dati vengono salvati in un file JSON locale.
+
+## Tecnologie
+- Linguaggio: Python 3.11+
+- Librerie: solo moduli standard (argparse, json, os, datetime)
+- Nessuna dipendenza esterna ammessa
+
+## Struttura
+taskmaster/
++-- _CONTEXT.md
++-- main.py              <- Entry point CLI
++-- task_manager.py      <- Logica di gestione task
++-- storage.py           <- Persistenza su file JSON
++-- tests/
+|   +-- test_task_manager.py
+|   +-- test_storage.py
++-- data/
+    +-- tasks.json       <- Database locale
+
+## Convenzioni
+- Naming: snake_case per tutto
+- Docstring: ogni funzione pubblica deve avere una docstring
+- Type hints: su tutte le firme di funzione
+- Output CLI: messaggi chiari e formattati
+
+## Vincoli
+- NON usare librerie esterne. Solo standard library.
+- NON usare variabili globali.
+- NON ignorare gli errori. Gestisci FileNotFoundError, etc.
+- Il file tasks.json deve essere creato automaticamente.
+
+## Comandi CLI
+- python main.py add "Comprare il latte"
+- python main.py list
+- python main.py list --status done
+- python main.py done 3
+- python main.py delete 3
+
+## Testing
+- Framework: pytest
+- python -m pytest tests/ -v
+- Copertura test >= 80%
+\end{lstlisting}
+
+\begin{checkpointbox}
+Questo file è tutto ciò che serve all'IA per generare un'applicazione CLI completa, testata e funzionante. Nel Capitolo~5 lo metterai in pratica.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section{Le 7 Regole d'Oro del Context Engineering}\index{Context Engineering!regole}
+
+\subsection*{Regola 1: Sii imperativo, non descrittivo}
+\begin{lstlisting}[language={}]
+NO:  "Sarebbe preferibile usare async/await"
+SI:  "Usa SEMPRE async/await. Mai callback o .then()."
+\end{lstlisting}
+
+\subsection*{Regola 2: I divieti sono più importanti dei permessi}
+L'IA sa fare mille cose. Il tuo lavoro è dirle le 10 che \textsc{non} deve fare. Ogni divieto nel contesto previene una classe intera di errori.
+
+\subsection*{Regola 3: Mostra la struttura, non descriverla}
+\begin{lstlisting}[language={}]
+NO: "Organizza i file in modo logico con cartelle separate"
+SI: "src/
+       controllers/
+       models/
+       services/"
+\end{lstlisting}
+
+\subsection*{Regola 4: Specifica i comandi esatti}
+L'IA non deve inventare come avviare il progetto. Se il comando è \texttt{npm run dev}, scrivilo.
+
+\subsection*{Regola 5: Un \texttt{\_CONTEXT.md} per progetto}
+Non riusare lo stesso contesto per progetti diversi. Ogni progetto ha il suo.
+
+\subsection*{Regola 6: Aggiorna dopo ogni errore}
+Quando l'IA commette un errore che poi correggi, aggiungi un vincolo al \texttt{\_CONTEXT.md} per prevenirlo in futuro. Il contesto è un documento vivente.
+
+\subsection*{Regola 7: Meno è meglio, purché sia preciso}
+Un contesto di 50 righe iper-specifiche batte un contesto di 500 righe generiche. L'IA perde efficacia quando il contesto è troppo lungo e dispersivo.
+
+% ---------------------------------------------------------
+\section{MCP e Agent Skills: Anteprima}
+
+\subsection{Model Context Protocol (MCP)}\index{MCP}\index{Model Context Protocol|see{MCP}}
+Quando l'IA deve interagire con servizi esterni (database, API, Slack, GitHub), utilizza il \textbf{MCP} --- un protocollo standard che collega l'IA agli strumenti~\cite{anthropic:mcp,mcp:spec}. Lo introdurremo nel Capitolo~7 quando collegheremo il backend a PostgreSQL.
+
+\subsection{Agent Skills (\texttt{SKILL.md})}\index{SKILL.md}\index{Agent Skills}
+Quando un progetto diventa complesso e ha bisogno di competenze specializzate, puoi creare file \texttt{SKILL.md} che conferiscono all'IA expertise su richiesta. Ne esistono per ogni fase ADLC: dall'\textbf{analisi} (requisiti, user story) al \textbf{design} (valutazione stack, ADR), dall'\textbf{implementazione} (React, Flutter, API, database, sicurezza) fino alle \textbf{operations} (incidenti, monitoring). Li introdurremo nel Capitolo~9 per il frontend React e nel Capitolo~11 per Flutter; l'Appendice~E analizza la copertura completa su tutte le fasi.
+
+Per ora, il \texttt{\_CONTEXT.md} è tutto ciò che ti serve.
+
+% ---------------------------------------------------------
+\section{Gestione di Progetti Lunghi: \texttt{PROGRESS.md}}\index{PROGRESS.md}
+
+Per progetti che durano più sessioni, avrai bisogno di un sistema di \textbf{memoria persistente}. L'IA dimentica tutto tra una sessione e l'altra, ma può leggere un file.
+
+Il file \texttt{PROGRESS.md} funge da \textbf{diario del progetto}. Al termine di ogni sessione di lavoro, chiedi all'IA:
+
+\begin{lstlisting}[language={}]
+Aggiorna PROGRESS.md con:
+1. Cosa e' stato implementato in questa sessione
+2. Quali decisioni architetturali sono state prese
+3. Quali problemi sono stati incontrati e come risolti
+4. Cosa resta da fare
+\end{lstlisting}
+
+La prossima sessione, l'IA leggerà questo file e ripartirà con tutta la conoscenza accumulata.
+
+\begin{notebox}
+Se usi \textbf{Claude Code}, puoi chiamare questo file \texttt{claude-progress.txt} --- viene letto automaticamente all'inizio di ogni sessione. Con altri strumenti (Copilot, Cursor, Windsurf), istruisci l'agente a leggerlo: \emph{``Leggi PROGRESS.md per capire lo stato del progetto, poi...''}.
+\end{notebox}
+
+Approfondiremo questa tecnica nel Capitolo~10.
+
+% ---------------------------------------------------------
+\section{Il Workflow Professionale: Dall'Idea all'Implementazione}
+
+Finora hai imparato a scrivere il \texttt{\_CONTEXT.md} manualmente e a chiedere all'IA di implementare. Ma nei progetti reali --- quelli con decine di funzionalità, vincoli di sicurezza e team che si alternano --- serve un passaggio intermedio: \textbf{usare l'IA stessa per decomporre l'idea in unità di lavoro implementabili}.
+
+Il workflow professionale ADLC completo ha sei fasi di decomposizione prima di scrivere una sola riga di codice:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{11-workflow-adlc.png}
+\caption{Workflow professionale ADLC: dall'idea all'implementazione in 6 fasi}
+\label{fig:workflow-adlc}
+\end{figure}
+
+\subsection{Fase 1: Dall'idea alle specifiche}
+
+Parti con un prompt di alto livello. L'IA genera un documento strutturato di requisiti:
+
+\begin{lstlisting}[language={}]
+Prompt:
+"Devo costruire un'applicazione BookShelf per gestire una libreria
+ personale. Backend Node.js + Express, frontend React, mobile Flutter,
+ auth OAuth Google.
+ Genera un documento di specifiche con requisiti funzionali e non
+ funzionali, vincoli tecnici e criteri di accettazione."
+\end{lstlisting}
+
+L'IA produce un PRD (Product Requirements Document) con sezioni chiare: obiettivo, utenti target, requisiti funzionali numerati (RF-01, RF-02\ldots), requisiti non funzionali (RNF-01\ldots), vincoli tecnici e priorità.
+
+\begin{tipbox}
+Salva il PRD in \texttt{docs/PRD.md} nel progetto. È il documento di riferimento per tutto il resto.
+\end{tipbox}
+
+\subsection{Fase 2: Dai requisiti ai casi d'uso}
+
+Prendi i requisiti e chiedi all'IA di derivare i casi d'uso:
+
+\begin{lstlisting}[language={}]
+Prompt:
+"A partire dal PRD in docs/PRD.md, genera i casi d'uso principali.
+ Per ogni caso d'uso indica: attore, precondizione, flusso principale,
+ flussi alternativi, postcondizione."
+\end{lstlisting}
+
+L'IA produce casi d'uso come:
+
+\begin{lstlisting}[language={}]
+## UC-01: Aggiunta libro al catalogo
+- Attore: Utente autenticato
+- Precondizione: L'utente ha effettuato il login
+- Flusso principale:
+  1. L'utente clicca "Aggiungi libro"
+  2. Compila titolo, autore, anno, genere
+  3. Il sistema valida i dati
+  4. Il sistema salva il libro nel database
+  5. Il sistema mostra il libro nella lista aggiornata
+- Flusso alternativo: Se il titolo e' vuoto -> errore di validazione
+- Postcondizione: Il libro e' visibile nella libreria dell'utente
+\end{lstlisting}
+
+Salva in \texttt{docs/USE\_CASES.md}. Questo documento colma il gap tra ``cosa fa il sistema'' e ``come lo usa una persona reale''.
+
+\subsection{Fase 3: Progettazione e scelte tecnologiche}\index{ADR}\index{Architecture Decision Record|see{ADR}}\index{progettazione}
+
+Questa è la fase in cui \textbf{l'IA propone, ma l'umano decide}. Prima di scomporre il lavoro in epic e task, servono decisioni architetturali che condizioneranno tutto il resto.
+
+\begin{lstlisting}[language={}]
+Prompt:
+"A partire dal PRD e dai casi d'uso, proponi l'architettura del sistema.
+ Per ogni decisione tecnica (database, ORM, autenticazione, struttura
+ progetto, pattern architetturali) presenta 2-3 opzioni con pro, contro
+ e raccomandazione. Io scelgo, tu documenti in docs/DESIGN.md."
+\end{lstlisting}
+
+L'IA genera un documento di design con decisioni strutturate:
+
+\begin{lstlisting}[language={}]
+## ADR-01: Scelta ORM
+
+### Contesto
+Il backend richiede un ORM per PostgreSQL compatibile con Node.js.
+\end{lstlisting}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Opzione} & \textbf{Pro} & \textbf{Contro} \\
+\midrule
+\textbf{Prisma} & Type-safe, migrazioni auto, ottima DX & Meno flessibile per query complesse \\
+\textbf{Drizzle} & Leggero, SQL-like, performante & Community più piccola, meno tutorial \\
+\textbf{TypeORM} & Maturo, pattern Active Record & API verbose, manutenzione rallentata \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{lstlisting}[language={}]
+### Raccomandazione
+Prisma -- migliore per un progetto didattico con focus su produttivita'.
+
+### Decisione
+-> **[L'UMANO SCEGLIE QUI]**
+\end{lstlisting}
+
+L'IA prosegue con le decisioni successive: struttura delle cartelle, strategia di autenticazione, gestione dello stato frontend, pattern API (REST vs.\ GraphQL), strategia di deploy.
+
+\begin{warnbox}
+\textbf{Regola fondamentale}: L'IA non deve scegliere da sola le tecnologie. Presenta le opzioni con dati concreti (performance, maturità, curva di apprendimento, costo), ma la scelta finale è sempre dell'umano. Questo vale per:
+\begin{itemize}
+  \item Stack tecnologico (linguaggio, framework, database)
+  \item Pattern architetturali (monolite vs.\ microservizi, REST vs.\ GraphQL)
+  \item Servizi cloud (hosting, auth provider, CDN)
+  \item Librerie con impatto architetturale (ORM, state management, UI framework)
+\end{itemize}
+\end{warnbox}
+
+Il risultato è un \texttt{docs/DESIGN.md} con tutte le ADR (Architecture Decision Records) --- decisioni motivate, tracciabili, che l'IA rispetterà in tutte le fasi successive.
+
+Salva in \texttt{docs/DESIGN.md}. Questo documento alimenta il \texttt{\_CONTEXT.md} con le scelte tecnologiche definitive.
+
+\subsection{Fase 4: Dai casi d'uso alle epic}
+
+Le epic raggruppano i casi d'uso in blocchi di lavoro gestibili:
+
+\begin{lstlisting}[language={}]
+Prompt:
+"A partire dai casi d'uso in docs/USE_CASES.md, organizza il lavoro
+ in epic. Ogni epic deve avere: codice (E-001, E-002...), titolo,
+ obiettivo, casi d'uso coperti, dipendenze tra epic,
+ e ordine di implementazione."
+\end{lstlisting}
+
+L'IA produce un indice come:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l l c l}
+\toprule
+\textbf{Codice} & \textbf{Titolo} & \textbf{Priorità} & \textbf{Dipendenze} \\
+\midrule
+E-001 & Setup e Infrastruttura & 1 & --- \\
+E-002 & Autenticazione OAuth & 2 & E-001 \\
+E-003 & CRUD Libri & 3 & E-002 \\
+E-004 & Ricerca e Filtri & 4 & E-003 \\
+E-005 & Statistiche & 5 & E-003 \\
+E-006 & Frontend Web & 6 & E-003 \\
+E-007 & App Mobile & 7 & E-003 \\
+E-008 & Testing e Sicurezza & 8 & E-006 \\
+E-009 & Deploy Produzione & 9 & E-008 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Salva in \texttt{docs/epics/INDEX.md} con un file per epic: \texttt{E-001\_Setup.md}, ecc.
+
+\subsection{Fase 5: Dalle epic ai task}
+
+Ogni epic viene scomposta in task atomici --- l'unità di lavoro che l'IA implementa in una singola sessione:
+
+\begin{lstlisting}[language={}]
+Prompt:
+"Scomponi l'epic E-003 (CRUD Libri) in task atomici.
+ Ogni task deve avere: codice (T-003.1, T-003.2...), titolo,
+ acceptance criteria verificabili, file coinvolti,
+ vincoli SEC/PERF applicabili, stima in story point (1-5)."
+\end{lstlisting}
+
+L'IA genera i task con questo formato:
+
+\begin{lstlisting}[language={}]
+# T-003.1 -- Modello Prisma Book
+Epic: E-003 | SP: 2 | Stato: TODO | Rischio: LOW
+
+## Obiettivo
+Definire il modello Book nello schema Prisma con tutti i campi da PRD.
+
+## Acceptance Criteria
+- [ ] Il modello Book e' definito in schema.prisma
+- [ ] Include i campi: title, author, year, genre, isbn?, coverUrl?,
+      status (enum), rating?, notes?
+- [ ] La relazione con User e' configurata (userId, foreign key)
+- [ ] La migrazione e' eseguita senza errori
+- [ ] Un test verifica la creazione di un record Book
+
+## File coinvolti
+- backend/prisma/schema.prisma
+- backend/tests/models/book.test.js
+
+## SEC/PERF applicabili
+- SEC-02: Ogni query filtra per userId
+- PERF-02: Indice su Book.userId e Book.status
+\end{lstlisting}
+
+Salva i task in \texttt{docs/epics/tasks/E-003/T-003.1\_Modello\_Book.md}.
+
+\subsection{Fase 6: Implementazione guidata dai task}
+
+Con i task pronti, l'implementazione diventa sistematica:
+
+\begin{lstlisting}[language={}]
+Prompt: "Implementa il task T-003.1 (Modello Prisma Book).
+ Leggi i dettagli in docs/epics/tasks/E-003/T-003.1_Modello_Book.md.
+ Rispetta i vincoli SEC-02 e PERF-02 dal _CONTEXT.md."
+\end{lstlisting}
+
+L'IA legge il file del task, conosce gli acceptance criteria, implementa, testa, e segna il task come completato. Poi passi al successivo: \texttt{"Implementa T-003.2."} Ogni sessione chiude uno o più task. Al termine l'IA aggiorna lo stato del task, produce un checkpoint e aggiorna \texttt{\_CONTEXT.md} e \texttt{PROGRESS.md}.
+
+\subsection{Perché questo workflow funziona}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{X X}
+\toprule
+\textbf{Senza decomposizione} & \textbf{Con decomposizione} \\
+\midrule
+``Costruisci l'app BookShelf'' & ``Implementa T-003.1'' \\
+L'IA inventa l'architettura & L'architettura è nelle specifiche \\
+Se deraglia, riparti da zero & Se deraglia, riprendi dal task \\
+Nessuna tracciabilità & Ogni decisione è documentata \\
+Impossibile stimare i tempi & Story point per task \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{checkpointbox}
+Il workflow Idea $\rightarrow$ Specifiche $\rightarrow$ Use Case $\rightarrow$ Design $\rightarrow$ Epic $\rightarrow$ Task $\rightarrow$ Implementazione è la differenza tra ``sperimentare con l'IA'' e ``fare ingegneria del software con l'IA''. Lo applicherai nel progetto autonomo dell'Appendice~F.
+\end{checkpointbox}
+
+% ---------------------------------------------------------
+\section*{Riepilogo}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Concetto} & \textbf{Cosa hai imparato} \\
+\midrule
+ADLC & Le 7 fasi del ciclo di vita 0-code \\
+\texttt{\_CONTEXT.md} & Come scrivere il contratto con l'IA \\
+Context Engineering & Le 7 regole per contesti efficaci \\
+Struttura progetto & Le 5 sezioni di un contesto ben scritto \\
+MCP / Skills & Anteprima di strumenti avanzati \\
+\texttt{PROGRESS.md} & Memoria persistente tra sessioni \\
+Workflow professionale & Dall'idea ai task implementabili in 6 fasi \\
+\bottomrule
+\end{tabularx}
+\end{center}
