@@ -214,9 +214,9 @@ AI-DLC segue semantic versioning (`MAJOR.MINOR.PATCH`):
 
 | Tipo di release | Quando aggiornare |
 |---|---|
-| PATCH (3.3.x → 3.3.1) | Subito: sono fix e chiarimenti, nessun cambio comportamentale |
-| MINOR (3.3.x → 3.4.0) | Pianificato: nuovi template, nuovi tool, backward-compatible |
-| MAJOR (3.x.x → 4.0.0) | Con attenzione: cambiano i path, i contratti di startup o le regole fondamentali — leggere `MIGRATION.md` prima di procedere |
+| PATCH (4.0.x → 4.0.1) | Subito: sono fix e chiarimenti, nessun cambio comportamentale |
+| MINOR (4.0.x → 4.1.0) | Pianificato: nuovi template, nuovi tool, backward-compatible |
+| MAJOR (4.x.x → 5.0.0) | Con attenzione: cambiano i path, i contratti di startup o le regole fondamentali — leggere `MIGRATION.md` prima di procedere |
 
 Per verificare la versione installata:
 ```bash
@@ -270,7 +270,7 @@ Se vuoi aggiungere una skill personalizzata, mettila in `.ai-dlc/project/skills/
 
 ## 16.4 L'agente in Fase 6 — Ops
 
-Quando il software è in produzione, l'agente entra in Phase 6 (Ops). Il comportamento cambia in modo significativo:
+Quando il software è in produzione, l'agente entra in Fase 6 (Ops). Il comportamento cambia in modo significativo:
 
 - **Ogni modifica ha un piano di rollback obbligatorio.** Non si propone un fix senza aver anche proposto come tornare indietro se il fix peggiora le cose.
 - **Le dipendenze si aggiornano solo con test di non-regressione.** Nessun `npm update` senza aver verificato che la test suite passi dopo.

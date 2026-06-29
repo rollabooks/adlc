@@ -1,0 +1,34 @@
+@startuml ch06-fasi-moduli
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "Noto Sans"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam ActivityBackgroundColor #F5F5F5
+skinparam ActivityBorderColor #333333
+skinparam ArrowColor #333333
+
+start
+:0 Discovery
+modulo 02_DISCOVERY_ANALYSIS;
+:1 Analysis
+modulo 02_DISCOVERY_ANALYSIS;
+:2 Design
+modulo 03_DESIGN;
+:3 Implementation
+modulo 04_IMPLEMENTATION;
+:4 Verification
+modulo 05_VERIFICATION_RELEASE;
+:5 Release
+modulo 05_VERIFICATION_RELEASE;
+:6 Ops
+modulo 06_OPS;
+stop
+
+note right
+  Il campo Phase in _CONTEXT.md
+  determina quale modulo
+  l'agente carica.
+end note
+
+@enduml

@@ -1,0 +1,1661 @@
+SUITESTENSA Software
+
+LC-SUITESTENSA-EN
+Annex A
+Microsoft Azure DevOps
+–
+SUITESTENSA
+Software Lifecycle Management
+
+PAGINA 1 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+1. Indice
+1.
+
+Indice ................................................................................................................................. 2
+
+2.
+
+Azure DevOps – Software Life Cycle Management System ................................................... 3
+
+3.
+
+2.1
+
+Gestione dei moduli ............................................................................................................... 3
+
+2.2
+
+Gestione operativa del flusso di lavoro e del Software Life-Cycle Dev ...................................... 4
+
+2.3
+
+Gestione delle Planning Review .............................................................................................. 7
+
+Processo di gestione del piano di sviluppo di prodotto ......................................................... 8
+3.1
+
+Processo di gestione del requisito ........................................................................................... 8
+
+3.2
+
+Processo di gestione del task di sviluppo................................................................................. 9
+
+3.3
+
+Processo di gestione delle verifiche ...................................................................................... 10
+
+3.3.1
+3.3.2
+3.3.3
+
+4.
+
+Struttura delle operazioni alla base del Piano di Test ............................................................................... 11
+Test di Validazione .................................................................................................................................... 15
+Conclusione Piano di test .......................................................................................................................... 15
+
+3.4
+
+Processo di produzione del pacchetto di rilascio ................................................................... 16
+
+3.5
+
+Definizione tipologia rilasci .................................................................................................. 18
+
+Piano di manutenzione del prodotto e processo di risoluzione dei problemi ....................... 22
+4.1
+
+Processo di ricezione, tracciabilità, comunicazione e gestione delle segnalazioni ................... 22
+
+4.2
+Valutazione e gestione delle segnalazioni di Product & Security Safety (Incident Management)
+e NC di prodotto .............................................................................................................................. 23
+
+5.
+
+4.3
+
+Valutazione e gestione delle non conformità di prodotto ...................................................... 24
+
+4.4
+
+Valutazione e gestione delle segnalazioni non bloccanti e nuovi requisiti .............................. 26
+
+Processo di gestione dei software terzi .............................................................................. 29
+
+PAGINA 2 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+2. Azure DevOps – Software Life Cycle Management System
+Le attività di pianificazione prodotto, progettazione e sviluppo sono registrate all’interno del
+sistema Microsoft Azure DevOps (precedentemente denominato TFS - Microsoft Team
+Foundation System) che mantiene l’archivio del codice sorgente sviluppato e la gestione dei
+flussi di lavoro.
+Le funzioni aziendali coinvolte nella gestione del piano di sviluppo e nell’utilizzo del sistema in
+oggetto sono:
+RdP
+Dev
+PP
+RS
+RdT
+Tester
+RA
+PM
+RPM
+RdD
+
+Responsabile di Progetto
+Progettista
+Planning & Product Manager
+Responsabile Ricerca e Sviluppo (R&S)
+Responsabile dei Test
+Tester
+Regulatory Affairs
+Project Manager
+Responsabile dei Project Manager
+Responsabile della documentazione
+
+2.1 Gestione dei moduli
+Si definisce, nel contesto di questo documento, come modulo applicativo un componente della
+piattaforma software, rispondente ai requisiti funzionali di un dominio clinico (esempi di moduli
+già attivi sono Screening, RX Interventistica, Radiologia, Cardiologia ECG, etc.). Nella gestione
+dei moduli applicativi e delle funzionalità, che possono essere trasversali ai moduli ed ai rilasci,
+si creano e assegnano sul sistema Azure DevOps degli oggetti logici che si caratterizzano per i
+loro contenuti e relazioni:
+Azure
+DevOps
+Item
+Epic
+Feature
+
+PAGINA 3 DI 29
+
+Creabile
+da
+
+Assegnabile
+a
+
+PP
+RdP
+PP
+RdP
+
+PP
+RdP
+PP
+RdP
+
+Descrizione
+
+Descrizione di un modulo applicativo.
+Descrizione di una funzionalità.
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Azure DevOps
+
+Questi oggetti sono in relazione tra di loro come rappresentato nello schema seguente e vengono
+descritti nel dettaglio nel seguito del presente documento:
+
+Requirement
+Epic
+
+Feature
+
+Change Request
+Issue
+
+2.2 Gestione operativa del flusso di lavoro e del Software Life-Cycle Dev
+Per la gestione dei flussi lavorativi si creano e assegnano su Azure DevOps degli oggetti logici
+che si caratterizzano per i loro contenuti:
+Azure
+DevOps
+Item
+User Story
+
+Creabile
+da
+
+Assegnabile
+a
+
+Descrizione
+
+PM
+
+PP
+
+Rappresenta un nuovo caso d’uso o la macro
+descrizione
+di
+una
+nuova
+funzionalità
+evidenziata nell’utilizzo del prodotto. L’analisi
+della User Story può esitare nella definizione di
+un nuovo requisito di prodotto.
+
+Requirement
+
+PP
+
+RdP
+
+Descrizione di un nuovo requisito di prodotto,
+parte di un nuovo prodotto o di un prodotto
+esistente.
+
+Change
+Request
+
+PP
+
+RdP
+
+Descrizione di una richiesta di modifica di
+una funzionalità del prodotto esistente.
+
+Issue
+
+PP
+RdP
+
+RdP
+
+Descrizione di un problema identificato nel
+prodotto esistente.
+
+Task
+
+RdP
+Dev
+
+Dev
+
+Attività di sviluppo e/o analisi.
+Può essere a sua volta suddivisa in sotto task
+per
+le
+dimensioni
+dell’attività
+o
+per
+l’assegnazione a più persone.
+
+PAGINA 4 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+Azure
+DevOps
+Item
+Bug
+
+Creabile
+da
+
+Assegnabile
+a
+
+Descrizione
+
+RdP
+Dev
+
+Dev
+
+Test Plan
+
+RdT
+
+---
+
+Attività
+di
+risoluzione
+di
+un
+malfunzionamento identificato nel prodotto
+in produzione.
+Oggetto che definiscono l’insieme dei test da
+eseguire in uno specifico contesto di verifica e
+validazione (es: rilascio applicativo, validazioni
+di software utilizzati nel QMS, ecc..). Gli oggetti
+TestPlan sono organizzati in Test Suite.
+
+Test Suite
+
+RdT
+
+---
+
+Raccoglitore di Test Case a diversi livelli: ogni
+livello gerarchico di organizzazione del Test
+Plan su Devops è una Test Suite.
+
+Test Case
+
+Dev
+PP
+
+---
+
+Rappresenta un percorso di verifica del corretto
+funzionamento di una funzionalità.
+L’oggetto viene utilizzato rispettivamente:
+- Nelle sessioni di test e verifica del prodotto
+da parte di RS e/o del team di test
+- Nelle sessioni di validazione del prodotto
+da parte di PP
+- Nelle sessioni di validazione di un software
+utilizzato in QMS
+
+Test Run
+
+Dev
+PP
+
+---
+
+Rappresentano l’esecuzione
+descritta in un Test Case.
+
+Test Session
+
+Tester
+
+---
+
+Gli oggetti Test Session riportano i dettagli di
+ogni singola sessione/ripetizione di test. In ogni
+Test Session viene evidenziato: Stato della
+sessione, Tipo di test effettuati per la sessione,
+Versione software testato, Build Quality, Data
+di avvio della sessione di test, Data di
+completamento della sessione di test, Numero
+dell’iterazione.
+
+Changeset
+
+Dev
+
+---
+
+Rappresenta un insieme di modifiche al codice
+sorgente. Deve essere collegato ad un Task o
+un Bug a cui fanno riferimento le modifiche
+effettuate.
+
+Deploy
+
+RdT
+
+Tester
+
+Rappresenta i contenuti ed i dati identificativi di
+un pacchetto di rilascio.
+
+PAGINA 5 DI 29
+
+di
+
+un
+
+test
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+Questi oggetti sono in relazione tra di loro come rappresentato nello schema seguente:
+
+Requirement
+User Story
+
+Change Request
+Issue
+
+Requirement
+
+Task
+
+Changeset
+
+Bug
+
+Changeset
+
+Task
+
+Changeset
+
+Azure DevOps
+
+Issue
+
+Requirement
+Change Request
+
+Task
+
+Changeset
+
+Bug
+
+Changeset
+Test Run
+
+Test Case (R&S)
+Bug
+Test Plan
+
+Changeset
+
+Test Suite
+Change Request
+Requirement
+
+Test Case (PP)
+Issue
+
+Change Request
+Deploy
+Issue
+Deploy
+
+PAGINA 6 DI 29
+
+Changeset
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+2.3 Gestione delle Planning Review
+Per la gestione e registrazione del processo di definizione, pianificazione, analisi e revisione dei
+requisiti parte del rilascio di un nuovo prodotto o del rilascio di una versione di aggiornamento e
+modifica di un prodotto già esistente, si definisce un oggetto di Azure DevOps così caratterizzato:
+Azure
+DevOps
+Item
+Planning
+Review
+
+Creabile
+da
+
+Assegnabile
+a
+
+PP
+
+PP
+RdP
+
+Descrizione
+
+Contenitore delle azioni di analisi,
+pianificazione e revisione dei requisiti
+
+Tale oggetto non ha collegamenti diretti, all’interno di Azure DevOps, con tutti gli altri oggetti
+(item) precedentemente definiti per la gestione del flusso di lavoro e del ciclo di vita di sviluppo
+del dispositivo.
+All’oggetto “Planning Review” sono associati i documenti di verbale della Planning Review Iniziale
+e delle riunioni di avanzamento (Planning Review) intermedie.
+Nota:
+•
+
+•
+
+nella sezione “COMMENTS” dell’oggetto Planning Review e nel verbale di Planning Review
+è registrato l’esito dell’analisi di impatto rispetto ai requisiti MDR (cfr. PQ-7.2-01-EBIT e
+QPR000030-Change Assessment) relativamente al contenuto dei Product Requirement
+parte del piano di rilascio definito nella Planning Review;
+nel verbale di Planning Review sono registrati i Product Requirement oggetto di
+validazione, secondo i criteri definiti nel documento LC- SUITESTENSA-EN. L’informazione
+puntuale sul singolo requisito è registrata nel tag VT associato agli item Requirement e
+Change Request nel seguito definiti.
+
+PAGINA 7 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+3. Processo di gestione del piano di sviluppo di prodotto
+3.1 Processo di gestione del requisito
+Per ogni requisito definito dalla Pianificazione Prodotto e assegnato al Responsabile di Progetto
+si devono effettuare le seguenti azioni:
+•
+
+PP deve compilare in modo opportuno il requisito nel sistema Azure DevOps descrivendo
+nel modo più dettagliato possibile il requisito mediante la creazione di un elemento di tipo
+Requirement con le seguenti caratteristiche:
+o Requirement: se le specifiche di definizione del requisito sono sintetiche esse possono
+essere inserite direttamente nel sistema Azure DevOps 1, altrimenti devono essere
+dettagliate in un documento dedicato di definizione dei requisiti che viene collegato.
+In quest’ultimo caso si deve comunque registrare nel sistema Azure DevOps un
+riassunto della funzionalità2.
+Nella definizione del requisito è responsabilità di PP l’attuazione delle attività di Risk
+Management con riferimento alle attività di identificazione di rischi e situazioni di
+rischio relative alla Usabilità del prodotto nella specifica funzionalità. L’esito della
+attività di Risk Management deve essere registrato nel campo Impact Assessment con
+specifica di Impact on UX (User Experience). L’esito dell’attività può includere una
+definizione di misure di riduzione di rischio su UX.
+o Un requisito può essere l’esito di una User Story inserita da PM, da PP o dal Team
+Integrazione a fronte dell’utilizzo del dispositivo o a fronte di richieste emerse in sede
+di partecipazione a gare/offerte/valutazioni. Ove la User Story sia creata da PM, la
+stessa viene assegnata al Responsabile dei PM che ne valuta la completezza dei
+contenuti e assegna/convalida la priorità di gestione della richiesta. A conclusione della
+valutazione RPM assegna l’elemento User Story alla Pianificazione Prodotto con gli
+elementi utili alla comprensione della richiesta e delle attese in termini di date di
+disponibilità e priorità dell’attività.
+
+•
+
+Assegnare la gestione del Requirement al responsabile di progetto.
+
+•
+
+Identificare una data attesa per la disponibilità dell’implementazione della richiesta campo Target Resolved Date - e classificarla indicando una priorità (dove il valore 1
+rappresenta la priorità massima).
+È compito della Pianificazione Prodotto convocare apposita Sprint Planning per sottoporre
+ad approvazione uno o più dei nuovi requisiti di prodotto e definire la pianificazione delle
+attività di sviluppo.
+
+•
+
+I requisiti sono associati ad un rilascio5 - quello corrente o eventualmente i successivi per
+sviluppi a lungo termine - e posti in stato Proposed.
+
+•
+
+Se durante l’analisi del requisito da parte del Responsabile di Progetto e/o del Progettista
+emergesse la necessità di approfondire o chiarire il requisito stesso questo viene posto in
+stato Blocked e ne viene specificata la ragione 6. L’uscita dallo stato Blocked è decisa in
+modalità condivisa a fronte dei chiarimenti e/o dettagli richiesti.
+
+1
+
+Impostazione dei campi: Description, Impact Assesment.
+Impostazione dei campi: Description, Impact Assesment.
+5
+Impostazione del campo: Target Integration Build
+6
+Impostazione del campo: Reason for blocked
+2
+
+PAGINA 8 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+•
+
+Nel momento in cui il contenuto del requisito stesso viene considerato completo a valle
+di un suo affinamento tra Pianificazione Prodotto e Responsabile di Progetto, con
+eventuale coinvolgimento dei Progettisti, questo viene posto in stato Active. In questo
+momento il requisito si intende completo e approvato.
+
+•
+
+È compito del Responsabile di Progetto procedere alla valutazione dell’impatto sul
+processo di gestione del rischio che la modifica alla progettazione per il soddisfacimento
+dei nuovi requisiti potrebbe indurre. In particolare, nella definizione del requisito è
+responsabilità di RdP l’attuazione delle attività di Risk Management. L’esito della attività
+di Risk Management deve essere registrato nel campo Impact Assessment.
+
+3.2 Processo di gestione del task di sviluppo
+•
+
+Il Responsabile di Progetto crea e assegna al Progettista di riferimento il Task relativo alle
+attività.
+Se dall’attività consegue la necessità di apportare modifiche alla documentazione, il RdP
+crea e apre al RdD il Task relativo alle modifiche da integrare nei manuali utente.
+
+•
+
+I Progettisti sono tenuti a mantenere aggiornati all’interno del sistema Azure DevOps
+gli item a loro assegnati sia come stato complessivo sia come stato di avanzamento. Per
+ogni item di sviluppo devono essere effettuate le seguenti azioni:
+o Compilare in modo opportuno il modulo evidenziando la specifica tecnica dell’attività
+che verrà effettuata per completarlo7. Se tali specifiche sono sintetiche esse possono
+essere compilate direttamente nel sistema Azure DevOps8, altrimenti devono essere
+dettagliate in un documento dedicato – Software Specification Document - che viene
+collegato al Task. In quest’ultimo caso si deve comunque riportare nel sistema Azure
+DevOps un riassunto della funzionalità9.
+o Definire una stima dell’attività in ore/uomo 10 evidenziandone il livello di accuratezza 11.
+o Associare le modifiche al codice (tramite Changeset) all’item di sviluppo
+corrispondente, inserendo un opportuno commento utile ad identificare l’impatto che
+le modifiche effettuate possono avere.
+
+7
+
+Impostazione del campo: Description
+Impostazione del campo: Description
+9
+Impostazione del campo: Description
+10
+Impostazione del campo: Estimate in ore/uomo
+11
+Impostazione del campo: Macro Estimate
+8
+
+PAGINA 9 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+o Mantenere aggiornato lo stato di avanzamento dell’attività segnalando il lavoro
+effettivamente svolto12.
+o Completare ed integrare la valutazione dell’impatto sul processo di gestione del rischio
+che la progettazione per il soddisfacimento dei nuovi requisiti potrebbe indurre.
+•
+
+Eventuali criticità nell’analisi o nello sviluppo devono essere segnalate dal Progettista
+impostando il Task a Blocked, tale stato viene riportato automaticamente al Requirement
+associato, notificandolo a PP e rendendo evidente la necessità di un approfondimento tra
+le figure coinvolte (Progettista, Responsabile di Progetto e Pianificatore Prodotto). Ove
+l’approfondimento abbia esito positivo, il Progettista aggiorna lo stato del Task ed il
+sistema notifica lo sblocco a PP.
+
+•
+
+Il Responsabile della documentazione prende il carico i task di modifica dei manuali
+utente ed apporta le necessarie modifiche ai documenti interessati, pubblicandone nuove
+revisioni. Lo stato dei task evolve opportunamente fino ad arrivare al completamento
+indicato dallo stato Closed.
+
+Di seguito si riassumono i cambiamenti di stato degli oggetti di tipo Requirement e Task:
+
+Figura 1 - Stati Requirement
+
+Figura 2 - Stati Task
+
+Si precisa che un oggetto di tipo REQ assume lo stato RESOLVED quando tutti i TASK ad esso
+associati sono posti nello stato CLOSED, sia quelli di sviluppo, sia quelli relativi alla manualistica.
+
+3.3 Processo di gestione delle verifiche
+Il processo di gestione delle verifiche è organizzato in un Test Plan, i cui contenuti sono definiti
+nella sezione 5.2.5 del documento LC-SUITESTENSA-EN.
+L’organizzazione dei test (sia di verifica che di validazione) in Azure DevOps è registrato ed
+organizzato come segue:
+•
+•
+
+12
+
+Nodo radice: Rappresenta il Test Plan corrente.
+Test-suite: Sono cartelle che contengono altre test-suite (sotto-cartelle).
+
+Impostazione del campo: Completed Work in ore/uomo
+
+PAGINA 10 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+•
+
+Nodo foglia: Contiene uno o più test-case, ciascuno dei quali è un test singolo
+caratterizzato da una serie di azioni (test step) e risultati attesi.
+
+I test falliti sono associati a uno o più bug come definito nel seguito.
+Si precisa quanto segue:
+1. Esclusione dei test unit dal piano di test: La creazione dei test unit, necessari per la
+verifica delle componenti di un singolo modulo, è lasciata alla pianificazione del
+responsabile di modulo e del singolo progettista e non è mandatoria la registrazione
+degli esiti in AzureDevOps
+2. Sviluppo e verifica dei test unit: Si assume che queste attività siano condotte nel
+contesto del piano di lavoro del singolo progettista e possano essere incluse nel piano di
+progetto e sviluppo.
+3. Sessioni di test interne: Il responsabile di modulo e/o i progettisti devono utilizzare
+le specifiche di test di modulo per una o più sessioni di test interne dedicate a una
+prima verifica e chiusura della progettazione, utili per l'avvio di una batteria di test. Non
+è richiesta la registrazione formale dei test da parte del progettista. Il progettista o il
+responsabile di modulo possono quindi creare un bug per tracciare l’attività necessaria
+alla correzione di un errore di progettazione. Il bug creato in questa fase non avrà un
+collegamento diretto con un test, ma potrà essere collegato all’attività di sviluppo
+(Requirement e/o Change request).
+4. Disponibilità del piano di test: Il piano di test, comprensivo delle specifiche di test e
+delle checklist di verifica, deve essere prodotto e disponibile almeno alla prima verifica
+di insieme funzionale, corrispondente al primo rilascio preliminare del prodotto (prima
+versione RC - 'Release Candidate').
+
+3.3.1 Struttura delle operazioni alla base del Piano di Test
+Gli oggetti relativi ad uno specifico TestPlan (Test Suite, Test Case e Test Result) vengono
+registrati in Azure DevOps. Viene creata una Test Suite con la denominazione "TP+Nome
+Prodotto + versione prodotto" sotto la Test Suite principale "TP Nome Prodotto", che
+raccoglierà tutte le definizioni dei test della versione corrente.
+L’organizzazione delle specifiche di test si sviluppa in una struttura ad albero a partire dalla
+Test Suite primaria ("TP+Nome Prodotto + versione prodotto"). La prima suddivisione è basata
+sul gruppo di competenza: radiologia, cardiologia, moduli comuni, regressione, ecc. All'interno
+di queste categorie, dove necessario per maggiore chiarezza, sono create ulteriori suite per
+specifici moduli (ad esempio, cardiologia è ulteriormente suddivisa in: common, US, EPLab,
+ecc.). All’interno delle suite, l’ulteriore suddivisione distingue tra:
+-
+
+Requirement, Change Request e Issue specifici pianificati per la versione di rilascio
+Moduli corrispondenti a nuove funzionalità
+
+PAGINA 11 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+La nomenclatura dei moduli invece, che era stata definita per i documenti di specifica di test,
+passa per una suddivisione per argomento fino ad arrivare ai ‘Test Case’ che raggruppano i ‘Test
+Step’.
+I ‘Test Case’, oggetti di categoria ‘Work Item’ che raggruppano i ‘Test Step’, sono veri e propri
+passi procedurali che portano all’esecuzione del test.
+I Test Step sono caratterizzati da una azione, un risultato atteso ed uno stato (Active, Passed,
+Failed, Blocked).
+
+PAGINA 12 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Figura 3 - Esempio della struttura di un Test Plan
+
+La Test Suite principale riporta l’indicazione della versione del prodotto ed il numero della
+build.
+Le Test Suite relative ad uno specifico modulo vengono denominate secondo la seguente
+convenzione:
+CTS-SE-SiglaProgetto-SiglaModulo-[SiglaSottomodulo]-DescrizioneEstesa
+dove
+-
+
+CTS è l’acronimo di Component Test Specification
+SE è l’acronimo del progetto SUITESTENSA
+SiglaProgetto è una tra CAR (cardiologia), RAD (radiologia), COM (moduli comuni), INT
+(integrazioni)
+SiglaModulo è la sigla identificativa del modulo eventualmente ulteriormente specificata
+con SiglaSottomodulo (opzionale)
+DescrizioneEstesa fornisce una descrizione leggibile del modulo
+
+PAGINA 13 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+La divisione in capitoli (a loro volta Test Suite) dei test di modulo riporta una numerazione
+d’ordine ed i titoli devono essere descrittivi del tema trattato.
+Nella definizione del titolo dei Test Case l’indicazione importante da seguire è l’inserimento nel
+titolo di una sigla che univocamente definisca il modulo interessato dai test (per permettere un
+filtraggio semplice nelle ricerche sul Database).
+L’esecuzione dei test avviene mediante lo strumento Azure DevOps: come applicativo o
+interfaccia web.
+All’avvio di una sessione di test, i responsabili dei moduli da testare mettono in stato ‘Resolved’
+tutti i work item che desiderano vengano testati durante la sessione.
+Avviando il Test Plan in modalità ‘Esecuzione’ (Run Tests) verranno presentati uno ad uno tutti
+i passi da eseguire per portare a termine i test assegnati. Ad ogni passo il tester deve indicare
+se questo conduce al risultato atteso o meno, assegnando lo stato ‘Failed’ oppure ‘Passed’ al
+passo di test. Conclusi tutti i passi di un Test Case, lo stato di questo risulterà ‘Passed’ solo se
+tutti i passi sono stati definiti superati, ‘Failed’ se anche un solo passo non è definito superato.
+A seguito di test falliti, il tester crea –sempre attraverso Azure DevOps - un work item di tipo
+‘bug’ (di default in stato ‘Proposed’) specificando nel campo ‘Assigned To’ il responsabile di
+modulo, e valorizzando adeguatamente i campi obbligatori “Symptom” e “Steps to Reproduce”.
+E’ inoltre possibile associare commenti ai Test Case che, pur risultando superati, meritano
+un’osservazione da parte del tester.
+La tracciabilità di esecuzione viene garantita da Azure DevOps mediante i Test Run, garantendo
+la registrazione dei test.
+Conclusa una sessione di test è compito dei singoli responsabili di modulo analizzare i rapporti
+di test registrati dai tester.
+A seguito di test falliti e dei work item di tipo ‘bug’ assegnati al responsabile del modulo, lo
+stesso deve cambiarne lo stato da ‘Proposed’ ad ‘Active’ nel caso che il bug sia effettivamente
+un problema software.
+Se il fallimento segnalato è invece dovuto ad una poco chiara descrizione dei passi da eseguire,
+ad un problema di configurazione o ad un errore di procedimento da parte del tester il
+responsabile di modulo può scegliere se rifiutare il bug impostando lo stato a ‘Closed’ e
+valorizzando opportunamente il campo ‘Reason’.
+Il bug viene assegnato dal Responsabile di Modulo al progettista delegato per la risoluzione del
+problema in previsione di una successiva batteria di test prevista dal piano di test (Test
+Confermativo).
+E’ obbligo del responsabile di modulo identificare su Azure DevOps gli eventuali moduli ed i
+singoli test-case che possono essere oggetto di verifica di un test di regressione, oltre a quelli
+evidenti dalla registrazione del test.
+I progettisti dopo aver risolto i problemi segnalati nei bug e quindi, dopo aver condiviso la parte
+di codice risolutiva sul ramo oggetto del rilascio, devono mettere lo stato del Bug a “Resolved”.
+Sarà compito del gruppo di test impostare lo stato dei bug a “Closed” a seguito dell’esito positivo
+della fase di test Confermativo.
+
+PAGINA 14 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+Il Responsabile del Team di Test analizza gli esiti di una sessione di test per riportare al
+Responsabile di Progetto evidenza degli esiti.
+E’ facoltà di RdP l’approvazione di un test di modulo anche in presenza di un test fallito ove si
+ritenga che il test fallito non pregiudichi il raggiungimento di un requisito prestazionale e
+funzionale e non sia parte di uno dei test funzionali alla verifica di una misura di riduzione dei
+rischi. Il problema, di minore entità, emerso dal test verrà tracciato come bug noto e sotto
+controllo per essere risolto in seguito.
+
+3.3.2 Test di Validazione
+Il gruppo di Pianificazione (PP) ha il compito di redigere e mantenere un Piano di Validazione di
+Test (creando una batteria di test nella apposita Test Suite CV-PP del TP) secondo le stesse
+modalità definite nella sezione 3.3.1.
+I test di validazione sono collegati al work item oggetto di rilascio che si deve testare seguendo
+criteri di usabilità del requisito, funzionalità e prestazione.
+Le esecuzioni dei test di validazione in carico a PP vengono tracciate con le stesse modalità
+previste per i test di verifica del team di test descritte nel paragrafo 3.3.1.
+In caso di fallimento di test vengono adottate misure correttive previa apertura bug, e vengono
+attuate attività di bug fixing.
+Se un Work Item non supera il test di validazione con esito positivo questo viene eliminato dal
+contenuto del Rilascio e posticipato a Release futura.
+
+3.3.3 Conclusione Piano di test
+Nel Work Item di Azure DevOps Test Suite (denominato in base alla versione sotto test),
+vengono riportate le seguenti informazioni:
+-
+
+Stato del piano di test
+Data di avvio del piano di test
+Data di completamento del piano di test
+Descrizione del piano di test
+Elenco delle Test Session contenute nel piano di test
+Riassunto globale dei bug individuati
+Riassunto dei test case
+
+Alla Test Suite, vengono inoltre allegati i seguenti documenti:
+-
+
+Stato complessivo dei Test Case
+Lista completa dei bug
+Lista dei bug aperti al momento del rilascio
+Lista dei bug chiusi come posticipati al momento del rilascio
+
+Alla chiusura del piano di test, la compilazione che viene valutata come Release Candidate
+conclusiva diventa versione di rilascio ufficiale e viene “bloccata” sul server di compilazione in
+modo da conservarne gli artefatti compilati.
+
+PAGINA 15 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+La conclusione dei test porta anche al completamento e chiusura del Work Item di Azure DevOps
+di tipo Deploy che rappresenta in modo preciso ed univoco la versione rilasciata. Esso riporta le
+seguenti informazioni:
+-
+
+Descrizione del deploy
+Stato del deploy
+Tipo di deploy (se Main Release, Service Pack, Patch)
+Build Quality
+Numero di Changeset del codice che ha prodotto gli artefatti di rilascio (e che ne permette
+la precisa rigenerazione)
+Percorso di distribuzione del pacchetto all’interno del Sharepoint
+Data di rilascio attesa
+Data di rilascio effettiva
+Versione SUITESTENSA
+
+L’oggetto Deploy è collegato in relazione univoca di tipo ‘References’ al Work Item Test Plan.
+Esso contiene inoltre (con link di tipo “related”) tutti gli item di lavoro (Requirement, Change
+Request, Issue) che hanno portato alla creazione della versione di rilascio.
+
+3.4 Processo di produzione del pacchetto di rilascio
+Il sistema dedicato alla predisposizione dei pacchetti di rilascio prevede l’utilizzo di
+un’architettura composta da un server con installato il repository del codice sorgente (Azure
+DevOps) e due sistemi di compilazione, attivati in automatico in corrispondenza di un nuovo
+Changeset effettuato dai Progettisti.
+Al momento della compilazione viene effettuata un’etichettatura univoca dei moduli, generata
+secondo lo schema seguente in cui si riporta per chiarezza un esempio:
+
+SUITESTENSA v1.7.0.29020 (SE_20130519.9)
+SUITESTENSA
+
+v1.7
+
+0
+
+29020
+
+Nome del prodotto
+
+Versione commerciale del
+prodotto
+
+Service
+pack
+
+Numero di build interno
+0
+2
+Service Pack
+Patch
+
+29
+Build
+
+0
+Hotfix
+
+SE_
+
+20130519
+
+9
+
+Codice interno del
+prodotto
+
+Data di compilazione
+(19/05/2013)
+
+Progressivo giornaliero
+
+A conclusione della compilazione, viene prodotto un pacchetto di Setup completo di tutte le
+funzionalità. Al fine di impedire la manomissione o la compromissione del pacchetto di Setup,
+quest’ultimo viene protetto tramite certificato di firma digitale.
+In corrispondenza della decisione di produrre una nuova versione del prodotto (release, service
+pack, patch – cfr. paragrafo 3.5) si installa tramite il setup il prodotto nell’ambiente di test,
+ambiente composto da diversi sistemi server e client configurati in modalità tale da coprire le
+principali opzioni di configurazione del prodotto.
+Su tale sistema verranno effettuati i test di validazione.
+
+PAGINA 16 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+L’attività di rilascio viene registrata nel sistema Azure DevOps associando tramite un oggetto di
+tipo Deploy. Tale oggetto contiene le informazioni utili a:
+•
+
+Identificare la denominazione20 del rilascio, ad esempio:
+o
+
+Service Pack SE 1.9 B31.0
+▪
+
+Patch SE 1.9 B31.0.1
+•
+
+Hotfix SE 1.9 B31.0.1.1
+
+•
+
+Identificare la tipologia del rilascio21 come Release, Service Pack, Patch, Hotfix.
+
+•
+
+Identificare i contenuti del rilascio (collegamenti a Issue/Requirement/Change Request)
+
+•
+
+Riportare la denominazione della versione di compilazione22, la versione di pubblicazione23
+ed il changeset di compilazione.
+
+•
+
+La posizione24 in cui sono stati pubblicati i contenuti del rilascio (file, documenti...).
+
+•
+
+Informazioni relative alla modalità di distribuzione 25 del contenuto, ossia se il rilascio
+contiene un setup, un insieme cumulativo di file (quindi comprendente anche le versioni
+precedenti) oppure il solo contenuto differenziale rispetto al rilascio precedente.
+
+•
+
+La data effettiva di rilascio26.
+
+•
+
+Nel caso in cui il Deploy corrisponda ad una Hotfix deve essere riportato da RdT come si
+è proceduto nella verifica delle eventuali regressioni 27.
+
+•
+
+Alla chiusura del rilascio, RdT verifica che ogni contenuto (Requirement, Change Request
+e Issue) sia impostato a Closed dall’assegnatario del contenuto stesso.
+
+20
+
+Impostazione del campo: Title
+Impostazione del campo: Type
+22
+Impostazione dei campi: Label (SUITESTENSA) e Label (DICOMED)
+23
+Impostazione del campo: Build Quality
+24
+Impostazione del campo: Deploy Folder
+25
+Impostazione dei campi: Setup e Cumulative
+26
+Impostazione del campo: Release Date
+27
+Impostazione del campo: Regression Analysis
+21
+
+PAGINA 17 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Gli artefatti vengono caricati sulla pagina Sharepoint ufficiale dei rilasci, dove il personale del
+Post Vendita (SPV) può reperire tutte le versioni ufficializzate, presenti e passate:
+https://esaotegroup.sharepoint.com/sites/EbitIT/SPV/Release
+(cartella “SUITESTENSA”, sottocartella nominata con la versione corrente)
+In particolare vengono distribuiti i seguenti file (indicati nelle relative cartelle):
+-
+
+Setup\SUITESTENSA\Setup.exe (setup server, principale)
+Setup\SUITESTENSAClient\SUITESTENSA.Client.exe (setup client 32 + 64bit)
+Setup\SUITESTENSAClient\SUITESTENSA.Client.x86_<versione>.msi
+(windows
+installer client versione 32 bit)
+Setup\SUITESTENSAClient\SUITESTENSA.Client.x64_<versione>.msi
+(windows
+installer client versione 64 bit)
+Setup\SUITESTENSAClient\SUITESTENSAISIntegration\SUITESTENSA.ISIntegration.x86
+_<versione>.msi (windows installer per integrazione client)
+
+Come anticipato, il pacchetto di Setup è protetto da certificato di firma digitale. Una volta caricato
+il pacchetto di Setup su Sharepoint, viene eseguita una ulteriore verifica che consiste nelle
+operazioni seguenti:
+•
+•
+•
+•
+
+•
+
+il pacchetto di Setup viene scaricato su una macchina di test;
+vengono verificate la presenza e l’integrità del certificato di firma digitale del pacchetto
+di Setup scaricato;
+il pacchetto di Setup vene eseguito per avviare l’installazione;
+se il software viene eseguito senza che il sistema operativo evidenzi problemi, l’attività
+di verifica si considera superata. In caso di problemi rilevati durante l’esecuzione del
+software, è necessario correggere il pacchetto di Setup come necessario e procedere
+nuovamente alla sua produzione e firma;
+L’esito dell’attività di verifica viene registrato nel Test Plan.
+
+Verificato che tutti gli artefatti, corredati della opportuna documentazione e manualistica, siano
+disponibili sul sito Sharepoint SPV, un “annuncio di rilascio” informa, a mezzo e-mail, tutti gli
+interessati censiti in apposita lista di distribuzione della disponibilità della nuova versione
+rilasciata.
+Le attività di delivery e installazione del dispositivo possono essere eseguite esclusivamente da
+personale autorizzato da EBIT s.r.l.; il pacchetto di Setup verificato, da impiegare ai fini
+dell’installazione, è reso disponibile a tale personale mediante accesso riservato al sopra citato
+sito Sharepoint SPV. Non viene fatto uso di alcun supporto fisico quale CD o DVD per la
+distribuzione del pacchetto di Setup.
+
+3.5 Definizione tipologia rilasci
+Le tipologie di rilasci sono elencate nella tabella seguente:
+
+PAGINA 18 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Release
+
+Contenuti ammessi: Requirement, Change Request, Issue (risoluzioni),
+Traduzioni
+Test Plan:
+-
+
+-
+
+Requirement, Change Request e Issue pianificati per la versione
+Requirement, Change Request e Issue appartenenti a patch oggetto di
+rilascio dopo la precedente Main Release, per i quali è identificabile una
+potenziale regressione
+Moduli soggetti a test di regressione
+Test automatici disponibili
+Test di flusso
+Test di validazione per i requisiti che lo prevedono
+
+Rilascio: pacchetto completo con setup compilato su build server
+Identificazione su Azure DevOps: branch del ramo di sviluppo
+Target installazione: siti in attesa di aggiornamento
+Service Pack
+
+Contenuti ammessi: Requirement, Change Request, Issue (risoluzioni),
+Traduzioni
+Test Plan:
+-
+
+Requirement, Change Request e Issue pianificati per la versione
+Moduli soggetti a test di regressione
+Test automatici disponibili
+Test di flusso
+Test di validazione per i requisiti che lo prevedono
+
+Rilascio: pacchetto completo con setup compilato su build server
+Identificazione su Azure DevOps: branch della main release
+Target installazione: siti in attesa delle nuove funzionalità
+Patch
+
+Contenuti ammessi: Requirement, Change Request, Issue (risoluzioni)
+Test Plan:
+-
+
+Requirement, Change Request e Issue pianificati per la versione
+Moduli soggetti a test di regressione
+Test automatici disponibili
+Test di flusso
+Test di validazione per i requisiti che lo prevedono
+
+Rilascio: pacchetto, che può essere pubblicato anche senza setup, compilato
+su build server
+Identificazione su Azure DevOps: tracciamento della label/changeset
+Target installazione: siti su cui impattano i problemi risolti
+
+PAGINA 19 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Hotfix
+
+Contenuti ammessi: soluzione Issue puntuali, su specifiche versioni e/o
+specifici impianti
+Test Plan:
+-
+
+Esecuzione di un Test Plan opportunamente costruito in funzione del
+contenuto del rilascio
+Verifica congiunta di RdT con RdP di riferimento
+Verifica autonoma di RdT
+
+Rilascio: sottoinsieme di file compilato su build server
+Identificazione su Azure DevOps: traccia del changeset
+Target installazione: siti su cui impattano i problemi risolti
+Generazione del pacchetto: su build server
+Pre-Hotfix
+
+Sono modifiche ad hoc, per una determinata installazione, che correggono i
+problemi segnalati (Issue) e “anticipano” il rilascio di una HotFix come sopra
+indicato.
+Rilascio: essendo dedicati ad una specifica installazione il pacchetto viene
+inserito in un folder condiviso con la seguente “naming convention”:
+
+•
+•
+•
+
+Sigla Mondiale (IT, DE, CO etc.)
+Sigla della provincia (solo per gli IT)
+Nome del sito/Asl etc.
+
+Test: Esecuzione di una verifica puntuale sul sito che ha effettuato la
+segnalazione.
+Chiusura della segnalazione: Quando si risolve la ISSUE aperta sulla
+segnalazione che stiamo risolvendo con la PreHF, viene inserito a chiusura
+della Discussion del Work Item, il link al pacchetto
+Identificazione su Azure DevOps: traccia del changeset/shelveset
+Target installazione: siti su cui impattano i problemi risolti
+Generazione del pacchetto: su build server
+Fix
+
+Modifiche per specifica/che versione/i: sono correzioni puntuali, sempre
+nell’ottica di anticipare l’uscita di una correzione in HotFix, quando la modifica da
+rilasciare è da installare su tutti gli impianti dove è presente una certa
+versione. Solitamente sono correzioni di Main Release e/o Service Pack appena
+rilasciati.
+Rilascio: il pacchetto viene copiato in una cartella “FIX” sotto il ramo della
+specifica
+versione
+rilasciata
+(sempre
+su
+sharepoint
+in
+“SPV\Release\SUITESTENSA”) con la seguente struttura (ad esempio):
+
+•
+
+PAGINA 20 DI 29
+
+SE_2.0_Build33
+o 2.0 Build33.5.2_Patch
+▪ FIX
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Test: Il test viene svolto sul Sistema di test sul quale è stata validate la
+versione oggetto della FIX
+Chiusura della segnalazione: Quando si risolve la ISSUE aperta sulla
+segnalazione che stiamo risolvendo con la FIX, viene inserito a chiusura della
+Discussion del Work Item, il link al pacchetto
+Identificazione su Azure DevOps: traccia del changeset/shelveset
+Target installazione: versione su cui impattano i problemi risolti
+Generazione del pacchetto: su build server
+
+PAGINA 21 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+4. Piano di manutenzione del prodotto e processo di risoluzione dei
+problemi
+Il piano di manutenzione del prodotto SUITESTENSA indirizza le attività di gestione delle
+segnalazioni di non conformità di prodotto, malfunzionamenti e feedback sul prodotto rilasciato.
+Il piano si attua attraverso le azioni, descritte nei paragrafi seguenti, assegnate alle opportune
+funzioni aziendali in funzione della organizzazione di EBIT s.r.l..
+Si assume nel seguito che le segnalazioni di malfunzionamento ed i feedback sul prodotto siano
+ricevuti a fronte di installazione ed uso del prodotto rilasciato.
+
+4.1 Processo di ricezione, tracciabilità, comunicazione e gestione delle
+segnalazioni
+Le funzioni primarie preposte alla ricezione di segnalazioni e feedback sul prodotto rilasciato
+possono essere:
+• personale di gestione installazioni e assistenza tecnica del prodotto
+• personale del servizio di Help Desk
+• personale commerciale e di supporto alla vendita, interno o esterno
+(rivenditori/distributori)
+• personale della funzione di Planning & Product Management
+Le segnalazioni sul prodotto installato sul campo, a fronte della ricezione di una richiesta di
+assistenza tecnica, sono registrate nel sistema di ticketing e gestione chiamate SHAPE dal
+Servizio di Help Desk ed Assistenza Tecnica che si occupa della ricezione e della tracciabilità delle
+chiamate (cfr. –documento PQ-7.5-07-EBIT)
+La segnalazione deve essere documentata in modo congruo, inclusiva delle condizioni al contorno
+per la caratterizzazione e la riproducibilità della segnalazione (ove trattasi di malfunzionamento).
+E’ compito del personale che registra la chiamata l’opportuno filtro della segnalazione,
+verificando con i colleghi dell’assistenza tecnica ed i responsabili della funzione se la segnalazione
+non sia già stata oggetto di ricezione e/o non abbia già trovato risposta e/o soluzione.
+Ove si identifichi una segnalazione sul dispositivo che non possa essere risolta in autonomia dal
+personale di assistenza, richiedendo l’intervento di RS per un approfondimento di analisi ed una
+potenziale modifica al dispositivo, viene creato un oggetto di tipo ISSUE la cui gestione e
+risoluzione è definita nel seguito del presente documento.
+La creazione dell’oggetto di tipo ISSUE (non assegnato) su Azure DevOps è automatica a fronte
+dell’apertura di un CASE su SHAPE da parte del personale HD, con un opportuno flag valorizzato.
+Grazie all’integrazione tra i sistemi SHAPE ed Azure DevOps, tale condizione determina appunto
+la creazione automatica di un oggetto ISSUE non assegnato. Gli oggetti di tipo ISSUE non
+assegnati vengono esaminati dai RdP o Dev per confermare che siano ISSUE (segnalazioni) che
+richiedono ed esitano in una modifica nella progettazione del dispositivo.
+La responsabilità di analisi delle ISSUE non assegnate è in carico a tutti gli RdP ed esita in una
+delle condizioni descritte nel seguito:
+
+PAGINA 22 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+•
+
+ove le segnalazioni, a fronte dell’apertura della ISSUE e dell’analisi congiunta con RS
+fatta da parte di RdP, confermino la necessità di modifica al dispositivo, viene creato e
+registrato un oggetto di tipo BUG, assegnato per risoluzione alla risorsa opportuna;
+
+•
+
+ove il RdP e/o il progettista assegnato nel corso dell’analisi, condotta di concerto con il
+personale Help Desk, identifichi che la risoluzione della ISSUE si attua senza una modifica
+alla progettazione (esempi: completamento configurazione, attuazione di workflow
+funzionale alternativo), l’elemento di tipo ISSUE viene classificato come REJECTED (NOT
+ISSUE), identificando la motivazione attraverso la registrazione di una delle seguenti
+voci:
+o Duplicate
+o Postponed
+o Rejected (not an issue)
+o Required R&D action
+o Missing Documentation
+o Missing Functionality
+o Site customization
+o CustomPage Configuration
+o Overtaken by events
+
+Ove la segnalazione o feedback sul prodotto sia raccolta dalle altre funzioni aziendali sopra citate,
+la stessa viene notificata direttamente a RS che procede direttamente alla creazione di un
+oggetto di tipo ISSUE la cui gestione e risoluzione è definita nel seguito del presente documento.
+
+4.2 Valutazione e gestione delle segnalazioni di Product & Security
+Safety (Incident Management) e NC di prodotto
+In parallelo al processo operativo sopra descritto, nella tabella seguente sono riportate in
+estrema sintesi le tipologie di segnalazione e le ulteriori azioni organizzative da attuarsi. Il
+dettaglio operativo è definito nelle procedure del Sistema di Gestione Qualità per la gestione di
+reclami, NC, CAPA ed eventi avversi (cfr. PQ-8.2-02-EBIT, QPR000018, QPR000019) e relative
+istruzioni operative.
+TIPOLOGIA DI SEGNALAZIONE
+
+AZIONI DA ATTUARE
+
+a
+
+SEGNALAZIONE
+DI
+PROBLEMA
+SUL
+PRODOTTO CON POTENZIALE MANCATO
+INCIDENTE e/o INCIDENTE.
+
+b
+
+SEGNALAZIONE
+DI
+BLOCCANTE SUL PRODOTTO.
+
+c
+
+SEGNALAZIONI DI MALFUNZIONAMENTI
+NON BLOCCANTI.
+
+Comunicazione immediata a RA, RdP, RS, DRC, PP.
+RdP prende in carico la segnalazione per immediata analisi del
+malfunzionamento ed immediata verifica rispetto al processo di
+gestione del rischio.
+Comunicazione immediata a RdP, in copia PP.
+RdP prende in carico la segnalazione per immediata analisi del
+malfunzionamento.
+Comunicazione a PP, in copia a RdP
+
+d
+
+SEGNALAZIONE DI RICHIESTA DI NUOVA
+FUNZIONALITA’
+
+PROBLEMA
+
+Comunicazione a PP, in copia a RdP
+
+Nella registrazione della ISSUE, confermata da parte di RS e quindi classificata come NC di
+Prodotto che richiede una modifica al dispositivo, è necessario valutare se la gestione della stessa
+debba richiedere l’attivazione di un CAPA Plan.
+Nella registrazione di una ISSUE associata alle categorie a=”Potential Failure and/or Incident” e
+b=”Blocking Problem” è mandatorio esplicitare la motivazione per la quale l’attivazione di un
+PAGINA 23 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+CAPA Plan non sia ritenuta necessaria. La registrazione della motivazione si attua attraverso la
+sezione CAPA Plan Description.
+A titolo esplicativo, una ISSUE può non richiedere CAPA nel caso di “Single Issue – Low Risk of
+Repetition”.
+Nell’ambito delle riunioni di Complaint Management è responsabilità di RA la valutazione e
+verifica di attivazione dei CAPA Plan sulle ISSUE aperte.
+
+4.3 Valutazione e gestione delle non conformità di prodotto
+
+E’ compito del personale di Help Desk e/o del Responsabile di Progetto, per tutte le segnalazioni
+che rientrano nella categoria di tipo a), b) e c) sopra descritte, registrare il malfunzionamento
+nel sistema Azure DevOps come item di tipo Issue e procedere alle seguenti azioni:
+• Compilare in modo opportuno il modulo evidenziando
+le condizioni in cui il problema si è verificato e
+l’identificazione delle condizioni e delle azioni utili alla
+sua riproduzione28.
+• Creazione di un item Bug o task di Analisi
+assegnandone la gestione al responsabile di modulo o
+direttamente ad un progettista delegato.
+• Identificare una data attesa di
+dell’analisi del malfunzionamento29.
+
+completamento
+
+• Identificare gli elementi di configurazione di una o più
+versioni di prodotto in cui tale malfunzionamento si
+verifica30.
+Figura 4 - Stati Issue
+
+Ove il RdP e/o il progettista assegnato nel corso dell’analisi, condotta di concerto con il personale
+Help Desk, identifichi che la risoluzione della ISSUE si attua senza una modifica alla progettazione
+(esempi: completamento configurazione, attuazione di workflow funzionale alternativo),
+l’elemento di tipo ISSUE viene classificato REJECTED (NOT ISSUE).
+
+28
+
+Description, Symptoms e Steps to Reproduce.
+Target Resolve Date
+30
+Build
+29
+
+PAGINA 24 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+E’ compito di RdP procedere alla valutazione dell’impatto sulla sicurezza del prodotto in termini
+di gestione del rischi indotti dal malfunzionamento segnalato e dal processo di risoluzione dello
+stesso31, scalando immediatamente la segnalazione al Responsabile RS ed al Responsabile RA.
+E’ compito del progettista incaricato procedere con un’analisi per identificare opportune soluzioni
+e comunicare al RdP le azioni di modifica alla progettazione di risoluzione del problema ivi inclusa
+la stima di modifica e test per la risoluzione del problema.
+A fronte del completamento delle azioni di cui sopra è facoltà del RdP l’approvazione di una
+richiesta di modifica alla progettazione e la conseguente pianificazione, anche immediata, di
+un’attività di modifica al prodotto rilasciato, mediante produzione e rilascio di una Patch/Hotfix
+di risoluzione, avviando quindi il processo di risoluzione di un problema attraverso una
+modifica di progettazione al dispositivo.
+Nel caso di NC sul prodotto derivanti da segnalazioni di problematiche bloccanti è compito di RdP
+dare comunicazione a SPV e a PP sulla data attesa di rilascio della Patch/Hotfix risolutiva.
+Nel caso di NC sul prodotto derivanti da segnalazione di problematiche non bloccanti la data
+attesa di rilascio della SP/Patch/Hotfix risolutiva è parte della pianificazione estesa delle attività
+di rilascio che si attua nelle riunioni di avanzamento (Sprint Planning e/o Sprint Review)
+intermedie.
+Le procedure di progettazione e rilascio di una Patch/Hotfix nel processo di risoluzione di un
+problema richiedono a RdP:
+
+31
+
+•
+
+L’analisi sui possibili effetti collaterali derivanti dalla modifica prevista alla progettazione.
+
+•
+
+Ove necessario, ma non consigliabile, l’apertura di un ramo di progettazione rispetto alla
+versione del prodotto rilasciato, finalizzata alla solo risoluzione del problema.
+
+•
+
+L’identificazione delle attività di test di modulo e di insieme da attuarsi funzionali al
+rilascio della Hotfix, ivi incluse la definizione dei test di regressione da attuarsi.
+
+•
+
+Poiché il malfunzionamento può essere identificato su una versione precedente del
+software rilasciato, a completamento del processo di risoluzione del problema la nota di
+rilascio deve prevedere anche l’identificazione di versioni successive rilasciate del
+prodotto che possano essere soggette al malfunzionamento.
+
+•
+
+Aggiornare lo stato dell’item alla condizione Closed evidenziando gli estremi della
+versione della patch che contiene le correzioni.
+
+Escalate
+
+PAGINA 25 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+Le singole azioni di gestione di un Bug vengono registrate nel
+sistema Azure DevOps seguendo i flussi indicati nel diagramma a
+lato:
+• RdP crea il Bug nello uno stato Proposed assegnandolo al
+responsabile di modulo o al progettista.
+• Il responsabile di modulo o il progettista incaricato attuano
+l’analisi aggiornando lo stato a:
+- Active se l’attività di sviluppo della risoluzione del problema
+è iniziata.
+- Closed se il bug non richiede ulteriori azioni. Il responsabile
+di modulo o il progettista incaricato a completamento dello
+sviluppo e del test aggiornano lo stato a Resolved.
+• RdP modifica lo stato a Closed in contemporaneo al rilascio della
+Hotfix.
+Figura 5 - Stati Bug
+
+L’attività di rilascio di una SP/Hotfix risolutiva con l’esito delle azioni di cui sopra viene registrata
+nel sistema Azure DevOps associando ai singoli Task/Bug la versione di disponibilità nel campo
+Integrated In corrispondente.
+L’attività di rilascio di una SP/Hotfix risolutiva con l’esito delle azioni di cui sopra viene registrata
+nel sistema Azure DevOps associando ad un oggetto di tipo Deploy i vari Issue.
+A completamento delle attività di produzione del rilascio viene inviata una comunicazione a SPV
+e a PP. Tale comunicazione contiene in modo evidente la condizione di applicabilità della
+correzione stessa ed in particolare evidenzia esplicitamente le versioni di applicabilità e la
+criticità.
+La comunicazione avviene mediante pubblicazione in un’area dedicata sul sistema Azure DevOps,
+su cui viene mantenuta la storia di tutti i rilasci e/o Hotfix prodotti, e inoltrata in automatico ad
+una lista di distribuzione mantenuta da SPV (con tutti i soggetti interessati al ricevimento della
+notifica).
+
+4.4 Valutazione e gestione delle segnalazioni non bloccanti e nuovi
+requisiti
+TIPOLOGIA DI SEGNALAZIONE
+SEGNALAZIONI DI POTENZIALI
+REQUISITI DI PRODOTTO
+
+NUOVI
+
+AZIONI DA ATTUARE
+Comunicazione a PP, in copia a RdP
+
+Nel caso di segnalazioni a fronte dell’utilizzo del dispositivo che possano portare alla introduzione
+di nuovi requisiti o a modifiche funzionali a requisiti già esistenti, è compito del PM (Gestore
+dell’impianto) e/o di PP registrare le segnalazioni nel sistema Azure DevOps tramite la creazione
+di un elemento di tipo User Story. Ove la User Story sia creata da PM, la stessa viene assegnata
+al Responsabile dei PM che ne valuta la completezza dei contenuti e assegna/convalida la priorità
+di gestione della richiesta. A conclusione della valutazione RPM assegna l’elemento User Story a
+
+PAGINA 26 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+PP con gli elementi utili alla comprensione della richiesta e delle attese in termini di date di
+disponibilità e priorità dell’attività.
+L’approvazione di una User Story da parte di PP esita nella creazione e registrazione nel sistema
+Azure DevOps di:
+•
+
+Nuovi requisiti di prodotto: inserendo nel sistema Azure DevOps un elemento di tipo
+Requirement.
+
+•
+
+Richiesta di modifica ad un requisito di prodotto rilasciato: inserendo nel sistema
+Azure DevOps un elemento di tipo Change Request.
+
+In entrambi i casi PP deve procedere alle seguenti azioni:
+•
+
+Compilare in modo opportuno il modulo descrivendo nel modo più dettagliato possibile il
+requisito:
+o Requirement: se le specifiche di definizione del requisito sono sintetiche possono
+essere inserite direttamente nel sistema Azure DevOps 32, altrimenti devono essere
+dettagliate in un documento dedicato di definizione dei requisiti che viene collegato al
+requisito. In quest’ultimo caso si deve comunque registrare nel sistema Azure DevOps
+un riassunto della funzionalità33.
+o Change Request: se le specifiche sono minimali possono essere inserite direttamente
+nel sistema Azure DevOps34 altrimenti possono essere dettagliate in un documento
+dedicato e dettagliato che viene collegato alla richiesta di variante. In quest’ultimo
+caso si deve comunque registrare nel sistema Azure DevOps un riassunto della
+funzionalità35. Devono essere inoltre compilate le informazioni relative alla ragione del
+cambiamento ed all’impatto che questo ha nel ciclo di vita del prodotto 36.
+
+•
+
+Assegnare la gestione del Requirement/Change Request al responsabile di progetto.
+
+32
+
+Impostazione dei campi: Description, Impact Assesment.
+Impostazione dei campi: Description, Impact Assesment.
+34
+Impostazione dei campi: Description, Justification.
+35
+Impostazione del campo: Description
+36
+Impostazione dei campi: Impact on Architecture, Impact on User Experience, Impact on Technical Publications.
+33
+
+PAGINA 27 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+•
+
+Identificare una data in cui si ritiene auspicabile la disponibilità dell’implementazione
+richiesta37.
+
+È compito di PP convocare apposita riunione per sottoporre ad approvazione uno o più dei nuovi
+requisiti di prodotto e dare avvio alle attività di mantenimento e completamento di un prodotto
+rilasciato.
+L’attività di modifica alla progettazione si attua in conformità alla procedura di progettazione con
+riunione iniziale di analisi dell’adeguatezza dei requisiti e stesura di appropriato piano di sviluppo
+software.
+Nella definizione di Requirement o Change Request è responsabilità di PP l’attuazione delle
+attività di Risk Management con riferimento alle attività di identificazione di rischi e situazioni di
+rischio relative alla Usabilità del prodotto nella specifica funzionalità. L’esito della attività di Risk
+Management deve essere registrato nel campo Impact Assessment con specifica di Impact on
+UX (User Experience). L’esito dell’attività può includere una definizione di misure di riduzione di
+rischio su UX.
+E’ compito del Responsabile di Progetto procedere alla valutazione dell’impatto sul processo di
+gestione del rischio che la modifica alla progettazione per il soddisfacimento dei nuovi requisiti
+potrebbe indurre38.
+
+37
+38
+
+Impostazione del campo: Target Resolved Date
+Impostazione dei campi: Impact on Design/Development, Impact on Test
+
+PAGINA 28 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+SUITESTENSA Software
+
+5. Processo di gestione dei software terzi
+Per la gestione dei Software di produttori terzi si creano e assegnano nel sistema Azure DevOps
+degli oggetti logici che si caratterizzano per i loro contenuti e relazioni:
+Azure
+DevOps
+Item
+ExternallySourced
+Software
+ExternallySourced
+Software
+Revision
+
+Creabile
+da
+
+Assegnabile
+a
+
+Descrizione
+
+PP
+RdP
+
+PP
+RdP
+
+Descrizione di un software di terzi.
+
+PP
+RdP
+
+PP
+RdP
+
+Descrizione di una specifica versione di un
+software di terzi.
+
+Azure DevOps
+
+Questi oggetti sono in relazione tra di loro come rappresentato nello schema seguente:
+
+Externally-Sourced
+Software
+
+Externally-Sourced
+Software Revision
+
+E’ compito di RS creare nel sistema Azure DevOps gli oggetti relativi all’Externally-Sourced
+Software definendo il responsabile del monitoraggio delle nuove versioni con analisi delle
+relative limitazioni e compatibilità software.
+Il responsabile del monitoraggio si occuperà di tenere traccia dei nuovi rilasci associando un
+nuovo oggetto di tipo Externally-Sourced Software Revision.
+Sono associati a questo oggetto i relativi Test Case e Test Result che evidenziano la verifica dei
+test di integrazione effettuati per ogni versione del software di terzi.
+Qualora l’integrazione dell’oggetto Externally-Sourced Software Revision renda necessario uno
+sviluppo, definito da un nuovo requisito, si rientrerà nel Processo di gestione del piano di sviluppo
+del prodotto descritto nel Capitolo 3 del presente documento.
+Lo stato dell’oggetto di tipo Externally-Sourced Software Revision assume il seguente
+significato:
+•
+
+Active: la validazione della versione software indicata è ancora in corso, quindi non è
+ammesso il suo utilizzo in produzione.
+
+•
+
+Closed: la validazione della versione software indicata è stata completata con successo,
+non sono stati evidenziati malfunzionamenti e di conseguenza viene dichiarata la
+compatibilità e ammesso l’utilizzo in produzione.
+
+PAGINA 29 DI 29
+
+LC SUITESTENSA-EN – ANNEX A – REV. U
+
+

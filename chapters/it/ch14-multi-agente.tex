@@ -21,6 +21,7 @@ AI-DLC è progettato per funzionare con più agenti, simultaneamente o in sequen
     Google Gemini & \texttt{GEMINI.md} & Delega ad \texttt{AGENTS.md} \\
     OpenClaw & \texttt{OPENCLAW.md} & Delega ad \texttt{AGENTS.md} \\
     GitHub Copilot & \texttt{.github/copilot-instructions.md} & Non può importare \\
+    Visual Studio 2026 & \texttt{VISUALSTUDIO.md} & Importa \texttt{AGENTS.md}; regola DOC-01 \\
     \bottomrule
   \end{tabular}
   \caption{Entry point per ogni agente AI}
@@ -28,6 +29,8 @@ AI-DLC è progettato per funzionare con più agenti, simultaneamente o in sequen
 \end{table}
 
 La struttura è a stella: \texttt{AGENTS.md} è il centro, gli altri file orbitano intorno. Il contenuto sostanziale del protocollo --- le regole di rischio, i confidence tag, gli HALT trigger --- vive in \texttt{AGENTS.md}.
+
+\diagramfig{ch14-stella-multiagente}{Architettura multi-agente a stella: \texttt{AGENTS.md} al centro, \texttt{\_CONTEXT.md} come fonte di verità condivisa.}
 
 \begin{tipbox}
 \textbf{Regola d'oro:} modifica solo \texttt{AGENTS.md} per le regole comuni. Non modificare \texttt{CLAUDE.md}, \texttt{GEMINI.md}, \texttt{OPENCLAW.md} per aggiungere regole --- aggiornali solo per comportamenti specifici di quell'agente.
@@ -69,11 +72,30 @@ Esegui \texttt{sync-copilot} dopo ogni modifica a \texttt{AGENTS.md} e prima di 
 
 \textbf{La qualità del context condiviso determina la qualità del risultato.} Se \texttt{\_CONTEXT.md} è obsoleto, tutti gli agenti lavorano su informazioni sbagliate.
 
+\section{Visual Studio 2026 e la regola DOC-01}
+\label{sec:14-visualstudio}
+
+La versione 4.0.0 introduce \texttt{VISUALSTUDIO.md}, il file di startup per Visual Studio 2026. Importa \texttt{AGENTS.md} e aggiunge le specificità dell'ambiente solution/project (\texttt{.sln} e \texttt{.csproj}).
+
+La regola \textbf{DOC-01} impone: ogni progetto ha la propria documentazione in \texttt{projects\textbackslash <ProjectName>\textbackslash} (nella radice del repository). Nessun file di documentazione va nelle cartelle del codice sorgente.
+
+La solution include un progetto condiviso \texttt{AI-DLC.Documentation}: il file \texttt{AI-DLC.Documentation.csproj} sta nella radice del repository e raccoglie le cartelle di documentazione, anch'esse in radice:
+\begin{itemize}
+  \item \texttt{projects/<Project>/\_CONTEXT.md} --- stato del progetto
+  \item \texttt{projects/<Project>/PROGRESS.md} --- progress log
+  \item \texttt{projects/<Project>/instructions.md} --- regole specifiche
+  \item \texttt{projects/shared/} --- documentazione cross-progetto
+  \item \texttt{docs/\_solution/} --- documentazione a livello di solution
+\end{itemize}
+
+Non è necessario usare \texttt{VISUALSTUDIO.md} se il progetto non ha una solution Visual Studio --- è completamente opzionale.
+
 \section*{\LabelSummary}
 
 \begin{itemize}
   \item \texttt{AGENTS.md} è il centro del sistema multi-agente; gli altri file sono wrapper.
   \item Il \texttt{\_CONTEXT.md} condiviso in git garantisce la coerenza tra agenti diversi.
   \item \texttt{sync-copilot} verifica l'allineamento di Copilot dopo ogni modifica alle regole comuni.
+  \item Visual Studio 2026 introduce la regola DOC-01: documentazione separata dal codice in \texttt{AI-DLC.Documentation}.
   \item Il multi-agente funziona bene per lavoro asincrono; non risolve i conflitti di edit concorrenti.
 \end{itemize}

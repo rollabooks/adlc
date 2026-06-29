@@ -1,0 +1,36 @@
+@startuml ch14-stella-multiagente
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "Noto Sans"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam ComponentBackgroundColor #F5F5F5
+skinparam ComponentBorderColor #333333
+skinparam ArrowColor #333333
+
+component "_CONTEXT.md\n(fonte di verita, condiviso in git)" as CTX #E8F4FD
+component "AGENTS.md\n(contratto comune)" as AGENTS
+
+component "CLAUDE.md" as CLAUDE
+component "GEMINI.md" as GEMINI
+component "OPENCLAW.md" as OPENCLAW
+component "VISUALSTUDIO.md" as VS
+component ".github/copilot-instructions.md" as COPILOT
+
+CLAUDE --> AGENTS : importa
+GEMINI --> AGENTS : importa
+OPENCLAW --> AGENTS : importa
+VS --> AGENTS : importa
+COPILOT ..> AGENTS : adotta i principi\n(non importa)
+
+AGENTS --> CTX : legge lo stato
+
+note bottom of CTX
+  Tutti gli agenti leggono
+  lo stesso _CONTEXT.md:
+  contesto allineato senza
+  briefing manuale.
+end note
+
+@enduml

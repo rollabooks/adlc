@@ -1,0 +1,47 @@
+@startuml ch03-ciclo-sessione
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "Noto Sans"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam ActivityBackgroundColor #F5F5F5
+skinparam ActivityBorderColor #333333
+skinparam ActivityDiamondBackgroundColor #E8F4FD
+skinparam ActivityDiamondBorderColor #1976D2
+skinparam ArrowColor #333333
+
+start
+:Bootstrap
+l'agente legge _CONTEXT.md
+e conferma il contesto;
+:@Task
+obiettivo, AI Sizing, test proposti;
+:Classificazione del rischio;
+
+if (Livello?) then (LOW)
+  :Esecuzione diretta
+e notifica;
+elseif (MEDIUM) then (MEDIUM)
+  :Approvazione del piano;
+  :Esecuzione;
+else (HIGH / HIGH+)
+  :HALT, conferma esplicita;
+  :Esecuzione;
+endif
+
+:Suite completa
+test del task + regressione;
+note right
+  Se un test fallisce
+  si torna all'esecuzione
+end note
+
+:@checkpoint
+aggiorna _CONTEXT.md e PROGRESS.md;
+note right
+  Il task successivo
+  riparte da @Task
+end note
+stop
+
+@enduml

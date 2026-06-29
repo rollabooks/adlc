@@ -1,6 +1,6 @@
 # AI-DLC — User Manual (English)
 
-> Framework version: 3.3.0
+> Framework version: 4.0.0
 > Audience: developers who want to use AI-DLC to orchestrate one or more AI agents in a software project, even without prior experience with similar systems.
 
 ---

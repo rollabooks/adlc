@@ -33,6 +33,15 @@ Constraints: SEC-01,SEC-02,SEC-03,PERF-01,PERF-02. Proceed?
 
 In tre secondi, l'agente sa tutto. Lorenzo scrive: \textit{``Procedi.''}
 
+\begin{beforeafterbox}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\textbf{Senza AI-DLC} & \textbf{Con AI-DLC} \\
+\midrule
+Dieci minuti per riepilogare stack, vincoli e contesto del task & Bootstrap: l'agente conferma tutto in pochi secondi leggendo il file \\[3pt]
+Ripeti a voce ``usiamo Zod, auth OIDC, niente PII nei log'' & I vincoli SEC/PERF sono già nel contesto: l'agente li cita da solo \\
+\end{tabularx}
+\end{beforeafterbox}
+
 \begin{tipbox}
 \textbf{Pattern da seguire:} all'inizio di ogni sessione, chiedi sempre la conferma del contesto prima di qualsiasi istruzione. È il modo per verificare che l'agente abbia letto \texttt{\_CONTEXT.md} correttamente.
 \end{tipbox}
@@ -178,6 +187,8 @@ DURANTE LA SESSIONE
 FINE SESSIONE
   +- @checkpoint → aggiorna _CONTEXT.md + PROGRESS.md → commit
 \end{lstlisting}
+
+\diagramfig{ch03-ciclo-sessione}{Il ciclo di una sessione AI-DLC, dal bootstrap al checkpoint.}
 
 \section*{\LabelSummary}
 

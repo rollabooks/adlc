@@ -192,7 +192,7 @@ T-010.1 — Notifiche in-app (polling ogni 30s) — questa sessione
   - Tabella notifications nel DB
   - Endpoint GET /notifications (ultime 20, non lette)
   - Endpoint POST /notifications/:id/read
-  
+
 T-010.2 — WebSocket real-time — sessione successiva
 T-010.3 — Queue Redis e worker — dopo T-010.2
 

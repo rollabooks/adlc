@@ -5,7 +5,7 @@
 \chapter{Model Levels: quale AI per quale task}
 \label{ch:model-levels}
 
-C'è un errore comune nell'uso degli agenti AI: usare sempre il modello più potente disponibile. Il primo motivo è il costo: i modelli più potenti costano di più in token. Il secondo è la latency: su task semplici e frequenti la differenza è percepibile e non giustificata.
+C'è un errore comune nell'uso degli agenti AI: usare sempre il modello più potente disponibile. Il primo motivo è il costo: i modelli più potenti costano di più in token. Il secondo è la latenza: su task semplici e frequenti la differenza è percepibile e non giustificata.
 
 AI-DLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che mappa la complessità del task al modello appropriato.
 
@@ -70,7 +70,7 @@ Esempio per TaskFlow API --- Lorenzo implementa \texttt{GET /tasks} con filtri:
 
 \subsection*{Passo 2 --- Applica il risk floor}
 
-Il task è classificato MEDIUM. Il risk floor per MEDIUM è livello 3. Anche se la stima token suggerisce livello 2, il level sale a 3.
+Il task è classificato MEDIUM. Il risk floor per MEDIUM è livello 3. Anche se la stima token suggerisce livello 2, il livello sale a 3.
 
 \begin{lstlisting}[language=,caption={AI Sizing in \_CONTEXT.md}]
 | Active Task Token Est.   | 2000/2500/4500  |
@@ -104,6 +104,6 @@ Il risk floor è cumulativo: un task HIGH (floor 5) che tocca auth (floor 6) usa
 \begin{itemize}
   \item I Model Level (1--7) mappano la complessità del task al modello AI appropriato.
   \item La stima è \texttt{input/output/totale} in token; il mapping vendor concreto è in \texttt{manifest.json}.
-  \item Il risk floor forza un minimum level indipendentemente dalla stima token.
+  \item Il risk floor forza un livello minimo indipendentemente dalla stima token.
   \item La stima migliora con la pratica; le prime settimane è normale sbagliare.
 \end{itemize}

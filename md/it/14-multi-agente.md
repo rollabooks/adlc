@@ -19,8 +19,11 @@ Ogni agente AI ha il suo file di startup nella radice del repository. AI-DLC li 
 | **Google Gemini** | `GEMINI.md` | Importa e delega ad `AGENTS.md` |
 | **OpenClaw** | `OPENCLAW.md` | Importa e delega ad `AGENTS.md` |
 | **GitHub Copilot** | `.github/copilot-instructions.md` | Caricato automaticamente dall'IDE, non può importare |
+| **Visual Studio 2026** | `VISUALSTUDIO.md` | Importa `AGENTS.md`; regola DOC-01 per il progetto documentazione |
 
 La struttura è a stella: `AGENTS.md` è il centro, gli altri file orbitano intorno. Il contenuto sostanziale del protocollo — le regole di rischio, i confidence tag, gli HALT trigger, il bootstrap — vive in `AGENTS.md`. Gli altri file lo importano o ne adottano i principi.
+
+![Architettura multi-agente a stella: AGENTS.md al centro, _CONTEXT.md come fonte di verità condivisa](figures/it/ch14-stella-multiagente.png)
 
 **Copilot è l'eccezione:** non può importare file esterni, quindi `.github/copilot-instructions.md` contiene una versione adattata delle stesse regole. Il tool `sync-copilot` (lo vedremo tra poco) serve proprio a mantenere l'allineamento.
 
@@ -93,7 +96,7 @@ bash .ai-dlc/tools/sync-copilot.sh
 Output tipico:
 
 ```
-sync-copilot — AI-DLC v3.3.0
+sync-copilot — AI-DLC v4.0.0
 
 Checking alignment: AGENTS.md ↔ .github/copilot-instructions.md
 
@@ -140,12 +143,59 @@ Il multi-agente funziona bene per il lavoro asincrono e per la divisione di ruol
 
 ---
 
+## 14.8 Visual Studio 2026 e la regola DOC-01
+
+La versione 4.0.0 introduce `VISUALSTUDIO.md`, il file di startup per Visual Studio 2026 con la sua integrazione di GitHub Copilot. Funziona come `CLAUDE.md` — importa `AGENTS.md` con `@AGENTS.md` e aggiunge solo le specificità dell'ambiente Visual Studio.
+
+La differenza principale rispetto a VS Code è che Visual Studio lavora con **solution e project** (`.sln` e `.csproj`). Questo richiede una convenzione aggiuntiva su dove vivono i file di documentazione.
+
+### La regola DOC-01
+
+In un workspace Visual Studio, AI-DLC impone una regola chiamata **DOC-01**:
+
+> Ogni progetto deve avere la propria documentazione in `projects\<ProjectName>\` (nella radice del repository). Nessun file di documentazione va nelle cartelle del codice sorgente.
+
+In pratica, la solution include un progetto condiviso `AI-DLC.Documentation`: il file `AI-DLC.Documentation.csproj` sta nella radice del repository e raccoglie le cartelle di documentazione, anch'esse in radice:
+
+```
+.                          ← radice del repository
+├── AI-DLC.Documentation.csproj
+├── docs\
+│   └── _solution\         ← documentazione a livello di solution
+└── projects\
+    ├── MyApi\
+    │   ├── _CONTEXT.md
+    │   ├── PROGRESS.md
+    │   └── instructions.md
+    ├── MyWorker\
+    │   ├── _CONTEXT.md
+    │   ├── PROGRESS.md
+    │   └── instructions.md
+    └── shared\            ← documentazione cross-progetto
+```
+
+La priorità dei file rimane quella standard AI-DLC, ma adattata al contesto Visual Studio:
+
+1. `projects\<Project>\_CONTEXT.md` — stato del progetto
+2. `projects\<Project>\instructions.md` — regole del progetto
+3. `.ai-dlc\company\` — processi aziendali
+4. `.ai-dlc\modules\` — framework (read-only)
+
+### Quando si usa
+
+`VISUALSTUDIO.md` si carica automaticamente quando si lavora in Visual Studio 2026 con l'integrazione Copilot. La `SKILL_VISUALSTUDIO.md` va caricata esplicitamente quando si lavora su struttura della solution, riferimenti `.csproj`, o organizzazione della documentazione.
+
+Non è necessario usare `VISUALSTUDIO.md` se il tuo progetto non ha una solution Visual Studio — è completamente opzionale. Se usi VS Code con Copilot, il file di riferimento rimane `.github/copilot-instructions.md`.
+
+---
+
 ## Riepilogo
 
-- AI-DLC fornisce file di startup per ogni agente principale: `AGENTS.md` (Codex), `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `.github/copilot-instructions.md` (Copilot).
+- AI-DLC fornisce file di startup per ogni agente principale: `AGENTS.md` (Codex), `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `VISUALSTUDIO.md` (Visual Studio 2026), `.github/copilot-instructions.md` (Copilot).
 - La regola d'oro: modifica solo `AGENTS.md` per le regole comuni. Gli altri file sono wrapper o eccezioni.
 - Il `_CONTEXT.md` condiviso in git è il meccanismo di coerenza: tutti gli agenti leggono lo stesso stato del progetto.
 - `sync-copilot` verifica l'allineamento di Copilot con `AGENTS.md` — eseguilo dopo ogni modifica alle regole comuni.
+- Visual Studio 2026 introduce la regola DOC-01: documentazione separata dal codice in un progetto `AI-DLC.Documentation` condiviso.
 - Il multi-agente funziona bene per lavoro asincrono e ruoli distinti; non risolve i conflitti di edit concorrenti.
 
 Nel prossimo capitolo affrontiamo gli scenari più complessi: monorepo con più sottoprogetti, estensione aziendale con processi SDLC aziendali, e analisi di codebase legacy.

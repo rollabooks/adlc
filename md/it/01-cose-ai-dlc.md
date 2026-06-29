@@ -10,6 +10,14 @@ Il decimo giorno, il team ha tre conversazioni diverse con tre agenti diversi, o
 
 È a questo punto che Lorenzo decide di adottare AI-DLC.
 
+> **Prima e dopo — Senza AI-DLC / Con AI-DLC**
+
+| Senza AI-DLC | Con AI-DLC |
+|---|---|
+| Il codice del pomeriggio ignora le convenzioni decise la mattina | Le convenzioni vivono in `_CONTEXT.md` e l'agente le rilegge a ogni sessione |
+| Tre agenti, tre contesti impliciti scollegati | Un solo `_CONTEXT.md` condiviso: stessa fonte di verità per tutti |
+| Ogni ripresa del progetto riparte da zero | Ogni sessione riprende dal punto in cui eri |
+
 ---
 
 ## 1.1 I quattro problemi che AI-DLC risolve
@@ -54,7 +62,7 @@ Il valore è reale e misurabile. Kim e Yegge lo riassumono in cinque dimensioni 
 
 ### Il problema del 70%
 
-L'entusiasmo per la velocità generativa si scontra però con un muro ingegneristico ben documentato. Addy Osmani, nel suo *Vibe Coding: The Future of Programming* (O'Reilly, 2025), lo chiama **il problema del 70%**: lasciata libera, l'AI completa circa il 70% di un progetto con una velocità sbalorditiva, generando prototipi che sembrano funzionare. Ma il restante 30% — casi limite, architettura, manutenibilità a lungo termine, sicurezza — diventa un *last mile* frustrante, dove la velocità iniziale si trasforma in rendimenti decrescenti.
+L'entusiasmo per la velocità generativa si scontra però con un muro ingegneristico ben documentato. Addy Osmani, nel suo *Beyond Vibe Coding* (O'Reilly, 2025), lo chiama **il problema del 70%**: lasciata libera, l'AI completa circa il 70% di un progetto con una velocità sbalorditiva, generando prototipi che sembrano funzionare. Ma il restante 30% — casi limite, architettura, manutenibilità a lungo termine, sicurezza — diventa un *last mile* frustrante, dove la velocità iniziale si trasforma in rendimenti decrescenti.
 
 La spiegazione è classica: nei termini di Fred Brooks, l'AI eccelle sulla **complessità accidentale** (il lavoro ripetitivo e meccanico) ma non sulla **complessità essenziale** (capire e governare la difficoltà intrinseca del problema), che resta sulle spalle umane. Steve Yegge descrive gli LLM di oggi come *«junior developer incredibilmente produttivi, ma potenzialmente sotto l'effetto di sostanze»*: rapidi, entusiasti e a volte fuori strada. Il problema non è la competenza, è che **la loro sicurezza apparente supera di gran lunga la loro affidabilità**.
 

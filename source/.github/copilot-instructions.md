@@ -64,8 +64,9 @@ Technology-agnostic. Context-driven. Security & Performance by design.
 | Operating modes | `00_MODE.md` |
 | Phase modules | `02` through `06` |
 | Workflows | `07_SPECIAL_LANES.md`, `08_PROMPT_LIBRARY.md`, `09_CODEBASE_ANALYSIS.md`, `10_DOCUMENTATION.md`, `11_BUGFIX_PLAYBOOK.md` |
+| Quality gates | `12_OVERCONFIDENCE.md`, `13_CONTENT_VALIDATION.md`, `14_STRUCTURED_QUESTIONS.md` |
 | Constraints | `SEC_CONSTRAINTS.md`, `PERF_CONSTRAINTS.md` |
-| Templates | `templates/CONTEXT_TEMPLATE.md`, `templates/CONTEXT_MIN.md`, `templates/PROGRESS_TEMPLATE.md`, `templates/EPIC_TEMPLATE.md`, `templates/TASK_TEMPLATE.md`, `templates/DECISION_RECORD_TEMPLATE.md`, `templates/PROJECT_INSTRUCTIONS_TEMPLATE.md`, `templates/COMPANY_PROCESS_TEMPLATE.md` |
+| Templates | `templates/CONTEXT_TEMPLATE.md`, `templates/CONTEXT_MIN.md`, `templates/PROGRESS_TEMPLATE.md`, `templates/EPIC_TEMPLATE.md`, `templates/TASK_TEMPLATE.md`, `templates/DECISION_RECORD_TEMPLATE.md`, `templates/TRACEABILITY_TEMPLATE.md`, `templates/QUESTIONS_TEMPLATE.md`, `templates/PROJECT_INSTRUCTIONS_TEMPLATE.md`, `templates/COMPANY_PROCESS_TEMPLATE.md` |
 
 ## TASK SIZING
 

@@ -78,6 +78,7 @@ triggers:
       - "CLAUDE.md"
       - "GEMINI.md"
       - "OPENCLAW.md"
+      - "VISUALSTUDIO.md"
       - ".github/copilot-instructions.md"
     reason: AI-DLC framework files and startup contracts
     risk: HIGH

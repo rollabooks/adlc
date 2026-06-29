@@ -16,6 +16,7 @@ progetto/
 ├── CLAUDE.md                        ← Claude Code
 ├── GEMINI.md                        ← Google Gemini
 ├── OPENCLAW.md                      ← OpenClaw
+├── VISUALSTUDIO.md                  ← Visual Studio 2026
 ├── .github/
 │   └── copilot-instructions.md      ← GitHub Copilot
 └── .ai-dlc/
@@ -42,6 +43,7 @@ cp /tmp/adlc/AGENTS.md .
 cp /tmp/adlc/CLAUDE.md .
 cp /tmp/adlc/GEMINI.md .
 cp /tmp/adlc/OPENCLAW.md .
+cp /tmp/adlc/VISUALSTUDIO.md .
 cp -r /tmp/adlc/.github .
 cp -r /tmp/adlc/.ai-dlc .
 ```
@@ -57,6 +59,7 @@ Copy-Item "$env:TEMP\adlc\AGENTS.md" .
 Copy-Item "$env:TEMP\adlc\CLAUDE.md" .
 Copy-Item "$env:TEMP\adlc\GEMINI.md" .
 Copy-Item "$env:TEMP\adlc\OPENCLAW.md" .
+Copy-Item "$env:TEMP\adlc\VISUALSTUDIO.md" .
 Copy-Item "$env:TEMP\adlc\.github" . -Recurse
 Copy-Item "$env:TEMP\adlc\.ai-dlc" . -Recurse
 ```
@@ -166,10 +169,10 @@ bash .ai-dlc/tools/validate.sh
 L'output atteso è simile a questo:
 
 ```
-AI-DLC validation — v3.3.0
+AI-DLC validation — v4.0.0
 
 ✅ Framework files present
-✅ AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md found
+✅ AGENTS.md, CLAUDE.md, GEMINI.md, OPENCLAW.md, VISUALSTUDIO.md found
 ✅ .github/copilot-instructions.md found
 ✅ halt-triggers.yaml valid
 ✅ manifest.json valid

@@ -1,6 +1,6 @@
 {
   "name": "ai-dlc-framework",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "paths": {
     "framework": ".ai-dlc/modules",
     "project": ".ai-dlc/project",
@@ -33,6 +33,8 @@
     "claude": "CLAUDE.md",
     "gemini": "GEMINI.md",
     "openclaw": "OPENCLAW.md",
+    "visualstudio": "VISUALSTUDIO.md",
+    "visualstudio_csproj": "AI-DLC.Documentation.csproj",
     "halt_triggers": ".ai-dlc/halt-triggers.yaml"
   },
   "templates": {
@@ -43,6 +45,8 @@
     "decision_record": ".ai-dlc/modules/templates/DECISION_RECORD_TEMPLATE.md",
     "progress": ".ai-dlc/modules/templates/PROGRESS_TEMPLATE.md",
     "project_instructions": ".ai-dlc/modules/templates/PROJECT_INSTRUCTIONS_TEMPLATE.md",
+    "traceability": ".ai-dlc/modules/templates/TRACEABILITY_TEMPLATE.md",
+    "questions": ".ai-dlc/modules/templates/QUESTIONS_TEMPLATE.md",
     "company_process": ".ai-dlc/modules/templates/COMPANY_PROCESS_TEMPLATE.md",
     "projects_index": ".ai-dlc/modules/templates/PROJECTS_TEMPLATE.json"
   },
@@ -50,7 +54,8 @@
     "manifest": ".ai-dlc/schemas/manifest.schema.json",
     "projects": ".ai-dlc/schemas/projects.schema.json",
     "processed_company": ".ai-dlc/schemas/processed-company.schema.json",
-    "halt_triggers": ".ai-dlc/schemas/halt-triggers.schema.json"
+    "halt_triggers": ".ai-dlc/schemas/halt-triggers.schema.json",
+    "questions": ".ai-dlc/schemas/questions.schema.json"
   },
   "ci_examples": {
     "github_actions_validate": ".ai-dlc/examples/github-actions-validate.yml"

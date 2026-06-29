@@ -7,7 +7,7 @@
 \label{ch:introduzione}
 
 \begin{tipbox}
-\textbf{Perché questo libro, in 30 secondi.} Gli agenti AI scrivono codice a una velocità sbalorditiva, ma dimenticano il contesto, ignorano i vincoli, a volte inventano e fanno troppo. \textbf{AI-DLC} è un metodo pratico --- solo file Markdown e JSON nel tuo repository --- che dà all'agente memoria persistente (\texttt{\_CONTEXT.md}, \texttt{PROGRESS.md}), vincoli sempre visibili (SEC/PERF), un freno per le operazioni rischiose (HALT trigger), un modo per dichiarare l'incertezza (confidence tag) e un'unità di lavoro test-driven (il \textit{task}). Il risultato: la velocità del \textit{vibe coding} senza perdere il controllo. Se hai fretta, la mappa è nella pagina \textit{``AI-DLC in una schermata''} qui dopo; se hai 30 minuti, il Capitolo~\ref{ch:setup-primo-progetto} ti mette in piedi su un progetto reale.
+\textbf{Perché questo libro, in 30 secondi.} Gli agenti AI scrivono codice a una velocità sbalorditiva, ma dimenticano il contesto, ignorano i vincoli, a volte inventano e fanno troppo. \textbf{AI-DLC} è un metodo pratico --- solo file Markdown e JSON nel tuo repository --- che dà all'agente memoria persistente (\texttt{\_CONTEXT.md}, \texttt{PROGRESS.md}), vincoli sempre visibili (SEC/PERF), un freno per le operazioni rischiose (HALT trigger), un modo per dichiarare l'incertezza (confidence tag) e un'unità di lavoro test-driven (il \textit{task}). Il risultato: la velocità del \textit{vibe coding} senza perdere il controllo. Se hai fretta, la mappa è nella pagina \textit{``AI-DLC in una schermata''} qui dopo; se hai 30 minuti, il Capitolo~\ref{ch:setup-primo-progetto} ti mette in piedi su un progetto reale. \textbf{Alla fine saprai trasformare Claude, Codex e Copilot da assistenti imprevedibili in collaboratori governati da un protocollo --- con memoria, vincoli e freni che decidi tu.}
 \end{tipbox}
 
 Hai già lavorato con un agente AI per qualche ora e hai visto come può essere straordinariamente utile. Gli chiedi di progettare un endpoint, lui risponde con codice pulito, test inclusi. Gli chiedi di rivedere un modulo, individua tre problemi che non avevi notato. Sembra quasi troppo bello.
@@ -50,6 +50,17 @@ Non è un problema degli agenti in sé --- è strutturale. Un agente AI, per sua
 
 La soluzione non è trovare un agente ``migliore''. La soluzione è costruire un sistema che sopravvive tra una sessione e l'altra.
 
+\begin{beforeafterbox}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\textbf{Senza AI-DLC} & \textbf{Con AI-DLC} \\
+\midrule
+Ogni mattina rispieghi stack, vincoli e dove eravamo & L'agente conferma il contesto in pochi secondi leggendo \texttt{\_CONTEXT.md} \\[3pt]
+Un vincolo discusso a voce viene dimenticato & I vincoli SEC/PERF sono riletti prima di ogni operazione critica \\[3pt]
+L'agente modifica lo schema ``per semplificare'' & Tocca lo schema solo dopo un HALT e la tua conferma \\[3pt]
+La documentazione ``inferita'' cita funzioni inesistenti & Ogni affermazione incerta è marcata \texttt{ASSUMPTION} da verificare \\
+\end{tabularx}
+\end{beforeafterbox}
+
 \section*{Cos'è AI-DLC}
 
 \textbf{AI-DLC} --- \textit{AI-Driven Development Life Cycle} --- è quel sistema. Non è un'AI, non è un tool da installare, non è un framework specifico per un linguaggio. È un insieme di file Markdown e JSON che vivono nel tuo repository e che dicono all'agente:
@@ -62,6 +73,10 @@ La soluzione non è trovare un agente ``migliore''. La soluzione è costruire un
 \end{itemize}
 
 Il risultato è un agente che lavora \textit{in continuità}: ogni sessione parte dal punto in cui la precedente si è fermata. Non perché l'agente ``ricordi'' --- ma perché il contesto è scritto, strutturato e sempre disponibile.
+
+\begin{notebox}
+\textbf{Due sigle da non confondere.} In questo libro \textbf{AI-DLC} significa \textit{usare} agenti AI per sviluppare software. Da non confondere con \textbf{ADLC} (\textit{Agent Development Lifecycle}, usato da IBM, Microsoft, Salesforce), che riguarda il \textit{costruire e governare} agenti come prodotto. Qui parliamo della prima: il software lo scrivi tu con l'agente, non costruisci l'agente.
+\end{notebox}
 
 \section*{Come leggere questo libro}
 

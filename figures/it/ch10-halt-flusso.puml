@@ -1,0 +1,29 @@
+@startuml ch10-halt-flusso
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "Noto Sans"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam sequenceParticipantBackgroundColor #F5F5F5
+skinparam sequenceParticipantBorderColor #333333
+skinparam sequenceLifeLineBorderColor #9E9E9E
+skinparam sequenceArrowColor #333333
+
+participant "Sviluppatore" as Dev
+participant "Agente AI" as AI
+
+Dev -> AI : richiesta che tocca un path sensibile
+activate AI
+AI -> AI : match in halt-triggers.yaml
+AI --> Dev : HALT: piano + rischi + livello minimo
+deactivate AI
+
+note over Dev : valuta il piano
+
+Dev -> AI : conferma esplicita
+activate AI
+AI -> AI : esegue la modifica
+AI --> Dev : notifica completamento
+deactivate AI
+
+@enduml

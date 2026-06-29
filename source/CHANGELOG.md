@@ -2,6 +2,30 @@
 
 All notable changes to AI-DLC are documented here.
 
+## 4.0.0 - 2026-06-29
+
+### Added
+- Module `12_OVERCONFIDENCE.md`: overconfidence prevention — mandatory vagueness detection, red-flag keywords, anti-patterns, and minimum question coverage by phase.
+- Module `13_CONTENT_VALIDATION.md`: pre-write validation checklist for fenced code blocks, Markdown structure, Mermaid/PlantUML diagrams, and embedded structured data.
+- Module `14_STRUCTURED_QUESTIONS.md`: protocol for persisting decisions in auditable files (`QUESTIONS_TEMPLATE.md`), traceability rules, and integration with adaptive depth.
+- `VISUALSTUDIO.md` agent startup file for Visual Studio 2026 Copilot integration.
+- `SKILL_VISUALSTUDIO.md` skill for solution/project navigation and documentation ownership in Visual Studio.
+- `AI-DLC.Documentation.csproj` (repo root) shared documentation project for Visual Studio solutions.
+- Template `TRACEABILITY_TEMPLATE.md` for requirement-to-code tracing.
+- Template `QUESTIONS_TEMPLATE.md` for structured question files.
+- Schema `questions.schema.json` for structured questions validation.
+- `manifest.json` paths: `visualstudio`, `visualstudio_csproj`.
+
+### Changed
+- Architecture upgraded from 3-Level to 4-Level (modules → company → project → session state).
+- `manifest.json` version bumped to 4.0.0.
+- README version header now uses semantic version (`4.0.0`) instead of date-based format.
+- Modules 12-14 marked as ALWAYS-load alongside `00_MODE.md` and `01_CORE_RULES.md`.
+
+### Breaking
+- Modules `12_OVERCONFIDENCE.md` and `13_CONTENT_VALIDATION.md` are mandatory (always loaded). Agents that skip them violate the protocol.
+- `VISUALSTUDIO.md` introduces `DOC-01` rule: documentation must live in `projects\<ProjectName>\` (repo root), not in application source folders.
+
 ## 3.3.0 - 2026-05-13
 
 ### Added

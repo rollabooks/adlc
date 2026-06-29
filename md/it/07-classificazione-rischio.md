@@ -128,6 +128,8 @@ Non procedo con l'implementazione finché AD-01 è aperta.
 
 ---
 
+![Classificazione del rischio: dal livello all'azione richiesta e al model level minimo](figures/it/ch07-rischio-azione.png)
+
 ## 7.2 Come l'agente classifica le richieste
 
 La classificazione avviene prima di qualsiasi azione. L'agente esamina tre fattori:

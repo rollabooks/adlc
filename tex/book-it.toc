@@ -5,7 +5,7 @@
 \contentsline {part}{I\hspace {1em}Il Framework}{1}{part.1}%
 \contentsline {chapter}{\numberline {1}AI-DLC: cos'è e perché esiste}{3}{chapter.1}%
 \contentsline {section}{\numberline {1.1}I quattro problemi che AI-DLC risolve}{3}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Dal vibe coding all'ingegneria: dove si colloca AI-DLC}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.2}Dal vibe coding all'ingegneria: dove si colloca AI-DLC}{5}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Cosa NON è AI-DLC}{7}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Quando usarlo (e quando no)}{8}{section.1.4}%
 \contentsline {section}{\numberline {1.5}I prerequisiti}{8}{section.1.5}%
@@ -46,9 +46,9 @@
 \contentsline {chapter}{\numberline {6}Fasi e Modes}{35}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Le sette fasi del ciclo AI-Driven}{35}{section.6.1}%
 \contentsline {section}{\numberline {6.2}I cinque Modes}{35}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Scenario tipico su TaskFlow API}{36}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Errori comuni con Fasi e Modes}{37}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Dal task al codice: il ciclo test-driven}{37}{section.6.5}%
+\contentsline {section}{\numberline {6.3}Scenario tipico su TaskFlow API}{37}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Errori comuni con Fasi e Modes}{38}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Dal task al codice: il ciclo test-driven}{38}{section.6.5}%
 \contentsline {part}{III\hspace {1em}Il Sistema di Sicurezza}{41}{part.3}%
 \contentsline {chapter}{\numberline {7}Classificazione del rischio}{43}{chapter.7}%
 \contentsline {section}{\numberline {7.1}I cinque livelli}{43}{section.7.1}%
@@ -66,7 +66,7 @@
 \contentsline {chapter}{\numberline {10}HALT Triggers: il freno di emergenza}{55}{chapter.10}%
 \contentsline {section}{\numberline {10.1}Il file \texttt {halt-triggers.yaml}}{55}{section.10.1}%
 \contentsline {section}{\numberline {10.2}Override di progetto}{56}{section.10.2}%
-\contentsline {section}{\numberline {10.3}I trigger non si disattivano mai con i Modes}{56}{section.10.3}%
+\contentsline {section}{\numberline {10.3}I trigger non si disattivano mai con i Modes}{57}{section.10.3}%
 \contentsline {chapter}{\numberline {11}Vincoli SEC e PERF}{59}{chapter.11}%
 \contentsline {section}{\numberline {11.1}La libreria SEC (sicurezza)}{59}{section.11.1}%
 \contentsline {section}{\numberline {11.2}La libreria PERF (performance)}{59}{section.11.2}%
@@ -76,9 +76,10 @@
 \contentsline {chapter}{\numberline {12}Moduli e Skill: caricare solo ciò che serve}{65}{chapter.12}%
 \contentsline {section}{\numberline {12.1}La distinzione tra moduli e skill}{65}{section.12.1}%
 \contentsline {section}{\numberline {12.2}La mappa dei moduli}{65}{section.12.2}%
-\contentsline {section}{\numberline {12.3}La mappa delle skill}{65}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Skill personalizzate di progetto}{65}{section.12.4}%
-\contentsline {section}{\numberline {12.5}Il modulo \texttt {07\_SPECIAL\_LANES.md}}{67}{section.12.5}%
+\contentsline {section}{\numberline {12.3}I moduli always-on: la triade della qualità}{65}{section.12.3}%
+\contentsline {section}{\numberline {12.4}La mappa delle skill}{67}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Skill personalizzate di progetto}{67}{section.12.5}%
+\contentsline {section}{\numberline {12.6}Il modulo \texttt {07\_SPECIAL\_LANES.md}}{68}{section.12.6}%
 \contentsline {chapter}{\numberline {13}Comandi conversazionali}{69}{chapter.13}%
 \contentsline {section}{\numberline {13.1}La lista completa}{69}{section.13.1}%
 \contentsline {section}{\numberline {13.2}I comandi più usati in dettaglio}{69}{section.13.2}%
@@ -88,7 +89,8 @@
 \contentsline {section}{\numberline {14.1}Uno stesso progetto, più entry point}{73}{section.14.1}%
 \contentsline {section}{\numberline {14.2}Un workflow multi-agente su TaskFlow API}{74}{section.14.2}%
 \contentsline {section}{\numberline {14.3}Mantenere Copilot allineato}{74}{section.14.3}%
-\contentsline {section}{\numberline {14.4}I limiti del multi-agente}{74}{section.14.4}%
+\contentsline {section}{\numberline {14.4}I limiti del multi-agente}{75}{section.14.4}%
+\contentsline {section}{\numberline {14.5}Visual Studio 2026 e la regola DOC-01}{75}{section.14.5}%
 \contentsline {chapter}{\numberline {15}Monorepo, Company Extension e Codebase Legacy}{77}{chapter.15}%
 \contentsline {section}{\numberline {15.1}Monorepo: un framework, più progetti}{77}{section.15.1}%
 \contentsline {section}{\numberline {15.2}Company extension: processi SDLC aziendali}{78}{section.15.2}%

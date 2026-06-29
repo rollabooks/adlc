@@ -11,6 +11,7 @@ AGENTS.md
 CLAUDE.md
 GEMINI.md
 OPENCLAW.md
+VISUALSTUDIO.md
 .github/copilot-instructions.md
 .ai-dlc/
 ```

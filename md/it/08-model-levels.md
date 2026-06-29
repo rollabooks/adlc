@@ -4,7 +4,7 @@ C'è un errore comune nell'uso degli agenti AI: usare sempre il modello più pot
 
 Il primo è il costo. I modelli più potenti costano di più in token. Un task da 2.000 token totali non richiede lo stesso modello di un task da 100.000 token.
 
-Il secondo è il latency. I modelli più potenti sono più lenti. Per task semplici e frequenti (rinomina, JSDoc, piccoli fix) la differenza di latenza è percepibile e non giustificata.
+Il secondo è la latenza. I modelli più potenti sono più lenti. Per task semplici e frequenti (rinomina, JSDoc, piccoli fix) la differenza di latenza è percepibile e non giustificata.
 
 AI-DLC introduce i Model Levels per risolvere questo: una scala da 1 a 7 che mappa la complessità del task al modello appropriato.
 
@@ -41,7 +41,7 @@ bash .ai-dlc/tools/show-models.sh
 Output tipico (il mapping cambia con le versioni del framework):
 
 ```
-AI-DLC Model Level Mapping — v3.3.0
+AI-DLC Model Level Mapping — v4.0.0
 
 Level 1  │ Anthropic: Haiku Low       │ OpenAI: gpt-5.4-nano    │ Gemini: Gemini 3.1 Flash-Lite
 Level 2  │ Anthropic: Haiku Medium    │ OpenAI: gpt-5.4-mini low│ Gemini: Gemini 2.5 Flash-Lite
@@ -92,14 +92,14 @@ Ma prima di fermarsi qui, si applica il risk floor.
 
 ### Passo 2 — Applica il risk floor
 
-Il task è classificato MEDIUM (nuovo endpoint). Il risk floor per MEDIUM è livello 3. Anche se la stima token suggerisce livello 2, il level sale a 3.
+Il task è classificato MEDIUM (nuovo endpoint). Il risk floor per MEDIUM è livello 3. Anche se la stima token suggerisce livello 2, il livello sale a 3.
 
 ```
 Active Task Token Est.   | 2000/2500/4500
 Active Task Model Level  | 3 Sonnet Low
 ```
 
-Il risk floor non è un override arbitrario: garantisce che le task MEDIUM vengano gestite da un modello con capacità di ragionamento adeguate, indipendentemente dalla quantità di token.
+Il risk floor non è un override arbitrario: garantisce che i task MEDIUM vengano gestiti da un modello con capacità di ragionamento adeguate, indipendentemente dalla quantità di token.
 
 ---
 
@@ -158,7 +158,7 @@ Se le tue stime sono sistematicamente sbagliate in una direzione, aggiustale. Il
 
 Potresti chiederti: perché non usare sempre il livello 7 e non pensarci più?
 
-La risposta è che il costo non è solo economico. Su molti sistemi di agenti AI, usare un modello più potente del necessario aumenta la latency, può introdurre verbosità inutile e — su task semplici — può paradossalmente produrre output peggiori perché il modello cerca di essere più "creativo" dove la soluzione era ovvia.
+La risposta è che il costo non è solo economico. Su molti sistemi di agenti AI, usare un modello più potente del necessario aumenta la latenza, può introdurre verbosità inutile e — su task semplici — può paradossalmente produrre output peggiori perché il modello cerca di essere più "creativo" dove la soluzione era ovvia.
 
 Più in profondità: il sistema di Model Levels ti forza a *pensare* alla complessità del task prima di delegarlo. Quella pausa da dieci secondi in cui stimi il livello è spesso sufficiente per accorgerti che stai per chiedere all'agente qualcosa che non hai ancora definito con sufficiente chiarezza.
 
@@ -166,9 +166,9 @@ Più in profondità: il sistema di Model Levels ti forza a *pensare* alla comple
 
 ## Riepilogo
 
-- I Model Levels (1-7) mappano la complessità del task al modello AI appropriato, bilanciando costo, latency e capacità di ragionamento.
+- I Model Levels (1-7) mappano la complessità del task al modello AI appropriato, bilanciando costo, latenza e capacità di ragionamento.
 - La stima è `input/output/totale` in token; il mapping vendor concreto è in `manifest.json` e si legge con `show-models`.
-- Il risk floor forza un minimum level indipendentemente dalla stima token: HIGH → 5, auth/secrets/produzione → 6, CRITICAL → 7.
+- Il risk floor forza un livello minimo indipendentemente dalla stima token: HIGH → 5, auth/secrets/produzione → 6, CRITICAL → 7.
 - La stima migliora con la pratica; le prime settimane è normale sbagliare — l'importante è avere una stima, non che sia perfetta.
 
 Nel prossimo capitolo affrontiamo uno dei meccanismi più sottili di AI-DLC: i confidence tag, il sistema con cui l'agente dichiara esplicitamente quanto è certo di ciò che dice.

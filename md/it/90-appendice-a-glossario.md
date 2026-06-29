@@ -41,7 +41,7 @@ Il file di stato persistente del progetto. Contiene: fase corrente, task attivo,
 Il livello di rischio più alto nella classificazione AI-DLC. Si applica a decisioni mission-critical ambigue con implicazioni architetturali irreversibili. L'agente produce alternative e un record di decisione, ma non esegue nulla. Model Level minimo: 7.
 
 **Entry point**
-Il file che un agente AI legge come prima istruzione in un repository AI-DLC. Ogni agente ha il suo: `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex), `GEMINI.md` (Gemini), `OPENCLAW.md` (OpenClaw), `.github/copilot-instructions.md` (Copilot).
+Il file che un agente AI legge come prima istruzione in un repository AI-DLC. Ogni agente ha il suo: `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex), `GEMINI.md` (Gemini), `OPENCLAW.md` (OpenClaw), `VISUALSTUDIO.md` (Visual Studio 2026), `.github/copilot-instructions.md` (Copilot).
 
 **FACT**
 Uno dei tre confidence tag. Indica che l'agente ha verificato l'informazione leggendo direttamente il codice o un file presente nel contesto. Vedi anche: *confidence tag*, *INFERRED*, *ASSUMPTION*.

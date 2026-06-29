@@ -116,6 +116,8 @@ Il flusso è sempre lo stesso: path rilevato → HALT → presentazione del pian
 
 ---
 
+![Il flusso di un HALT trigger, dal rilevamento del path alla conferma esplicita](figures/it/ch10-halt-flusso.png)
+
 ## 10.3 Override di progetto
 
 I trigger predefiniti sono pensati per la maggior parte dei progetti. Ma ogni progetto ha le sue zone sensibili. TaskFlow API, per esempio, ha un modulo di billing che non è coperto dai trigger predefiniti ma che il team vuole proteggere allo stesso modo.

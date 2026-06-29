@@ -145,7 +145,7 @@ Il file va aggiornato ogni volta che cambia qualcosa di significativo:
 - **Cambio di fase**: da Design a Implementation, da Implementation a Verification.
 - **Cambio di task**: quando finisci un task e ne inizi un altro.
 - **Cambio di vincoli**: aggiungi un requisito SEC, modifichi un target PERF.
-- **Decisione architettuale**: una `Open Decision` viene presa — rimuovila dalla sezione e aggiungila allo stack o alle note.
+- **Decisione architetturale**: una `Open Decision` viene presa — rimuovila dalla sezione e aggiungila allo stack o alle note.
 
 Il modo più pratico è usare il comando conversazionale `@context-update`:
 

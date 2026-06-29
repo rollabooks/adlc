@@ -1,6 +1,6 @@
 # AI-DLC — Manuale d'uso (italiano)
 
-> Versione framework: 3.3.0
+> Versione framework: 4.0.0
 > Pubblico: sviluppatori che vogliono usare AI-DLC per orchestrare uno o più agenti AI in un progetto software, anche senza esperienza precedente con sistemi simili.
 
 ---

@@ -1,39 +1,97 @@
-# AI-DLC Framework — Operating Guide
+# AI-DLC (AI-Driven Development Life Cycle)
 
-> Quick-start guide for the AI-Driven Development Life Cycle framework.
-> **Version:** 26.4.22
+> **Version:** 4.0.0 · **License:** MIT · **Platform:** Any IDE, any agent, any language
 
-> **Note on naming:** the methodology is named **AI-DLC** (AI-Driven Development Life Cycle).
-> The on-disk directory is `.ai-dlc/`, the package id is `ai-dlc-framework`, the manifesto file
-> is `AI-DLC.md`, and all tool paths use the `.ai-dlc/` prefix. Naming is fully aligned with the
-> methodology name across code, folders and documentation.
+A modular operating contract for AI-assisted software development. Technology-agnostic, context-driven, security and performance by design.
+
+> **Note on naming:** AI-DLC is the methodology name (AI-Driven Development Life Cycle). The on-disk directory is `.ai-dlc/`, the package ID is `ai-dlc-framework`, and all tool paths use the `.ai-dlc/` prefix.
 
 ---
 
-## What is this?
+## What Problem Does It Solve?
 
-A modular contract system that standardizes AI-assisted software development.
-Technology-agnostic. Works with any language, framework, or architecture.
-
-| Problem | Solution |
-|---------|----------|
+| Problem | AI-DLC Solution |
+|---------|-----------------|
 | AI forgets context between sessions | `_CONTEXT.md` = persistent state |
-| AI ignores security/performance | SEC-XX / PERF-XX constraints always visible |
-| Unreliable AI output | FACT / INFERRED / ASSUMPTION classification |
-| Context overload | Modular loading: only what's needed per phase |
+| AI ignores security/performance constraints | SEC-XX / PERF-XX always visible |
+| Unreliable AI output quality | FACT / INFERRED / ASSUMPTION confidence tags |
+| Context window overload | Modular loading: only what's needed per phase |
+| Overconfident agents that assume instead of asking | Overconfidence prevention module (always active) |
+| Decisions lost in chat history | Structured questions persisted in auditable files |
+
+---
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Agent Compatibility](#agent-compatibility)
+- [Directory Structure](#directory-structure)
+- [4-Level Architecture](#4-level-architecture)
+- [Six-Phase Workflow](#six-phase-workflow)
+- [What to Load by Phase](#what-to-load-by-phase)
+- [Essential Commands](#essential-commands)
+- [Task Token and Model Sizing](#task-token-and-model-sizing)
+- [Risk Classification](#risk-classification)
+- [Extensions](#extensions)
+- [Tools](#tools)
+- [Monorepo Support](#monorepo-support)
+- [Tenets](#tenets)
+- [Troubleshooting](#troubleshooting)
+- [Additional Resources](#additional-resources)
+- [License](#license)
+
+---
+
+## Quick Start
+
+### 1. Copy framework files to your repository
+
+```
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+OPENCLAW.md
+VISUALSTUDIO.md
+.github/copilot-instructions.md
+.ai-dlc/
+```
+
+### 2. Scaffold project files
+
+```powershell
+.\.ai-dlc\tools\init.ps1
+```
+
+```bash
+bash .ai-dlc/tools/init.sh
+```
+
+This creates `_CONTEXT.md`, `PROGRESS.md`, `.ai-dlc/project/instructions.md`, and `.ai-dlc/project/skills/`.
+
+### 3. Fill `_CONTEXT.md`
+
+At minimum: Project name, Phase, Mode, Stack, and 2-3 SEC/PERF constraints.
+
+### 4. Start chatting
+
+The AI discovers `_CONTEXT.md` automatically and loads the relevant phase module.
+
+For small projects or spikes, use `--context minimal` for a leaner `_CONTEXT.md`.
 
 ---
 
 ## Agent Compatibility
 
-| Tool | Entry point | Notes |
+| Tool | Entry Point | Notes |
 |------|-------------|-------|
 | **GitHub Copilot** (IDE + Coding Agent) | `.github/copilot-instructions.md` | Loaded automatically |
-| **Copilot CLI** (`gh copilot`) | `.github/copilot-instructions.md` | Conversational; same file |
+| **Copilot CLI** (`gh copilot`) | `.github/copilot-instructions.md` | Same file |
 | **Claude Code** | `CLAUDE.md` → imports `@AGENTS.md` | No rule duplication |
-| **OpenAI Codex CLI** | `AGENTS.md` | Root of the project |
+| **OpenAI Codex CLI** | `AGENTS.md` | Root entry point |
 | **Gemini** | `GEMINI.md` | Loads shared `AGENTS.md` rules |
 | **OpenClaw** | `OPENCLAW.md` | Loads shared `AGENTS.md` rules |
+| **Visual Studio 2026** | `VISUALSTUDIO.md` → imports `@AGENTS.md` | DOC-01 rule; `AI-DLC.Documentation` project |
+| **Other agents** | `AGENTS.md` | Universal fallback |
 
 ---
 
@@ -41,262 +99,288 @@ Technology-agnostic. Works with any language, framework, or architecture.
 
 ```
 .
-├── AGENTS.md                        ← OpenAI Codex CLI shared entry point
-├── CLAUDE.md                        ← Claude Code entry point (imports AGENTS.md)
-├── GEMINI.md                        ← Gemini entry point
-├── OPENCLAW.md                      ← OpenClaw entry point
-├── README.md                        ← This file
+├── AGENTS.md                          ← Shared agent contract (Codex entry point)
+├── CLAUDE.md                          ← Claude Code (imports AGENTS.md)
+├── GEMINI.md                          ← Gemini
+├── OPENCLAW.md                        ← OpenClaw
+├── VISUALSTUDIO.md                    ← Visual Studio 2026
+├── AI-DLC.Documentation.csproj        ← VS solution docs project (repo root)
+├── CHANGELOG.md                       ← Release history
 ├── .github/
-│   └── copilot-instructions.md      ← GitHub Copilot entry point (always loaded)
+│   └── copilot-instructions.md        ← GitHub Copilot (always loaded)
 └── .ai-dlc/
-    ├── AI-DLC.md                      ← Short framework manifesto
-    ├── COMMANDS.md                  ← Conversational command specification
-    ├── INSTALL.md                   ← New repository setup guide
-    ├── MIGRATION.md                 ← Old layout migration guide
-    ├── VERSION                      ← Framework version
-    ├── VERSIONING.md                ← Versioning policy
-    ├── manifest.json                ← Machine-readable framework metadata
-    ├── projects.json                ← Optional monorepo project index
-    ├── schemas/                     ← JSON Schema files
-    ├── tests/                       ← Cross-platform script tests
-    ├── company/                     ← Optional enterprise process extension
-    ├── examples/                    ← Filled examples
+    ├── AI-DLC.md                      ← Framework manifesto
+    ├── COMMANDS.md                    ← Conversational commands spec
+    ├── INSTALL.md                     ← Setup guide
+    ├── MANUAL.md / MANUAL.it.md       ← User manuals (EN/IT)
+    ├── MIGRATION.md                   ← Migration from old layouts
+    ├── VERSION                        ← Current version (4.0.0)
+    ├── VERSIONING.md                  ← Versioning policy
+    ├── manifest.json                  ← Machine-readable metadata
+    ├── halt-triggers.yaml             ← HALT zone glob patterns
+    ├── projects.json                  ← Monorepo project index
+    ├── schemas/                       ← JSON Schema files
+    ├── tests/                         ← Cross-platform smoke tests
+    ├── company/                       ← Enterprise process extension
+    ├── examples/                      ← Filled examples
     ├── tools/
-    │   ├── init.ps1                 ← PowerShell project scaffold
-    │   ├── init.sh                  ← Bash project scaffold
-    │   ├── preprocess-company-docs.ps1
-    │   ├── preprocess-company-docs.sh
-    │   ├── validate.ps1             ← PowerShell validator
-    │   └── validate.sh              ← Bash validator
+    │   ├── init.ps1 / init.sh         ← Project scaffold
+    │   ├── validate.ps1 / validate.sh ← Validator
+    │   ├── show-models.ps1 / .sh      ← Model level table
+    │   ├── sync-copilot.ps1 / .sh     ← Copilot alignment check
+    │   ├── update-projects.ps1 / .sh  ← Monorepo index updater
+    │   └── preprocess-company-docs.*  ← PDF/DOCX preprocessor
     └── modules/
-        ├── 00_MODE.md               ← Operating modes (LITE/STANDARD/AUDIT/RAPID/FAST)
-        ├── 01_CORE_RULES.md         ← Base rules + state tracking (always loaded)
-        ├── 02_DISCOVERY_ANALYSIS.md ← Phase 0-1: Discovery & Analysis
-        ├── 03_DESIGN.md             ← Phase 2: Architecture & Design
-        ├── 04_IMPLEMENTATION.md     ← Phase 3: Coding & Testing
-        ├── 05_VERIFICATION_RELEASE.md
-        ├── 06_OPS.md
-        ├── SEC_CONSTRAINTS.md
-        ├── PERF_CONSTRAINTS.md
-        ├── templates/
-        │   ├── CONTEXT_TEMPLATE.md
-        │   ├── CONTEXT_MIN.md
-        │   ├── PROGRESS_TEMPLATE.md
-        │   ├── EPIC_TEMPLATE.md
-        │   ├── TASK_TEMPLATE.md
-        │   ├── DECISION_RECORD_TEMPLATE.md
-        │   ├── COMPANY_PROCESS_TEMPLATE.md
-        │   └── PROJECT_INSTRUCTIONS_TEMPLATE.md
-        └── skills/
-            ├── SKILL_ANALYSIS.md
-            ├── SKILL_DESIGN.md
-            └── ...
+        ├── 00_MODE.md                 ← Operating modes (always loaded)
+        ├── 01_CORE_RULES.md           ← Base rules (always loaded)
+        ├── 02_DISCOVERY_ANALYSIS.md   ← Phase 0-1
+        ├── 03_DESIGN.md              ← Phase 2
+        ├── 04_IMPLEMENTATION.md       ← Phase 3
+        ├── 05_VERIFICATION_RELEASE.md ← Phase 4-5
+        ├── 06_OPS.md                  ← Phase 6
+        ├── 07_SPECIAL_LANES.md        ← Hotfix, spike, parallel
+        ├── 08_PROMPT_LIBRARY.md       ← Reusable prompts
+        ├── 09_CODEBASE_ANALYSIS.md    ← Legacy intake
+        ├── 10_DOCUMENTATION.md        ← Doc generation
+        ├── 11_BUGFIX_PLAYBOOK.md      ← Structured debugging
+        ├── 12_OVERCONFIDENCE.md       ← Overconfidence prevention (always loaded)
+        ├── 13_CONTENT_VALIDATION.md   ← Pre-write validation (always loaded)
+        ├── 14_STRUCTURED_QUESTIONS.md ← Decision persistence (always loaded)
+        ├── SEC_CONSTRAINTS.md         ← Security constraints
+        ├── PERF_CONSTRAINTS.md        ← Performance constraints
+        ├── templates/                 ← All templates
+        └── skills/                    ← Reusable skill files
 ```
 
 ---
 
-## 3-Level Architecture
+## 4-Level Architecture
 
 ```
-Level 1: .ai-dlc/modules/               → Universal framework (read-only)
-Level 2: .ai-dlc/company/                → Enterprise process extension
-Level 3: .ai-dlc/project/                → Project rules + domain expertise
-Level 4: _CONTEXT.md + PROGRESS.md     → Session state + history
+Level 1: .ai-dlc/modules/            → Universal framework (read-only)
+Level 2: .ai-dlc/company/            → Enterprise process extension
+Level 3: .ai-dlc/project/            → Project rules + domain expertise
+Level 4: _CONTEXT.md + PROGRESS.md   → Session state + history
 ```
 
 **Priority** (highest → lowest):
+
 1. `_CONTEXT.md` — current state, constraints
 2. `.ai-dlc/project/` — project-specific rules and skills
-3. `.ai-dlc/company/` — enterprise process extension docs
-4. `.copilot/` — compatibility project rules and skills
-5. `.ai-dlc/modules/` — framework (generic)
-
-In monorepos, each subproject can have its own `_CONTEXT.md`, `PROGRESS.md`, `.ai-dlc/project/`, and optional `.ai-dlc/company/`. Agents use the `_CONTEXT.md` closest to the active file as the project root, while `.ai-dlc/modules/` can stay at repository root as the shared framework.
+3. `.ai-dlc/company/` — enterprise process docs
+4. `.copilot/` — compatibility (GitHub Copilot legacy)
+5. `.ai-dlc/modules/` — framework (generic, read-only)
 
 ---
 
-## Quick Start (5 minutes)
+## Six-Phase Workflow
 
-### 1. Scaffold project files:
-```powershell
-.\.ai-dlc\tools\init.ps1
-```
+| Phase | Name | Module | Skills |
+|-------|------|--------|--------|
+| 0 | Discovery | `02_DISCOVERY_ANALYSIS.md` | `SKILL_ANALYSIS.md` |
+| 1 | Analysis | `02_DISCOVERY_ANALYSIS.md` | `SKILL_ANALYSIS.md` |
+| 2 | Design | `03_DESIGN.md` | `SKILL_DESIGN.md`, `SKILL_API_DESIGN.md` |
+| 3 | Implementation | `04_IMPLEMENTATION.md` | `SKILL_API_DESIGN.md`, `SKILL_SECURITY.md`, `SKILL_UI.md` |
+| 4-5 | Verification & Release | `05_VERIFICATION_RELEASE.md` | `SKILL_TESTING.md` |
+| 6 | Operations | `06_OPS.md` | `SKILL_OPS.md` |
 
-Or:
-
-```bash
-bash .ai-dlc/tools/init.sh
-```
-
-### 2. Create `_CONTEXT.md` manually if not using scaffold:
-```bash
-cp .ai-dlc/modules/templates/CONTEXT_TEMPLATE.md ./_CONTEXT.md
-```
-
-### 3. Fill the essential sections:
-- Phase, Active Task, Stack, SEC/PERF constraints
-
-### 4. Optionally create `.ai-dlc/project/instructions.md`:
-Project-specific conventions that override framework defaults. Use `.copilot/` only when GitHub Copilot compatibility requires it.
-
-### 5. Start chatting:
-The AI discovers `_CONTEXT.md` automatically and loads the relevant phase module.
-
-### Optional: Add company process documentation
-Create `.ai-dlc/company/` when the repository must follow enterprise SDLC, governance, compliance, or engineering standards. Agents load it automatically when present.
-
-For PDF/DOCX sources, put files in `.ai-dlc/company/source/` and run:
-
-```powershell
-.\.ai-dlc\tools\preprocess-company-docs.ps1
-```
-
-```bash
-bash .ai-dlc/tools/preprocess-company-docs.sh
-```
-
-Agents should use `.ai-dlc/company/processed/` for normal loading.
-Preprocessing also writes `.ai-dlc/company/processed/manifest.json`.
+Agents load the phase module automatically based on `Phase:` in `_CONTEXT.md`.
 
 ---
 
 ## What to Load by Phase
 
-| Activity | Load Module | Load SKILL |
+| Activity | Load Module | Load Skill |
 |----------|-------------|------------|
 | New project / requirements | `02_DISCOVERY_ANALYSIS.md` | `SKILL_ANALYSIS.md` |
-| Architecture decisions | `03_DESIGN.md` | `SKILL_DESIGN.md` + `SKILL_API_DESIGN.md` / `SKILL_DATA_ACCESS.md` |
-| Coding / implementation | `04_IMPLEMENTATION.md` | `SKILL_API_DESIGN.md` / `SKILL_DATA_ACCESS.md` / `SKILL_SECURITY.md` / `SKILL_UI.md` |
+| Architecture decisions | `03_DESIGN.md` | `SKILL_DESIGN.md` + `SKILL_API_DESIGN.md` |
+| Coding / implementation | `04_IMPLEMENTATION.md` | `SKILL_API_DESIGN.md` / `SKILL_SECURITY.md` / `SKILL_UI.md` |
 | Testing / deploy | `05_VERIFICATION_RELEASE.md` | `SKILL_TESTING.md` |
 | Production issues | `06_OPS.md` | `SKILL_OPS.md` |
-| Bug investigation | `11_BUGFIX_PLAYBOOK.md` | (none) |
-| Documentation from code | `10_DOCUMENTATION.md` | (none) |
-| Quick POC / spike | Only `01_CORE_RULES.md` + RAPID mode | (none) |
+| Bug investigation | `11_BUGFIX_PLAYBOOK.md` | — |
+| Documentation from code | `10_DOCUMENTATION.md` | — |
+| Visual Studio solution work | (any phase) | `SKILL_VISUALSTUDIO.md` |
+| Quick POC / spike | `01_CORE_RULES.md` + RAPID mode | — |
 
 ---
 
 ## Essential Commands
 
-See `.ai-dlc/COMMANDS.md` for inputs, expected outputs, and files usually updated.
+Conversational controls typed in the chat. Not shell commands.
 
 | Command | Purpose |
 |---------|---------|
+| `@Task [goal]` | Create test-driven implementation task with AI Sizing |
 | `@checkpoint` | Save state, summarize progress |
-| `@context-update` | Generate updated `_CONTEXT.md` block |
+| `@context-update` | Propose updated `_CONTEXT.md` block |
 | `@show-constraints` | List active SEC/PERF constraints |
 | `@security-check` | Verify against SEC-XX |
 | `@perf-check` | Verify against PERF-XX |
+| `@load-phase [N]` | Load phase module without changing context |
+| `@set-phase [N]` | Propose phase transition |
+| `@alternatives` | Generate 2-3 options with tradeoffs |
+| `@simplify` | Reduce scope or complexity |
+| `@rollback` | Propose rollback plan |
 | `@stop` | Stop immediately |
-| `@explain` | Explain reasoning |
-| `@alternatives` | Propose 2-3 alternative solutions |
+
+Full specification: [`.ai-dlc/COMMANDS.md`](.ai-dlc/COMMANDS.md)
 
 ---
 
 ## Task Token and Model Sizing
 
-Every created task must include AI sizing: input/output/total tokens, model level (1-7), recommended model, and rationale.
-
-Quick reference:
+Every created task must include AI sizing:
 
 | Level | Token Range | Typical Use |
 |-------|-------------|-------------|
 | 1 | < 4k | Small edits, docs, formatting |
-| 2 | 4k-8k | Localized code changes, simple tests |
-| 3 | 8k-16k | Standard implementation or focused debugging |
-| 4 | 16k-32k | Multi-file features and moderate design tradeoffs |
-| 5 | 32k-64k | Complex refactors, integrations, security-sensitive work |
-| 6 | 64k-120k | Architecture, deep debugging, broad cross-module changes |
-| 7 | > 120k | Mission-critical architecture, high ambiguity, high-risk decisions |
+| 2 | 4k–8k | Localized code changes, simple tests |
+| 3 | 8k–16k | Standard implementation, focused debugging |
+| 4 | 16k–32k | Multi-file features, moderate design tradeoffs |
+| 5 | 32k–64k | Complex refactors, security-sensitive work |
+| 6 | 64k–120k | Architecture, deep debugging, cross-module changes |
+| 7 | > 120k | Mission-critical architecture, high ambiguity |
 
-Vendor mapping lives in [`.ai-dlc/manifest.json#model_levels`](.ai-dlc/manifest.json). Print the current table:
+Vendor model mapping: [`.ai-dlc/manifest.json#model_levels`](.ai-dlc/manifest.json)
 
 ```powershell
-.\.ai-dlc\tools\show-models.ps1
+.\.ai-dlc\tools\show-models.ps1       # Print current mapping
 ```
-
-```bash
-bash .ai-dlc/tools/show-models.sh
-```
-
-Minimum levels and the full risk/approval matrix are defined in [`.ai-dlc/modules/01_CORE_RULES.md`](.ai-dlc/modules/01_CORE_RULES.md) §11 and `manifest.json#risk_floors`.
 
 ---
 
-## _CONTEXT.md vs PROGRESS.md
+## Risk Classification
+
+| Risk | Examples | Action | Min Level |
+|------|----------|--------|-----------|
+| LOW | naming, docs, format | Execute → notify | 1 |
+| MEDIUM | new feature, refactor | Propose plan → wait | 3 |
+| HIGH | schema, auth, arch, delete | Detailed plan + confirmation | 5 |
+| HIGH+ | secrets, compliance, production data | HALT → plan + confirmation | 6 |
+| CRITICAL | ambiguous mission-critical decisions | HALT → alternatives + ADR | 7 |
+
+HALT zones are defined in [`.ai-dlc/halt-triggers.yaml`](.ai-dlc/halt-triggers.yaml) (glob patterns for schema, auth, secrets, infra, CI/CD, framework files).
+
+---
+
+## Extensions
+
+### Company Process Extension
+
+For enterprise SDLC, governance, or compliance standards:
+
+```bash
+mkdir -p .ai-dlc/company/docs
+cp .ai-dlc/modules/templates/COMPANY_PROCESS_TEMPLATE.md .ai-dlc/company/README.md
+```
+
+Preprocess PDF/DOCX sources:
+
+```powershell
+.\.ai-dlc\tools\preprocess-company-docs.ps1
+```
+
+### Project-Specific Rules
+
+```bash
+# Already created by init.sh:
+.ai-dlc/project/instructions.md    # Project conventions
+.ai-dlc/project/skills/            # Domain-specific skills
+.ai-dlc/project/halt-triggers.yaml # Project-specific HALT overrides
+```
+
+---
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `init.ps1` / `init.sh` | Scaffold project files |
+| `validate.ps1` / `validate.sh` | Validate framework setup |
+| `show-models.ps1` / `show-models.sh` | Print model level mapping |
+| `sync-copilot.ps1` / `sync-copilot.sh` | Check Copilot alignment with AGENTS.md |
+| `update-projects.ps1` / `update-projects.sh` | Update monorepo project index |
+| `preprocess-company-docs.*` | Convert PDF/DOCX to agent-readable Markdown |
+
+Run validators after setup or migration:
+
+```bash
+bash .ai-dlc/tools/validate.sh       # or .ps1 on Windows
+```
+
+---
+
+## Monorepo Support
+
+Each subproject can have its own `_CONTEXT.md`, `PROGRESS.md`, and `.ai-dlc/project/`. The framework modules stay at repository root.
+
+```powershell
+# Scaffold a subproject
+.\.ai-dlc\tools\init.ps1 -ProjectRoot .\apps\app-a -FrameworkRoot .
+
+# Update project index
+.\.ai-dlc\tools\update-projects.ps1
+```
+
+Agents use the `_CONTEXT.md` closest to the active file as the project root.
+
+---
+
+## Tenets
+
+1. **Context is king.** `_CONTEXT.md` is the single source of truth for the session. Everything else is derived.
+2. **Modular by design.** Load only what the active phase needs. No context waste.
+3. **Security and performance are non-negotiable.** SEC-XX and PERF-XX are always visible, always enforced.
+4. **Human in the loop.** Critical decisions require explicit confirmation. Agents propose, humans approve.
+5. **Agent-agnostic.** Works with any IDE, any coding agent, any model. No vendor lock-in.
+6. **Reproducible.** Clear rules minimize variance across different models and sessions.
+7. **Read-only framework.** Customize in `.ai-dlc/project/`, never in `.ai-dlc/modules/`.
+
+---
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Agent doesn't follow rules | Verify `_CONTEXT.md` exists and has correct Phase |
+| Validator fails | Run `validate.ps1` / `validate.sh` and fix reported issues |
+| Copilot out of sync | Run `sync-copilot.ps1` / `sync-copilot.sh` |
+| Modules not loading | Check file paths match `.ai-dlc/modules/` structure |
+| Old layout conflicts | Follow `.ai-dlc/MIGRATION.md` |
+
+---
+
+## `_CONTEXT.md` vs `PROGRESS.md`
 
 | | `_CONTEXT.md` | `PROGRESS.md` |
 |---|---|---|
 | **Purpose** | Current state | Session journal |
-| **Contains** | Phase, stack, constraints, active task, blockers | Completed work, decisions, lessons learned |
-| **Updated** | Every session (overwrite state) | Every session (append entries) |
-| **Lifetime** | Lives as long as the project | Grows over project lifetime |
+| **Contains** | Phase, stack, constraints, active task | Completed work, decisions, lessons |
+| **Updated** | Every session (overwrite) | Every session (append) |
+| **Lifetime** | Project lifetime | Grows over project lifetime |
 
 ---
 
-## New Repository Setup
+## Additional Resources
 
-1. Follow `.ai-dlc/INSTALL.md`
-2. Copy startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`), `.github/`, and `.ai-dlc/` to the new repo
-3. Create `_CONTEXT.md` from the template
-4. Optionally create `.ai-dlc/project/instructions.md` for project-specific rules
-5. Copy relevant SKILLs to `.ai-dlc/project/skills/`
-6. Keep `.copilot/` only for compatibility with existing GitHub Copilot setups
+| Resource | Link |
+|----------|------|
+| Framework manifesto | [`.ai-dlc/AI-DLC.md`](.ai-dlc/AI-DLC.md) |
+| User manual (English) | [`.ai-dlc/MANUAL.md`](.ai-dlc/MANUAL.md) |
+| User manual (Italian) | [`.ai-dlc/MANUAL.it.md`](.ai-dlc/MANUAL.it.md) |
+| Conversational commands | [`.ai-dlc/COMMANDS.md`](.ai-dlc/COMMANDS.md) |
+| Installation guide | [`.ai-dlc/INSTALL.md`](.ai-dlc/INSTALL.md) |
+| Migration guide | [`.ai-dlc/MIGRATION.md`](.ai-dlc/MIGRATION.md) |
+| Versioning policy | [`.ai-dlc/VERSIONING.md`](.ai-dlc/VERSIONING.md) |
+| Release history | [`CHANGELOG.md`](CHANGELOG.md) |
+| Filled examples | [`.ai-dlc/examples/`](.ai-dlc/examples/) |
+| JSON Schemas | [`.ai-dlc/schemas/`](.ai-dlc/schemas/) |
 
-## Scaffold
+---
 
-Create missing project state and project override files:
+## License
 
-```powershell
-.\.ai-dlc\tools\init.ps1
-```
-
-```bash
-bash .ai-dlc/tools/init.sh
-```
-
-Use `--context minimal` for small projects or spikes. Add `-Company` in PowerShell or `--company` in Bash to scaffold `.ai-dlc/company/`. Use `-Force` in PowerShell or `--force` in Bash only when you intentionally want to overwrite generated files.
-
-For monorepos, scaffold a specific subproject while reading templates from the repository root:
-
-```powershell
-.\.ai-dlc\tools\init.ps1 -ProjectRoot .\apps\app-a -FrameworkRoot .
-```
-
-```bash
-bash .ai-dlc/tools/init.sh --project-root apps/app-a --framework-root .
-```
-
-Preprocess company docs for a specific subproject:
-
-```powershell
-.\.ai-dlc\tools\preprocess-company-docs.ps1 -ProjectRoot .\apps\app-a
-```
-
-```bash
-bash .ai-dlc/tools/preprocess-company-docs.sh --project-root apps/app-a
-```
-
-Update `.ai-dlc/projects.json` after adding or moving subprojects:
-
-```powershell
-.\.ai-dlc\tools\update-projects.ps1
-```
-
-```bash
-bash .ai-dlc/tools/update-projects.sh
-```
-
-## Validation
-
-Run the lightweight validator after setup or migration:
-
-```powershell
-.\.ai-dlc\tools\validate.ps1
-```
-
-```bash
-bash .ai-dlc/tools/validate.sh
-```
+MIT
 
 The validators always check JSON syntax and use `.ai-dlc/schemas/` for schema validation when a local JSON Schema runtime is available.
 

@@ -111,7 +111,22 @@ Rules:
 
 If `.ai-dlc/company/` exists at project root or repository root, agents must load it as an enterprise process extension.
 
-Load order:
+**Context-optimized loading (opt-in system)**:
+
+1. Scan `.ai-dlc/company/` for `*.opt-in.md` files
+2. Load ONLY the opt-in files (lightweight, ~20 lines each)
+3. During Discovery phase (or session start), present opt-in prompts to the user
+4. Load full extension files ONLY for accepted opt-ins (per the load mapping in each opt-in file)
+5. Extensions WITHOUT a matching `*.opt-in.md` → always enforced (load immediately)
+
+**Opt-in state persistence**:
+- Record opt-in decisions in `_CONTEXT.md` under `## Company Extensions`
+- On session resume, read saved decisions — do NOT re-ask
+- Format: `COMPANY_EXT: [A|B|C|D] — [extension name]`
+
+**Fallback (no opt-in files exist)**: use legacy full-load order below.
+
+Legacy load order:
 1. Repository `.ai-dlc/company/README.md` if present
 2. Repository `.ai-dlc/company/processed/INDEX.md` if present
 3. Repository `.ai-dlc/company/PROCESS.md`, `GOVERNANCE.md`, `STANDARDS.md` if present
@@ -130,6 +145,7 @@ Rules:
 - Project-level company docs override repository-level company docs for the same topic.
 - If company docs conflict with project rules, stop and ask unless one document explicitly states precedence.
 - If company docs introduce mandatory gates, include them in task acceptance criteria or Definition of Done.
+- **Opt-in enforcement**: once accepted, extension rules are hard constraints — non-compliance is blocking.
 
 ### 2. Communication Rules
 
@@ -150,6 +166,7 @@ Check against `_CONTEXT.md`:
 2. Does the stack match what is defined?
 3. Do I understand the active task?
 4. Is the action reversible or do I need confirmation?
+5. Am I making any assumptions? (see `12_OVERCONFIDENCE.md`)
 
 #### 2.3 Error handling
 If an error occurs:
@@ -157,6 +174,13 @@ If an error occurs:
 2. Describe what went wrong
 3. Propose 2-3 alternative solutions
 4. Wait for instructions
+
+Unclear requirements are not errors — they are opportunities to ask (see `12_OVERCONFIDENCE.md`).
+
+#### 2.4 Adaptive depth
+Before starting any phase, apply the **Adaptive Depth Assessment** from `00_MODE.md`.
+Log the derived depth (MINIMAL / STANDARD / COMPREHENSIVE) in your first response.
+Manual MODE override takes precedence.
 
 ### 3. Code Conventions
 
@@ -186,6 +210,14 @@ Before generating code:
 2. Verify code does not violate any constraint
 3. If unsure, STOP and ask
 
+#### 3.4 Content validation
+Before writing generated documentation, diagrams, or structured data to files,
+apply the validation checklist from `13_CONTENT_VALIDATION.md`.
+
+#### 3.5 Structured questions
+For architectural decisions, scope definitions, and tradeoff selections at MEDIUM+ risk,
+use the file-based question protocol from `14_STRUCTURED_QUESTIONS.md`.
+
 ### 4. Reference Documents
 
 | Document | Path |
@@ -213,9 +245,14 @@ Discovery → Analysis → Design → Sprint Planning → Implementation → Ver
 1. Discover the project `_CONTEXT.md` closest to the active file (§1.1 protocol)
 2. Establish project root and framework root
 3. Load project `.ai-dlc/project/instructions.md` and project `.copilot/instructions.md` if they exist
-4. Load repository and project `.ai-dlc/company/` process extension docs if present
+4. Load company extension via opt-in system (§1.2):
+   - If `PROGRESS.md` has saved opt-in decision → use it, do NOT re-ask
+   - If no saved decision → scan `*.opt-in.md`, present prompts, record answer
 5. Load relevant SKILL from project `.ai-dlc/project/skills/` or project `.copilot/skills/` based on phase/task (ONE at a time)
-6. Read project `PROGRESS.md` if it exists
+6. Read project `PROGRESS.md` if it exists:
+   - Parse "Current State" table for phase, stage, depth, next step
+   - Load all artifacts listed in "Artifacts to load on resume"
+   - Present brief summary: "Riprendiamo: fase [X], stage [Y], prossimo: [Z]"
 7. Analyze: project root, phase, task, constraints, stack, active SKILL, company gates
 8. Confirm once at session start: `"Context: [P] | ProjectRoot: [path] | Phase: [X] | Task: [Y] | Stack: [Z] | SKILL: [S] | Constraints: [SEC/PERF] | Company Gates: [Y/N]. Proceed?"`
 9. For LOW-risk work, proceed after the session confirmation. For MEDIUM/HIGH work, ask for task-specific approval unless already granted.
@@ -235,7 +272,10 @@ Every 3-5 significant actions:
 #### R4: End of session
 1. Summarize completed work
 2. Generate updated `_CONTEXT.md` block
-3. Generate `PROGRESS.md` entry
+3. Generate `PROGRESS.md` entry:
+   - Update "Current State" table (phase, stage, next step, blockers)
+   - Update "Artifacts to load on resume" with any new files created
+   - Append session log entry at the TOP of "Session Log"
 4. List next steps + blockers
 
 ### Task Navigation Protocol

@@ -63,7 +63,7 @@ Motivazione: riduce duplicazione e rende il comportamento coerente per futuri en
 
 ## 2026-06-25 — Setup iniziale AI-DLC
 
-- Aggiunto framework AI-DLC v3.3.0 al repository
+- Aggiunto framework AI-DLC v4.0.0 al repository
 - Compilato _CONTEXT.md con stack, SEC-01..SEC-05, PERF-01..PERF-03
 - Validazione: 2 warning risolti (placeholder token est.)
 - Prima sessione di lavoro: bootstrap confermato correttamente

@@ -1,0 +1,1745 @@
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Authors:
+Marco Fruscione
+Gianluca Severi
+Sandro Ubbiali
+Date of issue Revision
+29/09/2025 – rev. V
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+CQO, Integration Project and Regulatory Director – EBIT s.r.l
+R&D Director – EBIT s.r.l.
+Planning & Product Manager – EBIT s.r.l.
+
+Change history
+Updated coding of referenced procedures after migration to Arcadoc.
+Sections 1 and 5.1: detailed reference to IEC 81001-5-1.
+General revision for further specification of elementary activities as per Agile
+development methodology.
+Correction of typos and text rephrasing to improve document readability.
+
+29/11/2024 – rev. U
+
+Added references to POL000022 and IPR000021 in sections 2 and 5.1
+Updated section 5.2.1 with detailed list of Design Input requirements
+Updated section 5.2.2 with detailed list of the items included in the Project
+Development Plan document
+Revision of Annex A:
+• Section 3.4 – specification of the verification activities executed on the
+software release Setup package at the Deploy stage
+• Section 3.4 – specification of the software delivery and installation
+methods
+• section 3.5 – typo correction, added Translations for Service Pack
+
+28/06/2024 – rev. T
+
+Updated section 5.2.3.7 and 5.2.3.14 related to the Risk Management Activities in
+compliance with the new Risk Management Plan defined in MDR transition
+Updated section 5.2.5 and 5.2.6 related to Test Plan definition and Test Case
+specification in compliance with MDR transition
+
+24/04/2024 – rev. S
+
+General revision (also of related Annex A) for MDR transition and introduction of
+Agile methodology
+
+30/11/2023 – rev. R
+
+Revision of activities of section 5.2.8
+Updated section 5.2.8.5 – Software Verification and Validation, with more detail
+on test methods, acceptance criteria and expected results
+
+31/03/2023 – rev. Q
+
+Updated section 5.2.3 with more details on the revision process of Product
+Requirement during Intermediate Planning Review
+Updated section 5.2.8 – Software Verification and Validation, with addition of
+activity 5.2.8.5 related to the definition of the validation criteria of the Product
+Requirement
+
+30/06/2022 – rev. P
+
+Updated 5.2.3.7 and 5.2.3.14 with more details on responsibility of the Risk
+Management Activities
+
+LC-SUITESTENSA-EN rev. V
+
+1/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Updated 5.2.11.4: Revision of the OTS Software verification and validation
+process
+Revision of Annex A
+28/02/2020 – rev. N
+
+Updated 5.2.8.2 in Software Test plan Definition.
+Updated 5.2.9 Software Release Section.
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Reference to the Microsoft Azure DevOps (was Team Foundation Server).
+30/04/2019 – rev. M
+
+Annex A Revision on OTS Software Management.
+Minor revision to introduce the Product Manager function.
+
+30/11/2018 – rev. L
+
+Annex A Revision:
+Introduction and description of the User Story Concept and management in TFS.
+Update description of product non-conformity management through TFS.
+
+20/06/2018 – rev. H
+
+5.2.4.3, 5.2.5.1, 5.2.11.2 and 5.2.11.8: Added specific activities in compliance to
+GDPR EU Rules 679/2016, in effect from 25.05.2018.
+Introduction of the usability engineering process activities according to IEC623661.
+
+31/10/2017 – rev. G
+
+5.2.7.4 – Explicit reference to impact analysis in the Hotfix production process.
+
+30/01/2017 – rev. F
+
+5.2.11 - OTS Software – Maintenance and Integration process revised.
+
+30/09/2016 – rev. E
+
+Modified section 2 – References, eliminate reference not more valid to ESAOTE.
+Annex A – English Translation
+
+20/07/2015 – rev. D
+
+Modified section 5.2.3.16 – Clearly specified the risk assessment process in the
+phase of a change request of an existing device (new release input specification
+process).
+
+11/11/2014 – rev. C
+
+New version of Annex A of this document.
+
+03/10/2013 – rev. B
+
+Reference to the Microsoft TFS (Team Foundation Server) and introduction of the
+Annex A. Since April 2013 the User Product Requirements are electronically
+registered and listed on TFS.
+
+19/02/2013 – rev. A
+
+First issue
+
+LC-SUITESTENSA-EN rev. V
+
+2/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Content
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+1.
+2.
+3.
+
+Scope ............................................................................................................................. 4
+References ...................................................................................................................... 4
+Terms and Definitions ...................................................................................................... 5
+3.1.
+Definitions ................................................................................................................. 5
+4.
+Roles and Responsibilities................................................................................................. 6
+5.
+Software development ..................................................................................................... 6
+5.1.
+Overview................................................................................................................... 6
+5.2.
+The Software Development Lifecycle ........................................................................... 9
+5.2.1.
+Concept Development & Product Requirement Definition ....................................... 9
+5.2.2.
+Project Initiation and Management ..................................................................... 10
+5.2.3.
+Software Requirements Development ................................................................. 11
+5.2.4.
+Software Unit Implementation and Verification .................................................... 15
+5.2.5.
+Software Test Plan Definition ............................................................................. 15
+5.2.6.
+Software Integration and Software System integration testing .............................. 17
+5.2.7.
+Problem Resolution Process ................................................................................ 18
+5.2.8.
+Software Verification and Validation .................................................................... 19
+5.2.9.
+Software Release ............................................................................................... 20
+5.2.10. Post-Launch Software Releases, Change Management ......................................... 21
+5.2.11. Externally-Sourced Software Management .......................................................... 22
+
+LC-SUITESTENSA-EN rev. V
+
+3/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+1. Scope
+Scope of this document is to specify in detail the software development life-cycle model used in
+EBIT, in application of the standard operating procedure QPR000149 "Development and Design" of
+EBIT QMS (Quality Management System), for the development and life-cycle management of the
+SUITESTENSA Software and in compliance with:
+- IEC 62304:2015-Ed1.1 - Medical Device Software – Software life-cycle process
+- IEC 81001-5-1:2021 - Health software and health IT systems safety, effectiveness and
+security - Part 5-1: Security - Activities in the product life cycle
+- IEC 82304-1:2016 - Health software - Part 1: General requirements for product safety
+- IEC 62366-1:2015+AMD1:2020 - Application of usability engineering processes to medical
+devices.
+This standard procedure is applicable to new projects starting from and including the SUITESTENSA
+platform project. The application of the IEC 62366-1 is in application of Annex C, for those modules
+of SUITESTENSA platform designed and released before the introduction of IEC 62366-1.
+In the Annex A is described the operative process that should be followed when using the software
+suite Microsoft Azure DevOps (formerly, Team Foundation Server) in order to electronically register
+and manage the software life- cycle development and documentation.
+
+2. References
+Reference
+
+Title
+
+QMS
+
+Quality Management System EBIT
+
+QPR
+
+Quality Operating Procedure of EBIT QMS
+
+QOI
+
+Quality Operating Instructions of EBIT QMS
+
+QPR000147
+
+Product requirements definition and planning
+
+QPR000149
+
+Design and Development
+
+QPR000150
+
+Procurement
+
+POL000022
+
+Policy for secure software development (EBIT ISMS)
+
+IPR000021
+
+Secure Software Development Requirements Management
+(EBIT ISMS)
+
+QOI000136
+
+Risk Management Process
+
+RMP-SUITESTENSA
+
+Risk Management Plan
+
+IEC
+62304:2006+AMD1:2015
+
+Medical Device Software – Software life-cycle process
+
+IEC 82304-1:2016
+
+Health software - Part 1: General requirements for
+product safety
+
+IEC 62366-1:2015
++AMD1:2020
+
+Medical devices - Part 1: Application of usability
+engineering to medical devices
+
+ISO 14971:2019+A11:2021
+
+Application of Risk Management to Medical devices
+
+LC-SUITESTENSA-EN rev. V
+
+4/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+IEC 81001-5-1:2021
+
+Health software and health
+effectiveness and security
+
+IT
+
+systems
+
+safety,
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+3. Terms and Definitions
+CR
+Change Request (request to change a product requirement of an existing device)
+DA
+Diary of Activities
+DRC Head of Sales department
+DT
+Technical Description
+INT
+Integration department
+ISMS Information Security Management System
+PdP
+Project Development Plan
+PNPM Proposal of New Product/Module
+PP
+Planning & Product Management
+PR
+Planning Review
+QMS EBIT Quality Management System
+R&D Research and Development
+RADR Risk Analysis Design Review document
+RAV Risk Analysis Verification document
+RQ
+Product Requirement
+SI
+Input Specifications – Software Technical Specification Document
+SPV
+Post-Sales department (includes Technical Assistance, Help Desk)
+SP
+Sprint Planning
+SR
+Sprint Review
+STM Software Test Manager
+SW
+Software
+TP
+Test Plan
+TR
+Test Report
+TFS
+Microsoft Azure DevOps suite (previously Team Foundation Server)
+UEF Usability Engineering File
+USD Usability Specification Document
+
+3.1. Definitions
+The following definitions are taken from the IEC 62366 International Standard:
+Primary Operating Function
+Usability
+Usability Engineering
+LC-SUITESTENSA-EN rev. V
+
+Function that involves user interaction that is either
+frequently used or related to the safety of a medical device.
+Characteristic of the operator equipment interface that
+establishes effectiveness, efficiency, ease of user learning
+and user satisfaction.
+Application of knowledge about human behaviour, abilities,
+limitations, and other characteristics related to the design of
+5/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Usability Engineering File
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Use Error
+Use Scenario
+
+tools, devices, systems, tasks, jobs, and environments to
+achieve adequate usability.
+Set of records and other documents that are produced by
+the usability engineering process.
+Act or omission of an act that results in a different response
+than intended or expected.
+Specified sequence of events and tasks as performed by a
+specified operator in a specified environment.
+
+4. Roles and Responsibilities
+Role
+Planning &
+Product Manager
+
+R&D Manager
+
+Software
+Development
+Project Manager
+Software Test
+Manager
+
+Initials Responsibility
+PP
+- create the concepts for new products to be developed
+- produce a first level set of product and business user
+requirements (New Product Requirements) as well as of Change
+Requests (new requirements) on the existing device
+- perform the product Validation
+- call and lead the Inception meeting (initial Planning Review)
+- with R&D, review and approve the final Planning Review meeting
+minutes prior to product release
+R&D
+- review and approve the Product Requirements
+- appoint a SW Development Project Manager to the project, with
+a development team
+- approve and deliver the SW Project Development Plan
+- with PP, review and approve the Sprint Planning and Sprint
+Review meeting minutes
+- Approve the Software System Test Plan
+RdP
+- Approve the Software Input Specification documents
+- Manage the Sprint Planning and Sprint Review meeting minutes
+STM
+
+- Deliver the Software System Test Plan
+- Manage the Test Plan
+
+5. Software development
+5.1. Overview
+Software development is performed according to:
+- the Company’s QMS documentation, in which are described the processes in place to manage
+the various life cycle activities for product development, design control, and risk
+management. Dedicated QMS operating procedures describe the product and software
+development processes, from the time a new device or a new set of device features are
+formally defined through the release of the product to the market, including provisions for
+changes and maintenance planning for each device and for the software within each device.
+LC-SUITESTENSA-EN rev. V
+
+6/24
+
+-
+
+-
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+-
+
+-
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+the guidelines and the operating methods for the fulfilment of the requirements and criteria
+for secure software development, expressed in the documents POL000022 and IPR000021
+part of the Company’s ISMS.
+the IEC 62304 standard, that is intended to provide a framework of the whole life-cycle
+(processes, activities and task) necessary to safe design and maintenance processes of
+software medical devices.
+the IEC 82304 standard, that is intended to provide a framework of the whole life-cycle
+(processes, activities and task) necessary to cover and manage requirements for the safety
+and security of health software products.
+IEC 81001-5-1 standard, that is intended to define the life-cycle requirements for the
+development and maintenance of health software, with a specific focus on cybersecurity. It
+establishes a structured set of processes, activities, and tasks to ensure secure software
+development, maintenance, and risk management, complementing standards IEC 62304 and
+IEC 82304. The standard aims to increase the cybersecurity of health software by embedding
+security practices throughout the software life cycle, and is applicable to both medical device
+software and other health-related software products.
+
+Risk analysis activities are part of the development process and are carried out over the duration of
+the project plan, following the stage defined in the Risk Management Plan, and consistently with the
+development activities and in order for being able to properly implement software countermeasures
+to hazards that may be identified.
+Being SUITESTENSA a software medical device, risk identification is based on the product
+requirements of the software version to which the Risk Analysis applies
+An agile software development approach is adopted for the management of the software
+development life-cycle. Such iterative, incremental and adaptive methodology is depicted in the
+figure below and its key elements are discussed in the table below.
+
+Item
+
+Description
+
+LC-SUITESTENSA-EN rev. V
+
+Participants
+7/24
+
+Sprint
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Inception
+
+Product Backlog
+
+Sprint Backlog
+Backlog
+Prioritization
+
+Requirement
+Analysis
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+One full iteration of software development: a set period of
+time (usually two weeks) during which specific work
+(Sprint Backlog) has to be completed and made ready for
+review.
+A structured meeting (initial Planning Review) conducted
+at the beginning of the development project. It serves to
+align stakeholders on the product vision, clarify objectives,
+define the scope and delivery strategy, and assess
+potential risks: the goal of the meeting is to establish the
+scope and timeline for the release of the target software
+version.
+
+Scrum Team
+
+Through collaborative sessions, the development team and
+key stakeholders establish a shared understanding of
+priorities, constraints, and success criteria. This early
+alignment ensures that the project starts with a clear
+direction and a validated foundation for iterative
+development, i.e. the Product Backlog is defined in its
+initial version (1.0).
+List of all the CRs and RQs included as of the Inception
+meeting (kick-off) and potentially updated, redefined and
+reviewed following Delivery Updates sessions and/or due
+to other inputs.
+Subset of the Product Backlog items that the components
+of the Scrum Team are assigned to develop within the
+scope of the ongoing Sprint.
+The process of ordering Product Backlog items based on
+their value and priority, in order to ensure that the team
+focuses on delivering the most impactful features first.
+Prioritization is typically revisited at regular intervals (e.g.
+during Sprint Planning sessions) to reflect changing
+priorities, evolving goals and feedbacks.
+Session for in-depth analysis of those RQs and CRs that
+need further analysis and/or clarification functional to their
+development, before the Sprint Planning execution.
+
+Delivery Updates
+
+Regular session for evaluating and discussing the external
+feedbacks collected on the use of the software device.
+
+Scrum Team
+
+Cross-functional group of professionals accountable for the
+development of the Sprint Backlog within the scope of the
+ongoing Sprint.
+Bi-weekly meeting for:
+
+Sprint Planning
+(SP)
+
+-
+
+PP
+SPV
+INT
+R&D
+DRC
+
+N.A.
+
+N.A.
+PP
+
+PP
+SPV
+INT
+R&D
+PP
+SPV
+INT
+PP
+R&D
+PP
+R&D
+
+selecting the RQs and CRs that compose the Sprint
+Backlog;
+
+LC-SUITESTENSA-EN rev. V
+
+8/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+-
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+designating the RQs and CRs that need further
+clarification and will be developed in future Sprints.
+
+Sprint Review
+(SR)
+
+Bi-weekly project progress meeting.
+
+Daily Scrum
+
+Brief daily communication and status-check meeting for
+the Scrum Team members working on the ongoing Sprint.
+
+PP
+R&D
+Scrum Team
+
+5.2. The Software Development Lifecycle
+5.2.1.
+
+Concept Development & Product Requirement Definition
+
+According to QMS procedure for Product Concept and Planning (QPR000147), the Product Manager
+group has the responsibility for creating the concepts for any new product to be developed and for
+proposing it to EBIT management. It is mandatory to include in the "New Product Proposal"
+document a first level set of product and business requirements. It includes also provisions for
+changes and maintenance planning for each device and the software requirements within each
+device for the product to be developed (the Product Requirements – RQ Document), including:
+- Intended Use and Intended User base and Intended Use environment
+- Basic Technical Specifications.
+- Needed approvals, possible voluntary marking and product classification
+- Compatibility and relationship with other products
+- Costs and production volume targets
+- Product validation and market test activities
+- Required investments (project budget)
+- Project time Schedule
+During Product Requirement Specification it is required to address the definition of the Usability
+Specification Document (USD), to be used in the Usability Engineering Process activities. USD
+Document should include at least the application specifications and the frequently used functions of
+the medical device. The USD shall include:
+- intended medical indication
+- intended patient population
+- intended part of the body or type of tissue applied to or interact with
+- intended operator profile
+- intended conditions of use
+- operating principle
+The Primary Operating Functions shall include:
+- frequently used functions
+- functions related to safety
+The Design Input requirements of the device under development include the following items:
+• user product-specific requirements, which identify the User Need requirements and are used
+to drive downstream software requirements development;
+
+LC-SUITESTENSA-EN rev. V
+
+9/24
+
+•
+•
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+•
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+labelling requirements, which are registered in Azure DevOps by means of a specific
+“Requirement” in order to be appropriately documented as design inputs and included in the
+verification process;
+applicable regulatory requirements, which are identified and recorded in the Project
+Development Plan document and are regularly evaluated, discussed and reviewed during
+project progress meetings;
+certain business requirements that influence the product’s strategic positioning and market
+readiness, which are considered during the development of the Design and Development
+Plan and may indirectly inform design input activities.
+
+Since April 2013 the User Product Requirements are electronically registered and listed on the
+Microsoft Azure DevOps (previously named Team Foundation Server) – cfr. Annex A.
+EBIT uses Microsoft Azure DevOps for the management of the SUITESTENSA Software development
+life-cycle documentation.
+Microsoft Azure DevOps is an ALM (Application Life-cycle Management) Software Suite.
+The User Product Requirements and Software Specification Requirements are electronically
+registered and listed in Microsoft Azure DevOps which provides interactive tools and report
+capabilities to:
+1. list the open requirement for a specific release version
+2. assess the status of each product requirement, both in term of analysis & verification.
+3. give traceability of the specific product requirements with relation to the task assigned in the
+software development plan and the software developer responsible for the task.
+4. register the output of the verification and validation phase on the specific requirement.
+The approval of the Product Requirements Backlog in its initial version (1.0) related to a specific
+release version takes place within the context of the Inception meeting (initial Planning Review), in
+presence of PP, R&D, SPV, INT and Sales Managers.
+The R&D manager is required to review the Product Requirements.
+Upon approval of the development, a SW Development Project Manager is appointed to the project
+and the development team is structured into dedicated working groups, whose organization and
+composition are formally defined during the Inception meeting (initial Planning Review).
+
+5.2.2.
+
+Project Initiation and Management
+
+According to the procedure for Design Control (QPR000149), design and product development are
+managed through a Project Development Plan (PdP) that identifies the activities and responsibilities
+for the management of the following items:
+1. identification of the project objectives and expected product requirements and of the
+sustainability and risk elements underlying the project;
+2. definition and identification of the elements of technological innovation, if any, and, where
+applicable, definition of the related system software architecture;
+3. identification of the standards and mandatory regulatory requirements with which the
+development project and the product to be released shall comply;
+4. identification of development services and tools;
+5. identification of the Risk Management Plan (cfr. QOI000136);
+6. identification of the Test Plan;
+7. identification of the plan for product management and maintenance activities;
+LC-SUITESTENSA-EN rev. V
+
+10/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+8. organisation of work and assignment of activities and responsibilities;
+9. identification of the methods for verifying the progress of the plan;
+10. definition of the time development plan for the project and the related activities.
+The activities included in the PdP, also referred to as Software Development Plan, are managed
+through the Microsoft Azure DevOps software suite. From the activities defined in the suite, detailed
+project plans and responsibilities are developed in order to manage the document specification
+creation, documentation development, verification testing activities that demonstrate compliance of
+the design to its Design Input requirements.
+The software Test and Verification Processes and the Risk Management Process are delivered in
+compliance to the Test Plan and Risk Management Plan documents, that define:
+- the action to be performed,
+- the methodology and guideline to be followed, and
+- the timeline that should be respected during the software development plan.
+Activities and specifications are assigned to the team members. In order to help control development
+activities, Microsoft Azure DevOps Suite is used as a project management tool as the project team’s
+bug-tracking system, as well as the means by which project task activities are managed.
+
+5.2.3.
+
+Software Requirements Development
+
+Product Requirements are regarded as system input requirements (Design Input) for the
+development team.
+The Software Requirement Specification process consists in Requirement Analysis sessions and/or
+dedicated meetings over the duration of the Sprint, during which the Product Requirements are
+discussed so as to clearly identify the User Need requirements. The goal of such process, referred
+to as “Definition of Ready”, is to ensure that Product Requirements reach a “Ready” status, suitable
+for subsequent development activities.
+As soon as an architecture is identified for the device to be developed, the system input requirements
+are further specified in SW Technical Specification Documents that describe the various subsystems.
+Table 1 summarizes the task to be accomplished during this phase for the design and development
+of a new system. The following process and its approval phases are registered in the Microsoft Azure
+DevOps Suite.
+
+5.2.3.1
+
+5.2.3.2
+5.2.3.3
+5.2.3.4
+
+Table 1 - Software requirements of a new system
+Product Requirements are reviewed and accepted by the SW Project Manager
+and the team.
+The review activity includes identification of User Need requirements.
+The Product Backlog in its initial version (1.0) includes Product Requirements
+that have reached a “Ready” status.
+The development team identifies a system architecture to meet the design
+input.
+The software system is divided into items.
+The main software items are identified to fit the system architecture.
+
+LC-SUITESTENSA-EN rev. V
+
+11/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.3.5
+
+5.2.3.6
+5.2.3.7
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+A number of SW Technical Specification Documents to cover the User Need
+requirements is identified, when necessary.
+Starting from the Primary Operating Functions, the Usability Specification shall
+be extended to describe:
+- use scenarios related to the Primary Operating Functions (frequent and
+reasonably foreseeable worst-case use scenarios);
+- operator equipment interface requirements for Primary Operating
+Functions, including those to mitigate risk;
+- requirements for determining whether Primary Operating Functions are
+easily recognizable by the operator, if applicable.
+A Technical Description document (ADD - Architectural Design Document)
+reports the system architecture, approved by the RdP and/or R&D Manager.
+Risk Management activities are initiated for the device under development
+during this phase of the software requirement specification. Risk Management
+activities are planned to remove or reduce as far as possible the risks
+associated with:
+- the use of the device;
+- the possible negative interactions between software and the IT
+environment within which it operates and interacts (where applicable)
+in terms of cybersecurity.
+Risk Management activities and Risk Analysis, as defined in the Risk
+Management Plan, shall include:
+a) Identification of possible safety and security risks arising from the use
+of the medical device. Identification of hazards and hazardous
+situations shall be performed as early as possible in the design and
+development process, in order to facilitate risk control, and shall
+continue throughout the entire lifecycle of the product.
+Being SUITESTENSA a software medical device, risk identification is
+based on the product requirements of the software version to which
+the Risk Analysis applies and is performed according to:
+- questions in UNI ISO/TR 24971:2020 Annex A, for the evaluation
+of safety risks;
+- IEC/TR 80001-2-2:2012 and, where applicable, IEC/TR 80002-1
+with particular reference to Annex B, for the evaluation of security
+risks.
+b) Assessment of the probability and severity of the risk, and the
+resulting acceptability level.
+c) Identification of countermeasures – that could be software risk
+mitigation measures, warning and instructions within IFU and within
+Operative Instruction and Quality Operating Procedure of the EBIT
+QMS - to be applied for risk mitigation.
+Software design measures to control the risk are identified by R&D, to be part
+of SW Technical Specification Documents (SI) when necessary.
+
+LC-SUITESTENSA-EN rev. V
+
+12/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Risk Management activities shall specifically include identification of Hazards
+and Hazardous Situations related to Usability as per the Risk Management
+Process, starting from the Usability Specification Document and the frequently
+used operating functions. Responsible of the Risk Management Activities
+related to Usability is PP. Software design measures to control the risk are
+identified by R&D department, to be part of SW Technical Specification
+Documents (SI) when necessary.
+The results of risk identification analysis mentioned above are recorded and
+documented in the Risk Management Summary document (RMSSUITESTENSA).
+Similarly to the product requirements definition stage, which follows the
+aforementioned iterative, incremental and adaptive Agile methodology, also
+the Risk Management Plan follows an iterative approach.
+During the planning and design phase, and in compliance with the Agile
+methodology principle, the Risk Management Summary document (RMSSUITESTENSA) can be updated and/or modified if new risk elements
+emerge during the definition of the software detailed architecture and/or if
+new design elements and requirement are introduced.
+5.2.3.8
+5.2.3.9
+5.2.3.10
+5.2.3.10.1
+
+The software development team identifies a system software architecture to
+meet the system software requirements. System software Items are identified
+including Third-Party and OTS Software.
+In the Technical Description document (ADD - Architectural Design
+Document), Software Items are classified based on safety, according to IEC
+62304 and on the outcomes of the Risk Analysis.
+Technical Description document (ADD – System Software Architecture
+document) reports the system software architecture and is approved by the
+RdP and/or R&D Manager.
+During project progress meetings (SR):
+• the list of Product Requirements may be revised based on the current
+status of the release plan, as well as in the case where new RQs, not
+originally planned, have to be incorporated in the release plan with
+higher priority. Any changes to the list of Product Requirements are
+formalized through subsequent versions of the Product Backlog,
+ensuring traceability and consistency with the updated development
+scope;
+• applicable regulatory requirements are evaluated, discussed and
+reviewed to ensure ongoing compliance and alignment with project
+objectives.
+All relevant evidence related to these activities is recorded within the Azure
+DevOps system, where each Sprint is managed as a structured container
+encompassing work items and their associated workflows and
+interdependencies.
+
+Table 2 summarizes the tasks to be accomplished during this phase for the design and development
+of changes to software of an existing device.
+LC-SUITESTENSA-EN rev. V
+
+13/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.3.11
+
+5.2.3.12
+5.2.3.13
+5.2.3.14
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Table 2 - Software requirements of changes to an existing device
+The Product Requirements for the release (RQ and CR) are reviewed and
+accepted by the SW Development Project Manager (RdP) and the team.
+USD Document should be updated if any modification should occur on existing
+requirement on:
+- intended medical indication;
+- intended patient population;
+- intended part of the body or type of tissue applied to or interact with;
+- intended operator profile;
+- intended conditions of use;
+- operating principle.
+In the case of new Primary Operating Functions, USD shall include:
+- frequently used functions;
+- functions related to safety.
+Revision includes also compatibility with the current system architecture and
+identification of the parts of the system affected and involved in the new
+requirements.
+New System Input Specifications (SI) documents or changes to existing SI are
+identified.
+Risk Management activities are initiated in case of changes to an existing
+device, following the same process described earlier in 5.2.3.7
+As defined in the Risk Management Plan, if new software design measures to
+control the risk are added as results of the Risk Analysis, they have to be
+verified in the Test Case Session on risk control measures.
+In the case that no design measures to control the risk have to be added due
+to changes to an existing device, this should also be clearly defined and stated
+within the context of the relevant SP/SR meeting and in the final RADR
+document (Risk Analysis Design Review) document, as defined in the Risk
+Management Plan.
+
+5.2.3.15
+5.2.3.16
+5.2.3.17
+
+SW Technical Specification Documents, when deemed necessary, are drafted,
+approved by RdP.
+The system software architecture and the software items, including safety
+classification, are reviewed to confirm applicability of the new requirements or
+to identify and classify new items in the architecture.
+During project progress meetings (SR):
+• the list of Product Requirements may be revised based on the current
+status of the release plan, as well as in the case where new RQs, not
+originally planned, have to be incorporated in the release plan with
+higher priority. Any changes to the list of Product Requirements are
+formalized through subsequent versions of the Product Backlog,
+ensuring traceability and consistency with the updated development
+scope;
+• applicable regulatory requirements are evaluated, discussed and
+reviewed to ensure ongoing compliance and alignment with project
+objectives.
+
+LC-SUITESTENSA-EN rev. V
+
+14/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Table 2 - Software requirements of changes to an existing device
+All relevant evidence related to these activities is recorded within the Azure
+DevOps system, where each Sprint is managed as a structured container
+encompassing work items and their associated workflows and
+interdependencies.
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.4.
+5.2.4.1
+5.2.4.2
+5.2.4.3
+
+5.2.4.4
+
+5.2.4.5
+
+5.2.4.6
+
+Software Unit Implementation and Verification
+
+Table 3 - Software/Firmware Unit Implementation and Verification
+Once the software architecture has been reviewed and approved, the software
+unit and module development activities are assigned to the Scrum Team
+members according to the software architecture specifications.
+Software is developed and verified at the unit level directly by the software
+development engineer as specified in Test Plan.
+Programming Languages and development tools (including software
+configuration management programs) are identified and documented.
+Development Environment must be hosted in logical segregated network and
+must not be available on the Internet.
+Software Item Test (unit test) is performed by the software developer to
+verify the requirement implementation against its Specifications.
+Test Cases are specified for those work items (RQs/CRs) that have reached
+the "Definition of Done": in accordance with Agile methodology, this status
+indicates that all development activities related to the work item have been
+completed. Upon reaching this status, two activities are executed:
+• specification of Test Cases by the software developer;
+• execution of Test Cases (unit testing activities) by the software
+developer.
+To bring efficiency to the software development process, simulators or
+emulators might be used for unit testing that reproduce the device’s software
+environment. This allows for detailed testing of all input and output conditions
+at the unit and module level. Test cases are specified within the simulation
+environment to thoroughly test each software unit and module.
+Test cases are specified by the developers to ensure traceability to software
+requirements, clarity of expected outcomes and repeatability of test
+procedures. Each test case shall target specific functional or non-functional
+aspects of the software, contributing to the overall demonstration of product
+quality and reliability.
+Software Items Verification activities include:
+- proper event sequence;
+- data flow;
+- fault handling;
+- initialization of variables;
+- memory management;
+- boundary conditions;
+- implementation of risk control measures.
+
+5.2.5.
+
+Software Test Plan Definition
+Table 4 - Software System Test Plan
+
+LC-SUITESTENSA-EN rev. V
+
+15/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.5.1
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+In the Project Development Plan, the Software Test Manager creates the Test
+Plan as a series of item, software item integration and system-level test
+cases/checklists.
+In alignment with the Agile methodology, the Test Plan is progressively defined
+over time: during each Sprint, the Testing team performs pre-testing activities
+on Test Cases (TCs) that have reached the “Ready” state. These TCs are
+incrementally included in the Test Plan, which is therefore managed as an
+evolving artifact.
+The execution of these tests is recorded within the Azure DevOps system,
+ensuring full traceability of the testing activities and their alignment with the
+development workflow.
+Test cases with execution outcome “PASSED” in previous sessions are not reexecuted in subsequent testing sessions, unless they are linked to unresolved
+issues, bug-related work items or identified regression risks.
+The Test Plan includes, where appropriate for software releases of devices
+already in the market, a regression testing section to assure that modules not
+subjected to change requests or new requirement still work properly and that
+no unintended side effects have been introduced to that modules by the
+changes made to the device’s software.
+The plan definition of Verification and Validation Tests of CR/RQs under
+development within a Sprint (Sprint Backlog) is carried out over the duration
+of the Sprint itself: relevant Test Case objects related to Sprint Backlog are
+defined on the Microsoft Azure DevOps system.
+Verification and Validation Tests are generally executed subsequent to project
+progress meetings (SP/SR), after which the Verification team (R&D) and the
+Validation team (PP) coordinate to align on the testing activities planned for
+the Sprint.
+Where applicable, the Validation team (PP) proceeds with the execution of
+validation tests upon completion and positive outcome of an initial round of
+verification tests executed by the Verification team (R&D). This approach
+ensures that testing activities efforts are based on a stable and verified
+software baseline.
+Test Environment must be hosted in logical segregated network and must not
+available on the Internet.
+The Test Plan shall include the plan of the software risk mitigation control
+measure defined for the version under test, and related to safety, security and
+usability of the device, as defined in the Risk Management Plan.
+The Test Plan may also include specific activities related to security measures,
+in order to identify vulnerabilities through:
+- Vulnerability Assessment/Penetration Tests;
+- Source Code Review activities.
+As defined in document IPR000021, which is part of EBIT ISMS implemented
+in compliance with ISO/IEC 27001:2022, periodic Vulnerability Assessments
+
+LC-SUITESTENSA-EN rev. V
+
+16/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+and Penetration Tests are conducted on released product versions to detect
+emerging threats in deployed software components.
+In parallel, Code Review activities -supported by off-the-shelf (OTS) tools- are
+regularly performed during development to identify security vulnerabilities,
+quality issues, and deviations from secure coding standards through static
+code analysis. These reviews are periodically assessed by the development
+team and their outcomes inform corrective actions across both new
+development and maintenance cycles.
+All findings related to the activities described above contribute to the
+continuous update of risk analysis documentation, in alignment with the
+provisions of the Risk Management Plan (RMP) document.
+A Software Test Plan document identifies the procedures and criteria for test
+execution and acceptance of test results.
+Test Plans are issued and approved before the tests start.
+The software system test plan (with all the checklists) is approved by R&D or
+RdP.
+Software Verification Checklists are developed for each major software
+function that define the software function’s requirements. These Software
+Verification Checklists are then used to develop test cases and acceptance
+criteria.
+Test specification (checklists) are developed from System Input Specifications
+and Product Requirement definition. These checklists may include individual
+test cases with acceptance criteria defined for each test case.
+
+5.2.5.2
+5.2.5.3
+5.2.5.4
+
+5.2.5.5
+
+Test specifications for new modules/features: this task is assigned to the
+module manager (Dev), possibly supported by the Test Team.
+Test specifications for release-specific requirements and issues: this activity is
+performed by the module manager (Dev) and, if necessary, by the project
+manager (RdP).
+
+5.2.6.
+5.2.6.1
+
+5.2.6.2
+
+5.2.6.3
+
+Software Integration and Software System integration testing
+Table 5 - Software Integration and integration testing
+From Project Development Plan, the Software Test Manager creates the Test
+Plan as a series of item, software item integration and system-level test
+cases/checklists.
+The Test Plan includes, where appropriate for software releases of devices
+already in the market, a regression testing section to assure that modules not
+subjected to change requests or new requirement still work properly and that
+no unintended side effects have been introduced to that modules by the
+changes made to the device’s software.
+Software integration tests are performed by a group dedicated to this
+function within the software development department.
+Software Integration test address whether the integrated items perform as
+specified in the Input Specification documents.
+Software Integration Test Reports are approved by the Software team
+manager and delivered to RdP.
+
+LC-SUITESTENSA-EN rev. V
+
+17/24
+
+5.2.6.4
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.6.6
+
+5.2.6.7
+
+5.2.7.3
+5.2.7.4
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Software System Test Report is issued and approved by RdP to document the
+test result.
+Approval includes verification that:
+- Test Methodology is correct;
+- Test procedure trace to Software System Requirements;
+- all applicable Software System Requirements have been verified.
+- Test results meet the pass/fail criteria.
+
+5.2.7.
+
+5.2.7.2
+
+rev. V
+
+Full integration testing and software system testing are combined in a
+Software System Testing set of activities.
+Software System Verification Tests are performed by the Software
+System Test Group. This group performs verification testing to assess that the
+system software requirements, developed to cover the User Needs, have been
+met. Software System Verification Tests may include the following:
+• Integrated tests/Flow tests specification: these tests are designed to
+verify interaction procedures, intended as data and control flows
+between individual software modules.
+• Software Module verification sessions: they shall be conducted in
+accordance with formal test specifications and at the verification
+milestones defined in the project plan. They consist of parallel
+execution of test suites performed by a dedicated test team.
+• Integrated Verification sessions: these sessions support the
+qualification of candidate software builds for both preliminary and final
+product releases, ensuring compliance with functional and regulatory
+requirements.
+A “Risk” Analysis Verification (RAV) Checklist is drafted at the completion of
+the Risk Analysis and during the analysis and design of software risk mitigation
+measures.
+RAV is issued to assess that the measures to control the risk involving software
+have been implemented correctly, as defined in the Risk Management Plan.
+The RAV is updated with changes made to the Risk Management documents.
+
+5.2.6.5
+
+5.2.7.1
+
+LC-SUITESTENSA-EN
+
+Problem Resolution Process
+Table 6 - Problem Resolution Process
+Problems are identified and tracked using the Azure DevOps tool (cfr. Annex
+A – Issue definition).
+Anomalies detected in software during the test phases or reported by field
+service are investigated for reproducibility and to identify the causes.
+The problems are also evaluated for relevance to the safety and effectiveness
+of the system and classified accordingly.
+All bugs discovered during verification of measure taken to reduce a risk (Risk
+Analysis Checklist), according to the risk management documentation, are set
+to "Critical" severity.
+The implementation of the solution (HotFix) to correct each bug is verified.
+The verification is carried out by the bug Reporter or an independent person.
+In the case the HF is not specifically related to a single installation and a
+Service Pack is not planned (see Annex A), the impact analysis on the module
+affected by the HF is mandatory and regression test is performed, if needed.
+
+LC-SUITESTENSA-EN rev. V
+
+18/24
+
+5.2.8.
+5.2.8.1
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.8.2
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Software Verification and Validation
+Table 7 - Software Validation
+Software is validated at the system level. At the end of the verification phase,
+the system is delivered to the PP group for Validation.
+PP, responsible for Validation activities, operates independently from the
+design team.
+PP shall prepare and maintain a Validation Plan. The Validation Plan defines
+the structured approach to validation activities, ensuring that the medical
+device consistently meets its intended use, safety and performance
+requirements throughout its lifecycle, in compliance with MDR (EU) 2017/745.
+It outlines the scope, methods, responsibilities, and acceptance criteria for
+validation, supporting regulatory conformity and patient safety.
+Validation is performed with regards to the Input User Requirement Document
+and includes, as defined in the following 5.2.8.5, the verification of:
+- the usability of the requirement;
+- the performance of the requirement;
+- the functionality of the requirement.
+The specific list of Input User Requirements to be validated is defined
+following the criteria defined in 5.2.8.4 hereinafter.
+PP shall also prepare and maintain a Usability Evaluation Plan specifying:
+- the methods and acceptance criteria for validation of the Usability of
+the Primary Operating Functions based on the Usability Specification;
+- the kind of environment where the validation is performed;
+- the specific user training needs that should be addressed with respect
+to the device performance.
+The Usability Evaluation Plan is part of the Validation Plan of the product.
+
+5.2.8.3
+
+5.2.8.4
+
+According to Product Concept and Planning procedure (QPR000147), two
+phases could be identified:
+- product validation: demonstration of conformance to product
+requirements and user needs;
+- market test (optional): to gauge market acceptance and to confirm
+market penetration rates, especially in consideration of the product’s
+innovations and applications.
+During Requirement Analysis sessions and/or within the context of the
+Inception (initial Planning Review) and the project progress meetings (SR/SP)
+assessing the status of development and possibly update of the List of Product
+Requirements, the specific list of Input User Requirements to be validated is
+defined. Those requirements are validated and verified with a registration on
+the Azure DevOps system.
+
+LC-SUITESTENSA-EN rev. V
+
+19/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+The general criteria to determine whether an Input User Requirement may not
+be subjected to validation are the following:
+• the requirement is related to a technical and or architectural back-end
+functionality;
+• the requirement has no direct impact on the User Interface;
+• the requirement is classified as a Change Request to an existing
+functionality and has no relevant impact on the User Experience and
+User Interface. This criterion could be applied also to new
+Requirements;
+• the requirement is related to integration process (back-end
+requirements).
+In more general terms, a requirement may not be subjected to validation in
+those cases where, due to the nature of the requirement itself, there is no
+need for the PP validation process, since the following topics are already
+verified and tested in the Verification Phase defined in 5.2.6:
+- the usability of the requirement;
+- the performance of the requirement;
+- the functionality of the requirement.
+Validation is performed with regards to the Input User Requirement Document
+and includes verification of:
+- the usability of the requirement;
+- performance;
+- functionality.
+
+5.2.8.5
+
+For each of them, PP creates one (or more) Validation Test Case object(s) on
+the Azure DevOps system. Each Test Case object provides a tab ”Steps” where
+PP defines test methods, acceptance criteria and expected results of the
+validation to be performed. Such structured information aims to define proper
+implementing rules for running the Validation Test Cases in order to assess
+the Usability, the Performance and the Functionality of each requirement.
+
+5.2.9.
+5.2.9.1
+
+5.2.9.2
+
+Software Release
+Table 8 - Software Release
+At the final Planning Review prior to release (for both a new device software
+and a change to an existing device) the following activities are performed:
+- residual anomalies are identified and evaluated to ensure that they
+don’t contribute to an unacceptable risk;
+- verification that all the software risk reduction measures have been
+successfully tested;
+- verification that no Critical bug has been left unresolved.
+The registration of the validation test case on the Azure DevOps system is
+reviewed within the context of the final Planning Review formalizing the
+release. Acceptance and release of this validation test case is required for
+device release.
+
+LC-SUITESTENSA-EN rev. V
+
+20/24
+
+5.2.9.3
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+The version of the software that is being released is documented through the
+formal filing of source codes, executable code, archive documentation to
+identify the components of the release and the references for specifications
+and test plan.
+The Product Release Note shall contain a clear evidence of the following:
+- list of all the released functionalities;
+- for specific functionalities, released only for testing purpose with thirdparty software, a clear indication must be specified. As soon as the
+integration test with third-parties is completed, the Integration Project
+Release Note, already part of the documentation produced, is officially
+part of the Product Release Note.
+During the final Planning Review prior to software release, the checklist of the
+compliance to IEC 62304, 81001-5-1 and 82304 shall be verified.
+The responsibility of the checklist is of R&D, who appoints the contribution to:
+- RdP – Software Development Phase;
+- Test Plan Manager;
+- PP – Verification and Validation.
+The final Planning Review meeting minutes document is approved by the R&D
+manager and the PP manager.
+The meeting formalizes the verification of successful outcomes from
+verification and validation testing, as well as the completeness of the
+documentation required for product release. Specifically, the following items
+are reviewed:
+• the results and conclusions of the Validation Report (VRSUITESTENSA);
+• the results and conclusions of the Risk Management Report (RMRSUITESTENSA);
+• the product’s compliance with the General Safety and Performance
+Requirements (GSPR) of Regulation (EU) 2017/745, verified through
+the GSPR checklist (GSPR-SUITESTENSA);
+• confirmation that the changes introduced to the device do not
+constitute significant modifications to its design or intended use, in
+accordance with the classification criteria and verification schemes
+defined in MDCG 2020-3 and NBOG BPG 2014-3;
+• the availability and content of the Product Release Note.
+Based on the above, the commercial release of the product is formally
+approved and authorized. Final release actions are identified and planned,
+including the delivery of internal training activities to relevant company
+personnel.
+
+5.2.9.4
+
+5.2.9.5
+
+5.2.9.6
+
+5.2.10.
+5.2.10.1
+
+LC-SUITESTENSA-EN
+
+Post-Launch Software Releases, Change Management
+
+Table 9 - Post-Launch Software Releases, Change Management
+According to the Product Development Procedure, changes to device software
+after initial market release are processed following the same steps of the first
+release of the device.
+
+LC-SUITESTENSA-EN rev. V
+
+21/24
+
+5.2.10.2
+5.2.10.3
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.10.4
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Table 9 - Post-Launch Software Releases, Change Management
+A new software release is formally required to have all software development
+processes completed, from Requirements and Specification through
+Verification and Validation.
+When applicable, Regression testing must be performed at the Software
+System Test level.
+All new system software releases are verified for their compatibility with legacy
+product hardware configurations already on the market. Any compatibility
+limitations are explained in the release notes and in the Field Service
+information provided with a new software release.
+
+5.2.11.
+
+Externally-Sourced Software Management
+
+Externally-Sourced Software can be of multiple types:
+1. OTS (Off-The-Shelf) software:
+OTS software may be divided in two main categories:
+• a generally available software component, intended for general purpose computing, that
+has not been developed for the purpose of being incorporated into a medical device;
+• a software medical device, with its own clearance and/or certification, that is integrated
+providing end-user clinical functionalities.
+2. SOUP (Software Of Unknown Provenance): a software component for which adequate
+documentation may be difficult to obtain, because it has not been developed under a
+controlled software development life-cycle.
+3. Sub-contracted Software: custom software that is externally developed by contract
+software developers under the direction of the Company.
+
+5.2.11.1
+5.2.11.2
+
+5.2.11.3
+
+Table 10 - OTS Software
+The use of OTS software is desired to reduce development costs and exploit
+specific supplier expertise which is out of the boundary of the Company’s field
+of interest.
+Prior to its use in a device, OTS software modules are evaluated for their
+performance and limitations and are evaluated for their suitability for use
+integrated with the device.
+In the case of OTS Software Medical Device, EBIT shall ensure that the source
+code complies with functional and security requirements.
+Where applicable, specific contract clauses may be defined so as to ensure the
+test of the source code through Vulnerability Assessment/Penetration Test or
+Source Code Review before release in production environment. These activities
+shall be executed in compliance with the provisions of document IPR000021
+(which forms part of the EBIT ISMS, implemented in compliance with ISO/IEC
+27001:2022). The outcomes of periodic security assessments and regular static
+code reviews enable ongoing updates to EBIT risk analysis documentation, in
+accordance with the Risk Management Plan.
+OTS software components are integrated in the device’s software design.
+Because of their integration with the overall operating system, OTS software
+modules are tested as part of the system software testing process.
+
+LC-SUITESTENSA-EN rev. V
+
+22/24
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+5.2.11.4
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Table 10 - OTS Software
+Whenever a new release or version of the OTS is available, the changes
+introduced in the OTS are analysed to assess any possible impact on the device’s
+system performance, safety or efficacy.
+In case of OTS Software Medical Device, PP defines whether or not it is required
+to incorporate the latest revision of the OTS from the vendor, in order to benefit
+of new functionalities and or bug fixing included in the new release.
+The evaluation, verification and validation process of a new OTS major software
+release requires the activities described in the following table. The activity
+responsible is defined with regard to the type of OTS Software (Medical Device
+or General Available Software).
+
+Activity
+
+Evaluation if integration of a new
+release of OTS Software is needed.
+Definition
+of
+new
+product
+requirement
+related
+with
+the
+integration of the new OTS release.
+a. Verification of the requirement.
+New OTS software version
+requirements (OS, devices,
+etc…) have to be strictly verified
+with regards to the software
+device OS requirements, in order
+to maintain and/or update a
+compatibility list.
+b. New OTS software versions, that
+should be natively embedded in
+the devices are checked into the
+source code control system as
+the software is built.
+c. The inclusion of a different
+version of the OTS requires
+integration test of the software
+at the system level.
+d. Due to the integration with the
+overall operating system, OTS
+software modules are tested as
+part of the system software
+testing process.
+Validation of the integration of the
+new OTS, when necessary in
+particular in the case of Generally
+LC-SUITESTENSA-EN rev. V
+
+Responsible
+OTS Medical
+Device SW
+PP
+
+Responsible
+OTS Generally
+Available SW
+R&D
+
+PP
+
+R&D
+
+R&D
+
+R&D
+
+PP
+
+PP
+
+23/24
+
+LC-SUITESTENSA-EN
+
+rev. V
+
+SUITESTENSA Software Development Life-cycle Model
+
+29/09/2025
+
+Le informazioni contenute nel presente documento sono proprietà di EBIT srl e sono riservate; Ne è vietata la riproduzione e la diffusione in qualunque modo eseguita. Tutti i diritti riservati.
+The information in this document is confidential and proprietary to EBIT srl; no part of this document may be reproduced, copied distributed or in any way exploited. All rights reserved
+
+Table 10 - OTS Software
+Available sw, in particular whenever
+the changes to OTS software
+integration affect the user interface.
+
+5.2.11.6
+5.2.11.7
+
+5.2.11.8
+
+5.2.11.9
+5.2.11.10
+
+Table 11 - SOUP
+SOUP software application is carefully controlled.
+SOUP software is managed similarly to OTS software, with a thorough analysis
+of its performance and limitations being performed in advance of its application
+into a device’s software system.
+Table 12 – Sub-contracted Software
+When software is sub-contracted to an outside software development
+subcontractor, the subcontractor is contractually required to follow EBIT
+software development procedures or provide their own software development
+procedures which are evaluated to be equivalent to those in place at EBIT and
+which will deliver the same documentation set as if the module were internally
+developed.
+In the case of subcontracted software, EBIT shall ensure that the source code
+complies with functional and security requirements.
+Where applicable, specific contract clauses may be defined so as to ensure the
+test of the source code through Vulnerability Assessment/Penetration Test or
+Source Code Review before release in production environment. These
+activities shall be executed in compliance with the provisions of document
+IPR000021 (which forms part of the EBIT ISMS, implemented in compliance
+with ISO/IEC 27001:2022). The outcomes of periodic security assessments
+and regular static code reviews enable ongoing updates to EBIT risk analysis
+documentation, in accordance with the Risk Management Plan.
+Changes to subcontracted software are managed as changes to an internally
+developed software.
+Software suppliers of subcontracted software are selected, qualified and
+monitored as defined in the EBIT QMS procedure QPR000150 – Procurement.
+
+LC-SUITESTENSA-EN rev. V
+
+24/24
+
+

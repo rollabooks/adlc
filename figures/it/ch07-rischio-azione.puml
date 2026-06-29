@@ -1,0 +1,41 @@
+@startuml ch07-rischio-azione
+!theme plain
+skinparam backgroundColor transparent
+skinparam defaultFontName "Noto Sans"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam ActivityBackgroundColor #F5F5F5
+skinparam ActivityBorderColor #333333
+skinparam ActivityDiamondBackgroundColor #E8F4FD
+skinparam ActivityDiamondBorderColor #1976D2
+skinparam ArrowColor #333333
+
+start
+:Richiesta dell'agente;
+:Classificazione del rischio;
+
+switch (Livello?)
+case (LOW)
+  :Esegui e notifica
+livello minimo 1;
+case (MEDIUM)
+  :Proponi un piano
+attendi approvazione
+livello minimo 3;
+case (HIGH)
+  :HALT
+piano dettagliato + conferma esplicita
+livello minimo 5;
+case (HIGH+)
+  :HALT
+conferma intento, poi piano, poi conferma
+livello minimo 6;
+case (CRITICAL)
+  :HALT
+alternative + ADR, nessuna esecuzione
+livello minimo 7;
+endswitch
+
+stop
+
+@enduml

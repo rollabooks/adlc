@@ -89,6 +89,8 @@ Se sei in Fase 3 e chiedi di progettare un'architettura, l'agente lo farà — m
 
 ---
 
+![Le sette fasi del ciclo AI-Driven e il modulo caricato in ciascuna](figures/it/ch06-fasi-moduli.png)
+
 ## 6.3 I cinque Modes
 
 I Modes controllano **quanta cerimonia** applica l'agente. La stessa richiesta può ricevere risposte molto diverse a seconda del Mode attivo.

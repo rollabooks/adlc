@@ -149,3 +149,83 @@ Timeline: [events]
 5 Whys analysis.
 Root cause + contributing factors + preventive actions.
 ```
+
+---
+
+## REVIEW PROMPTS
+
+### R01: Code Self-Review
+```
+Self-review [FILES/MODULE] across 6 dimensions.
+For each dimension, score 1-5 and list specific findings:
+
+1. SECURITY: secrets exposure, input validation, auth gaps, injection risks
+2. SCALABILITY: bottlenecks, N+1 queries, unbounded growth, missing pagination
+3. EFFICIENCY: redundant operations, unnecessary allocations, blocking I/O
+4. COMPLEXITY: cyclomatic complexity > 10, deep nesting, god classes
+5. LOGGING & OBSERVABILITY: missing audit logs, PII leakage, no correlation IDs
+6. STRUCTURE: SRP violations, tight coupling, unclear naming, missing abstractions
+
+Output format:
+| Dimension | Score | Findings | Suggested Fix |
+|-----------|-------|----------|---------------|
+
+Active SEC/PERF constraints: [from _CONTEXT.md]
+Halt triggers matched: [Y/N — list if Y]
+```
+
+### R02: Design Self-Review
+```
+Self-review design artifacts for [FEATURE/MODULE]:
+
+Check:
+1. COMPLETENESS: all FR/NFR addressed? Missing endpoints? Missing entities?
+2. CONSISTENCY: API contract matches data model? Naming aligned across layers?
+3. SECURITY ARCH: threat model covers all surfaces? Auth on every endpoint?
+4. PERFORMANCE ARCH: caching strategy? Query patterns? Latency budget?
+5. TRACEABILITY: every FR maps to a component? Every component has a test strategy?
+6. ALTERNATIVES: were other options considered? ADR captures why-not?
+
+For each gap found:
+- Severity: CRITICAL / IMPORTANT / SUGGESTION
+- Location: [artifact + section]
+- Proposed fix: [specific action]
+
+Reference: _CONTEXT.md constraints, active ADRs, TRACEABILITY_TEMPLATE.md
+```
+
+### R03: Traceability Generation
+```
+Generate traceability matrix for [PROJECT/MODULE].
+
+Sources to scan:
+- Requirements: [path to FR/NFR docs]
+- User stories: [path or backlog reference]
+- Design: [path to architecture/API docs]
+- Code: [src/ path]
+- Tests: [test/ path]
+
+Output: populated TRACEABILITY_TEMPLATE.md with:
+- Full trace table (Req → Story → Design → Code → Test)
+- Gap analysis (orphaned reqs, orphaned code, missing tests)
+- Metrics summary
+
+Depth: [MINIMAL = trace table only | STANDARD = + gaps | COMPREHENSIVE = + metrics + actions]
+```
+
+### R04: Pre-Merge Checklist
+```
+Pre-merge review for [BRANCH/PR]:
+
+Verify:
+- [ ] All acceptance criteria from task met
+- [ ] SEC-XX constraints verified (list which)
+- [ ] PERF-XX constraints verified (list which)
+- [ ] No halt-trigger files modified without approval
+- [ ] Tests pass (unit + integration)
+- [ ] No regressions in existing tests
+- [ ] Documentation updated (API docs, README, ADR if needed)
+- [ ] PROGRESS.md entry drafted
+
+Report: PASS / FAIL with blocking items listed.
+```

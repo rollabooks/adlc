@@ -147,8 +147,6 @@ In quella situazione, quasi tutto è INFERRED o ASSUMPTION. Il valore non è nel
 
 ---
 
----
-
 ## Riepilogo
 
 - I tre confidence tag — FACT (verificato), INFERRED (dedotto), ASSUMPTION (ipotesi) — rendono esplicita la certezza dell'agente su ogni affermazione ad alto impatto.

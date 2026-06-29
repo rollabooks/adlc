@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  28 JUN 2026 16:49
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12 Portable) (format=lualatex 2026.6.27)  29 JUN 2026 22:20
  system commands enabled.
 **book-it.tex
 (./book-it.tex
@@ -1867,7 +1867,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[10]) (../chapters/it/ch00b-cheatsheet.tex
+[10]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1875,7 +1875,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[11]
+[11]) (../chapters/it/ch00b-cheatsheet.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1883,9 +1883,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[12
+[12] [13
 
-] [13])
+])
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1924,7 +1924,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [5]
-Overfull \hbox (38.51646pt too wide) in paragraph at lines 86--96
+Overfull \hbox (38.51646pt too wide) in paragraph at lines 96--106
  [][] 
  []
 
@@ -1951,7 +1951,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[8]) (../chapters/it/ch02-setup-primo-progetto.tex
+[8]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1959,7 +1959,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[9]
+[9]) (../chapters/it/ch02-setup-primo-progetto.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -1967,13 +1967,13 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[10
-
-]
+[10]
 Capitolo 2.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 17.
-[11]
+[11
+
+]
 (C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/tex/latex/listings/lst
 lang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
@@ -1991,7 +1991,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [12]
 LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
-(Font)              scaled to size 12.67206pt on input line 96.
+(Font)              scaled to size 12.67206pt on input line 97.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -2052,7 +2052,14 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[20])
+[20]
+<../figures/it/ch03-ciclo-sessione.png, id=866, 1680.2775pt x 2018.54124pt>
+File: ../figures/it/ch03-ciclo-sessione.png Graphic file (type png)
+<use ../figures/it/ch03-ciclo-sessione.png>
+Package luatex.def Info: ../figures/it/ch03-ciclo-sessione.png  used on input l
+ine 191.
+(luatex.def)             Requested size: 313.65228pt x 376.78154pt.
+)
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2068,9 +2075,10 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[22
+[22<../figures/it/ch03-ciclo-sessione.png>] [23
 
-] [23] [24] (../chapters/it/ch04-context-md.tex
+] [24]
+(../chapters/it/ch04-context-md.tex
 Capitolo 4.
 LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
 (Font)              scaled to size 18.2513pt on input line 5.
@@ -2152,6 +2160,12 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [34]
 Capitolo 6.
+<../figures/it/ch06-fasi-moduli.png, id=1025, 1207.51125pt x 1910.13625pt>
+File: ../figures/it/ch06-fasi-moduli.png Graphic file (type png)
+<use ../figures/it/ch06-fasi-moduli.png>
+Package luatex.def Info: ../figures/it/ch06-fasi-moduli.png  used on input line
+ 53.
+(luatex.def)             Requested size: 313.65228pt x 496.15738pt.
 [35
 
 ]
@@ -2162,11 +2176,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[36]
-
-LaTeX Font Warning: Font shape `TU/InconsolataN(0)/m/it' undefined
-(Font)              using `TU/InconsolataN(0)/m/n' instead on input line 112.
-
+[36<../figures/it/ch06-fasi-moduli.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2176,13 +2186,9 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [37]
 
-Package fancyhdr Warning: \headheight is too small (14.0pt): 
-(fancyhdr)                Make it at least 19.69997pt, for example:
-(fancyhdr)                \setlength{\headheight}{19.69997pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+LaTeX Font Warning: Font shape `TU/InconsolataN(0)/m/it' undefined
+(Font)              using `TU/InconsolataN(0)/m/n' instead on input line 114.
 
-[38])
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2190,7 +2196,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[39]
+[38]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2198,9 +2204,17 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[40
+[39])
 
-] [41] [42] (../chapters/it/ch07-classificazione-rischio.tex
+Package fancyhdr Warning: \headheight is too small (14.0pt): 
+(fancyhdr)                Make it at least 19.69997pt, for example:
+(fancyhdr)                \setlength{\headheight}{19.69997pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
+
+[40] [41
+
+] [42] (../chapters/it/ch07-classificazione-rischio.tex
 Capitolo 7.
 [43
 
@@ -2213,6 +2227,13 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
 [44]
+<../figures/it/ch07-rischio-azione.png, id=1114, 3322.4125pt x 1172.38pt>
+File: ../figures/it/ch07-rischio-azione.png Graphic file (type png)
+<use ../figures/it/ch07-rischio-azione.png>
+Package luatex.def Info: ../figures/it/ch07-rischio-azione.png  used on input l
+ine 86.
+(luatex.def)             Requested size: 313.65228pt x 110.66168pt.
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2220,7 +2241,8 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[45]) (../chapters/it/ch08-model-levels.tex
+[45<../figures/it/ch07-rischio-azione.png>])
+(../chapters/it/ch08-model-levels.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2296,8 +2318,12 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 ]
 Capitolo 10.
 [55]
-LaTeX Font Info:    Font shape `TU/InconsolataN(0)/m/it' will be
-(Font)              scaled to size 7.92004pt on input line 65.
+<../figures/it/ch10-halt-flusso.png, id=1231, 1482.53876pt x 1050.92625pt>
+File: ../figures/it/ch10-halt-flusso.png Graphic file (type png)
+<use ../figures/it/ch10-halt-flusso.png>
+Package luatex.def Info: ../figures/it/ch10-halt-flusso.png  used on input line
+ 45.
+(luatex.def)             Requested size: 313.65228pt x 222.33669pt.
 
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
@@ -2306,7 +2332,11 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[56]) (../chapters/it/ch11-vincoli-sec-perf.tex
+[56<../figures/it/ch10-halt-flusso.png>]
+LaTeX Font Info:    Font shape `TU/InconsolataN(0)/m/it' will be
+(Font)              scaled to size 7.92004pt on input line 67.
+)
+(../chapters/it/ch11-vincoli-sec-perf.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2354,9 +2384,14 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 ] [63] [64] (../chapters/it/ch12-moduli-e-skill.tex
 Capitolo 12.
+LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
+(Font)              scaled to size 10.56006pt on input line 54.
 [65
 
 ]
+Underfull \vbox (badness 1661) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2364,7 +2399,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[66]) (../chapters/it/ch13-comandi-conversazionali.tex
+[66]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2372,7 +2407,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[67]
+[67]) (../chapters/it/ch13-comandi-conversazionali.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2380,13 +2415,11 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[68
+[68]
+Capitolo 13.
+[69
 
 ]
-Capitolo 13.
-LaTeX Font Info:    Font shape `TU/InconsolataN(0)/b/n' will be
-(Font)              scaled to size 10.56006pt on input line 40.
-[69]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2412,6 +2445,13 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 [72]
 Capitolo 14.
+<../figures/it/ch14-stella-multiagente.png, id=1410, 2462.19875pt x 1468.48625p
+t>
+File: ../figures/it/ch14-stella-multiagente.png Graphic file (type png)
+<use ../figures/it/ch14-stella-multiagente.png>
+Package luatex.def Info: ../figures/it/ch14-stella-multiagente.png  used on inp
+ut line 33.
+(luatex.def)             Requested size: 313.65228pt x 187.05586pt.
 [73
 
 ]
@@ -2422,7 +2462,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[74]) (../chapters/it/ch15-monorepo-legacy.tex
+[74<../figures/it/ch14-stella-multiagente.png>]
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2430,7 +2470,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[75]
+[75]) (../chapters/it/ch15-monorepo-legacy.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2438,9 +2478,7 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-5.69997pt}.
 
-[76
-
-]
+[76]
 Capitolo 15.
 
 Underfull \hbox (badness 7685) in paragraph at lines 37--38
@@ -2449,7 +2487,9 @@ m/n/10 do-po ag-giun-te o spo-sta-men-ti di sot-to-pro-get-ti, ag-gior-na \TU/I
 nconsolataN(0)/m/n/10 .ai-
  []
 
-[77]
+[77
+
+]
 Overfull \hbox (2.00589pt too wide) in paragraph at lines 71--72
 \TU/texgyretermes(0)/m/n/10 AI-DLC co-pre que-sto flus-so con due mo-du-li in se
 -quen-za: pri-ma si ana-liz-za (\TU/InconsolataN(0)/m/n/10 09_CODEBASE_ANALYSIS.
@@ -2519,9 +2559,13 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 
 ] [88] (../chapters/it/app-a-glossario.tex
 Appendice A.
-[89
 
-]) (../chapters/it/app-b-comandi.tex
+Underfull \vbox (badness 3088) has occurred while \output is active []
+
+ [89
+
+])
+(../chapters/it/app-b-comandi.tex
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2615,9 +2659,6 @@ Package fancyhdr Warning: \headheight is too small (14.0pt):
 ]
 Appendice D.
 [101]
-Underfull \vbox (badness 1661) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (14.0pt): 
 (fancyhdr)                Make it at least 19.69997pt, for example:
@@ -2651,21 +2692,21 @@ L3 programming layer <2025-12-24>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `book-it.out' has not changed.
-(rerunfilecheck)             Checksum: 7200099D3FF418264FFBCA82EA4033C8;24186.
+(rerunfilecheck)             Checksum: 801F199178164A4C8E134D8245A437E9;24797.
 Package logreq Info: Writing requests to 'book-it.run.xml'.
 
 \openout1 = book-it.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 44947 strings out of 476081
- 596945,1977958 words of node,token memory allocated
- 693 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 75 glue_spec
+ 44981 strings out of 476081
+ 596895,1977958 words of node,token memory allocated
+ 688 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 20 attribute, 74 glue_spec
 , 12 attribute_list, 3 write, 3 pdf_action nodes
-   avail lists: 1:3,2:9866,3:458,4:12657,5:11855,6:98,7:15413,8:73,9:28637,10:63
+   avail lists: 1:4,2:9863,3:460,4:12657,5:11858,6:98,7:15413,8:73,9:28637,10:63
 ,11:1456
- 65386 multiletter control sequences out of 65536+600000
+ 65397 multiletter control sequences out of 65536+600000
  100 fonts using 10818551 bytes
  108i,13n,110p,1199b,2228s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/opentype/public/t
@@ -2683,12 +2724,14 @@ ublic/tex-gyre/texgyreheros-regular.otf><C:/Users/ricca/scoop/apps/miktex/curren
 t/texmfs/install/fonts/opentype/public/tex-gyre/texgyreheros-bold.otf><C:/Users/
 ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/public/amsfonts/cm/cm
 mi10.pfb><C:/Users/ricca/scoop/apps/miktex/current/texmfs/install/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><C:/Users/ricca/scoop/apps/miktex/current/texmfs/ins
-tall/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/ricca/scoop/apps/miktex/
-current/texmfs/install/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on book-it.pdf (118 pages, 539700 bytes).
+blic/amsfonts/cm/cmr10.pfb><C:/Users/ricca/scoop/apps/miktex/current/texmfs/inst
+all/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ricca/scoop/apps/miktex/
+current/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/ricca/
+scoop/apps/miktex/current/texmfs/install/fonts/type1/public/amsfonts/symbols/msa
+m10.pfb>
+Output written on book-it.pdf (118 pages, 1225872 bytes).
 
-PDF statistics: 1914 PDF objects out of 2073 (max. 8388607)
- 947 named destinations out of 1000 (max. 1048576)
- 848 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1944 PDF objects out of 2073 (max. 8388607)
+ 955 named destinations out of 1000 (max. 1048576)
+ 864 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -35,6 +35,9 @@ Il framework AI-DLC è composto da file che non vengono caricati tutti insieme a
     \texttt{09\_CODEBASE\_ANALYSIS.md} & Su richiesta & Analisi codebase esistente \\
     \texttt{10\_DOCUMENTATION.md} & Su richiesta & Generazione documentazione \\
     \texttt{11\_BUGFIX\_PLAYBOOK.md} & Su richiesta & Debug strutturato \\
+    \texttt{12\_OVERCONFIDENCE.md} & Sempre & Prevenzione overconfidence \\
+    \texttt{13\_CONTENT\_VALIDATION.md} & Sempre & Validazione pre-scrittura \\
+    \texttt{14\_STRUCTURED\_QUESTIONS.md} & Sempre & Domande strutturate \\
     \texttt{SEC\_CONSTRAINTS.md} & Su richiesta & Libreria vincoli SEC \\
     \texttt{PERF\_CONSTRAINTS.md} & Su richiesta & Libreria vincoli PERF \\
     \bottomrule
@@ -42,6 +45,36 @@ Il framework AI-DLC è composto da file che non vengono caricati tutti insieme a
   \caption{Mappa dei moduli AI-DLC}
   \label{tab:12-moduli}
 \end{table}
+
+\section{I moduli always-on: la triade della qualità}
+\label{sec:12-always-on}
+
+Oltre a \texttt{00\_MODE.md} e \texttt{01\_CORE\_RULES.md}, tre moduli sono sempre attivi. Non riguardano una fase specifica --- riguardano \emph{come} l'agente pensa e \emph{come} produce output.
+
+\subsection*{\texttt{12\_OVERCONFIDENCE.md} --- Prevenzione dell'overconfidence}
+
+Il problema più subdolo: un agente che assume requisiti non detti e procede con sicurezza su fondamenta instabili.
+
+Il modulo impone:
+\begin{itemize}
+  \item \textbf{Red flag keywords:} se rispondi ``dipende'', ``forse'', ``standard'' senza specificare, l'agente non procede senza follow-up.
+  \item \textbf{Anti-pattern espliciti:} non può completare una fase complessa senza domande, assumere requisiti non dichiarati, o scegliere lo stack senza conferma.
+  \item \textbf{Soglie di confidenza:} $\geq 90\%$ procede dichiarando; 70--89\% chiede conferma; $< 70\%$ deve chiedere; $< 50\%$ si ferma.
+\end{itemize}
+
+\subsection*{\texttt{13\_CONTENT\_VALIDATION.md} --- Validazione pre-scrittura}
+
+Ogni volta che l'agente scrive in un file, una checklist di validazione previene errori banali:
+\begin{itemize}
+  \item Code block bilanciati con language tag corretto
+  \item Heading Markdown sequenziali, tabelle con colonne coerenti
+  \item Diagrammi Mermaid/PlantUML con sintassi valida
+  \item JSON senza virgole trailing, YAML con indentazione coerente
+\end{itemize}
+
+\subsection*{\texttt{14\_STRUCTURED\_QUESTIONS.md} --- Decisioni in file auditabili}
+
+Le decisioni architetturali, di scope e di sicurezza vengono persistite in file \texttt{QS-<NN>-<desc>.md} invece di perdersi nella chat. Il workflow: l'agente identifica i punti di decisione, formula domande con opzioni A/B/C/D/E, salva il file, attende risposte. Ogni decisione è tracciabile (referenziata in ADR, \texttt{\_CONTEXT.md}, documenti di design).
 
 \section{La mappa delle skill}
 \label{sec:12-mappa-skill}

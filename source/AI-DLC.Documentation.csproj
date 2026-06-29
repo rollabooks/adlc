@@ -1,0 +1,185 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+      AI-DLC Documentation Project — SINGLE shared docs container for ALL projects in the solution.
+      RULE DOC-01: All project documentation lives here, under docs\<ProjectName>\.
+      Application project folders must NOT contain documentation files.
+      This project contains no executable C# code.
+
+   
+      All documentation content (context, project rules, analysis, tasks) lives
+      alongside this file, in the repo root or in docs\ subfolders.
+      The .ai-dlc\ folder contains only read-only framework files.
+    -->
+    <TargetFramework>net9.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Description>AI-DLC — AI-Driven Development Life Cycle- No executable code.</Description>
+  </PropertyGroup>
+
+  <!-- Session state & progress (repo root, same folder as this .csproj) -->
+  <ItemGroup Label="Session State">
+    <None Include="_CONTEXT.md" Condition="Exists('_CONTEXT.md')" />
+    <None Include="PROGRESS.md" Condition="Exists('PROGRESS.md')" />
+  </ItemGroup>
+
+  <!-- Agent startup files (repo root) -->
+  <ItemGroup Label="Agent Startup Files">
+    <None Include="AGENTS.md" />
+    <None Include="CHANGELOG.md" />
+    <None Include="CLAUDE.md" />
+    <None Include="GEMINI.md" />
+    <None Include="OPENCLAW.md" />
+    <None Include="README.md" />
+    <None Include="VISUALSTUDIO.md" />
+  </ItemGroup>
+
+  <!-- GitHub Copilot instructions -->
+  <ItemGroup Label="GitHub Copilot">
+    <None Include=".github\copilot-instructions.md" />
+  </ItemGroup>
+
+  <!--
+    PROJECT DOCUMENTATION — RULE DOC-01
+    ─────────────────────────────────────
+    All documentation lives at the repo root:
+      docs\_solution\   → solution-wide architecture, MAP, RISKS, DECISION_RECORDS
+      projects\<Name>\  → per-project docs (declared in the "Projects" ItemGroup below)
+
+    This block wires only the solution-wide docs; per-project folders are added
+    in the "Projects" section that follows.
+  -->
+  <ItemGroup Label="Docs — Solution Wide">
+    <None Include="docs\_solution\**\*.*" Condition="Exists('docs\_solution')" />
+  </ItemGroup>
+
+  <!--
+    PROJECT DOCUMENTATION — RULE DOC-01
+    ─────────────────────────────────────
+    Each project gets its own subfolder under projects\<ProjectName>\ containing:
+      _CONTEXT.md       — session state and constraints
+      PROGRESS.md       — progress log
+      instructions.md   — project-specific Copilot rules
+      docs\             — all documentation artifacts (PHASES\, EPICS\, API\, DECISION_RECORDS\)
+
+    Shared cross-project documentation lives in projects\shared\docs\.
+
+    To add a new project: create projects\<ProjectName>\ and add an ItemGroup below.
+    Example:
+      <ItemGroup Label="Project — MyApp">
+        <None Include="projects\MyApp\**\*.*" />
+      </ItemGroup>
+  -->
+  <ItemGroup Label="Projects — Shared">
+    <None Include="projects\shared\**\*.*" Condition="Exists('projects\shared')" />
+  </ItemGroup>
+
+  <!-- Project-specific rules that live outside the projects\ tree (.ai-dlc\company) -->
+  <ItemGroup Label="Company Process Rules">
+    <None Include=".ai-dlc\company\**\*.*" Condition="Exists('.ai-dlc\company')" />
+  </ItemGroup>
+
+  <!-- ── AI-DLC FRAMEWORK (read-only) ──────────────────────────────────── -->
+
+  <!-- .ai-dlc root -->
+  <ItemGroup Label="AI-DLC Root">
+    <None Include=".ai-dlc\AI-DLC.md" />
+    <None Include=".ai-dlc\COMMANDS.md" />
+    <None Include=".ai-dlc\halt-triggers.yaml" />
+    <None Include=".ai-dlc\INSTALL.md" />
+    <None Include=".ai-dlc\manifest.json" />
+    <None Include=".ai-dlc\MANUAL.it.md" />
+    <None Include=".ai-dlc\MANUAL.md" />
+    <None Include=".ai-dlc\MIGRATION.md" />
+    <None Include=".ai-dlc\projects.json" />
+    <None Include=".ai-dlc\VERSION" />
+    <None Include=".ai-dlc\VERSIONING.md" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\examples\ -->
+  <ItemGroup Label="AI-DLC Examples">
+    <None Include=".ai-dlc\examples\CONTEXT.example.md" />
+    <None Include=".ai-dlc\examples\EPIC.example.md" />
+    <None Include=".ai-dlc\examples\github-actions-validate.yml" />
+    <None Include=".ai-dlc\examples\PROGRESS.example.md" />
+    <None Include=".ai-dlc\examples\TASK.example.md" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\modules\ — framework (read-only) -->
+  <ItemGroup Label="AI-DLC Modules">
+    <None Include=".ai-dlc\modules\00_MODE.md" />
+    <None Include=".ai-dlc\modules\01_CORE_RULES.md" />
+    <None Include=".ai-dlc\modules\02_DISCOVERY_ANALYSIS.md" />
+    <None Include=".ai-dlc\modules\03_DESIGN.md" />
+    <None Include=".ai-dlc\modules\04_IMPLEMENTATION.md" />
+    <None Include=".ai-dlc\modules\05_VERIFICATION_RELEASE.md" />
+    <None Include=".ai-dlc\modules\06_OPS.md" />
+    <None Include=".ai-dlc\modules\07_SPECIAL_LANES.md" />
+    <None Include=".ai-dlc\modules\08_PROMPT_LIBRARY.md" />
+    <None Include=".ai-dlc\modules\09_CODEBASE_ANALYSIS.md" />
+    <None Include=".ai-dlc\modules\10_DOCUMENTATION.md" />
+    <None Include=".ai-dlc\modules\11_BUGFIX_PLAYBOOK.md" />
+    <None Include=".ai-dlc\modules\PERF_CONSTRAINTS.md" />
+    <None Include=".ai-dlc\modules\SEC_CONSTRAINTS.md" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\modules\skills\ -->
+  <ItemGroup Label="AI-DLC Skills">
+    <None Include=".ai-dlc\modules\skills\SKILL_ANALYSIS.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_API_DESIGN.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_DATA_ACCESS.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_DESIGN.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_OPS.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_SECURITY.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_TESTING.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_UI.md" />
+    <None Include=".ai-dlc\modules\skills\SKILL_VISUALSTUDIO.md" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\modules\templates\ -->
+  <ItemGroup Label="AI-DLC Templates">
+    <None Include=".ai-dlc\modules\templates\COMPANY_PROCESS_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\CONTEXT_MIN.md" />
+    <None Include=".ai-dlc\modules\templates\CONTEXT_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\DECISION_RECORD_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\EPIC_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\PROGRESS_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\PROJECT_INSTRUCTIONS_TEMPLATE.md" />
+    <None Include=".ai-dlc\modules\templates\PROJECTS_TEMPLATE.json" />
+    <None Include=".ai-dlc\modules\templates\TASK_TEMPLATE.md" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\schemas\ -->
+  <ItemGroup Label="AI-DLC Schemas">
+    <None Include=".ai-dlc\schemas\halt-triggers.schema.json" />
+    <None Include=".ai-dlc\schemas\manifest.schema.json" />
+    <None Include=".ai-dlc\schemas\processed-company.schema.json" />
+    <None Include=".ai-dlc\schemas\projects.schema.json" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\tests\ -->
+  <ItemGroup Label="AI-DLC Tests (scripts)">
+    <None Include=".ai-dlc\tests\test.ps1" />
+    <None Include=".ai-dlc\tests\test.sh" />
+  </ItemGroup>
+
+  <!-- .ai-dlc\tools\ -->
+  <ItemGroup Label="AI-DLC Tools (scripts)">
+    <None Include=".ai-dlc\tools\init.ps1" />
+    <None Include=".ai-dlc\tools\init.sh" />
+    <None Include=".ai-dlc\tools\preprocess-company-docs.ps1" />
+    <None Include=".ai-dlc\tools\preprocess-company-docs.sh" />
+    <None Include=".ai-dlc\tools\show-models.ps1" />
+    <None Include=".ai-dlc\tools\show-models.sh" />
+    <None Include=".ai-dlc\tools\sync-copilot.ps1" />
+    <None Include=".ai-dlc\tools\sync-copilot.sh" />
+    <None Include=".ai-dlc\tools\update-projects.ps1" />
+    <None Include=".ai-dlc\tools\update-projects.sh" />
+    <None Include=".ai-dlc\tools\validate.ps1" />
+    <None Include=".ai-dlc\tools\validate.sh" />
+  </ItemGroup>
+
+</Project>

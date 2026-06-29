@@ -75,6 +75,17 @@
 
 % === GRAFICA E TABELLE ===
 \usepackage{graphicx}
+\graphicspath{{../figures/it/}{../figures/}}
+% Inserisce un diagramma; mostra un segnaposto finche' il PNG non e' stato generato
+% dalla pipeline dei diagrammi (PlantUML). Uso: \diagramfig{nome-file-senza-estensione}{Didascalia}
+\newcommand{\diagramfig}[2]{%
+  \begin{figure}[htbp]\centering
+  \IfFileExists{../figures/it/#1.png}%
+    {\includegraphics[width=0.8\textwidth]{#1.png}}%
+    {\fbox{\parbox[c][4cm][c]{0.8\textwidth}{\centering\itshape [Diagramma \texttt{#1.png} --- da generare con il build dei diagrammi]}}}%
+  \caption{#2}\label{fig:#1}%
+  \end{figure}%
+}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{longtable}

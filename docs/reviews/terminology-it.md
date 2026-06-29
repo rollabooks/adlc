@@ -50,6 +50,9 @@ Questo file documenta le decisioni terminologiche prese durante il copy editing.
 | **deployment** / **deploy** | "deploy" come verbo e sostantivo informale; "deployment" nella prosa formale. Entrambi accettati. |
 | **pull request** / **PR** | Accettati entrambi. Prima occorrenza: "pull request (PR)". |
 | **refactor** | Non tradotto. Accettato come sostantivo e verbo invariante. |
+| **latenza** | Tradotto in italiano (femminile). Non "latency": evita l'oscillazione di genere ("il latency" / "la latency") rilevata nel Cap 8. Deciso 2026-06-29. |
+| **task** (genere maschile) | Invariante inglese, trattato come maschile: "il task", "i task". Non "la task" / "le task". Deciso 2026-06-29. |
+| **livello** (prosa) vs **Level/Model Level** (campo) | Nella prosa si usa "livello" / "livello minimo"; "Level" e "Minimum Level" solo come intestazioni di tabella o nome di campo. |
 
 ## Punteggiatura e stile
 

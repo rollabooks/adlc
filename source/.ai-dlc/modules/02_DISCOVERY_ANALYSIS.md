@@ -2,6 +2,23 @@
 
 > Loading: When starting a new project/feature or during requirements analysis
 > Prerequisite: `01_CORE_RULES.md`
+> Depth: Apply Adaptive Depth Assessment from `00_MODE.md` before executing
+
+---
+
+## Adaptive Depth Effects on This Phase
+
+| Stage | MINIMAL | STANDARD | COMPREHENSIVE |
+|-------|---------|----------|---------------|
+| Discovery | Skip if scope in `_CONTEXT.md` | Full checklist | + stakeholder map + risk matrix |
+| FR Elicitation | Intent summary (3-5 bullet) | Full FR table | + prioritization workshop |
+| NFR Definition | Only active SEC/PERF from context | All SEC + PERF applicable | + scalability + availability + compliance |
+| User Stories | Skip (acceptance criteria in FR) | Core stories with AC | + edge case stories + personas |
+| Threat Model | Skip | Preliminary (assets + surfaces) | Full STRIDE + mitigations |
+| Data Model | Skip | Conceptual entities | + relationships + sensitivity classification |
+
+**Overconfidence check**: At STANDARD and COMPREHENSIVE depth, you MUST ask at least
+the minimum questions listed in `12_OVERCONFIDENCE.md` for this phase before proceeding.
 
 ---
 

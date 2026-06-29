@@ -1,0 +1,118 @@
+# EBIT Company HALT Triggers
+#
+# EBIT-specific halt triggers extending the base .ai-dlc/halt-triggers.yaml.
+# These enforce regulatory compliance for SUITESTENSA medical device software.
+#
+# Source: LC-SUITESTENSA-EN rev.V + Annex A rev.U
+# Loaded after: .ai-dlc/halt-triggers.yaml (base framework triggers)
+
+version: 1
+
+triggers:
+  - id: ebit-risk-control
+    patterns:
+      - "**/RiskControl/**"
+      - "**/risk-control/**"
+      - "**/risk_control/**"
+      - "**/safety/**"
+    reason: "Code implementing risk control measures (IEC 62304). RAV verification required."
+    risk: HIGH+
+
+  - id: ebit-safety-classified
+    patterns:
+      - "**/ClassC/**"
+      - "**/ClassB/**"
+      - "**/safety-critical/**"
+    reason: "Safety-classified software items per IEC 62304. Impact analysis mandatory."
+    risk: HIGH+
+
+  - id: ebit-ots-dependencies
+    patterns:
+      - "**/packages.config"
+      - "**/Directory.Packages.props"
+      - "**/nuget.config"
+      - "**/package.json"
+      - "**/package-lock.json"
+      - "**/Directory.Build.props"
+    reason: "OTS/SOUP dependency changes require evaluation per EBIT lifecycle §5.2.11."
+    risk: HIGH
+
+  - id: ebit-architecture
+    patterns:
+      - "**/Architecture/**"
+      - "**/ADD/**"
+      - "**/*.archimate"
+      - "**/SystemDesign/**"
+    reason: "Architecture Document (ADD) changes require RdP/R&D approval."
+    risk: HIGH
+
+  - id: ebit-test-plan
+    patterns:
+      - "**/TestPlan/**"
+      - "**/test-plan/**"
+      - "**/*TestPlan*.md"
+      - "**/*TestPlan*.yaml"
+    reason: "Test Plan changes require STM + R&D approval per EBIT lifecycle §5.2.5."
+    risk: HIGH
+
+  - id: ebit-security
+    patterns:
+      - "**/Security/**"
+      - "**/Encryption/**"
+      - "**/Cryptography/**"
+      - "**/GDPR/**"
+      - "**/PrivacyByDesign/**"
+    reason: "Security-sensitive code per IPR000021/IEC 81001-5-1. VA/PT scope affected."
+    risk: HIGH+
+
+  - id: ebit-usability
+    patterns:
+      - "**/PrimaryOperatingFunction/**"
+      - "**/UsabilitySpec/**"
+      - "**/USD/**"
+    reason: "Primary Operating Function changes require USD update + PP validation (IEC 62366-1)."
+    risk: HIGH
+
+  - id: ebit-solution-structure
+    patterns:
+      - "**/*.sln"
+    reason: "Solution structure changes affect build pipeline and release process."
+    risk: HIGH
+
+  - id: ebit-release-artifacts
+    patterns:
+      - "**/Setup/**"
+      - "**/Deploy/**"
+      - "**/Release/**"
+      - "**/*.msi"
+      - "**/*.exe"
+    reason: "Release artifacts require Final Planning Review before distribution."
+    risk: HIGH
+
+  - id: ebit-pipeline
+    patterns:
+      - "**/azure-pipelines*.yml"
+      - "**/.azuredevops/**"
+      - "**/build/**/*.yaml"
+      - "**/build/**/*.yml"
+    reason: "Azure DevOps pipeline changes affect regulated build/deploy process."
+    risk: HIGH
+
+  - id: ebit-risk-documents
+    patterns:
+      - "**/RMS-SUITESTENSA*"
+      - "**/RMR-SUITESTENSA*"
+      - "**/RAV*"
+      - "**/RADR*"
+      - "**/RMP*"
+      - "**/GSPR*"
+    reason: "Risk management documents are regulated artifacts. Changes require R&D + PP approval."
+    risk: HIGH+
+
+  - id: ebit-incident-safety
+    patterns:
+      - "**/CAPA/**"
+      - "**/Incident/**"
+      - "**/FieldSafety/**"
+    reason: "Safety incident / CAPA artifacts. RA + RS approval required."
+    risk: CRITICAL

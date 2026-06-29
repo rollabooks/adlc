@@ -135,6 +135,9 @@ All read-only. Located in `.ai-dlc/modules/`:
 | `09_CODEBASE_ANALYSIS.md` | Existing codebase intake |
 | `10_DOCUMENTATION.md` | Documentation generation |
 | `11_BUGFIX_PLAYBOOK.md` | Structured debugging |
+| `12_OVERCONFIDENCE.md` | Overconfidence prevention (always loaded) |
+| `13_CONTENT_VALIDATION.md` | Pre-write content validation (always loaded) |
+| `14_STRUCTURED_QUESTIONS.md` | Structured questions protocol (always loaded) |
 | `SEC_CONSTRAINTS.md` | Security constraints SEC-01..SEC-07 |
 | `PERF_CONSTRAINTS.md` | Performance constraints PERF-01..PERF-07 |
 
@@ -144,7 +147,7 @@ All read-only. Located in `.ai-dlc/modules/`:
 
 **NEVER:**
 - Edit `.ai-dlc/modules/` unless explicitly maintaining the framework
-- Edit startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `.github/copilot-instructions.md`) unless explicitly maintaining the framework
+- Edit startup files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `OPENCLAW.md`, `VISUALSTUDIO.md`, `.github/copilot-instructions.md`) unless explicitly maintaining the framework
 - Invent facts — use confidence tags instead
 
 **MAY freely create/edit:**

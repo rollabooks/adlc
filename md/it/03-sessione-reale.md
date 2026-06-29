@@ -24,6 +24,13 @@ In tre secondi, l'agente sa tutto. Lorenzo scrive:
 
 Questo è il punto in cui, senza AI-DLC, Lorenzo avrebbe passato dieci minuti a riepilogare lo stack, i vincoli e il contesto del task. Con AI-DLC, quella conversazione è già nel file.
 
+> **Prima e dopo — Senza AI-DLC / Con AI-DLC**
+
+| Senza AI-DLC | Con AI-DLC |
+|---|---|
+| Dieci minuti per riepilogare stack, vincoli e contesto del task | Bootstrap: l'agente conferma tutto in pochi secondi leggendo il file |
+| Ripeti a voce "usiamo Zod, auth OIDC, niente PII nei log" | I vincoli SEC/PERF sono già nel contesto: l'agente li cita da solo |
+
 > **Pattern da seguire:** all'inizio di ogni sessione, chiedi sempre la conferma del contesto prima di qualsiasi istruzione. È il modo per verificare che l'agente abbia letto `_CONTEXT.md` correttamente.
 
 ---
@@ -192,6 +199,8 @@ DURANTE LA SESSIONE
 FINE SESSIONE
     └─ @checkpoint → aggiorna _CONTEXT.md + voce PROGRESS.md → commit
 ```
+
+![Il ciclo di una sessione AI-DLC, dal bootstrap al checkpoint](figures/it/ch03-ciclo-sessione.png)
 
 Il tempo extra che spendi in questo ciclo — i checkpoint, le conferme, il bootstrap — è di pochi minuti per sessione. Il tempo che risparmi è tutto quello che normalmente spendi a ripetere le stesse istruzioni, a correggere vincoli dimenticati e a ricostruire il contesto perduto.
 

@@ -15,6 +15,16 @@ Il decimo giorno, il team ha tre conversazioni diverse con tre agenti diversi, o
 
 È a questo punto che Lorenzo decide di adottare AI-DLC.
 
+\begin{beforeafterbox}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\textbf{Senza AI-DLC} & \textbf{Con AI-DLC} \\
+\midrule
+Il codice del pomeriggio ignora le convenzioni decise la mattina & Le convenzioni vivono in \texttt{\_CONTEXT.md} e l'agente le rilegge a ogni sessione \\[3pt]
+Tre agenti, tre contesti impliciti scollegati & Un solo \texttt{\_CONTEXT.md} condiviso: stessa fonte di verità per tutti \\[3pt]
+Ogni ripresa del progetto riparte da zero & Ogni sessione riprende dal punto in cui eri \\
+\end{tabularx}
+\end{beforeafterbox}
+
 \section{I quattro problemi che AI-DLC risolve}
 \label{sec:01-quattro-problemi}
 
@@ -57,7 +67,7 @@ Il valore è reale e misurabile. Kim e Yegge lo riassumono in cinque dimensioni 
 
 \subsection*{Il problema del 70\%}
 
-L'entusiasmo per la velocità generativa si scontra però con un muro ingegneristico ben documentato. Addy Osmani, nel suo \textit{Vibe Coding: The Future of Programming} (O'Reilly, 2025), lo chiama \textbf{il problema del 70\%}: lasciata libera, l'AI completa circa il 70\% di un progetto con una velocità sbalorditiva, generando prototipi che sembrano funzionare. Ma il restante 30\% --- casi limite, architettura, manutenibilità a lungo termine, sicurezza --- diventa un \textit{last mile} frustrante, dove la velocità iniziale si trasforma in rendimenti decrescenti.
+L'entusiasmo per la velocità generativa si scontra però con un muro ingegneristico ben documentato. Addy Osmani, nel suo \textit{Beyond Vibe Coding} (O'Reilly, 2025), lo chiama \textbf{il problema del 70\%}: lasciata libera, l'AI completa circa il 70\% di un progetto con una velocità sbalorditiva, generando prototipi che sembrano funzionare. Ma il restante 30\% --- casi limite, architettura, manutenibilità a lungo termine, sicurezza --- diventa un \textit{last mile} frustrante, dove la velocità iniziale si trasforma in rendimenti decrescenti.
 
 La spiegazione è classica: nei termini di Fred Brooks, l'AI eccelle sulla \textbf{complessità accidentale} (il lavoro ripetitivo e meccanico) ma non sulla \textbf{complessità essenziale} (capire e governare la difficoltà intrinseca del problema), che resta sulle spalle umane. Steve Yegge descrive gli LLM di oggi come \textit{«junior developer incredibilmente produttivi, ma potenzialmente sotto l'effetto di sostanze»}: rapidi, entusiasti e a volte fuori strada. Il problema non è la competenza, è che \textbf{la loro sicurezza apparente supera di gran lunga la loro affidabilità}.
 

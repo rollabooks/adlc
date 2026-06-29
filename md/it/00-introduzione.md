@@ -1,6 +1,6 @@
 ﻿# Introduzione — Il problema senza nome
 
-> **Perché questo libro, in 30 secondi.** Gli agenti AI scrivono codice a una velocità sbalorditiva, ma dimenticano il contesto, ignorano i vincoli, a volte inventano e fanno troppo. **AI-DLC** è un metodo pratico — solo file Markdown e JSON nel tuo repository — che dà all'agente memoria persistente (`_CONTEXT.md`, `PROGRESS.md`), vincoli sempre visibili (SEC/PERF), un freno per le operazioni rischiose (HALT trigger), un modo per dichiarare l'incertezza (confidence tag) e un'unità di lavoro test-driven (il *task*). Il risultato: la velocità del *vibe coding* senza perdere il controllo. Se hai fretta, la mappa è nella pagina *"AI-DLC in una schermata"* qui dopo; se hai 30 minuti, il Capitolo 2 ti mette in piedi su un progetto reale.
+> **Perché questo libro, in 30 secondi.** Gli agenti AI scrivono codice a una velocità sbalorditiva, ma dimenticano il contesto, ignorano i vincoli, a volte inventano e fanno troppo. **AI-DLC** è un metodo pratico — solo file Markdown e JSON nel tuo repository — che dà all'agente memoria persistente (`_CONTEXT.md`, `PROGRESS.md`), vincoli sempre visibili (SEC/PERF), un freno per le operazioni rischiose (HALT trigger), un modo per dichiarare l'incertezza (confidence tag) e un'unità di lavoro test-driven (il *task*). Il risultato: la velocità del *vibe coding* senza perdere il controllo. Se hai fretta, la mappa è nella pagina *"AI-DLC in una schermata"* qui dopo; se hai 30 minuti, il Capitolo 2 ti mette in piedi su un progetto reale. **Alla fine saprai trasformare Claude, Codex e Copilot da assistenti imprevedibili in collaboratori governati da un protocollo — con memoria, vincoli e freni che decidi tu.**
 
 Hai già lavorato con un agente AI per qualche ora e hai visto come può essere straordinariamente utile. Gli chiedi di progettare un endpoint, lui risponde con codice pulito, test inclusi. Gli chiedi di rivedere un modulo, individua tre problemi che non avevi notato. Sembra quasi troppo bello.
 
@@ -46,6 +46,15 @@ Non è un problema degli agenti in sé — è strutturale. Un agente AI, per sua
 
 La soluzione non è trovare un agente "migliore". La soluzione è costruire un sistema che sopravvive tra una sessione e l'altra.
 
+> **Prima e dopo — Senza AI-DLC / Con AI-DLC**
+
+| Senza AI-DLC | Con AI-DLC |
+|---|---|
+| Ogni mattina rispieghi stack, vincoli e dove eravamo | L'agente conferma il contesto in pochi secondi leggendo `_CONTEXT.md` |
+| Un vincolo discusso a voce viene dimenticato | I vincoli SEC/PERF sono riletti prima di ogni operazione critica |
+| L'agente modifica lo schema "per semplificare" | Tocca lo schema solo dopo un HALT e la tua conferma |
+| La documentazione "inferita" cita funzioni inesistenti | Ogni affermazione incerta è marcata `ASSUMPTION` da verificare |
+
 ---
 
 ## Cos'è AI-DLC
@@ -58,6 +67,8 @@ La soluzione non è trovare un agente "migliore". La soluzione è costruire un s
 - come classificare il proprio output quando non è certo
 
 Il risultato è un agente che lavora *in continuità*: ogni sessione parte dal punto in cui la precedente si è fermata. Non perché l'agente "ricordi" — ma perché il contesto è scritto, strutturato e sempre disponibile.
+
+> **Due sigle da non confondere.** In questo libro *AI-DLC* significa *usare* agenti AI per sviluppare software. Da non confondere con *ADLC* (*Agent Development Lifecycle*, usato da IBM, Microsoft, Salesforce), che riguarda il *costruire e governare* agenti come prodotto. Qui parliamo della prima: il software lo scrivi tu con l'agente, non costruisci l'agente.
 
 ---
 
